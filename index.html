@@ -100,6 +100,22 @@
         
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animações da Janela Expansível */
+        @keyframes expandIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-expand {
+            animation: expandIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
     </style>
 </head>
 <body>
@@ -123,7 +139,7 @@
         const IconZoomOut = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>;
         const IconCompass = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>;
 
-        // --- COMPONENTE SLIDESHOW (Adaptado para o painel lateral) ---
+        // --- COMPONENTE SLIDESHOW ---
         const Slideshow = ({ images }) => {
             const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -138,17 +154,17 @@
             }, [images]);
 
             return (
-                <div className="w-full h-64 md:h-80 custom-border shadow-woodcut-sm bg-pastel-sand overflow-hidden relative group flex items-center justify-center mt-6">
+                <div className="w-full h-64 md:h-96 lg:h-full custom-border shadow-woodcut-sm bg-pastel-sand overflow-hidden relative group flex items-center justify-center">
                     {images.map((img, index) => (
                         <img
                             key={index}
                             src={img}
                             alt={`Imagem ${index + 1}`}
-                            className={`absolute inset-0 w-full h-full object-contain p-2 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                            className={`absolute inset-0 w-full h-full object-contain p-2 md:p-4 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                         />
                     ))}
                     {images.length > 1 && (
-                        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-20">
+                        <div className="absolute bottom-3 md:bottom-5 left-0 right-0 flex justify-center gap-2 z-20">
                             {images.map((_, idx) => (
                                 <button 
                                     key={idx} 
@@ -162,7 +178,7 @@
             );
         };
 
-        // --- GRÁFICOS ---
+        // --- GRÁFICOS E CARTÕES ---
         const RaceChart = () => {
             const data = [
                 { label: 'Parda', val: 3111, bg: 'bg-pastel-peach' },
@@ -175,11 +191,11 @@
                 <div className="space-y-2 mt-4">
                     {data.map(d => (
                         <div key={d.label} className="flex items-center text-xs font-sans font-bold text-pastel-ink uppercase tracking-wider">
-                            <span className="w-16 truncate">{d.label}</span>
-                            <div className="flex-1 h-3 bg-white custom-border mx-2 overflow-hidden flex">
+                            <span className="w-20 truncate">{d.label}</span>
+                            <div className="flex-1 h-4 bg-white custom-border mx-2 overflow-hidden flex">
                                 <div className={`h-full border-r-2 border-pastel-ink ${d.bg}`} style={{width: `${(d.val/4571)*100}%`}}></div>
                             </div>
-                            <span className="w-8 text-right">{d.val}</span>
+                            <span className="w-10 text-right">{d.val}</span>
                         </div>
                     ))}
                 </div>
@@ -200,13 +216,13 @@
                         <span>Mulheres</span>
                     </div>
                     {data.map(d => (
-                        <div key={d.age} className="flex items-center justify-center text-[10px] font-sans font-bold text-pastel-ink">
+                        <div key={d.age} className="flex items-center justify-center text-xs font-sans font-bold text-pastel-ink">
                             <div className="flex-1 flex justify-end">
-                                <div className="h-3 bg-pastel-blue custom-border border-r-0" style={{width: `${d.m}%`}}></div>
+                                <div className="h-4 bg-pastel-blue custom-border border-r-0" style={{width: `${d.m}%`}}></div>
                             </div>
-                            <span className="w-10 text-center bg-white custom-border py-0.5 z-10 leading-none">{d.age}</span>
+                            <span className="w-14 text-center text-[10px] bg-white custom-border py-0.5 z-10">{d.age}</span>
                             <div className="flex-1 flex justify-start">
-                                <div className="h-3 bg-pastel-peach custom-border border-l-0" style={{width: `${d.f}%`}}></div>
+                                <div className="h-4 bg-pastel-peach custom-border border-l-0" style={{width: `${d.f}%`}}></div>
                             </div>
                         </div>
                     ))}
@@ -214,31 +230,66 @@
             );
         };
 
-        // --- CONTEÚDO DOS PAINÉIS LATERAIS ---
+        const StatCard = ({ title, value, subtitle, data, color, maxVal }) => {
+            const max = maxVal || Math.max(...data);
+            const width = 100;
+            const height = 25;
+            const points = data.map((d, i) => `${(i / (data.length - 1)) * width},${height - (d / max) * height}`).join(' ');
+
+            return (
+                <div className="p-4 border-2 border-pastel-ink bg-white shadow-woodcut-sm flex flex-col justify-between h-full">
+                    <h4 className="font-serif font-bold text-pastel-ink text-sm leading-tight mb-2">{title}</h4>
+                    <div className="text-3xl font-bold font-serif text-pastel-ink mb-2">{value}</div>
+                    <div className="mt-auto">
+                        <svg viewBox={`-3 -3 ${width+6} ${height+6}`} className="w-full h-8 overflow-visible">
+                            <polyline fill="none" stroke={color} strokeWidth="2.5" points={points} strokeLinejoin="round" strokeLinecap="round" />
+                            <circle cx={(data.length - 1) / (data.length - 1) * width} cy={height - (data[data.length-1] / max) * height} r="3" fill={color} />
+                        </svg>
+                        <p className="text-[9px] uppercase font-bold text-pastel-text mt-3 text-center tracking-wider">{subtitle}</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- CONTEÚDO DAS JANELAS (RESTAURADO COM INFORMAÇÕES COMPLETAS) ---
         
         // 1. Qual o problema?
         const ProblemaContent = () => {
             const [activeStep, setActiveStep] = useState(0);
+            
+            // Textos completos restaurados
             const steps = [
-                { title: "Déficits nos Eixos do Saneamento", desc: "A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água potável, esgotamento sanitário, limpeza urbana e manejo de resíduos sólidos, além da drenagem de águas pluviais.", ref: "Produto D - Prognóstico do Saneamento Básico; Resumo Executivo." },
-                { title: "Exclusão Histórica", desc: "A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico e necessário para uma vida digna.", ref: "Resumo Executivo (Projeto SanBas, p. 2)." },
-                { title: "Gestão de Riscos e Semiárido", desc: "A formulação de programas é dificultada pela vulnerabilidade ambiental (como os longos períodos de seca do semiárido) e falhas de infraestrutura.", ref: "Produto E - Programas; Produto D - Prognóstico." }
+                { 
+                    title: "Déficits nos Eixos do Saneamento", 
+                    desc: "A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água potável, esgotamento sanitário, limpeza urbana e manejo de resíduos sólidos, além da drenagem de águas pluviais. O cenário exige levantamentos para dimensionar a demanda de infraestrutura, especialmente nas áreas rurais e povoados.",
+                    ref: "Produto D - Prognóstico do Saneamento Básico; Resumo Executivo - Produtos A a F."
+                },
+                { 
+                    title: "Exclusão Histórica e Universalização", 
+                    desc: "A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico e necessário para uma vida digna, visando a universalização dos serviços no município.",
+                    ref: "Resumo Executivo - Produtos A a F (Apresentação do Projeto SanBas, p. 2)."
+                },
+                { 
+                    title: "Sustentabilidade e Gestão de Riscos", 
+                    desc: "A formulação de programas e projetos é dificultada pela vulnerabilidade ambiental (como os longos períodos de seca do semiárido) e falhas de infraestrutura. Há o desafio de estruturar metas de curto, médio e longo prazo que englobem educação em saúde, convivência com o semiárido e a recuperação de mananciais.",
+                    ref: "Produto E - Programas, Projetos e Ações; Produto D - Prognóstico do Saneamento Básico."
+                }
             ];
 
             return (
-                <div className="space-y-4">
+                <div className="space-y-4 max-w-4xl mx-auto">
                     {steps.map((step, index) => (
-                        <div key={index} className={`custom-border bg-white transition-all overflow-hidden ${activeStep === index ? 'shadow-woodcut-sm' : ''}`}>
-                            <button className="w-full px-4 py-4 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveStep(activeStep === index ? -1 : index)}>
-                                <span className="font-bold text-pastel-ink font-serif text-lg flex items-center gap-3">
-                                    <span className={`flex items-center justify-center shrink-0 w-8 h-8 font-sans text-sm custom-border ${activeStep === index ? 'bg-pastel-peach' : 'bg-pastel-sand'}`}>{index + 1}</span>
+                        <div key={index} className={`custom-border bg-white transition-all overflow-hidden ${activeStep === index ? 'shadow-woodcut' : 'hover:shadow-woodcut-sm'}`}>
+                            <button className="w-full px-5 py-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveStep(activeStep === index ? -1 : index)}>
+                                <span className="font-bold text-pastel-ink font-serif text-lg md:text-xl flex items-center gap-4">
+                                    <span className={`flex items-center justify-center shrink-0 w-10 h-10 font-sans text-sm custom-border ${activeStep === index ? 'bg-pastel-peach' : 'bg-pastel-sand'}`}>{index + 1}</span>
                                     {step.title}
                                 </span>
                                 <IconChevronDown className={`w-6 h-6 transition-transform ${activeStep === index ? 'rotate-180 text-pastel-peach' : 'text-pastel-ink'}`} />
                             </button>
-                            <div className={`px-4 transition-all duration-300 ease-in-out border-t-2 border-transparent flex flex-col justify-between ${activeStep === index ? 'py-4 bg-pastel-sand/30 border-pastel-ink max-h-96 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
-                                <p className="text-pastel-text text-base font-sans mb-3 leading-relaxed">{step.desc}</p>
-                                <p className="text-[11px] text-pastel-ink/80 italic font-sans border-t border-pastel-ink/10 pt-2"><strong>Ref:</strong> {step.ref}</p>
+                            <div className={`px-5 md:px-16 transition-all duration-300 ease-in-out border-t-2 border-transparent flex flex-col justify-between ${activeStep === index ? 'py-6 bg-pastel-sand/30 border-pastel-ink max-h-[500px] opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
+                                <p className="text-pastel-text text-lg font-sans mb-4 leading-relaxed">{step.desc}</p>
+                                <p className="text-xs text-pastel-ink/80 italic font-sans border-t border-pastel-ink/10 pt-3"><strong>Ref:</strong> {step.ref}</p>
                             </div>
                         </div>
                     ))}
@@ -246,48 +297,127 @@
             );
         };
 
-        // 2. Onde será avaliado?
+        // 2. Onde será avaliado? (Restaurado com gráficos e StatCards)
         const OndeContent = () => {
             const [activeTab, setActiveTab] = useState('historia');
+            
             const tabImages = {
                 historia: ["https://i.postimg.cc/JhWqTh7r/IMG-20250819-WA0013.jpg", "https://i.postimg.cc/TPX9kP2x/IMG-20250809-151736639.jpg"],
                 geografia: ["https://i.postimg.cc/s2Rcn2fR/IMG-20180421-103542037.jpg", "https://i.postimg.cc/8CVHyCpY/IMG-20260113-WA0006.jpg"],
                 demografia: ["https://i.postimg.cc/jjrX8jx9/IMG-20250819-WA0014.jpg"],
                 socioeconomico: ["https://i.postimg.cc/fbhKHbz1/IMG-20260113-WA0008.jpg"]
             };
+
             const tabs = {
-                historia: { icon: <IconHistory/>, title: "História", content: <p>A ocupação da região remonta ao século XVI com a expedição de Francisco Bruza de Spinosa (1553). O povoado de Indaiá cresceu ao redor de uma igreja construída em mutirão em 1953. O nome "Novorizonte" foi inspirado na vista da chapada local. A emancipação ocorreu em 1995.</p> },
-                geografia: { icon: <IconLeaf/>, title: "Geografia", content: <p>Localizado em área de transição entre Cerrado e Mata Atlântica e inserido no semiárido brasileiro. A dinâmica climática de secas e a proteção de barragens e do Rio Jequitinhonha são essenciais.</p> },
-                demografia: { icon: <IconUsers/>, title: "Demografia", content: (
-                    <div className="space-y-4">
-                        <p>População de <strong>4.571 habitantes</strong> (Censo 2022). O município mantém perfil urbano de 83,1%, enquanto 16,9% residem na área rural.</p>
-                        <div className="grid grid-cols-1 gap-4">
-                            <div className="p-4 border-2 border-pastel-ink bg-pastel-bg"><h4 className="font-serif font-bold mb-2 border-b-2 border-pastel-ink pb-1">Cor ou Raça</h4><RaceChart /></div>
-                            <div className="p-4 border-2 border-pastel-ink bg-pastel-bg"><h4 className="font-serif font-bold mb-2 border-b-2 border-pastel-ink pb-1">Pirâmide Etária</h4><PyramidChart /></div>
+                historia: { 
+                    icon: <IconHistory/>, 
+                    title: "História", 
+                    content: (
+                        <div className="space-y-4">
+                            <p>A ocupação da região remonta ao século XVI com a expedição de Francisco Bruza de Spinosa (1553). Historicamente ligada a Salinas, a formação atual da cidade deve-se muito ao fazendeiro João Bernardino de Souza (João Davilino), proprietário da Fazenda Córrego da Xícara no antigo povoado de Indaiá.</p>
+                            <p>Homem popular e trabalhador, João Bernardino atuou como Inspetor de Quarteirão e Inspetor da Escola Municipal. Em 1953, mobilizou a comunidade e conseguiu a doação de terras pelas famílias Almeida e Ferreira em uma chapada chamada "Novo Indaiá". O objetivo era construir uma praça e uma igreja dedicada a Nossa Senhora da Conceição, obra erguida em mutirão pelas famílias locais.</p>
+                            <p>Em 06 de outubro de 1953, o então prefeito de Salinas, Dr. Costa, ao visitar o Novo Indaiá, admirou a vista da chapada e declarou a João Bernardino: <em>"isto aqui é muito bonito, é um horizonte"</em>. A inspiração gerou o nome "Novorizonte", que foi prontamente aceito por todos. A emancipação ocorreu em 1995.</p>
                         </div>
-                    </div>
-                ) },
-                socioeconomico: { icon: <IconTrendingUp/>, title: "Economia", content: <p>Situado na microrregião de Salinas. A área rural abrange 26 fazendas e comunidades tradicionais geraizeiras. O PIB per capita é de R$ 20.256 e a economia local possui forte vínculo com as águas e a agricultura.</p> }
+                    ) 
+                },
+                geografia: { 
+                    icon: <IconLeaf/>, 
+                    title: "Geografia", 
+                    content: <p>Novorizonte é um município localizado em uma região de planalto, situado em área de transição entre o Cerrado e a Mata Atlântica. Pertence à região do semiárido brasileiro, o que torna a dinâmica climática (incluindo períodos de seca) e a infraestrutura hídrica (barragens) desafios cruciais. É reconhecido também pela produção de inúmeras cachaças.</p> 
+                },
+                demografia: { 
+                    icon: <IconUsers/>, 
+                    title: "Demografia", 
+                    content: (
+                        <div className="space-y-4">
+                            <div className="flex flex-wrap gap-3 mb-4">
+                                <span className="px-3 py-1 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase">Gentílico: Novorizontino</span>
+                                <span className="px-3 py-1 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase">Aniversário: 21 de Dezembro</span>
+                            </div>
+                            <p>Segundo o <strong>Censo IBGE 2022</strong>, o município conta com uma população de <strong>4.571 habitantes</strong> e uma densidade demográfica de <strong>16,83 hab./km²</strong>. Historicamente, mantém-se o perfil de forte presença na área urbana (cerca de 83,1%), enquanto 16,9% residem na área rural. A idade mediana é de 37 anos.</p>
+                            
+                            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
+                                <div className="p-4 border-2 border-pastel-ink bg-pastel-bg shadow-woodcut-sm">
+                                    <h4 className="font-serif font-bold text-pastel-ink mb-2 border-b-2 border-pastel-ink pb-2">Cor ou Raça (2022)</h4>
+                                    <RaceChart />
+                                </div>
+                                <div className="p-4 border-2 border-pastel-ink bg-pastel-bg shadow-woodcut-sm">
+                                    <h4 className="font-serif font-bold text-pastel-ink mb-2 border-b-2 border-pastel-ink pb-2">Pirâmide Etária (2022)</h4>
+                                    <PyramidChart />
+                                </div>
+                            </div>
+                        </div>
+                    ) 
+                },
+                socioeconomico: { 
+                    icon: <IconTrendingUp/>, 
+                    title: "Economia", 
+                    content: (
+                        <div className="space-y-6">
+                            <p>Localizado na mesorregião do Norte de Minas (microrregião de Salinas) e pertencente à Bacia Hidrográfica do Rio Jequitinhonha. O território é formado pelos distritos Sede e Campo Verde de Minas, pelos povoados de Baixa da Cambaúba, Baixa do Bitu, Indaiá e São João do Pequi, pela comunidade de Alto São João e por 26 fazendas na área rural. Destaca-se a presença de povos tradicionais geraizeiros.</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <StatCard 
+                                    title="PIB per Capita" 
+                                    value="R$ 20.256" 
+                                    subtitle="Crescimento (2012-2023)" 
+                                    data={[5, 6, 7, 8, 10, 11, 13, 19, 20.2]} 
+                                    color="#2B2624" 
+                                />
+                                <StatCard 
+                                    title="Mortalidade Infantil" 
+                                    value="0" 
+                                    subtitle="Óbitos/mil nv (2008-2023)" 
+                                    data={[10, 14, 14, 44, 28, 20, 32, 20, 14, 18, 21, 20, 0]} 
+                                    color="#2B2624" 
+                                    maxVal={50}
+                                />
+                                <StatCard 
+                                    title="IDEB (Anos Finais)" 
+                                    value="4,6" 
+                                    subtitle="Rede Pública (2005-2023)" 
+                                    data={[2, 3, 4, 4, 4, 4, 4, 4, 5, 4.6]} 
+                                    color="#2B2624" 
+                                    maxVal={6}
+                                />
+                            </div>
+                        </div>
+                    ) 
+                }
             };
 
             return (
-                <div className="flex flex-col">
-                    <div className="flex gap-2 overflow-x-auto pb-2 hide-scrollbar mb-4">
+                <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[500px]">
+                    {/* Menu de Abas */}
+                    <div className="flex lg:flex-col gap-3 overflow-x-auto pb-2 lg:pb-0 lg:w-1/4 xl:w-1/5 shrink-0 hide-scrollbar">
                         {Object.keys(tabs).map((key) => (
-                            <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-2 px-3 py-2 text-sm whitespace-nowrap font-bold custom-border ${activeTab === key ? 'bg-pastel-blue text-pastel-ink' : 'bg-white hover:bg-pastel-sand'}`}>
-                                {tabs[key].icon} {tabs[key].title}
+                            <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-3 px-4 py-3 text-left transition-all whitespace-nowrap lg:whitespace-normal font-sans font-bold custom-border ${activeTab === key ? 'bg-pastel-blue text-pastel-ink shadow-woodcut-sm lg:translate-x-2' : 'bg-white text-pastel-text hover:bg-pastel-sand'}`}>
+                                <span className={activeTab === key ? 'text-pastel-ink' : 'text-pastel-text'}>{tabs[key].icon}</span>
+                                <span>{tabs[key].title}</span>
                             </button>
                         ))}
                     </div>
-                    <div className="bg-white custom-border p-5 text-pastel-text font-sans text-base leading-relaxed">
-                        {tabs[activeTab].content}
-                        <Slideshow images={tabImages[activeTab]} />
+                    
+                    {/* Área de Conteúdo */}
+                    <div className="flex-1 bg-white custom-border p-6 md:p-8 shadow-woodcut flex flex-col xl:flex-row gap-8 overflow-hidden">
+                        <div className="flex-1 flex flex-col">
+                            <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-6 border-b-2 border-pastel-ink pb-3 flex items-center gap-3">
+                                {tabs[activeTab].icon} {tabs[activeTab].title}
+                            </h3>
+                            <div className="text-pastel-text font-sans text-lg leading-relaxed flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                                {tabs[activeTab].content}
+                            </div>
+                        </div>
+                        {/* Slideshow */}
+                        <div className="w-full xl:w-[45%] flex flex-col shrink-0 min-h-[300px]">
+                            <Slideshow images={tabImages[activeTab]} />
+                        </div>
                     </div>
                 </div>
             );
         };
 
-        // 3. Como será avaliado?
+        // 3. Como será avaliado? (Restaurado com lista completa e citação)
         const ComoContent = () => {
             const [checkedItems, setCheckedItems] = useState([false, false, false]);
             const toggleItem = (index) => {
@@ -295,22 +425,70 @@
                 newItems[index] = !newItems[index];
                 setCheckedItems(newItems);
             };
+
             const metricas = [
-                { label: "Cartografia Temática (SIG)", desc: "Mapeamento digital focado em bacias hidrográficas, áreas de risco e infraestrutura de poços/barragens.", ref: "Diagnóstico Técnico-Participativo" },
-                { label: "Coleta de Dados e DRP", desc: "Pesquisas socioeconômicas e Diagnóstico Rápido Participativo nas comunidades, complementado por auditorias in loco.", ref: "Metodologias SanBas / IBGE" },
-                { label: "Participação Popular", desc: "Audiências públicas, comitês executivos e oficinas para debater os prognósticos com a população local.", ref: "Estratégias de Mobilização Social" }
+                { 
+                    label: "1. Cartografias e Análise Espacial (Leitura Técnica)", 
+                    subItems: [
+                        { title: "Cartografia Temática", text: "Mapas focados em bacias hidrográficas (Rio Jequitinhonha), áreas de risco, escassez hídrica (semiárido) e proteção ambiental." },
+                        { title: "Sistemas de Informação Geográfica (SIG)", text: "Uso de dados digitais para georreferenciar a infraestrutura de saneamento (poços tubulares, barragens, redes de água/esgoto e lixões)." },
+                        { title: "Cartografia Social/Participativa", text: "Mapas construídos pelos moradores rurais (povoados e fazendas) para identificar fontes de água, áreas de seca e locais de descarte inadequado." }
+                    ],
+                    ref: "Produto C - Diagnóstico Técnico-Participativo / SanBas"
+                },
+                { 
+                    label: "2. Pesquisas e Coleta de Dados (Leitura Técnica)", 
+                    subItems: [
+                        { title: "Pesquisas Socioeconômicas", text: "Levantamentos sobre o perfil demográfico e acesso a serviços básicos, essenciais para entender a exclusão histórica no município." },
+                        { title: "Diagnóstico Rápido Participativo (DRP)", text: "Metodologia ágil e direta para coletar informações nas comunidades rurais (que compõem 16,9% da população de Novorizonte)." },
+                        { title: "Auditoria de Infraestrutura in loco", text: "Levantamento técnico das condições físicas e operacionais dos sistemas de abastecimento e manejo de resíduos sólidos." }
+                    ],
+                    ref: "Metodologias do Projeto SanBas / IBGE"
+                },
+                { 
+                    label: "3. Participação Popular e Consulta Social (Leitura Comunitária)", 
+                    subItems: [
+                        { title: "Audiências e Consultas Públicas", text: "Reuniões formais para apresentação, debate e validação do diagnóstico e dos prognósticos do PMSB junto à população." },
+                        { title: "Oficinas de Setorização", text: "Dinâmicas em pequenos grupos (distritos e comunidades) para garantir que as demandas específicas das 26 fazendas sejam incorporadas ao plano." },
+                        { title: "Comitês de Coordenação e Executivo", text: "Órgãos colegiados formados por representantes do poder público e sociedade civil para acompanhar e aprovar as etapas do PMSB." }
+                    ],
+                    ref: "Produtos A e B - Estratégias de Mobilização Social"
+                }
             ];
 
             return (
-                <div className="space-y-4">
+                <div className="space-y-6 max-w-5xl mx-auto">
+                    {/* Citação de destaque restaurada */}
+                    <div className="mb-8 p-6 bg-pastel-sand/50 custom-border border-l-4 border-l-pastel-peach shadow-woodcut-sm">
+                        <p className="font-serif italic text-pastel-ink text-xl leading-relaxed">
+                            "A combinação de leitura técnica (cartografias/pesquisas) com a leitura comunitária (participação popular) é a base de um diagnóstico urbanístico eficiente e democrático."
+                        </p>
+                    </div>
+
                     {metricas.map((metrica, index) => (
-                        <div key={index} onClick={() => toggleItem(index)} className={`cursor-pointer flex items-start gap-4 p-4 custom-border transition-all ${checkedItems[index] ? 'bg-pastel-green/40 shadow-woodcut-sm' : 'bg-white hover:bg-pastel-sand'}`}>
-                            <div className={`mt-1 ${checkedItems[index] ? 'text-pastel-ink' : 'text-pastel-text'}`}><IconCheckCircle2 className="w-6 h-6" /></div>
-                            <div>
-                                <h4 className={`text-lg font-bold font-serif ${checkedItems[index] ? 'text-pastel-ink' : 'text-pastel-text'}`}>{metrica.label}</h4>
-                                <div className={`transition-all overflow-hidden ${checkedItems[index] ? 'max-h-64 mt-2 opacity-100' : 'max-h-0 opacity-0'}`}>
-                                    <p className="text-sm font-sans mb-2">{metrica.desc}</p>
-                                    <p className="text-[11px] italic">Ref: {metrica.ref}</p>
+                        <div key={index} onClick={() => toggleItem(index)} className={`cursor-pointer flex items-start gap-5 p-6 custom-border transition-all ${checkedItems[index] ? 'bg-pastel-green/40 shadow-woodcut' : 'bg-white hover:bg-pastel-sand hover:shadow-woodcut-sm'}`}>
+                            <div className={`mt-1 transition-colors ${checkedItems[index] ? 'text-pastel-ink' : 'text-pastel-text'}`}>
+                                <IconCheckCircle2 className="w-8 h-8" />
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex justify-between items-center w-full">
+                                    <h4 className={`text-xl md:text-2xl font-bold font-serif ${checkedItems[index] ? 'text-pastel-ink' : 'text-pastel-text'}`}>
+                                        {metrica.label}
+                                    </h4>
+                                    <IconChevronDown className={`w-6 h-6 transition-transform duration-300 ${checkedItems[index] ? 'rotate-180 text-pastel-ink' : 'text-pastel-text'}`} />
+                                </div>
+                                
+                                <div className={`transition-all duration-300 overflow-hidden ${checkedItems[index] ? 'max-h-[1000px] mt-6 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                    <ul className="space-y-4 font-sans text-pastel-text mb-6">
+                                        {metrica.subItems.map((sub, sIdx) => (
+                                            <li key={sIdx} className="text-lg leading-relaxed border-l-4 border-pastel-ink/20 pl-4">
+                                                <strong className="text-pastel-ink">{sub.title}:</strong> {sub.text}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p className="text-sm font-sans italic text-pastel-ink/80 pt-3 border-t-2 border-pastel-ink/10">
+                                        <strong>Referência:</strong> {metrica.ref}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +511,7 @@
 
             // Funções de Arrastar (Pan)
             const handlePointerDown = (e) => {
-                if (e.target.closest('.no-drag')) return; // Ignora se clicar no painel ou botões
+                if (e.target.closest('.no-drag')) return; 
                 setIsDragging(true);
                 dragStart.current = { x: e.clientX - pos.x, y: e.clientY - pos.y };
                 e.target.setPointerCapture(e.pointerId);
@@ -363,14 +541,13 @@
             const resetView = () => {
                 setPos({ x: 0, y: 0 });
                 setZoom(1);
-                setActiveNode(null);
             };
 
-            // Dados dos Pinos (Markers) no Mapa (Coordenadas baseadas em um canvas de 4000x3000, centro é 0,0)
+            // Dados dos Pinos (Markers)
             const mapNodes = [
-                { id: 'problema', x: -600, y: -150, title: '1. A Justificativa', subtitle: 'Qual o problema?', icon: IconTarget, bg: 'bg-pastel-peach', content: <ProblemaContent /> },
-                { id: 'onde', x: 0, y: 250, title: '2. O Território', subtitle: 'Onde será avaliado?', icon: IconMapPin, bg: 'bg-pastel-blue', content: <OndeContent /> },
-                { id: 'como', x: 650, y: -50, title: '3. A Metodologia', subtitle: 'Como será avaliado?', icon: IconBookOpen, bg: 'bg-pastel-green', content: <ComoContent /> }
+                { id: 'problema', x: -600, y: -150, title: '1. A Justificativa', subtitle: 'Qual o problema?', icon: IconTarget, bg: 'bg-pastel-peach', content: <ProblemaContent />, modalWidth: 'max-w-5xl' },
+                { id: 'onde', x: 0, y: 250, title: '2. O Território', subtitle: 'Onde será avaliado?', icon: IconMapPin, bg: 'bg-pastel-blue', content: <OndeContent />, modalWidth: 'max-w-[95vw] 2xl:max-w-[1600px]' },
+                { id: 'como', x: 650, y: -50, title: '3. A Metodologia', subtitle: 'Como será avaliado?', icon: IconBookOpen, bg: 'bg-pastel-green', content: <ComoContent />, modalWidth: 'max-w-5xl' }
             ];
 
             const activeNodeData = mapNodes.find(n => n.id === activeNode);
@@ -414,7 +591,7 @@
                                     key={node.id}
                                     onClick={(e) => { e.stopPropagation(); setActiveNode(node.id); }}
                                     className={`absolute flex flex-col items-center justify-center transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 no-drag cursor-pointer
-                                        ${isActive ? 'scale-110 z-20' : 'hover:scale-105 z-10'}`}
+                                        ${isActive ? 'scale-110 z-20 opacity-0' : 'hover:scale-105 z-10 opacity-100'}`}
                                     style={{ left: `calc(50% + ${node.x}px)`, top: `calc(50% + ${node.y}px)` }}
                                 >
                                     {/* Tooltip / Label */}
@@ -424,7 +601,7 @@
                                     </div>
                                     
                                     {/* Marcador Visual */}
-                                    <div className={`w-20 h-20 rounded-full custom-border shadow-woodcut flex items-center justify-center ${node.bg} ${isActive ? 'ring-8 ring-white/50' : ''}`}>
+                                    <div className={`w-20 h-20 rounded-full custom-border shadow-woodcut flex items-center justify-center ${node.bg}`}>
                                         <Icon className="w-10 h-10 text-pastel-ink" />
                                     </div>
                                     
@@ -438,17 +615,15 @@
 
                     {/* --- INTERFACE DE USUÁRIO (OVERLAYS FIXOS) --- */}
 
-                    {/* CABEÇALHO CENTRALIZADO */}
-                    <div className="absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-white/95 backdrop-blur-md custom-border shadow-woodcut w-[90%] max-w-4xl p-5 md:p-8 text-center flex flex-col items-center max-h-[40vh] overflow-y-auto hide-scrollbar pointer-events-auto">
+                    {/* CABEÇALHO CENTRALIZADO (Some suavemente quando a janela abre) */}
+                    <div className={`absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-white/95 backdrop-blur-md custom-border shadow-woodcut w-[90%] max-w-4xl p-5 md:p-8 text-center flex flex-col items-center max-h-[40vh] overflow-y-auto hide-scrollbar pointer-events-auto transition-opacity duration-300 ${activeNode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                         
-                        {/* Informações Institucionais (UFBA) */}
                         <div className="font-sans text-[10px] md:text-xs font-bold text-pastel-ink/80 uppercase tracking-widest mb-3 md:mb-4 flex flex-wrap justify-center items-center gap-2">
                             <span>Universidade Federal da Bahia</span>
                             <span className="hidden md:inline">•</span>
                             <span>ARQC10 - Planejamento Urbano e Regional</span>
                         </div>
                         
-                        {/* Títulos Principais */}
                         <h1 className="text-2xl md:text-4xl font-bold font-serif text-pastel-ink leading-tight mb-2">
                             Retratos do Saneamento Básico em Novorizonte - MG
                         </h1>
@@ -456,13 +631,11 @@
                             Diagnóstico, Desafios e Caminhos para a Universalização
                         </h2>
                         
-                        {/* Texto de Apresentação e Linha Separadora */}
                         <div className="border-t-2 border-pastel-peach pt-4 md:pt-5 w-full">
                             <p className="text-xs md:text-sm font-sans text-pastel-text leading-relaxed mb-4 max-w-3xl mx-auto">
                                 Trabalho desenvolvido no escopo da disciplina <strong>ARQC10 - Ateliê de Fundamentação de Planejamento Urbano e Regional</strong>. O objetivo deste material é investigar a realidade socioespacial e hídrica do município para desenvolver uma síntese interativa do diagnóstico técnico-participativo, servindo como base para a compreensão, estruturação e avaliação do Plano Municipal de Saneamento Básico (PMSB).
                             </p>
                             
-                            {/* Créditos (Discente / Docente / Tag Parte 1) */}
                             <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 font-sans text-xs text-pastel-text">
                                 <span><strong>Discente:</strong> Caio Aphonso Almeida</span>
                                 <span className="hidden md:inline">&bull;</span>
@@ -474,43 +647,59 @@
                         </div>
                     </div>
 
-                    {/* Dica de Navegação (Centro Inferior) */}
-                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-pastel-ink text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg flex items-center gap-3 pointer-events-none opacity-80">
-                        <IconCompass className="w-5 h-5" /> Arraste para explorar o mapa
+                    {/* Dica de Navegação e Controles */}
+                    <div className={`transition-opacity duration-300 ${activeNode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-pastel-ink text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg flex items-center gap-3 pointer-events-none opacity-80">
+                            <IconCompass className="w-5 h-5" /> Arraste para explorar o mapa
+                        </div>
+
+                        <div className="absolute bottom-8 right-8 z-30 no-drag flex flex-col gap-2">
+                            <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomIn /></button>
+                            <button onClick={() => setZoom(z => Math.max(z - 0.2, 0.4))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomOut /></button>
+                            <button onClick={resetView} className="mt-2 text-xs font-bold uppercase bg-pastel-ink text-white py-2 px-2 custom-border hover:bg-black">Resetar</button>
+                        </div>
                     </div>
 
-                    {/* Controles de Zoom (Canto Inferior Direito) */}
-                    <div className="absolute bottom-8 right-8 z-30 no-drag flex flex-col gap-2">
-                        <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomIn /></button>
-                        <button onClick={() => setZoom(z => Math.max(z - 0.2, 0.4))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomOut /></button>
-                        <button onClick={resetView} className="mt-2 text-xs font-bold uppercase bg-pastel-ink text-white py-2 px-2 custom-border hover:bg-black">Resetar</button>
-                    </div>
-
-                    {/* PAINEL LATERAL (Desliza da direita quando um pino é clicado) */}
-                    <div className={`absolute top-0 right-0 h-full w-full md:w-[450px] lg:w-[500px] bg-pastel-bg custom-border border-r-0 shadow-[-10px_0_20px_rgba(0,0,0,0.1)] z-40 no-drag transition-transform duration-500 ease-in-out flex flex-col
-                        ${activeNode ? 'translate-x-0' : 'translate-x-[110%]'}`}
-                    >
-                        {activeNodeData && (
-                            <>
-                                {/* Cabeçalho do Painel */}
-                                <div className={`p-6 border-b-2 border-pastel-ink flex items-center justify-between shrink-0 ${activeNodeData.bg}`}>
-                                    <div className="flex items-center gap-4">
-                                        <div className="bg-white p-2 custom-border"><activeNodeData.icon className="w-6 h-6 text-pastel-ink" /></div>
+                    {/* JANELA EXPANSÍVEL (MODAL CENTRAL) */}
+                    {activeNodeData && (
+                        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 no-drag pointer-events-auto">
+                            
+                            {/* Overlay Escuro com Blur */}
+                            <div 
+                                className="absolute inset-0 bg-pastel-ink/60 backdrop-blur-md animate-fade cursor-pointer"
+                                onClick={() => setActiveNode(null)}
+                            ></div>
+                            
+                            {/* Janela Principal */}
+                            <div className={`relative w-full ${activeNodeData.modalWidth} max-h-full bg-pastel-bg custom-border shadow-woodcut-lg flex flex-col animate-expand`}>
+                                
+                                {/* Cabeçalho da Janela */}
+                                <div className={`p-6 md:px-8 md:py-6 border-b-2 border-pastel-ink flex items-center justify-between shrink-0 ${activeNodeData.bg}`}>
+                                    <div className="flex items-center gap-4 md:gap-6">
+                                        <div className="bg-white p-3 custom-border shadow-woodcut hidden sm:block">
+                                            <activeNodeData.icon className="w-8 h-8 md:w-10 md:h-10 text-pastel-ink" />
+                                        </div>
                                         <div>
-                                            <div className="text-xs font-bold uppercase text-pastel-ink/70">{activeNodeData.title}</div>
-                                            <h2 className="text-2xl font-bold font-serif text-pastel-ink">{activeNodeData.subtitle}</h2>
+                                            <div className="text-sm font-bold uppercase tracking-widest text-pastel-ink/70 mb-1">{activeNodeData.title}</div>
+                                            <h2 className="text-3xl md:text-4xl font-bold font-serif text-pastel-ink">{activeNodeData.subtitle}</h2>
                                         </div>
                                     </div>
-                                    <button onClick={() => setActiveNode(null)} className="p-2 bg-white/50 hover:bg-white custom-border transition-colors"><IconX className="w-5 h-5"/></button>
+                                    <button 
+                                        onClick={() => setActiveNode(null)} 
+                                        className="p-3 bg-white/60 hover:bg-white custom-border transition-colors shadow-woodcut-sm cursor-pointer ml-4"
+                                    >
+                                        <IconX className="w-6 h-6 text-pastel-ink"/>
+                                    </button>
                                 </div>
                                 
-                                {/* Conteúdo Rolável do Painel */}
-                                <div className="p-6 overflow-y-auto flex-1 map-texture">
+                                {/* Conteúdo Rolável */}
+                                <div className="p-6 md:p-10 overflow-y-auto flex-1 map-texture hide-scrollbar">
                                     {activeNodeData.content}
                                 </div>
-                            </>
-                        )}
-                    </div>
+
+                            </div>
+                        </div>
+                    )}
 
                 </div>
             );
