@@ -251,53 +251,9 @@
             );
         };
 
-        // --- CONTEÚDO DAS JANELAS (RESTAURADO COM INFORMAÇÕES COMPLETAS) ---
+        // --- CONTEÚDO DAS JANELAS ---
         
-        // 1. Qual o problema?
-        const ProblemaContent = () => {
-            const [activeStep, setActiveStep] = useState(0);
-            
-            // Textos completos restaurados
-            const steps = [
-                { 
-                    title: "Déficits nos Eixos do Saneamento", 
-                    desc: "A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água potável, esgotamento sanitário, limpeza urbana e manejo de resíduos sólidos, além da drenagem de águas pluviais. O cenário exige levantamentos para dimensionar a demanda de infraestrutura, especialmente nas áreas rurais e povoados.",
-                    ref: "Produto D - Prognóstico do Saneamento Básico; Resumo Executivo - Produtos A a F."
-                },
-                { 
-                    title: "Exclusão Histórica e Universalização", 
-                    desc: "A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico e necessário para uma vida digna, visando a universalização dos serviços no município.",
-                    ref: "Resumo Executivo - Produtos A a F (Apresentação do Projeto SanBas, p. 2)."
-                },
-                { 
-                    title: "Sustentabilidade e Gestão de Riscos", 
-                    desc: "A formulação de programas e projetos é dificultada pela vulnerabilidade ambiental (como os longos períodos de seca do semiárido) e falhas de infraestrutura. Há o desafio de estruturar metas de curto, médio e longo prazo que englobem educação em saúde, convivência com o semiárido e a recuperação de mananciais.",
-                    ref: "Produto E - Programas, Projetos e Ações; Produto D - Prognóstico do Saneamento Básico."
-                }
-            ];
-
-            return (
-                <div className="space-y-4 max-w-4xl mx-auto">
-                    {steps.map((step, index) => (
-                        <div key={index} className={`custom-border bg-white transition-all overflow-hidden ${activeStep === index ? 'shadow-woodcut' : 'hover:shadow-woodcut-sm'}`}>
-                            <button className="w-full px-5 py-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveStep(activeStep === index ? -1 : index)}>
-                                <span className="font-bold text-pastel-ink font-serif text-lg md:text-xl flex items-center gap-4">
-                                    <span className={`flex items-center justify-center shrink-0 w-10 h-10 font-sans text-sm custom-border ${activeStep === index ? 'bg-pastel-peach' : 'bg-pastel-sand'}`}>{index + 1}</span>
-                                    {step.title}
-                                </span>
-                                <IconChevronDown className={`w-6 h-6 transition-transform ${activeStep === index ? 'rotate-180 text-pastel-peach' : 'text-pastel-ink'}`} />
-                            </button>
-                            <div className={`px-5 md:px-16 transition-all duration-300 ease-in-out border-t-2 border-transparent flex flex-col justify-between ${activeStep === index ? 'py-6 bg-pastel-sand/30 border-pastel-ink max-h-[500px] opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
-                                <p className="text-pastel-text text-lg font-sans mb-4 leading-relaxed">{step.desc}</p>
-                                <p className="text-xs text-pastel-ink/80 italic font-sans border-t border-pastel-ink/10 pt-3"><strong>Ref:</strong> {step.ref}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            );
-        };
-
-        // 2. Onde será avaliado? (Restaurado com gráficos e StatCards)
+        // 1. Onde será avaliado?
         const OndeContent = () => {
             const [activeTab, setActiveTab] = useState('historia');
             
@@ -417,7 +373,50 @@
             );
         };
 
-        // 3. Como será avaliado? (Restaurado com lista completa e citação)
+        // 2. Qual o problema?
+        const ProblemaContent = () => {
+            const [activeStep, setActiveStep] = useState(0);
+            
+            const steps = [
+                { 
+                    title: "Déficits nos Eixos do Saneamento", 
+                    desc: "A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água potável, esgotamento sanitário, limpeza urbana e manejo de resíduos sólidos, além da drenagem de águas pluviais. O cenário exige levantamentos para dimensionar a demanda de infraestrutura, especialmente nas áreas rurais e povoados.",
+                    ref: "Produto D - Prognóstico do Saneamento Básico; Resumo Executivo - Produtos A a F."
+                },
+                { 
+                    title: "Exclusão Histórica e Universalização", 
+                    desc: "A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico e necessário para uma vida digna, visando a universalização dos serviços no município.",
+                    ref: "Resumo Executivo - Produtos A a F (Apresentação do Projeto SanBas, p. 2)."
+                },
+                { 
+                    title: "Sustentabilidade e Gestão de Riscos", 
+                    desc: "A formulação de programas e projetos é dificultada pela vulnerabilidade ambiental (como os longos períodos de seca do semiárido) e falhas de infraestrutura. Há o desafio de estruturar metas de curto, médio e longo prazo que englobem educação em saúde, convivência com o semiárido e a recuperação de mananciais.",
+                    ref: "Produto E - Programas, Projetos e Ações; Produto D - Prognóstico do Saneamento Básico."
+                }
+            ];
+
+            return (
+                <div className="space-y-4 max-w-4xl mx-auto">
+                    {steps.map((step, index) => (
+                        <div key={index} className={`custom-border bg-white transition-all overflow-hidden ${activeStep === index ? 'shadow-woodcut' : 'hover:shadow-woodcut-sm'}`}>
+                            <button className="w-full px-5 py-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveStep(activeStep === index ? -1 : index)}>
+                                <span className="font-bold text-pastel-ink font-serif text-lg md:text-xl flex items-center gap-4">
+                                    <span className={`flex items-center justify-center shrink-0 w-10 h-10 font-sans text-sm custom-border ${activeStep === index ? 'bg-pastel-peach' : 'bg-pastel-sand'}`}>{index + 1}</span>
+                                    {step.title}
+                                </span>
+                                <IconChevronDown className={`w-6 h-6 transition-transform ${activeStep === index ? 'rotate-180 text-pastel-peach' : 'text-pastel-ink'}`} />
+                            </button>
+                            <div className={`px-5 md:px-16 transition-all duration-300 ease-in-out border-t-2 border-transparent flex flex-col justify-between ${activeStep === index ? 'py-6 bg-pastel-sand/30 border-pastel-ink max-h-[500px] opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
+                                <p className="text-pastel-text text-lg font-sans mb-4 leading-relaxed">{step.desc}</p>
+                                <p className="text-xs text-pastel-ink/80 italic font-sans border-t border-pastel-ink/10 pt-3"><strong>Ref:</strong> {step.ref}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        // 3. Como será avaliado?
         const ComoContent = () => {
             const [checkedItems, setCheckedItems] = useState([false, false, false]);
             const toggleItem = (index) => {
@@ -458,7 +457,6 @@
 
             return (
                 <div className="space-y-6 max-w-5xl mx-auto">
-                    {/* Citação de destaque restaurada */}
                     <div className="mb-8 p-6 bg-pastel-sand/50 custom-border border-l-4 border-l-pastel-peach shadow-woodcut-sm">
                         <p className="font-serif italic text-pastel-ink text-xl leading-relaxed">
                             "A combinação de leitura técnica (cartografias/pesquisas) com a leitura comunitária (participação popular) é a base de um diagnóstico urbanístico eficiente e democrático."
@@ -504,12 +502,14 @@
             const [pos, setPos] = useState({ x: 0, y: 0 });
             const [zoom, setZoom] = useState(1);
             const [isDragging, setIsDragging] = useState(false);
-            const [activeNode, setActiveNode] = useState(null); // 'problema', 'onde', 'como'
+            const [activeNode, setActiveNode] = useState(null);
             
-            const mapRef = useRef(null);
+            // Estado da Passarinha seguindo o cursor
+            const [birdTarget, setBirdTarget] = useState({ x: 0, y: 0, flip: false });
+
             const dragStart = useRef({ x: 0, y: 0 });
 
-            // Funções de Arrastar (Pan)
+            // Funções de Arrastar (Pan) e Rastreamento do Mouse
             const handlePointerDown = (e) => {
                 if (e.target.closest('.no-drag')) return; 
                 setIsDragging(true);
@@ -518,11 +518,25 @@
             };
 
             const handlePointerMove = (e) => {
-                if (!isDragging) return;
-                setPos({
-                    x: e.clientX - dragStart.current.x,
-                    y: e.clientY - dragStart.current.y
-                });
+                let currentPosX = pos.x;
+                let currentPosY = pos.y;
+                
+                if (isDragging) {
+                    currentPosX = e.clientX - dragStart.current.x;
+                    currentPosY = e.clientY - dragStart.current.y;
+                    setPos({ x: currentPosX, y: currentPosY });
+                }
+
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                const bX = (e.clientX - centerX - currentPosX) / zoom;
+                const bY = (e.clientY - centerY - currentPosY) / zoom;
+                
+                setBirdTarget(prev => ({
+                    x: bX,
+                    y: bY,
+                    flip: bX < prev.x
+                }));
             };
 
             const handlePointerUp = (e) => {
@@ -530,27 +544,28 @@
                 e.target.releasePointerCapture(e.pointerId);
             };
 
-            // Zoom com Scroll do Mouse
             const handleWheel = (e) => {
                 if (e.target.closest('.no-drag')) return;
                 const zoomDelta = e.deltaY * -0.001;
                 setZoom(z => Math.min(Math.max(0.4, z + zoomDelta), 2.5));
             };
 
-            // Centralizar
             const resetView = () => {
                 setPos({ x: 0, y: 0 });
                 setZoom(1);
             };
 
-            // Dados dos Pinos (Markers)
+            // Dados dos Pinos
             const mapNodes = [
-                { id: 'problema', x: -600, y: -150, title: '1. A Justificativa', subtitle: 'Qual o problema?', icon: IconTarget, bg: 'bg-pastel-peach', content: <ProblemaContent />, modalWidth: 'max-w-5xl' },
-                { id: 'onde', x: 0, y: 250, title: '2. O Território', subtitle: 'Onde será avaliado?', icon: IconMapPin, bg: 'bg-pastel-blue', content: <OndeContent />, modalWidth: 'max-w-[95vw] 2xl:max-w-[1600px]' },
+                { id: 'onde', x: -600, y: -150, title: '1. O Território', subtitle: 'Onde será avaliado?', icon: IconMapPin, bg: 'bg-pastel-blue', content: <OndeContent />, modalWidth: 'max-w-[95vw] 2xl:max-w-[1600px]' },
+                { id: 'problema', x: 0, y: 250, title: '2. A Justificativa', subtitle: 'Qual o problema?', icon: IconTarget, bg: 'bg-pastel-peach', content: <ProblemaContent />, modalWidth: 'max-w-5xl' },
                 { id: 'como', x: 650, y: -50, title: '3. A Metodologia', subtitle: 'Como será avaliado?', icon: IconBookOpen, bg: 'bg-pastel-green', content: <ComoContent />, modalWidth: 'max-w-5xl' }
             ];
 
             const activeNodeData = mapNodes.find(n => n.id === activeNode);
+
+            // Caminho SVG
+            const pathData = `M ${2000 + mapNodes[0].x} ${1500 + mapNodes[0].y} Q ${2000 + mapNodes[0].x + 300} ${1500 + mapNodes[0].y + 400} ${2000 + mapNodes[1].x} ${1500 + mapNodes[1].y} Q ${2000 + mapNodes[1].x + 300} ${1500 + mapNodes[1].y - 300} ${2000 + mapNodes[2].x} ${1500 + mapNodes[2].y}`;
 
             return (
                 <div className="w-screen h-screen overflow-hidden relative map-texture map-grid font-sans select-none"
@@ -560,27 +575,38 @@
                      onPointerCancel={handlePointerUp}
                      onWheel={handleWheel}>
                     
-                    {/* CONTAINER DO MAPA MUNDO (Escalável e Arrastável) */}
+                    {/* CONTAINER DO MAPA MUNDO */}
                     <div 
                         className={`absolute top-1/2 left-1/2 w-[4000px] h-[3000px] origin-center ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
                         style={{ transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${zoom})` }}
                     >
                         
-                        {/* Imagens de Cenário (Xilogravuras espalhadas pelo mapa) */}
                         <img src="https://i.postimg.cc/Kvn0SL1s/image.png" className="woodcut-bg" style={{ top: '1200px', left: '1200px', width: '400px' }} />
                         <img src="https://i.postimg.cc/GpSQJxfp/image.png" className="woodcut-bg" style={{ top: '1600px', left: '2300px', width: '500px' }} />
                         <img src="https://i.postimg.cc/xCw3BTnQ/image.png" className="woodcut-bg" style={{ top: '1100px', left: '2600px', width: '300px' }} />
                         <img src="https://i.postimg.cc/fTjfgNFT/image.png" className="woodcut-bg" style={{ top: '1800px', left: '1400px', width: '350px' }} />
                         
-                        {/* Linha Tracejada Conectando os Pinos (Jornada) */}
                         <svg className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
                             <path 
-                                d={`M ${2000 + mapNodes[0].x} ${1500 + mapNodes[0].y} 
-                                    Q ${2000 + mapNodes[0].x + 300} ${1500 + mapNodes[0].y + 400} ${2000 + mapNodes[1].x} ${1500 + mapNodes[1].y}
-                                    Q ${2000 + mapNodes[1].x + 300} ${1500 + mapNodes[1].y - 300} ${2000 + mapNodes[2].x} ${1500 + mapNodes[2].y}`}
+                                d={pathData}
                                 fill="none" stroke="#2B2624" strokeWidth="6" strokeDasharray="20, 20"
                             />
                         </svg>
+
+                        {/* Personagem "SanBas" */}
+                        <div
+                            className="absolute z-20 pointer-events-none flex flex-col items-center justify-start transition-all duration-[200ms] ease-out"
+                            style={{
+                                left: `calc(50% + ${birdTarget.x}px)`,
+                                top: `calc(50% + ${birdTarget.y}px)`,
+                                transform: 'translate(-50%, -50%)',
+                                marginTop: '-60px'
+                            }}
+                        >
+                            <div className={`bg-white rounded-full shadow-woodcut-sm custom-border animate-bounce flex items-center justify-center w-12 h-12 transform transition-transform duration-300 ${birdTarget.flip ? 'scale-x-100' : '-scale-x-100'}`}>
+                                <span className="text-2xl leading-none block mt-1">🐦</span>
+                            </div>
+                        </div>
 
                         {/* Pinos Interativos */}
                         {mapNodes.map((node) => {
@@ -594,18 +620,15 @@
                                         ${isActive ? 'scale-110 z-20 opacity-0' : 'hover:scale-105 z-10 opacity-100'}`}
                                     style={{ left: `calc(50% + ${node.x}px)`, top: `calc(50% + ${node.y}px)` }}
                                 >
-                                    {/* Tooltip / Label */}
                                     <div className="bg-white custom-border shadow-woodcut-sm p-4 mb-4 text-center max-w-[250px] pointer-events-none">
                                         <div className="text-xs font-bold uppercase tracking-wider text-pastel-ink/60">{node.title}</div>
                                         <div className="text-xl font-bold font-serif text-pastel-ink">{node.subtitle}</div>
                                     </div>
                                     
-                                    {/* Marcador Visual */}
                                     <div className={`w-20 h-20 rounded-full custom-border shadow-woodcut flex items-center justify-center ${node.bg}`}>
                                         <Icon className="w-10 h-10 text-pastel-ink" />
                                     </div>
                                     
-                                    {/* Sombra no chão */}
                                     <div className="w-16 h-4 bg-pastel-ink/20 rounded-[50%] mt-4 blur-[2px]"></div>
                                 </div>
                             );
@@ -615,7 +638,7 @@
 
                     {/* --- INTERFACE DE USUÁRIO (OVERLAYS FIXOS) --- */}
 
-                    {/* CABEÇALHO CENTRALIZADO (Some suavemente quando a janela abre) */}
+                    {/* CABEÇALHO CENTRALIZADO */}
                     <div className={`absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-white/95 backdrop-blur-md custom-border shadow-woodcut w-[90%] max-w-4xl p-5 md:p-8 text-center flex flex-col items-center max-h-[40vh] overflow-y-auto hide-scrollbar pointer-events-auto transition-opacity duration-300 ${activeNode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                         
                         <div className="font-sans text-[10px] md:text-xs font-bold text-pastel-ink/80 uppercase tracking-widest mb-3 md:mb-4 flex flex-wrap justify-center items-center gap-2">
@@ -640,9 +663,6 @@
                                 <span><strong>Discente:</strong> Caio Aphonso Almeida</span>
                                 <span className="hidden md:inline">&bull;</span>
                                 <span><strong>Docente:</strong> Aline Barroso</span>
-                                <div className="inline-block bg-pastel-sand px-3 py-1 custom-border text-pastel-ink font-bold uppercase mt-2 md:mt-0 shadow-woodcut-sm">
-                                    Parte 1
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -650,7 +670,7 @@
                     {/* Dica de Navegação e Controles */}
                     <div className={`transition-opacity duration-300 ${activeNode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 no-drag bg-pastel-ink text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg flex items-center gap-3 pointer-events-none opacity-80">
-                            <IconCompass className="w-5 h-5" /> Arraste para explorar o mapa
+                            <IconCompass className="w-5 h-5" /> Arraste o mapa e deixe a Passarinha seguir você!
                         </div>
 
                         <div className="absolute bottom-8 right-8 z-30 no-drag flex flex-col gap-2">
