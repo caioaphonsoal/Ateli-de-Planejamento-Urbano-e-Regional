@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Interativo: Saneamento Básico em Novorizonte - MG</title>
+    <title>Relatório: Saneamento Básico em Novorizonte - MG</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,9 +17,6 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
         tailwind.config = {
@@ -27,14 +24,14 @@
                 extend: {
                     colors: {
                         pastel: {
-                            bg: '#FDFBF7',     /* Fundo principal areia claro */
-                            peach: '#E8C3B3',  /* Pêssego pastel */
-                            blue: '#B9D2D0',   /* Azul pastel */
-                            green: '#CDE0C0',  /* Verde pastel */
-                            sand: '#F2E8D3',   /* Areia */
-                            ink: '#2B2624',    /* Tinta escura/Marrom */
-                            text: '#4A4440',   /* Texto secundário */
-                            alert: '#D49A89',  /* Tom mais forte para alertas */
+                            bg: '#FDFBF7',
+                            peach: '#E8C3B3',
+                            blue: '#B9D2D0',
+                            green: '#CDE0C0',
+                            sand: '#F2E8D3',
+                            ink: '#2B2624',
+                            text: '#4A4440',
+                            alert: '#D49A89',
                         }
                     },
                     fontFamily: {
@@ -42,9 +39,8 @@
                         serif: ['Lora', 'serif'],
                     },
                     boxShadow: {
-                        'woodcut': '6px 6px 0px 0px rgba(43, 38, 36, 1)',
-                        'woodcut-sm': '4px 4px 0px 0px rgba(43, 38, 36, 1)',
-                        'woodcut-lg': '12px 12px 0px 0px rgba(43, 38, 36, 1)',
+                        'woodcut': '4px 4px 0px 0px rgba(43, 38, 36, 1)',
+                        'woodcut-sm': '2px 2px 0px 0px rgba(43, 38, 36, 1)',
                     }
                 }
             }
@@ -52,75 +48,55 @@
     </script>
 
     <style>
-        /* Desabilita o scroll nativo, pois o mapa é "arrastável" */
         body {
-            background-color: #FDFBF7;
-            overflow: hidden; 
+            background-color: #e5e5e5;
             margin: 0;
-            padding: 0;
-            touch-action: none;
+            padding: 20px 0;
+            font-family: 'Inter', sans-serif;
         }
 
+        .custom-border { border: 2px solid #2B2624; }
+        
         .map-texture {
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
         }
 
-        /* Grade Cartográfica de fundo */
-        .map-grid {
-            background-image: 
-                linear-gradient(rgba(43, 38, 36, 0.05) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(43, 38, 36, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(43, 38, 36, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(43, 38, 36, 0.02) 1px, transparent 1px);
-            background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
-            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+        /* Configurações da Página A4 */
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            background-color: #FDFBF7;
+            margin: 0 auto 40px auto;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
         }
 
-        .woodcut-bg {
-            position: absolute;
-            opacity: 0.25;
-            pointer-events: none;
-            mix-blend-mode: multiply;
-            filter: grayscale(100%) contrast(1.2);
+        /* Rodapé de página automático (via CSS) */
+        .page-number::after {
+            content: counter(page);
         }
 
-        .custom-border { border: 2px solid #2B2624; }
-
-        /* Cursores para o mapa */
-        .cursor-grab { cursor: grab; }
-        .cursor-grabbing { cursor: grabbing !important; }
-
-        /* Scrollbar elegante */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb {
-            background-color: rgba(43, 38, 36, 0.2);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover { background-color: rgba(43, 38, 36, 0.4); }
-        
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Animações da Janela Expansível */
-        @keyframes expandIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .animate-expand {
-            animation: expandIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .animate-fade {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-        
-        /* Utility for chart bars */
-        .bar-fill {
-            transition: width 1s ease-out;
+        /* Configurações de Impressão */
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { 
+                background-color: white; 
+                margin: 0; 
+                padding: 0; 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
+            .a4-page { 
+                margin: 0; 
+                box-shadow: none; 
+                page-break-after: always;
+                border: none;
+            }
+            .no-print { display: none !important; }
         }
     </style>
 </head>
@@ -128,91 +104,50 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState } = React;
 
-        // --- Ícones Inline SVG ---
-        const IconTarget = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>;
-        const IconMapPin = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>;
-        const IconBookOpen = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
-        const IconX = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>;
-        const IconChevronDown = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m6 9 6 6 6-6"/></svg>;
-        const IconCheckCircle2 = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>;
-        const IconHistory = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>;
-        const IconLeaf = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>;
-        const IconUsers = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
-        const IconTrendingUp = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>;
-        const IconZoomIn = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>;
-        const IconZoomOut = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>;
-        const IconSun = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
-        const IconDroplets = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7 6.3 7 6.3s-2.15 2.76-3.29 3.69C2.57 10.92 2 12.02 2 13.18 2 15.4 3.8 17.2 6 17.2"/><path d="m22 17.65-4-5.32-4 5.32c-.8.8-1.2 1.9-1.2 3.05 0 2.37 1.8 4.3 4 4.3 2.2 0 4-1.93 4-4.3 0-1.15-.4-2.25-1.2-3.05z"/></svg>;
-        const IconMap = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>;
-        const IconAlertCircle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>;
-        const IconPieChart = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>;
+        // --- Ícones ---
+        const IconTarget = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>;
+        const IconMapPin = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>;
+        const IconBookOpen = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        const IconHistory = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>;
+        const IconLeaf = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>;
+        const IconUsers = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+        const IconTrendingUp = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>;
+        const IconSun = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
+        const IconDroplets = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7 6.3 7 6.3s-2.15 2.76-3.29 3.69C2.57 10.92 2 12.02 2 13.18 2 15.4 3.8 17.2 6 17.2"/><path d="m22 17.65-4-5.32-4 5.32c-.8.8-1.2 1.9-1.2 3.05 0 2.37 1.8 4.3 4 4.3 2.2 0 4-1.93 4-4.3 0-1.15-.4-2.25-1.2-3.05z"/></svg>;
+        const IconMap = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>;
+        const IconAlertCircle = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>;
+        const IconPieChart = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>;
+        const IconPrinter = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
 
         // --- COMPONENTES AUXILIARES PARA GRÁFICOS ---
-        const MiniBar = ({ label, percent, valStr, colorClass = "bg-pastel-blue", width = "w-16" }) => {
-            const [loaded, setLoaded] = useState(false);
-            useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
-            
-            return (
-                <div className="flex items-center text-[10px] sm:text-xs font-sans font-bold text-pastel-ink uppercase tracking-wider mb-2">
-                    <span className={`${width} truncate shrink-0`}>{label}</span>
-                    <div className="flex-1 h-4 bg-pastel-sand/50 custom-border mx-2 overflow-hidden flex relative">
-                        <div className={`h-full border-r-2 border-pastel-ink ${colorClass} bar-fill`} style={{width: loaded ? `${percent}%` : '0%'}}></div>
-                    </div>
-                    <span className="w-12 text-right shrink-0">{valStr || `${percent}%`}</span>
+        const MiniBar = ({ label, percent, valStr, colorClass = "bg-pastel-blue", width = "w-16" }) => (
+            <div className="flex items-center text-[10px] font-sans font-bold text-pastel-ink uppercase tracking-wider mb-1.5">
+                <span className={`${width} truncate shrink-0`}>{label}</span>
+                <div className="flex-1 h-3 bg-pastel-sand/50 custom-border mx-2 overflow-hidden flex">
+                    <div className={`h-full border-r border-pastel-ink ${colorClass}`} style={{width: `${percent}%`}}></div>
                 </div>
-            );
-        };
-
-        const HighlightBox = ({ title, value, subtitle, color = "bg-pastel-peach" }) => (
-            <div className={`p-4 custom-border shadow-woodcut-sm flex flex-col justify-center items-center text-center ${color}`}>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-pastel-ink/80 mb-1">{title}</span>
-                <span className="text-3xl font-serif font-bold text-pastel-ink mb-1 leading-none">{value}</span>
-                <span className="text-xs font-sans font-bold text-pastel-ink">{subtitle}</span>
+                <span className="w-12 text-right shrink-0">{valStr || `${percent}%`}</span>
             </div>
         );
 
-        // --- COMPONENTE SLIDESHOW (Atualizado para 5 segundos) ---
-        const Slideshow = ({ images }) => {
-            const [currentIndex, setCurrentIndex] = useState(0);
+        const HighlightBox = ({ title, value, subtitle, color = "bg-pastel-peach" }) => (
+            <div className={`p-3 custom-border shadow-woodcut-sm flex flex-col justify-center items-center text-center ${color}`}>
+                <span className="text-[9px] font-bold uppercase tracking-wider text-pastel-ink/80 mb-1">{title}</span>
+                <span className="text-2xl font-serif font-bold text-pastel-ink mb-1 leading-none">{value}</span>
+                <span className="text-[10px] font-sans font-bold text-pastel-ink">{subtitle}</span>
+            </div>
+        );
 
-            useEffect(() => { setCurrentIndex(0); }, [images]);
+        const InfoBlock = ({ title, value, subtitle, bgClass = 'bg-pastel-bg' }) => (
+            <div className={`p-3 custom-border shadow-woodcut-sm flex flex-col justify-center items-center text-center ${bgClass}`}>
+                <span className="text-[9px] font-bold uppercase tracking-wider text-pastel-ink/60 mb-1">{title}</span>
+                <span className="text-xl font-serif font-bold text-pastel-ink mb-1 leading-none">{value}</span>
+                <span className="text-[10px] font-sans font-bold text-pastel-ink">{subtitle}</span>
+            </div>
+        );
 
-            useEffect(() => {
-                if (!images || images.length <= 1) return;
-                const interval = setInterval(() => {
-                    setCurrentIndex((prev) => (prev + 1) % images.length);
-                }, 5000); 
-                return () => clearInterval(interval);
-            }, [images]);
-
-            return (
-                <div className="w-full h-64 md:h-96 lg:h-full custom-border shadow-woodcut-sm bg-pastel-sand overflow-hidden relative group flex items-center justify-center">
-                    {images.map((img, index) => (
-                        <img
-                            key={index}
-                            src={img}
-                            alt={`Imagem ${index + 1}`}
-                            className={`absolute inset-0 w-full h-full object-contain p-2 md:p-4 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-                        />
-                    ))}
-                    {images.length > 1 && (
-                        <div className="absolute bottom-3 md:bottom-5 left-0 right-0 flex justify-center gap-2 z-20">
-                            {images.map((_, idx) => (
-                                <button 
-                                    key={idx} 
-                                    onClick={() => setCurrentIndex(idx)}
-                                    className={`w-2 h-2 rounded-full transition-all border border-pastel-ink/30 shadow-sm ${idx === currentIndex ? 'bg-pastel-ink w-6' : 'bg-pastel-ink/30 hover:bg-pastel-ink/60'}`} 
-                                />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        // --- GRÁFICOS E CARTÕES ---
         const RaceChart = () => {
             const data = [
                 { label: 'Parda', val: 3111, bg: 'bg-pastel-peach' },
@@ -222,14 +157,14 @@
                 { label: 'Amarela', val: 2, bg: 'bg-white' },
             ];
             return (
-                <div className="space-y-2 mt-4">
+                <div className="space-y-1.5 mt-2">
                     {data.map(d => (
-                        <div key={d.label} className="flex items-center text-xs font-sans font-bold text-pastel-ink uppercase tracking-wider">
-                            <span className="w-20 truncate">{d.label}</span>
-                            <div className="flex-1 h-4 bg-white custom-border mx-2 overflow-hidden flex">
-                                <div className={`h-full border-r-2 border-pastel-ink ${d.bg}`} style={{width: `${(d.val/4571)*100}%`}}></div>
+                        <div key={d.label} className="flex items-center text-[10px] font-sans font-bold text-pastel-ink uppercase tracking-wider">
+                            <span className="w-16 truncate">{d.label}</span>
+                            <div className="flex-1 h-3 bg-white custom-border mx-2 overflow-hidden flex">
+                                <div className={`h-full border-r border-pastel-ink ${d.bg}`} style={{width: `${(d.val/4571)*100}%`}}></div>
                             </div>
-                            <span className="w-10 text-right">{d.val}</span>
+                            <span className="w-8 text-right">{d.val}</span>
                         </div>
                     ))}
                 </div>
@@ -244,33 +179,25 @@
                 { age: '0-19', m: 20, f: 18 },
             ];
             return (
-                <div className="flex flex-col space-y-2 mt-4">
-                    <div className="flex justify-between text-[10px] font-bold uppercase text-pastel-ink mb-1">
+                <div className="flex flex-col space-y-1.5 mt-2">
+                    <div className="flex justify-between text-[9px] font-bold uppercase text-pastel-ink mb-1">
                         <span>Homens</span>
                         <span>Mulheres</span>
                     </div>
                     {data.map(d => (
-                        <div key={d.age} className="flex items-center justify-center text-xs font-sans font-bold text-pastel-ink">
+                        <div key={d.age} className="flex items-center justify-center text-[10px] font-sans font-bold text-pastel-ink">
                             <div className="flex-1 flex justify-end">
-                                <div className="h-4 bg-pastel-blue custom-border border-r-0" style={{width: `${d.m}%`}}></div>
+                                <div className="h-3 bg-pastel-blue custom-border border-r-0" style={{width: `${d.m}%`}}></div>
                             </div>
-                            <span className="w-14 text-center text-[10px] bg-white custom-border py-0.5 z-10">{d.age}</span>
+                            <span className="w-12 text-center text-[9px] bg-white custom-border py-px z-10">{d.age}</span>
                             <div className="flex-1 flex justify-start">
-                                <div className="h-4 bg-pastel-peach custom-border border-l-0" style={{width: `${d.f}%`}}></div>
+                                <div className="h-3 bg-pastel-peach custom-border border-l-0" style={{width: `${d.f}%`}}></div>
                             </div>
                         </div>
                     ))}
                 </div>
             );
         };
-
-        const InfoBlock = ({ title, value, subtitle, bgClass = 'bg-pastel-bg' }) => (
-            <div className={`p-4 custom-border shadow-woodcut-sm flex flex-col justify-center items-center text-center ${bgClass}`}>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-pastel-ink/60 mb-1">{title}</span>
-                <span className="text-2xl lg:text-3xl font-serif font-bold text-pastel-ink mb-1 leading-none">{value}</span>
-                <span className="text-xs font-sans font-bold text-pastel-ink">{subtitle}</span>
-            </div>
-        );
 
         const StatCard = ({ title, value, subtitle, data, color, maxVal }) => {
             const max = maxVal || Math.max(...data);
@@ -279,266 +206,318 @@
             const points = data.map((d, i) => `${(i / (data.length - 1)) * width},${height - (d / max) * height}`).join(' ');
 
             return (
-                <div className="p-4 border-2 border-pastel-ink bg-white shadow-woodcut-sm flex flex-col justify-between h-full">
-                    <h4 className="font-serif font-bold text-pastel-ink text-sm leading-tight mb-2">{title}</h4>
-                    <div className="text-3xl font-bold font-serif text-pastel-ink mb-2">{value}</div>
+                <div className="p-3 border-2 border-pastel-ink bg-white shadow-woodcut-sm flex flex-col justify-between h-full">
+                    <h4 className="font-serif font-bold text-pastel-ink text-xs leading-tight mb-1">{title}</h4>
+                    <div className="text-2xl font-bold font-serif text-pastel-ink mb-2">{value}</div>
                     <div className="mt-auto">
-                        <svg viewBox={`-3 -3 ${width+6} ${height+6}`} className="w-full h-8 overflow-visible">
+                        <svg viewBox={`-3 -3 ${width+6} ${height+6}`} className="w-full h-6 overflow-visible">
                             <polyline fill="none" stroke={color} strokeWidth="2.5" points={points} strokeLinejoin="round" strokeLinecap="round" />
                             <circle cx={(data.length - 1) / (data.length - 1) * width} cy={height - (data[data.length-1] / max) * height} r="3" fill={color} />
                         </svg>
-                        <p className="text-[9px] uppercase font-bold text-pastel-text mt-3 text-center tracking-wider">{subtitle}</p>
+                        <p className="text-[8px] uppercase font-bold text-pastel-text mt-2 text-center tracking-wider">{subtitle}</p>
                     </div>
                 </div>
             );
         };
 
-        // --- CONTEÚDO DAS JANELAS ---
-        
-        // 1. O Contexto (Território)
-        const OndeContent = () => {
-            const [activeTab, setActiveTab] = useState('historia');
-
-            // Imagens inseridas para cada aba
-            const tabImages = {
-                historia: [
-                    "https://i.postimg.cc/JhWqTh7r/IMG-20250819-WA0013.jpg", 
-                    "https://i.postimg.cc/fbhKHbz1/IMG-20260113-WA0008.jpg", 
-                    "https://i.postimg.cc/yY5xHdLj/imagem.jpg"
-                ],
-                geografia: [
-                    "https://i.postimg.cc/s2Rcn2fR/IMG-20180421-103542037.jpg", 
-                    "https://i.postimg.cc/TPX9kP2x/IMG-20250809-151736639.jpg"
-                ],
-                demografia: [
-                    "https://i.postimg.cc/8CVHyCpY/IMG-20260113-WA0006.jpg"
-                ],
-                socioeconomico: [
-                    "https://i.postimg.cc/L675pXxv/Resumo-Executivo-Produtos-A-a-F-pdf.png"
-                ]
-            };
-
-            const tabs = {
-                historia: { 
-                    icon: <IconHistory/>, 
-                    title: "História", 
-                    content: (
-                        <div className="space-y-4">
-                            <p>A ocupação da região remonta ao século XVI com a expedição de Francisco Bruza de Spinosa (1553). Historicamente ligada a Salinas, a formação atual da cidade deve-se muito ao fazendeiro João Bernardino de Souza (João Davilino), proprietário da Fazenda Córrego da Xícara no antigo povoado de Indaiá.</p>
-                            <p>Homem popular e trabalhador, João Bernardino atuou como Inspetor de Quarteirão e Inspetor da Escola Municipal. Em 1953, mobilizou a comunidade e conseguiu a doação de terras pelas famílias Almeida e Ferreira em uma chapada chamada "Novo Indaiá". O objetivo era construir uma praça e uma igreja dedicada a Nossa Senhora da Conceição, obra erguida em mutirão pelas famílias locais.</p>
-                            <p>Em 06 de outubro de 1953, o então prefeito de Salinas, Dr. Costa, ao visitar o Novo Indaiá, admirou a vista da chapada e declarou a João Bernardino: <em>"isto aqui é muito bonito, é um horizonte"</em>. A inspiração gerou o nome "Novorizonte", que foi prontamente aceito por todos. A emancipação ocorreu em 1995.</p>
-                        </div>
-                    ) 
-                },
-                geografia: { 
-                    icon: <IconLeaf/>, 
-                    title: "Geografia", 
-                    content: (
-                        <div className="space-y-6">
-                            <p className="text-pastel-text font-sans text-lg leading-relaxed">
-                                Novorizonte possui uma dinâmica geográfica rica e desafiadora, marcada pela sua localização estratégica e características climáticas marcantes.
-                            </p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="p-4 custom-border bg-pastel-green/40 shadow-woodcut-sm flex items-start gap-4">
-                                    <div className="bg-pastel-green custom-border p-2 shrink-0"><IconMap /></div>
-                                    <div>
-                                        <h4 className="font-bold text-pastel-ink font-serif mb-1">Bioma e Relevo</h4>
-                                        <p className="text-sm font-sans text-pastel-text">Localiza-se em região de planalto, em área de transição entre o Cerrado e a Mata Atlântica.</p>
-                                    </div>
-                                </div>
-                                <div className="p-4 custom-border bg-pastel-peach/40 shadow-woodcut-sm flex items-start gap-4">
-                                    <div className="bg-pastel-peach custom-border p-2 shrink-0"><IconSun /></div>
-                                    <div>
-                                        <h4 className="font-bold text-pastel-ink font-serif mb-1">Clima</h4>
-                                        <p className="text-sm font-sans text-pastel-text">Pertence ao semiárido brasileiro, o que impõe desafios com longos períodos de seca sazonal.</p>
-                                    </div>
-                                </div>
-                                <div className="p-4 custom-border bg-pastel-blue/40 shadow-woodcut-sm flex items-start gap-4">
-                                    <div className="bg-pastel-blue custom-border p-2 shrink-0"><IconDroplets /></div>
-                                    <div>
-                                        <h4 className="font-bold text-pastel-ink font-serif mb-1">Recursos Hídricos</h4>
-                                        <p className="text-sm font-sans text-pastel-text">Forte dependência de infraestrutura hídrica, como poços e barragens, para abastecimento.</p>
-                                    </div>
-                                </div>
-                                <div className="p-4 custom-border bg-pastel-sand shadow-woodcut-sm flex items-start gap-4">
-                                    <div className="bg-white custom-border p-2 shrink-0"><IconTarget /></div>
-                                    <div>
-                                        <h4 className="font-bold text-pastel-ink font-serif mb-1">Destaque Local</h4>
-                                        <p className="text-sm font-sans text-pastel-text">É amplamente reconhecido pela tradição e produção de inúmeras cachaças artesanais.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                demografia: { 
-                    icon: <IconUsers/>, 
-                    title: "Demografia", 
-                    content: (
-                        <div className="space-y-6">
-                            <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase shadow-woodcut-sm">Gentílico: Novorizontino</span>
-                                <span className="px-3 py-1 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase shadow-woodcut-sm">Aniversário: 21 de Dezembro</span>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                                <InfoBlock title="População (2022)" value="4.571" subtitle="Habitantes" bgClass="bg-white" />
-                                <InfoBlock title="Densidade" value="16,83" subtitle="hab./km²" bgClass="bg-white" />
-                                <InfoBlock title="Urbana vs Rural" value="83 / 17" subtitle="% Distribuição" bgClass="bg-white" />
-                                <InfoBlock title="Idade Mediana" value="37" subtitle="Anos" bgClass="bg-white" />
-                            </div>
-                            
-                            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
-                                <div className="p-4 border-2 border-pastel-ink bg-pastel-bg shadow-woodcut-sm">
-                                    <h4 className="font-serif font-bold text-pastel-ink mb-2 border-b-2 border-pastel-ink pb-2">Cor ou Raça (2022)</h4>
-                                    <RaceChart />
-                                </div>
-                                <div className="p-4 border-2 border-pastel-ink bg-pastel-bg shadow-woodcut-sm">
-                                    <h4 className="font-serif font-bold text-pastel-ink mb-2 border-b-2 border-pastel-ink pb-2">Pirâmide Etária (2022)</h4>
-                                    <PyramidChart />
-                                </div>
-                            </div>
-                        </div>
-                    ) 
-                },
-                socioeconomico: { 
-                    icon: <IconTrendingUp/>, 
-                    title: "Economia", 
-                    content: (
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                                <div className="col-span-1 md:col-span-2 p-3 custom-border bg-pastel-sand flex items-center gap-3 shadow-woodcut-sm">
-                                    <div className="w-10 h-10 shrink-0 bg-white custom-border flex items-center justify-center"><IconMapPin className="w-5 h-5"/></div>
-                                    <div>
-                                        <div className="text-[10px] font-bold uppercase text-pastel-ink/60">Localização</div>
-                                        <div className="font-bold text-pastel-ink leading-tight">Norte de Minas</div>
-                                        <div className="text-xs font-sans text-pastel-text">Microrregião de Salinas</div>
-                                    </div>
-                                </div>
-                                <div className="col-span-1 md:col-span-2 p-3 custom-border bg-pastel-blue/40 flex items-center gap-3 shadow-woodcut-sm">
-                                    <div className="w-10 h-10 shrink-0 bg-white custom-border flex items-center justify-center"><IconDroplets className="w-5 h-5"/></div>
-                                    <div>
-                                        <div className="text-[10px] font-bold uppercase text-pastel-ink/60">Hidrografia</div>
-                                        <div className="font-bold text-pastel-ink leading-tight">Rio Jequitinhonha</div>
-                                        <div className="text-xs font-sans text-pastel-text">Bacia Hidrográfica</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="p-4 custom-border bg-pastel-bg shadow-woodcut-sm border-l-4 border-l-pastel-green">
-                                <h4 className="font-serif font-bold text-pastel-ink mb-3 border-b border-pastel-ink/10 pb-2">Composição Territorial</h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 2 Distritos (Sede e Campo Verde)</span>
-                                    <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 4 Povoados principais</span>
-                                    <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 26 Fazendas na área rural</span>
-                                    <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> Povos Tradicionais Geraizeiros</span>
-                                </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <StatCard 
-                                    title="PIB per Capita" 
-                                    value="R$ 20.256" 
-                                    subtitle="Crescimento (2012-2023)" 
-                                    data={[5, 6, 7, 8, 10, 11, 13, 19, 20.2]} 
-                                    color="#2B2624" 
-                                />
-                                <StatCard 
-                                    title="Mortalidade Infantil" 
-                                    value="0" 
-                                    subtitle="Óbitos/mil nv (2008-2023)" 
-                                    data={[10, 14, 14, 44, 28, 20, 32, 20, 14, 18, 21, 20, 0]} 
-                                    color="#2B2624" 
-                                    maxVal={50}
-                                />
-                                <StatCard 
-                                    title="IDEB (Anos Finais)" 
-                                    value="4,6" 
-                                    subtitle="Rede Pública (2005-2023)" 
-                                    data={[2, 3, 4, 4, 4, 4, 4, 4, 5, 4.6]} 
-                                    color="#2B2624" 
-                                    maxVal={6}
-                                />
-                            </div>
-                        </div>
-                    ) 
-                }
-            };
-
+        // --- COMPONENTE PRINCIPAL (LIVRO) ---
+        const App = () => {
             return (
-                <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[500px]">
-                    {/* Menu de Abas */}
-                    <div className="flex lg:flex-col gap-3 overflow-x-auto pb-2 lg:pb-0 lg:w-1/4 xl:w-1/5 shrink-0 hide-scrollbar">
-                        {Object.keys(tabs).map((key) => (
-                            <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-3 px-4 py-3 text-left transition-all whitespace-nowrap lg:whitespace-normal font-sans font-bold custom-border ${activeTab === key ? 'bg-pastel-blue text-pastel-ink shadow-woodcut-sm lg:translate-x-2' : 'bg-white text-pastel-text hover:bg-pastel-sand'}`}>
-                                <span className={activeTab === key ? 'text-pastel-ink' : 'text-pastel-text'}>{tabs[key].icon}</span>
-                                <span>{tabs[key].title}</span>
-                            </button>
-                        ))}
-                    </div>
+                <div className="font-sans">
                     
-                    {/* Área de Conteúdo (COM SLIDESHOW) */}
-                    <div className="flex-1 bg-white custom-border p-6 md:p-8 shadow-woodcut flex flex-col xl:flex-row gap-8 overflow-hidden">
-                        <div className="flex-1 flex flex-col">
-                            <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-6 border-b-2 border-pastel-ink pb-3 flex items-center gap-3">
-                                {tabs[activeTab].icon} {tabs[activeTab].title}
-                            </h3>
-                            <div className="text-pastel-text font-sans text-lg leading-relaxed flex-1 overflow-y-auto pr-2 custom-scrollbar">
-                                {tabs[activeTab].content}
-                            </div>
-                        </div>
-                        {/* Slideshow */}
-                        <div className="w-full xl:w-[45%] flex flex-col shrink-0 min-h-[300px]">
-                            <Slideshow images={tabImages[activeTab]} />
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-
-        // 2. Metodologia (Anteriormente 3)
-        const ComoContent = () => {
-            const [activeTab, setActiveTab] = useState(0);
-
-            return (
-                <div className="space-y-6 max-w-5xl mx-auto">
-                    
-                    {/* ACCORDION 1: CARTOGRAFIA */}
-                    <div className={`custom-border transition-all overflow-hidden ${activeTab === 0 ? 'bg-pastel-sand/20 shadow-woodcut' : 'bg-white hover:bg-pastel-sand/50 hover:shadow-woodcut-sm'}`}>
-                        <button className="w-full p-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveTab(activeTab === 0 ? -1 : 0)}>
-                            <div className="flex items-center gap-4">
-                                <div className={`p-2 custom-border transition-colors ${activeTab === 0 ? 'bg-pastel-green' : 'bg-white'}`}>
-                                    <IconMap className="w-6 h-6 text-pastel-ink" />
-                                </div>
-                                <h4 className={`text-xl md:text-2xl font-bold font-serif ${activeTab === 0 ? 'text-pastel-ink' : 'text-pastel-text'}`}>
-                                    1. Cartografia e Análise Espacial
-                                </h4>
-                            </div>
-                            <IconChevronDown className={`w-6 h-6 transition-transform duration-300 ${activeTab === 0 ? 'rotate-180 text-pastel-ink' : 'text-pastel-text'}`} />
+                    {/* Botão de Impressão (Não aparece no PDF) */}
+                    <div className="fixed top-4 right-4 z-50 no-print">
+                        <button 
+                            onClick={() => window.print()}
+                            className="bg-pastel-ink text-white font-bold py-3 px-6 shadow-woodcut custom-border flex items-center gap-2 hover:bg-black transition-colors"
+                        >
+                            <IconPrinter /> Salvar em PDF
                         </button>
-                        
-                        <div className={`px-5 md:px-8 transition-all duration-500 overflow-hidden ${activeTab === 0 ? 'max-h-[2500px] py-6 opacity-100 border-t-2 border-pastel-ink/20' : 'max-h-0 py-0 opacity-0'}`}>
+                    </div>
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 1: CAPA */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture justify-center items-center text-center">
+                        <div className="w-full max-w-2xl bg-white/90 p-12 custom-border shadow-woodcut flex flex-col items-center">
                             
-                            {/* Mapa com Marcadores */}
-                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] border-2 border-pastel-ink mb-8 bg-pastel-sand shadow-woodcut-sm overflow-hidden group">
-                                <img src="https://i.postimg.cc/yY5xHdLj/imagem.jpg" alt="Mapa de Satélite Novorizonte" className="w-full h-full object-cover opacity-90 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000" />
+                            <div className="font-sans text-xs font-bold text-pastel-ink/80 uppercase tracking-widest mb-6 flex flex-col items-center gap-1 border-b-2 border-pastel-peach pb-4 w-full">
+                                <span>Universidade Federal da Bahia</span>
+                                <span>ARQC10 - Planejamento Urbano e Regional</span>
+                            </div>
+
+                            <div className="bg-pastel-sand rounded-full shadow-woodcut-sm custom-border flex items-center justify-center w-20 h-20 mb-8">
+                                <span className="text-4xl block mt-1">🐦</span>
+                            </div>
+                            
+                            <h1 className="text-5xl font-bold font-serif text-pastel-ink leading-tight mb-4">
+                                Retratos do Saneamento Básico
+                            </h1>
+                            <h2 className="text-2xl font-serif text-pastel-ink/80 mb-10 italic">
+                                Novorizonte - Minas Gerais
+                            </h2>
+                            
+                            <p className="text-sm font-sans text-pastel-text leading-relaxed mb-10 text-justify bg-pastel-bg p-6 custom-border">
+                                Trabalho desenvolvido no escopo da disciplina <strong>ARQC10 - Ateliê de Fundamentação de Planejamento Urbano e Regional</strong>. O objetivo deste material é mapear e analisar as ações já realizadas no âmbito do Plano Municipal de Saneamento Básico (PMSB) desde sua implantação, visando compreender seu nível de execução, avanços e lacunas ao longo do tempo.
+                            </p>
+                            
+                            <div className="flex flex-col w-full text-sm font-sans text-pastel-ink bg-pastel-blue/20 p-4 custom-border border-l-4 border-l-pastel-blue text-left">
+                                <span className="mb-2"><strong>Discente:</strong> Caio Aphonso Almeida</span>
+                                <span><strong>Docente:</strong> Aline Barroso</span>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 2: O CONTEXTO (História e Geografia) */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-6 flex justify-between items-end">
+                            <div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 1</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconMapPin className="w-8 h-8 text-pastel-blue"/> O Contexto: Território
+                                </h2>
+                            </div>
+                        </header>
+
+                        <div className="flex-1 flex flex-col gap-6">
+                            
+                            {/* HISTÓRIA */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut-sm">
+                                <h3 className="text-xl font-bold font-serif text-pastel-ink mb-4 flex items-center gap-2 border-b-2 border-pastel-sand pb-2">
+                                    <IconHistory className="text-pastel-peach"/> Resumo Histórico
+                                </h3>
+                                <div className="text-sm font-sans text-pastel-text leading-relaxed columns-2 gap-6 text-justify">
+                                    <p className="mb-3">A ocupação da região remonta ao século XVI com a expedição de Francisco Bruza de Spinosa (1553). Historicamente ligada a Salinas, a formação atual da cidade deve-se muito ao fazendeiro João Bernardino de Souza (João Davilino), proprietário da Fazenda Córrego da Xícara no antigo povoado de Indaiá.</p>
+                                    <p className="mb-3">Homem popular e trabalhador, João Bernardino atuou como Inspetor de Quarteirão e Inspetor da Escola Municipal. Em 1953, mobilizou a comunidade e conseguiu a doação de terras pelas famílias Almeida e Ferreira em uma chapada chamada "Novo Indaiá". O objetivo era construir uma praça e uma igreja dedicada a Nossa Senhora da Conceição, obra erguida em mutirão pelas famílias locais.</p>
+                                    <p>Em 06 de outubro de 1953, o então prefeito de Salinas, Dr. Costa, ao visitar o Novo Indaiá, admirou a vista da chapada e declarou a João Bernardino: <em>"isto aqui é muito bonito, é um horizonte"</em>. A inspiração gerou o nome "Novorizonte", que foi prontamente aceito por todos. A emancipação ocorreu em 1995.</p>
+                                </div>
+                                {/* Galeria História */}
+                                <div className="grid grid-cols-3 gap-3 mt-4">
+                                    <img src="https://i.postimg.cc/JhWqTh7r/IMG-20250819-WA0013.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                    <img src="https://i.postimg.cc/fbhKHbz1/IMG-20260113-WA0008.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                    <img src="https://i.postimg.cc/yY5xHdLj/imagem.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                </div>
+                            </div>
+
+                            {/* GEOGRAFIA */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut-sm flex-1">
+                                <h3 className="text-xl font-bold font-serif text-pastel-ink mb-4 flex items-center gap-2 border-b-2 border-pastel-sand pb-2">
+                                    <IconLeaf className="text-pastel-green"/> Geografia e Clima
+                                </h3>
+                                <p className="text-sm font-sans text-pastel-text leading-relaxed mb-4">
+                                    Novorizonte possui uma dinâmica geográfica rica e desafiadora, marcada pela sua localização estratégica e características climáticas marcantes do semiárido.
+                                </p>
+                                
+                                <div className="grid grid-cols-2 gap-4 mb-4">
+                                    <div className="p-3 custom-border bg-pastel-green/40 flex items-start gap-3">
+                                        <div className="bg-pastel-green custom-border p-1.5 shrink-0"><IconMap /></div>
+                                        <div>
+                                            <h4 className="font-bold text-pastel-ink font-serif text-sm mb-1">Bioma e Relevo</h4>
+                                            <p className="text-xs font-sans text-pastel-text">Planalto em área de transição entre o Cerrado e a Mata Atlântica.</p>
+                                        </div>
+                                    </div>
+                                    <div className="p-3 custom-border bg-pastel-peach/40 flex items-start gap-3">
+                                        <div className="bg-pastel-peach custom-border p-1.5 shrink-0"><IconSun /></div>
+                                        <div>
+                                            <h4 className="font-bold text-pastel-ink font-serif text-sm mb-1">Clima</h4>
+                                            <p className="text-xs font-sans text-pastel-text">Semiárido brasileiro, impondo desafios com longos períodos de seca.</p>
+                                        </div>
+                                    </div>
+                                    <div className="p-3 custom-border bg-pastel-blue/40 flex items-start gap-3">
+                                        <div className="bg-pastel-blue custom-border p-1.5 shrink-0"><IconDroplets /></div>
+                                        <div>
+                                            <h4 className="font-bold text-pastel-ink font-serif text-sm mb-1">Recursos Hídricos</h4>
+                                            <p className="text-xs font-sans text-pastel-text">Forte dependência de poços e barragens para abastecimento.</p>
+                                        </div>
+                                    </div>
+                                    <div className="p-3 custom-border bg-pastel-sand flex items-start gap-3">
+                                        <div className="bg-white custom-border p-1.5 shrink-0"><IconTarget /></div>
+                                        <div>
+                                            <h4 className="font-bold text-pastel-ink font-serif text-sm mb-1">Destaque Local</h4>
+                                            <p className="text-xs font-sans text-pastel-text">Tradição na produção de cachaças artesanais de qualidade.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Galeria Geografia */}
+                                <div className="grid grid-cols-2 gap-3 mt-auto">
+                                    <img src="https://i.postimg.cc/s2Rcn2fR/IMG-20180421-103542037.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                    <img src="https://i.postimg.cc/TPX9kP2x/IMG-20250809-151736639.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 3: O CONTEXTO (Demografia e Economia) */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-6">
+                            <h2 className="text-2xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                <IconUsers className="text-pastel-peach"/> Demografia e Economia
+                            </h2>
+                        </header>
+
+                        <div className="flex flex-col gap-6 h-full">
+                            
+                            {/* DEMOGRAFIA */}
+                            <div className="bg-white p-5 custom-border shadow-woodcut-sm">
+                                <div className="flex justify-between items-center mb-4 border-b-2 border-pastel-sand pb-2">
+                                    <h3 className="text-lg font-bold font-serif text-pastel-ink">Dados Demográficos (2022)</h3>
+                                    <div className="flex gap-2">
+                                        <span className="px-2 py-0.5 bg-pastel-sand custom-border text-[9px] font-bold text-pastel-ink uppercase">Gentílico: Novorizontino</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="grid grid-cols-4 gap-2 mb-4">
+                                    <InfoBlock title="População" value="4.571" subtitle="Habitantes" bgClass="bg-pastel-bg" />
+                                    <InfoBlock title="Densidade" value="16,83" subtitle="hab./km²" bgClass="bg-pastel-bg" />
+                                    <InfoBlock title="Urb. vs Rural" value="83/17" subtitle="% Distribuição" bgClass="bg-pastel-bg" />
+                                    <InfoBlock title="Idade Med." value="37" subtitle="Anos" bgClass="bg-pastel-bg" />
+                                </div>
+                                
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="p-3 custom-border bg-pastel-bg border-l-4 border-l-pastel-peach">
+                                        <h4 className="font-serif font-bold text-pastel-ink text-xs mb-2">Cor ou Raça</h4>
+                                        <RaceChart />
+                                    </div>
+                                    <div className="p-3 custom-border bg-pastel-bg border-l-4 border-l-pastel-blue">
+                                        <h4 className="font-serif font-bold text-pastel-ink text-xs mb-2">Pirâmide Etária</h4>
+                                        <PyramidChart />
+                                    </div>
+                                </div>
+                                <div className="mt-3">
+                                    <img src="https://i.postimg.cc/8CVHyCpY/IMG-20260113-WA0006.jpg" className="w-full h-32 object-cover custom-border shadow-sm grayscale hover:grayscale-0 transition-all"/>
+                                </div>
+                            </div>
+
+                            {/* ECONOMIA E TERRITÓRIO */}
+                            <div className="bg-white p-5 custom-border shadow-woodcut-sm flex-1 flex flex-col">
+                                <h3 className="text-lg font-bold font-serif text-pastel-ink mb-3 flex items-center gap-2 border-b-2 border-pastel-sand pb-2">
+                                    <IconTrendingUp className="text-pastel-blue"/> Perfil Socioeconômico e Territorial
+                                </h3>
+
+                                <div className="grid grid-cols-2 gap-3 mb-4">
+                                    <div className="p-2 custom-border bg-pastel-sand flex items-center gap-2">
+                                        <div className="w-8 h-8 shrink-0 bg-white custom-border flex items-center justify-center"><IconMapPin className="w-4 h-4"/></div>
+                                        <div>
+                                            <div className="text-[9px] font-bold uppercase text-pastel-ink/60">Localização</div>
+                                            <div className="text-xs font-bold text-pastel-ink leading-tight">Norte de Minas</div>
+                                        </div>
+                                    </div>
+                                    <div className="p-2 custom-border bg-pastel-blue/40 flex items-center gap-2">
+                                        <div className="w-8 h-8 shrink-0 bg-white custom-border flex items-center justify-center"><IconDroplets className="w-4 h-4"/></div>
+                                        <div>
+                                            <div className="text-[9px] font-bold uppercase text-pastel-ink/60">Hidrografia</div>
+                                            <div className="text-xs font-bold text-pastel-ink leading-tight">Rio Jequitinhonha</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-3 custom-border bg-pastel-green/20 mb-4 border-l-4 border-l-pastel-green">
+                                    <h4 className="font-serif font-bold text-pastel-ink text-sm mb-2">Composição do Território</h4>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <span className="flex items-center gap-1.5 text-xs font-bold text-pastel-text"><span className="w-1.5 h-1.5 rounded-full bg-pastel-ink block"></span> 2 Distritos (Sede e Campo Verde)</span>
+                                        <span className="flex items-center gap-1.5 text-xs font-bold text-pastel-text"><span className="w-1.5 h-1.5 rounded-full bg-pastel-ink block"></span> 4 Povoados principais</span>
+                                        <span className="flex items-center gap-1.5 text-xs font-bold text-pastel-text"><span className="w-1.5 h-1.5 rounded-full bg-pastel-ink block"></span> 26 Fazendas na área rural</span>
+                                        <span className="flex items-center gap-1.5 text-xs font-bold text-pastel-text"><span className="w-1.5 h-1.5 rounded-full bg-pastel-ink block"></span> Povos Tradicionais Geraizeiros</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="grid grid-cols-3 gap-3">
+                                    <StatCard title="PIB per Capita" value="R$ 20.256" subtitle="Crescimento (2012-2023)" data={[5, 6, 7, 8, 10, 11, 13, 19, 20.2]} color="#2B2624" />
+                                    <StatCard title="Mortalidade Inf." value="0" subtitle="Óbitos/mil nv (08-23)" data={[10, 14, 14, 44, 28, 20, 32, 20, 14, 18, 21, 20, 0]} color="#2B2624" maxVal={50}/>
+                                    <StatCard title="IDEB (Anos Finais)" value="4,6" subtitle="Rede Pública (05-23)" data={[2, 3, 4, 4, 4, 4, 4, 4, 5, 4.6]} color="#2B2624" maxVal={6}/>
+                                </div>
+                                
+                                <div className="mt-auto pt-3">
+                                    <img src="https://i.postimg.cc/L675pXxv/Resumo-Executivo-Produtos-A-a-F-pdf.png" className="w-full h-24 object-cover custom-border grayscale"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 4: A JUSTIFICATIVA */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-8 flex justify-between items-end">
+                            <div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 2</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconTarget className="w-8 h-8 text-pastel-alert"/> A Justificativa: O Problema
+                                </h2>
+                            </div>
+                        </header>
+
+                        <div className="flex-1 flex flex-col justify-center max-w-4xl mx-auto space-y-6 w-full">
+                            
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex gap-5 items-start">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-peach custom-border flex items-center justify-center text-2xl font-bold font-sans">1</div>
+                                <div>
+                                    <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-3">Déficits nos Eixos do Saneamento</h3>
+                                    <p className="text-base font-sans text-pastel-text leading-relaxed text-justify mb-4">A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água potável, esgotamento sanitário, limpeza urbana e manejo de resíduos sólidos, além da drenagem de águas pluviais. O cenário exige levantamentos para dimensionar a demanda de infraestrutura, especialmente nas áreas rurais e povoados.</p>
+                                    <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2"><strong>Ref:</strong> Produto D - Prognóstico do Saneamento Básico; Resumo Executivo - Produtos A a F.</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex gap-5 items-start">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-blue custom-border flex items-center justify-center text-2xl font-bold font-sans">2</div>
+                                <div>
+                                    <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-3">Exclusão Histórica e Universalização</h3>
+                                    <p className="text-base font-sans text-pastel-text leading-relaxed text-justify mb-4">A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico e necessário para uma vida digna, visando a universalização dos serviços no município e a diminuição das desigualdades socioterritoriais.</p>
+                                    <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2"><strong>Ref:</strong> Resumo Executivo - Produtos A a F (Apresentação do Projeto SanBas, p. 2).</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex gap-5 items-start">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-green custom-border flex items-center justify-center text-2xl font-bold font-sans">3</div>
+                                <div>
+                                    <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-3">Sustentabilidade e Gestão de Riscos</h3>
+                                    <p className="text-base font-sans text-pastel-text leading-relaxed text-justify mb-4">A formulação de programas e projetos é dificultada pela vulnerabilidade ambiental (como os longos períodos de seca extrema do semiárido) e falhas de infraestrutura. Há o imenso desafio de estruturar metas de curto, médio e longo prazo que englobem educação em saúde, convivência com o semiárido e a recuperação de mananciais hídricos essenciais.</p>
+                                    <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2"><strong>Ref:</strong> Produto E - Programas, Projetos e Ações; Produto D - Prognóstico do Saneamento Básico.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 5: A METODOLOGIA (Cartografia) */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-6 flex justify-between items-end">
+                            <div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 3</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconBookOpen className="w-8 h-8 text-pastel-green"/> A Metodologia: Cartografia
+                                </h2>
+                            </div>
+                        </header>
+
+                        <div className="flex-1 flex flex-col gap-6">
+                            
+                            {/* MAPA */}
+                            <div className="relative w-full h-80 custom-border bg-pastel-sand shadow-woodcut-sm overflow-hidden">
+                                <img src="https://i.postimg.cc/yY5xHdLj/imagem.jpg" alt="Mapa" className="w-full h-full object-cover mix-blend-multiply opacity-90" />
                                 
                                 {/* Marcador Novorizonte */}
-                                <div className="absolute top-[40%] left-[45%] md:left-[50%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-3 py-1 shadow-woodcut flex flex-col items-center mb-2 z-10">
-                                        <span className="text-[10px] md:text-xs font-bold font-serif text-pastel-ink uppercase tracking-wider flex items-center gap-1"><IconMapPin className="w-3 h-3"/> Novorizonte</span>
-                                        <span className="text-sm md:text-lg font-bold bg-pastel-green/50 px-2 mt-1 custom-border w-full text-center">94,29%</span>
-                                        <span className="text-[9px] mt-1 text-pastel-text font-sans"></span>
+                                <div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                                    <div className="bg-white custom-border px-3 py-1 shadow-woodcut-sm flex flex-col items-center mb-1">
+                                        <span className="text-[10px] font-bold font-serif text-pastel-ink uppercase flex items-center gap-1"><IconMapPin className="w-3 h-3"/> Novorizonte</span>
+                                        <span className="text-sm font-bold bg-pastel-green/50 px-2 mt-1 custom-border">94,29%</span>
                                     </div>
                                     <div className="w-0.5 h-6 bg-pastel-ink"></div>
                                     <div className="w-2 h-2 rounded-full bg-pastel-ink"></div>
                                 </div>
 
                                 {/* Marcador Cambaúba */}
-                                <div className="absolute top-[20%] left-[20%] md:left-[30%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-2 z-10">
-                                        <span className="text-[10px] font-bold font-serif text-pastel-ink uppercase tracking-wider">Cambaúba</span>
+                                <div className="absolute top-[20%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-1">
+                                        <span className="text-[9px] font-bold font-serif text-pastel-ink uppercase">Cambaúba</span>
                                         <span className="text-xs font-bold bg-pastel-peach/50 px-2 mt-1 custom-border">2,86%</span>
                                     </div>
                                     <div className="w-0.5 h-4 bg-pastel-ink"></div>
@@ -546,9 +525,9 @@
                                 </div>
 
                                 {/* Marcador Campo Verde */}
-                                <div className="absolute top-[70%] left-[75%] md:left-[70%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-2 z-10">
-                                        <span className="text-[10px] font-bold font-serif text-pastel-ink uppercase tracking-wider">Campo Verde</span>
+                                <div className="absolute top-[70%] left-[70%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-1">
+                                        <span className="text-[9px] font-bold font-serif text-pastel-ink uppercase">Campo Verde</span>
                                         <span className="text-xs font-bold bg-pastel-blue/50 px-2 mt-1 custom-border">2,86%</span>
                                     </div>
                                     <div className="w-0.5 h-4 bg-pastel-ink"></div>
@@ -556,434 +535,200 @@
                                 </div>
                             </div>
 
-                            {/* Leitura Crítica */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                                <div className="bg-white p-5 custom-border shadow-woodcut-sm">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-xl mb-4 border-b-2 border-pastel-ink pb-2 flex items-center gap-2">
-                                        <IconAlertCircle className="w-5 h-5 text-pastel-alert"/> Leitura Crítica da Amostra
+                            {/* LEITURA CRÍTICA */}
+                            <div className="grid grid-cols-2 gap-6 flex-1">
+                                <div className="bg-white p-5 custom-border shadow-woodcut-sm flex flex-col justify-center">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2 flex items-center gap-2">
+                                        <IconAlertCircle className="text-pastel-alert"/> Análise Espacial da Amostra
                                     </h5>
                                     
                                     <div className="space-y-4">
                                         <div>
-                                            <strong className="text-pastel-ink font-sans block mb-1">1. Amostra extremamente concentrada</strong>
-                                            <p className="text-sm text-pastel-text font-sans">A pesquisa é praticamente um retrato exclusivo da sede (Novorizonte). Outras comunidades são estatisticamente irrelevantes, o que significa que as conclusões refletem apenas uma realidade pontual.</p>
+                                            <strong className="text-pastel-ink font-sans text-sm block mb-1">1. Amostra extremamente concentrada</strong>
+                                            <p className="text-xs text-pastel-text font-sans">A pesquisa é praticamente um retrato exclusivo da sede. Outras comunidades são estatisticamente irrelevantes (apenas 2 respondentes fora da sede).</p>
                                         </div>
                                         <div>
-                                            <strong className="text-pastel-ink font-sans block mb-1">2. Baixa diversidade territorial</strong>
-                                            <p className="text-sm text-pastel-text font-sans">Apenas 3 comunidades aparecem. Essa limitação metodológica não permite comparação entre territórios e mascara possíveis desigualdades intraurbanas e rurais graves.</p>
+                                            <strong className="text-pastel-ink font-sans text-sm block mb-1">2. Baixa diversidade territorial</strong>
+                                            <p className="text-xs text-pastel-text font-sans">Essa limitação metodológica não permite comparação entre territórios e mascara possíveis desigualdades intraurbanas e rurais graves.</p>
                                         </div>
                                         <div>
-                                            <strong className="text-pastel-ink font-sans block mb-1">3. Problema comum em pesquisa de campo</strong>
-                                            <p className="text-sm text-pastel-text font-sans">Isso geralmente indica coleta por conveniência/proximidade (rede de contatos), maior engajamento de uma área específica e falha no planejamento de alcance da pesquisa.</p>
+                                            <strong className="text-pastel-ink font-sans text-sm block mb-1">3. Problema na execução da pesquisa</strong>
+                                            <p className="text-xs text-pastel-text font-sans">Indica provável coleta por conveniência/proximidade, maior engajamento de uma área específica e falha no planejamento de alcance da mobilização.</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="bg-pastel-peach/20 p-5 custom-border border-l-4 border-l-pastel-alert shadow-woodcut-sm">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-3">📌 Síntese para o Diagnóstico</h5>
-                                    <p className="text-base text-pastel-text font-sans leading-relaxed italic">
-                                        "A amostra apresenta forte concentração territorial, com 94,29% dos respondentes pertencentes à comunidade de Novorizonte, enquanto Cambaúba e Campo Verde aparecem de forma residual (2,86% cada). Isso evidencia uma grave limitação na diversidade espacial da pesquisa, fazendo com que os resultados representem predominantemente a realidade de uma única comunidade, mascarando o déficit do restante do município."
+                                <div className="bg-pastel-peach/20 p-6 custom-border border-l-8 border-l-pastel-alert shadow-woodcut-sm flex flex-col justify-center">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-xl mb-4">📌 Síntese Diagnóstica</h5>
+                                    <p className="text-sm text-pastel-text font-sans leading-relaxed italic text-justify">
+                                        "A amostra apresenta forte concentração territorial, com 94,29% dos respondentes pertencentes à comunidade de Novorizonte, enquanto Cambaúba e Campo Verde aparecem de forma residual (2,86% cada). 
+                                        <br/><br/>
+                                        Isso evidencia uma grave limitação na diversidade espacial da pesquisa oficial, fazendo com que os resultados tabulados pelo PMSB representem predominantemente a realidade de uma única comunidade, mascarando e subnotificando o déficit estrutural do restante do município, especialmente nas zonas rurais."
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    {/* ACCORDION 2: PESQUISAS E DADOS */}
-                    <div className={`custom-border transition-all overflow-hidden ${activeTab === 1 ? 'bg-pastel-sand/20 shadow-woodcut' : 'bg-white hover:bg-pastel-sand/50 hover:shadow-woodcut-sm'}`}>
-                        <button className="w-full p-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveTab(activeTab === 1 ? -1 : 1)}>
-                            <div className="flex items-center gap-4">
-                                <div className={`p-2 custom-border transition-colors ${activeTab === 1 ? 'bg-pastel-peach' : 'bg-white'}`}>
-                                    <IconPieChart className="w-6 h-6 text-pastel-ink" />
-                                </div>
-                                <h4 className={`text-xl md:text-2xl font-bold font-serif ${activeTab === 1 ? 'text-pastel-ink' : 'text-pastel-text'}`}>
-                                    2. Pesquisas e Coleta de Dados
-                                </h4>
-                            </div>
-                            <IconChevronDown className={`w-6 h-6 transition-transform duration-300 ${activeTab === 1 ? 'rotate-180 text-pastel-ink' : 'text-pastel-text'}`} />
-                        </button>
-                        
-                        <div className={`px-4 md:px-6 transition-all duration-500 overflow-hidden ${activeTab === 1 ? 'max-h-[5000px] py-6 opacity-100 border-t-2 border-pastel-ink/20' : 'max-h-0 py-0 opacity-0'}`}>
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 6: O PROCESSO (Dados Pt 1) */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-6">
+                            <h2 className="text-2xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                <IconPieChart className="text-pastel-blue"/> Pesquisas e Coleta de Dados (Parte 1)
+                            </h2>
+                        </header>
+
+                        <div className="grid grid-cols-2 gap-5 flex-1">
                             
-                            {/* DASHBOARD GRID */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            {/* Perfil */}
+                            <div className="bg-white p-5 custom-border shadow-woodcut-sm flex flex-col">
+                                <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 1. Perfil dos Respondentes</h5>
                                 
-                                {/* BLOCO 1: Perfil */}
-                                <div className="bg-white p-5 custom-border shadow-woodcut-sm flex flex-col">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 1. Perfil dos Respondentes</h5>
-                                    
-                                    <div className="mb-4">
-                                        <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Faixa Etária</div>
-                                        <MiniBar label="16 a 24 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-20" />
-                                        <MiniBar label="25 a 34 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-20" />
-                                        <MiniBar label="35 a 44 anos" percent={7.69} colorClass="bg-pastel-blue" width="w-20" />
-                                        <MiniBar label="45 a 59 anos" percent={30.77} colorClass="bg-pastel-blue" width="w-20" />
-                                        <MiniBar label="60+ anos" percent={15.38} colorClass="bg-pastel-blue" width="w-20" />
-                                    </div>
-                                    
-                                    <div className="grid grid-cols-2 gap-4 mt-auto border-t border-pastel-ink/10 pt-4">
-                                        <div>
-                                            <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Gênero</div>
-                                            <MiniBar label="Mulher" percent={76.92} colorClass="bg-pastel-peach" width="w-12" />
-                                            <MiniBar label="Homem" percent={23.08} colorClass="bg-pastel-sand" width="w-12" />
-                                        </div>
-                                        <div>
-                                            <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Renda Familiar</div>
-                                            <MiniBar label="Até 1 SM" percent={7.69} colorClass="bg-pastel-green" width="w-12" />
-                                            <MiniBar label="1 a 3 SM" percent={76.92} colorClass="bg-pastel-green" width="w-12" />
-                                            <MiniBar label="> 3 SM" percent={15.38} colorClass="bg-pastel-green" width="w-12" />
-                                        </div>
-                                    </div>
+                                <div className="mb-4">
+                                    <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Faixa Etária</div>
+                                    <MiniBar label="16 a 24 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-20" />
+                                    <MiniBar label="25 a 34 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-20" />
+                                    <MiniBar label="35 a 44 anos" percent={7.69} colorClass="bg-pastel-blue" width="w-20" />
+                                    <MiniBar label="45 a 59 anos" percent={30.77} colorClass="bg-pastel-blue" width="w-20" />
+                                    <MiniBar label="60+ anos" percent={15.38} colorClass="bg-pastel-blue" width="w-20" />
                                 </div>
-
-                                {/* BLOCO 2: Participação (DESTAQUE) */}
-                                <div className="bg-white p-5 custom-border shadow-woodcut-sm flex flex-col">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 2. Conhecimento e Participação</h5>
-                                    
-                                    <div className="grid grid-cols-2 gap-4 mb-4">
-                                        <HighlightBox title="Conhece o Plano?" value="53%" subtitle="Dizem que Sim" color="bg-pastel-sand" />
-                                        <HighlightBox title="Escuta da Prefeitura" value="84%" subtitle="Não sabe/Não viu" color="bg-pastel-sand" />
-                                    </div>
-
-                                    <div className="mt-auto bg-pastel-alert p-4 custom-border text-center shadow-woodcut-sm animate-pulse">
-                                        <div className="text-xs font-bold text-white uppercase tracking-widest mb-1">Convidados para Reuniões?</div>
-                                        <div className="text-4xl font-serif font-bold text-white mb-1">100% NÃO</div>
-                                        <div className="text-sm font-sans font-bold text-white">Dado forte: zero participação institucional</div>
-                                    </div>
-                                </div>
-
-                                {/* BLOCO 3: Melhorias e Promessas */}
-                                <div className="bg-white p-5 custom-border shadow-woodcut-sm">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 3 & 4. Percepção vs Realidade</h5>
-                                    
-                                    <div className="mb-6">
-                                        <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Maior Melhoria Percebida</div>
-                                        <MiniBar label="Água" percent={80} valStr="> 80%" colorClass="bg-blue-300" width="w-16" />
-                                        <p className="text-[10px] font-sans text-pastel-text mt-1 italic">👉 A água chegou, mas o saneamento não está completo.</p>
-                                    </div>
-
+                                
+                                <div className="grid grid-cols-2 gap-4 mt-auto border-t border-pastel-ink/10 pt-4">
                                     <div>
-                                        <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">O que foi prometido e NÃO feito</div>
-                                        <MiniBar label="Esgoto" percent={50} valStr="~ 50%" colorClass="bg-pastel-alert" width="w-16" />
-                                        <MiniBar label="Tratamento" percent={30} valStr="Recorrente" colorClass="bg-pastel-peach" width="w-16" />
-                                        <p className="text-[10px] font-sans text-pastel-text mt-1 italic">👉 Síntese: O grande déficit do município é o ESGOTO.</p>
+                                        <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Gênero</div>
+                                        <MiniBar label="Mulher" percent={76.92} colorClass="bg-pastel-peach" width="w-12" />
+                                        <MiniBar label="Homem" percent={23.08} colorClass="bg-pastel-sand" width="w-12" />
+                                    </div>
+                                    <div>
+                                        <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-2">Renda Familiar</div>
+                                        <MiniBar label="Até 1 SM" percent={7.69} colorClass="bg-pastel-green" width="w-12" />
+                                        <MiniBar label="1 a 3 SM" percent={76.92} colorClass="bg-pastel-green" width="w-12" />
+                                        <MiniBar label="> 3 SM" percent={15.38} colorClass="bg-pastel-green" width="w-12" />
                                     </div>
                                 </div>
+                            </div>
 
-                                {/* BLOCO 4: Problemas Cotidianos */}
-                                <div className="bg-white p-5 custom-border shadow-woodcut-sm">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 6 a 9. O Cotidiano Precário</h5>
-                                    
-                                    <div className="space-y-4">
-                                        <div>
-                                            <div className="flex justify-between text-xs font-bold font-sans text-pastel-ink mb-1"><span>Solução para Esgoto (Ausência de Rede)</span> <span className="text-pastel-alert">Fossa (61,54%)</span></div>
-                                            <div className="w-full h-2 bg-pastel-sand custom-border overflow-hidden"><div className="h-full bg-pastel-alert w-[61.54%]"></div></div>
-                                            <p className="text-[9px] text-pastel-text mt-1">Forte presença de soluções individuais precárias.</p>
-                                        </div>
-                                        <div>
-                                            <div className="flex justify-between text-xs font-bold font-sans text-pastel-ink mb-1"><span>Lixo Atrasado</span> <span className="text-pastel-peach">Rua / Guarda (61,5%)</span></div>
-                                            <div className="w-full h-2 bg-pastel-sand custom-border overflow-hidden"><div className="h-full bg-pastel-peach w-[61.5%]"></div></div>
-                                            <p className="text-[9px] text-pastel-text mt-1">Comportamento coletivo heterogêneo; 30% descarta irregularmente.</p>
-                                        </div>
-                                        <div>
-                                            <div className="flex justify-between text-xs font-bold font-sans text-pastel-ink mb-1"><span>Alagamentos / Lama</span> <span className="text-pastel-blue">Nenhuma Solução (61,54%)</span></div>
-                                            <div className="w-full h-2 bg-pastel-sand custom-border overflow-hidden"><div className="h-full bg-pastel-blue w-[61.54%]"></div></div>
-                                            <p className="text-[9px] text-pastel-text mt-1">Ausência total de resposta onde o problema ocorre.</p>
-                                        </div>
-                                    </div>
+                            {/* Participação */}
+                            <div className="bg-white p-5 custom-border shadow-woodcut-sm flex flex-col">
+                                <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 2. Conhecimento e Participação</h5>
+                                
+                                <div className="grid grid-cols-2 gap-3 mb-4">
+                                    <HighlightBox title="Conhece o Plano?" value="53%" subtitle="Dizem que Sim" color="bg-pastel-sand" />
+                                    <HighlightBox title="Escuta da Prefeit." value="84%" subtitle="Não sabe/Não viu" color="bg-pastel-sand" />
                                 </div>
 
-                                {/* BLOCO 5: Conclusão e Prioridade Larga */}
-                                <div className="col-span-1 md:col-span-2 bg-pastel-bg p-5 custom-border shadow-woodcut">
-                                    <div className="flex flex-col md:flex-row gap-6">
-                                        <div className="flex-1">
-                                            <h5 className="font-serif font-bold text-pastel-ink text-lg mb-3 flex items-center gap-2"><IconTarget className="w-5 h-5"/> Prioridade Absoluta (Mutirão)</h5>
-                                            <MiniBar label="Esgoto / Saneam." percent={50} valStr="~50%" colorClass="bg-pastel-alert" width="w-24" />
-                                            <MiniBar label="Drenagem" percent={20} valStr="~20%" colorClass="bg-pastel-blue" width="w-24" />
-                                            <MiniBar label="Pavimentação" percent={15} valStr="~15%" colorClass="bg-pastel-sand" width="w-24" />
-                                            <p className="text-sm font-sans text-pastel-ink font-bold mt-4 bg-white p-2 custom-border">👉 Consenso claro: A prioridade da população é o ESGOTO.</p>
-                                        </div>
-                                        
-                                        <div className="flex-1 bg-white p-4 custom-border border-l-4 border-l-pastel-ink">
-                                            <h5 className="font-serif font-bold text-pastel-ink text-lg mb-3">🧠 Leitura Estratégica</h5>
-                                            <ul className="space-y-3 font-sans text-sm text-pastel-text">
-                                                <li><strong className="text-pastel-ink">1. Universalização parcial:</strong> Água está relativamente resolvida, mas o esgoto representa uma grande falha estrutural.</li>
-                                                <li><strong className="text-pastel-ink">2. Ausência do Estado:</strong> Planejamento não participativo (100% nunca foi chamado pra reunião) e baixa atuação prática.</li>
-                                                <li><strong className="text-pastel-ink">3. Infraestrutura incompleta:</strong> Obras pontuais não sistêmicas; falta severa de drenagem e tratamento.</li>
-                                                <li><strong className="text-pastel-ink">4. Solução improvisada:</strong> O uso de fossas domina. A população resolve seus problemas básicos como pode.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div className="mt-auto bg-pastel-alert p-5 custom-border text-center shadow-woodcut-sm">
+                                    <div className="text-xs font-bold text-white uppercase tracking-widest mb-2">Convidados para Reuniões?</div>
+                                    <div className="text-5xl font-serif font-bold text-white mb-2">100% NÃO</div>
+                                    <div className="text-sm font-sans font-bold text-white">Dado crítico: zero participação institucional efetiva</div>
                                 </div>
+                            </div>
 
+                            {/* Melhorias e Promessas */}
+                            <div className="col-span-2 bg-white p-6 custom-border shadow-woodcut-sm flex gap-6">
+                                <div className="flex-1 border-r-2 border-pastel-ink/10 pr-6">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4">📊 3. Percepção de Melhoria</h5>
+                                    <div className="mb-2">
+                                        <MiniBar label="Água" percent={80} valStr="> 80%" colorClass="bg-pastel-blue" width="w-16" />
+                                        <MiniBar label="Esgoto" percent={10} valStr="Baixo" colorClass="bg-pastel-sand" width="w-16" />
+                                        <MiniBar label="Drenagem" percent={2} valStr="Nulo" colorClass="bg-pastel-sand" width="w-16" />
+                                    </div>
+                                    <p className="text-[10px] font-sans text-pastel-text italic bg-pastel-bg p-2 custom-border">👉 A água chegou, mas o saneamento não está completo.</p>
+                                </div>
+                                <div className="flex-1 pl-2">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4">📊 4. Prometido e NÂO Feito</h5>
+                                    <div className="mb-2">
+                                        <MiniBar label="Esgoto" percent={50} valStr="~ 50%" colorClass="bg-pastel-alert" width="w-20" />
+                                        <MiniBar label="Tratamento" percent={30} valStr="Frequente" colorClass="bg-pastel-peach" width="w-20" />
+                                        <MiniBar label="Aterro/Lixo" percent={10} valStr="Pouco" colorClass="bg-pastel-sand" width="w-20" />
+                                    </div>
+                                    <p className="text-[10px] font-sans text-pastel-text italic bg-pastel-alert/20 p-2 custom-border">👉 Síntese: O grande déficit cobrado é o ESGOTO.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    {/* ACCORDION 3: PARTICIPAÇÃO SOCIAL */}
-                    <div className={`custom-border transition-all overflow-hidden ${activeTab === 2 ? 'bg-pastel-sand/20 shadow-woodcut' : 'bg-white hover:bg-pastel-sand/50 hover:shadow-woodcut-sm'}`}>
-                        <button className="w-full p-5 text-left flex justify-between items-center bg-transparent" onClick={() => setActiveTab(activeTab === 2 ? -1 : 2)}>
-                            <div className="flex items-center gap-4">
-                                <div className={`p-2 custom-border transition-colors ${activeTab === 2 ? 'bg-pastel-blue' : 'bg-white'}`}>
-                                    <IconUsers className="w-6 h-6 text-pastel-ink" />
+
+                    {/* ========================================================= */}
+                    {/* PÁGINA 7: O PROCESSO (Dados Pt 2 e Conclusão) */}
+                    {/* ========================================================= */}
+                    <section className="a4-page map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-4 mb-6">
+                            <h2 className="text-2xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                <IconPieChart className="text-pastel-blue"/> Pesquisas e Coleta de Dados (Parte 2)
+                            </h2>
+                        </header>
+
+                        <div className="flex flex-col gap-5 flex-1">
+                            
+                            {/* Problemas Cotidianos */}
+                            <div className="bg-white p-5 custom-border shadow-woodcut-sm">
+                                <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 border-b-2 border-pastel-ink pb-2">📊 O Cotidiano Precário</h5>
+                                
+                                <div className="grid grid-cols-3 gap-6">
+                                    <div>
+                                        <div className="text-xs font-bold font-sans text-pastel-ink mb-2">Solução para Esgoto</div>
+                                        <div className="w-full h-3 bg-pastel-sand custom-border overflow-hidden mb-2"><div className="h-full bg-pastel-alert w-[61.54%]"></div></div>
+                                        <span className="text-pastel-alert font-bold text-sm block mb-1">Fossa (61,5%)</span>
+                                        <p className="text-[10px] text-pastel-text">Forte presença de soluções individuais precárias por falta de rede.</p>
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold font-sans text-pastel-ink mb-2">Lixo Atrasado</div>
+                                        <div className="w-full h-3 bg-pastel-sand custom-border overflow-hidden mb-2"><div className="h-full bg-pastel-peach w-[61.5%]"></div></div>
+                                        <span className="text-pastel-peach font-bold text-sm block mb-1">Rua / Guarda (61,5%)</span>
+                                        <p className="text-[10px] text-pastel-text">Comportamento heterogêneo; 30% descarta de forma irregular.</p>
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold font-sans text-pastel-ink mb-2">Alagamentos / Lama</div>
+                                        <div className="w-full h-3 bg-pastel-sand custom-border overflow-hidden mb-2"><div className="h-full bg-pastel-blue w-[61.54%]"></div></div>
+                                        <span className="text-pastel-blue font-bold text-sm block mb-1">Sem Solução (61,5%)</span>
+                                        <p className="text-[10px] text-pastel-text">Ausência total de resposta do poder público onde o problema ocorre.</p>
+                                    </div>
                                 </div>
-                                <h4 className={`text-xl md:text-2xl font-bold font-serif ${activeTab === 2 ? 'text-pastel-ink' : 'text-pastel-text'}`}>
-                                    3. Diretrizes de Participação (Omissões)
+                            </div>
+
+                            {/* Leitura Estratégica */}
+                            <div className="bg-pastel-bg p-6 custom-border shadow-woodcut flex gap-6 mt-2">
+                                <div className="flex-1">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 flex items-center gap-2"><IconTarget className="w-5 h-5"/> Prioridade (Mutirão)</h5>
+                                    <MiniBar label="Esgoto / Saneam." percent={50} valStr="~50%" colorClass="bg-pastel-alert" width="w-24" />
+                                    <MiniBar label="Drenagem" percent={20} valStr="~20%" colorClass="bg-pastel-blue" width="w-24" />
+                                    <MiniBar label="Pavimentação" percent={15} valStr="~15%" colorClass="bg-pastel-sand" width="w-24" />
+                                    <p className="text-xs font-sans text-pastel-ink font-bold mt-5 bg-white p-3 custom-border">👉 Consenso claro: A prioridade da população é a rede de ESGOTO.</p>
+                                </div>
+                                
+                                <div className="flex-1 bg-white p-5 custom-border border-l-4 border-l-pastel-ink">
+                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-3">🧠 Leitura Estratégica</h5>
+                                    <ul className="space-y-3 font-sans text-xs text-pastel-text">
+                                        <li><strong className="text-pastel-ink">1. Universalização parcial:</strong> Água está relativamente resolvida, mas o esgoto representa falha estrutural.</li>
+                                        <li><strong className="text-pastel-ink">2. Ausência do Estado:</strong> Planejamento não participativo (zero reuniões) e baixa atuação prática corretiva.</li>
+                                        <li><strong className="text-pastel-ink">3. Infraestrutura incompleta:</strong> Obras pontuais não sistêmicas; falta severa de drenagem pluvial.</li>
+                                        <li><strong className="text-pastel-ink">4. Solução improvisada:</strong> O uso de fossas domina e a população resolve seus problemas básicos como pode.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* Diretrizes de Participação */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut-sm border-t-8 border-t-pastel-blue mt-auto">
+                                <h4 className="text-xl font-bold font-serif text-pastel-ink flex items-center gap-2 mb-3">
+                                    <IconUsers className="text-pastel-blue"/> Conclusão: Diretrizes de Participação
                                 </h4>
+                                <p className="text-xs text-pastel-text font-sans mb-4">Apesar do PMSB prever a leitura comunitária como pilar central, os dados provam uma discrepância drástica entre a teoria do documento e a prática no município.</p>
+                                <ul className="space-y-3 font-sans text-pastel-text text-xs">
+                                    <li className="border-l-4 border-pastel-alert/50 pl-3 py-1">
+                                        <strong className="text-pastel-ink">Audiências Públicas Inexistentes:</strong> Contradizendo as diretrizes de mobilização social, 100% da população amostrada relata exclusão total de reuniões e processos decisórios.
+                                    </li>
+                                    <li className="border-l-4 border-pastel-alert/50 pl-3 py-1">
+                                        <strong className="text-pastel-ink">Falta de Setorização Justa:</strong> As demandas das áreas rurais (fazendas e povoados menores) são ignoradas e engolidas pelas prioridades da Sede (Novorizonte), como demonstrado pela falha de amostragem da pesquisa cartográfica.
+                                    </li>
+                                </ul>
                             </div>
-                            <IconChevronDown className={`w-6 h-6 transition-transform duration-300 ${activeTab === 2 ? 'rotate-180 text-pastel-ink' : 'text-pastel-text'}`} />
-                        </button>
-                        
-                        <div className={`px-5 md:px-16 transition-all duration-500 overflow-hidden ${activeTab === 2 ? 'max-h-[1000px] py-6 opacity-100 border-t-2 border-pastel-ink/20' : 'max-h-0 py-0 opacity-0'}`}>
-                            <p className="text-pastel-text text-lg font-sans mb-4 leading-relaxed">Apesar do PMSB prever a leitura comunitária, os dados coletados mostram uma discrepância drástica entre a teoria e a prática no município.</p>
-                            <ul className="space-y-4 font-sans text-pastel-text mb-6">
-                                <li className="text-lg leading-relaxed border-l-4 border-pastel-alert/50 pl-4">
-                                    <strong className="text-pastel-ink">Audiências Públicas Inexistentes:</strong> Contradizendo as diretrizes de mobilização social, a população relata exclusão total de reuniões decisórias.
-                                </li>
-                                <li className="text-lg leading-relaxed border-l-4 border-pastel-alert/50 pl-4">
-                                    <strong className="text-pastel-ink">Falta de Setorização:</strong> As demandas das áreas rurais (fazendas e povoados menores) são engolidas pelas prioridades da Sede (Novorizonte), como provado pela amostra da pesquisa.
-                                </li>
-                            </ul>
+
                         </div>
-                    </div>
-
-                </div>
-            );
-        };
-
-
-        // --- MAPA INTERATIVO ---
-        const App = () => {
-            // Estado do Mapa
-            const [pos, setPos] = useState({ x: 0, y: 0 });
-            const [zoom, setZoom] = useState(1);
-            const [isDragging, setIsDragging] = useState(false);
-            const [activeNode, setActiveNode] = useState(null);
-            const [showIntro, setShowIntro] = useState(true);
-            
-            // Estado da Passarinha seguindo o cursor
-            const [birdTarget, setBirdTarget] = useState({ x: 0, y: 0, flip: false });
-
-            const dragStart = useRef({ x: 0, y: 0 });
-
-            // Funções de Arrastar (Pan) e Rastreamento do Mouse
-            const handlePointerDown = (e) => {
-                if (e.target.closest('.no-drag') || showIntro) return; 
-                setIsDragging(true);
-                dragStart.current = { x: e.clientX - pos.x, y: e.clientY - pos.y };
-                e.target.setPointerCapture(e.pointerId);
-            };
-
-            const handlePointerMove = (e) => {
-                let currentPosX = pos.x;
-                let currentPosY = pos.y;
-                
-                if (isDragging) {
-                    currentPosX = e.clientX - dragStart.current.x;
-                    currentPosY = e.clientY - dragStart.current.y;
-                    setPos({ x: currentPosX, y: currentPosY });
-                }
-
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
-                const bX = (e.clientX - centerX - currentPosX) / zoom;
-                const bY = (e.clientY - centerY - currentPosY) / zoom;
-                
-                setBirdTarget(prev => ({
-                    x: bX,
-                    y: bY,
-                    flip: bX < prev.x
-                }));
-            };
-
-            const handlePointerUp = (e) => {
-                setIsDragging(false);
-                e.target.releasePointerCapture(e.pointerId);
-            };
-
-            const handleWheel = (e) => {
-                if (e.target.closest('.no-drag') || showIntro) return;
-                const zoomDelta = e.deltaY * -0.001;
-                setZoom(z => Math.min(Math.max(0.4, z + zoomDelta), 2.5));
-            };
-
-            const resetView = () => {
-                setPos({ x: 0, y: 0 });
-                setZoom(1);
-            };
-
-            // Dados dos Pinos (Removido o pino "Qual o problema?")
-            const mapNodes = [
-                { id: 'onde', x: -600, y: -150, title: '1. O Contexto', subtitle: 'Território', icon: IconMapPin, bg: 'bg-pastel-blue', content: <OndeContent />, modalWidth: 'max-w-[95vw] 2xl:max-w-[1600px]' },
-                { id: 'como', x: 650, y: -50, title: '2. O Processo', subtitle: 'Metodologia', icon: IconBookOpen, bg: 'bg-pastel-green', content: <ComoContent />, modalWidth: 'max-w-[95vw] 2xl:max-w-[1400px]' }
-            ];
-
-            const activeNodeData = mapNodes.find(n => n.id === activeNode);
-
-            // Caminho SVG ajustado para conectar apenas os 2 pinos restantes
-            const pathData = `M ${2000 + mapNodes[0].x} ${1500 + mapNodes[0].y} Q ${2000 + mapNodes[0].x + 600} ${1500 + mapNodes[0].y + 200} ${2000 + mapNodes[1].x} ${1500 + mapNodes[1].y}`;
-
-            return (
-                <div className="w-screen h-screen overflow-hidden relative map-texture map-grid font-sans select-none"
-                     onPointerDown={handlePointerDown}
-                     onPointerMove={handlePointerMove}
-                     onPointerUp={handlePointerUp}
-                     onPointerCancel={handlePointerUp}
-                     onWheel={handleWheel}>
-                    
-                    {/* TELA INICIAL (SPLASH SCREEN) */}
-                    {showIntro && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-pastel-bg/80 backdrop-blur-md no-drag pointer-events-auto">
-                            <div 
-                                className="bg-white custom-border shadow-woodcut-lg max-w-3xl p-8 md:p-12 cursor-pointer hover:bg-pastel-sand/30 transition-colors animate-expand flex flex-col items-center text-center"
-                                onClick={() => setShowIntro(false)}
-                            >
-                                <IconMap className="w-12 h-12 text-pastel-ink mb-6" />
-                                <h1 className="text-3xl md:text-5xl font-bold font-serif text-pastel-ink mb-6 leading-tight">
-                                    Retratos do Saneamento Básico em Novorizonte - MG
-                                </h1>
-                                <div className="border-t-2 border-pastel-peach pt-6 w-full">
-                                    <p className="text-sm md:text-base font-sans text-pastel-text leading-relaxed mb-8 max-w-2xl mx-auto">
-                                        Trabalho desenvolvido no escopo da disciplina <strong>ARQC10 - Ateliê de Fundamentação de Planejamento Urbano e Regional</strong>. O objetivo deste material é mapear e analisar as ações já realizadas no âmbito do Plano Municipal de Saneamento Básico (PMSB) desde sua implantação, visando compreender seu nível de execução, avanços e lacunas ao longo do tempo.
-                                    </p>
-                                    <button className="inline-flex items-center gap-3 px-6 py-3 bg-pastel-ink text-white font-bold font-sans uppercase tracking-widest text-sm custom-border hover:bg-black transition-colors">
-                                        Explorar o Mapa <IconMapPin className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* CONTAINER DO MAPA MUNDO */}
-                    <div 
-                        className={`absolute top-1/2 left-1/2 w-[4000px] h-[3000px] origin-center ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} transition-opacity duration-700 ${showIntro ? 'opacity-30' : 'opacity-100'}`}
-                        style={{ transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${zoom})` }}
-                    >
-                        
-                        <img src="https://i.postimg.cc/Kvn0SL1s/image.png" className="woodcut-bg" style={{ top: '1200px', left: '1200px', width: '400px' }} />
-                        <img src="https://i.postimg.cc/GpSQJxfp/image.png" className="woodcut-bg" style={{ top: '1600px', left: '2300px', width: '500px' }} />
-                        <img src="https://i.postimg.cc/xCw3BTnQ/image.png" className="woodcut-bg" style={{ top: '1100px', left: '2600px', width: '300px' }} />
-                        <img src="https://i.postimg.cc/fTjfgNFT/image.png" className="woodcut-bg" style={{ top: '1800px', left: '1400px', width: '350px' }} />
-                        
-                        <svg className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
-                            <path 
-                                d={pathData}
-                                fill="none" stroke="#2B2624" strokeWidth="6" strokeDasharray="20, 20"
-                            />
-                        </svg>
-
-                        {/* Personagem "SanBas" */}
-                        <div
-                            className="absolute z-20 pointer-events-none flex flex-col items-center justify-start transition-all duration-[200ms] ease-out"
-                            style={{
-                                left: `calc(50% + ${birdTarget.x}px)`,
-                                top: `calc(50% + ${birdTarget.y}px)`,
-                                transform: 'translate(-50%, -50%)',
-                                marginTop: '-60px'
-                            }}
-                        >
-                            <div className={`bg-white rounded-full shadow-woodcut-sm custom-border animate-bounce flex items-center justify-center w-12 h-12 transform transition-transform duration-300 ${birdTarget.flip ? 'scale-x-100' : '-scale-x-100'}`}>
-                                <span className="text-2xl leading-none block mt-1">🐦</span>
-                            </div>
-                        </div>
-
-                        {/* Pinos Interativos */}
-                        {mapNodes.map((node) => {
-                            const Icon = node.icon;
-                            const isActive = activeNode === node.id;
-                            return (
-                                <div 
-                                    key={node.id}
-                                    onClick={(e) => { e.stopPropagation(); setActiveNode(node.id); }}
-                                    className={`absolute flex flex-col items-center justify-center transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 no-drag cursor-pointer
-                                        ${isActive ? 'scale-110 z-20 opacity-0' : 'hover:scale-105 z-10 opacity-100'}`}
-                                    style={{ left: `calc(50% + ${node.x}px)`, top: `calc(50% + ${node.y}px)` }}
-                                >
-                                    <div className="bg-white custom-border shadow-woodcut-sm p-4 mb-4 text-center max-w-[250px] pointer-events-none">
-                                        <div className="text-xs font-bold uppercase tracking-wider text-pastel-ink/60">{node.title}</div>
-                                        <div className="text-xl font-bold font-serif text-pastel-ink">{node.subtitle}</div>
-                                    </div>
-                                    
-                                    <div className={`w-20 h-20 rounded-full custom-border shadow-woodcut flex items-center justify-center ${node.bg}`}>
-                                        <Icon className="w-10 h-10 text-pastel-ink" />
-                                    </div>
-                                    
-                                    <div className="w-16 h-4 bg-pastel-ink/20 rounded-[50%] mt-4 blur-[2px]"></div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-
-                    {/* --- INTERFACE DE USUÁRIO (OVERLAYS FIXOS) --- */}
-
-                    {/* CABEÇALHO FIXO (BARRA SUPERIOR) */}
-                    <div className={`fixed top-0 left-0 w-full z-30 no-drag bg-white/95 backdrop-blur-md border-b-2 border-pastel-ink shadow-sm px-4 py-2 md:px-8 md:py-3 flex flex-col md:flex-row items-center justify-between transition-transform duration-300 ${(activeNode || showIntro) ? '-translate-y-full' : 'translate-y-0'}`}>
-                        <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                            <div className="font-sans text-[9px] md:text-[10px] font-bold text-pastel-ink/80 uppercase tracking-widest mb-1 flex flex-wrap justify-center md:justify-start items-center gap-1 md:gap-2">
-                                <span>Universidade Federal da Bahia</span>
-                                <span className="hidden md:inline">•</span>
-                                <span>ARQC10 - Planejamento Urbano e Regional</span>
-                            </div>
-                            <h1 className="text-base md:text-xl font-bold font-serif text-pastel-ink leading-tight">
-                                Retratos do Saneamento Básico em Novorizonte - MG
-                            </h1>
-                        </div>
-                        <div className="hidden md:flex flex-col items-end text-right mt-2 md:mt-0 font-sans text-[10px] md:text-xs text-pastel-text">
-                            <span><strong>Discente:</strong> Caio Aphonso Almeida</span>
-                            <span><strong>Docente:</strong> Aline Barroso</span>
-                        </div>
-                    </div>
-
-                    {/* Dica de Navegação e Controles */}
-                    <div className={`transition-opacity duration-300 ${(activeNode || showIntro) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                        <div className="absolute bottom-8 right-8 z-30 no-drag flex flex-col gap-2">
-                            <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomIn /></button>
-                            <button onClick={() => setZoom(z => Math.max(z - 0.2, 0.4))} className="w-12 h-12 bg-white custom-border shadow-woodcut-sm flex items-center justify-center hover:bg-pastel-sand active:translate-y-1"><IconZoomOut /></button>
-                            <button onClick={resetView} className="mt-2 text-xs font-bold uppercase bg-pastel-ink text-white py-2 px-2 custom-border hover:bg-black">Resetar</button>
-                        </div>
-                    </div>
-
-                    {/* JANELA EXPANSÍVEL (MODAL CENTRAL) */}
-                    {activeNodeData && (
-                        <div className="absolute inset-0 z-50 flex items-center justify-center p-2 sm:p-6 md:p-12 no-drag pointer-events-auto">
-                            
-                            {/* Overlay Escuro com Blur */}
-                            <div 
-                                className="absolute inset-0 bg-pastel-ink/60 backdrop-blur-md animate-fade cursor-pointer"
-                                onClick={() => setActiveNode(null)}
-                            ></div>
-                            
-                            {/* Janela Principal */}
-                            <div className={`relative w-full ${activeNodeData.modalWidth} max-h-full bg-pastel-bg custom-border shadow-woodcut-lg flex flex-col animate-expand`}>
-                                
-                                {/* Cabeçalho da Janela */}
-                                <div className={`p-4 md:px-8 md:py-6 border-b-2 border-pastel-ink flex items-center justify-between shrink-0 ${activeNodeData.bg}`}>
-                                    <div className="flex items-center gap-4 md:gap-6">
-                                        <div className="bg-white p-3 custom-border shadow-woodcut hidden sm:block">
-                                            <activeNodeData.icon className="w-8 h-8 md:w-10 md:h-10 text-pastel-ink" />
-                                        </div>
-                                        <div>
-                                            <div className="text-[10px] md:text-sm font-bold uppercase tracking-widest text-pastel-ink/70 mb-1">{activeNodeData.title}</div>
-                                            <h2 className="text-2xl md:text-4xl font-bold font-serif text-pastel-ink">{activeNodeData.subtitle}</h2>
-                                        </div>
-                                    </div>
-                                    <button 
-                                        onClick={() => setActiveNode(null)} 
-                                        className="p-2 md:p-3 bg-white/60 hover:bg-white custom-border transition-colors shadow-woodcut-sm cursor-pointer ml-4"
-                                    >
-                                        <IconX className="w-5 h-5 md:w-6 md:h-6 text-pastel-ink"/>
-                                    </button>
-                                </div>
-                                
-                                {/* Conteúdo Rolável */}
-                                <div className="p-4 md:p-10 overflow-y-auto flex-1 map-texture hide-scrollbar">
-                                    {activeNodeData.content}
-                                </div>
-
-                            </div>
-                        </div>
-                    )}
+                    </section>
 
                 </div>
             );
