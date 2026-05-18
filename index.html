@@ -135,7 +135,8 @@
         const IconMap = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>;
         const IconAlertCircle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>;
         const IconPieChart = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>;
-        const IconPrinter = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        const IconPrinter = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>;
+        const IconRecycle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 15.3 3 11.4 7 7.6"/><path d="M19.5 16a9 9 0 0 1-15-4.6"/><path d="M17 8.7l4 3.9-4 3.8"/><path d="M4.5 8a9 9 0 0 1 15 4.6"/></svg>;
 
         const MiniBar = ({ label, percent, valStr, colorClass = "bg-pastel-blue", width = "w-24" }) => (
             <div className="flex items-center text-[11px] font-sans font-bold text-pastel-ink uppercase tracking-wider mb-1.5">
@@ -250,512 +251,455 @@
                     </div>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 1: CAPA */}
+                    {/* SLIDE CAPA: INFORMAÇÕES BÁSICAS */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture justify-center items-center text-center">
-                        <div className="w-full max-w-4xl bg-white/95 p-10 custom-border shadow-woodcut flex flex-col items-center relative">
+                        <div className="w-full max-w-4xl bg-white/95 p-12 custom-border shadow-woodcut flex flex-col items-center relative overflow-hidden">
                             
-                            <div className="font-sans text-xs font-bold text-pastel-ink/80 uppercase tracking-widest mb-6 flex items-center justify-center gap-3 border-b-2 border-pastel-peach pb-3 w-full">
-                                <span>Universidade Federal da Bahia</span>
-                                <span>•</span>
-                                <span>ARQC10 - Planejamento Urbano e Regional</span>
-                            </div>
+                            {/* Borda decorativa de fundo */}
+                            <div className="absolute inset-2 border-2 border-pastel-ink/10 pointer-events-none"></div>
 
-                            <div className="bg-pastel-sand rounded-full shadow-woodcut-sm custom-border flex items-center justify-center w-20 h-20 mb-6">
-                                <span className="text-4xl block mt-1">🐦</span>
+                            <div className="font-sans text-sm font-bold text-pastel-ink/80 uppercase tracking-widest mb-8 flex flex-col items-center gap-2 border-b-2 border-pastel-peach pb-6 w-full relative z-10">
+                                <span>Universidade Federal da Bahia</span>
+                                <span>ARQC10 - Ateliê de Fundamentação de Planejamento Urbano e Regional</span>
                             </div>
                             
-                            <h1 className="text-5xl font-bold font-serif text-pastel-ink leading-tight mb-4">
+                            <div className="bg-pastel-sand rounded-full shadow-woodcut-sm custom-border flex items-center justify-center w-24 h-24 mb-8 relative z-10">
+                                <span className="text-5xl block mt-2">🐦</span>
+                            </div>
+                            
+                            <h1 className="text-5xl font-bold font-serif text-pastel-ink leading-tight mb-4 relative z-10">
                                 Retratos do Saneamento Básico
                             </h1>
-                            <h2 className="text-2xl font-serif text-pastel-ink/80 mb-8 italic">
+                            <h2 className="text-2xl font-serif text-pastel-ink/80 mb-10 italic relative z-10">
                                 Novorizonte - Minas Gerais
                             </h2>
                             
-                            <p className="text-base font-sans text-pastel-text leading-relaxed mb-8 text-justify bg-pastel-bg p-5 custom-border shadow-woodcut-sm">
-                                Trabalho desenvolvido no escopo da disciplina <strong>ARQC10</strong>. O objetivo deste material é mapear e analisar as ações já realizadas no âmbito do Plano Municipal de Saneamento Básico (PMSB) desde sua implantação, visando compreender seu nível de execução, avanços e lacunas ao longo do tempo.
-                            </p>
+                            <div className="bg-pastel-blue/20 p-5 custom-border border-l-8 border-l-pastel-blue mb-10 w-full text-center shadow-woodcut-sm relative z-10">
+                                <h3 className="font-bold font-sans text-pastel-ink text-xl uppercase tracking-wider">Etapa 4: Proposições Práticas</h3>
+                                <p className="text-base font-serif italic text-pastel-text mt-2">O Problema, as Diretrizes, as Ações e os Instrumentos Urbanísticos</p>
+                            </div>
                             
-                            <div className="flex w-full justify-between items-center text-base font-sans text-pastel-ink bg-pastel-blue/20 p-4 custom-border border-l-8 border-l-pastel-blue text-left">
-                                <span><strong>Discente:</strong> Caio Aphonso Almeida</span>
-                                <span><strong>Docente:</strong> Aline Barroso</span>
+                            <div className="flex flex-row gap-16 w-full justify-center text-base font-sans text-pastel-ink relative z-10">
+                                <span className="flex flex-col"><span className="text-[11px] text-pastel-ink/60 uppercase font-bold tracking-wider mb-1">Discente</span><strong>Caio Aphonso Almeida</strong></span>
+                                <span className="flex flex-col"><span className="text-[11px] text-pastel-ink/60 uppercase font-bold tracking-wider mb-1">Docente</span><strong>Aline Barroso</strong></span>
                             </div>
                         </div>
                     </section>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 2: O CONTEXTO (História) */}
+                    {/* SLIDE: SÍNTESE DO PROBLEMA */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-6 flex justify-between items-end shrink-0">
                             <div>
-                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 1</span>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Introdução</span>
                                 <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                    <IconMapPin className="w-8 h-8 text-pastel-blue"/> O Contexto: História
+                                    <IconAlertCircle className="w-8 h-8 text-pastel-alert"/> A Síntese do Problema: Resíduos Sólidos
                                 </h2>
                             </div>
                         </header>
 
-                        {/* Alteração Aqui: items-center previne as caixas de esticarem até o fim da tela */}
-                        <div className="flex-1 flex gap-5 min-h-0 items-center">
+                        <div className="flex-1 flex flex-col justify-center max-w-5xl mx-auto gap-4 w-full">
                             
-                            {/* Coluna Texto (Fica justinha no conteúdo devido ao items-center do pai) */}
-                            <div className="w-[55%] flex flex-col justify-center">
-                                <div className="bg-white p-6 custom-border shadow-woodcut">
-                                    <h3 className="text-2xl font-bold font-serif text-pastel-ink mb-4 flex items-center gap-2 border-b-2 border-pastel-sand pb-2">
-                                        <IconHistory className="w-6 h-6 text-pastel-peach"/> Resumo Histórico
-                                    </h3>
-                                    <div className="text-base font-sans text-pastel-text leading-snug text-justify space-y-3">
-                                        <p>A ocupação da região remonta ao século XVI com a expedição de Francisco Bruza de Spinosa (1553). Historicamente ligada a Salinas, a formação atual da cidade deve-se ao fazendeiro João Bernardino de Souza, no antigo povoado de Indaiá.</p>
-                                        <p>Em 1953, João mobilizou a comunidade e conseguiu a doação de terras pelas famílias Almeida e Ferreira em uma chapada chamada "Novo Indaiá", para construir uma praça e uma igreja em mutirão.</p>
-                                        <p>Em outubro de 1953, o então prefeito de Salinas, Dr. Costa, ao visitar a chapada, declarou: <em>"isto aqui é muito bonito, é um horizonte"</em>. A inspiração gerou o nome "Novorizonte". A emancipação ocorreu em 1995.</p>
-                                    </div>
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-alert/20 border-2 border-pastel-alert flex items-center justify-center text-3xl font-bold font-serif text-pastel-alert">1</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2">Descarte Irregular por Falta de Adaptação</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">A coleta convencional com caminhões grandes não consegue acessar as áreas mais acidentadas, ruas de terra e becos de Novorizonte. Sem rotas alternativas, a população fica sem opção e acaba forçada a recorrer ao descarte irregular nas ruas ou terrenos, gerando acúmulo crônico e riscos à saúde pública.</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-alert/20 border-2 border-pastel-alert flex items-center justify-center text-3xl font-bold font-serif text-pastel-alert">2</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2">A Coleta Excludente</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">O modelo de gestão atual ignora completamente as dinâmicas da comunidade. O planejamento do Plano Municipal (PMSB) foi elaborado de cima para baixo, sem ouvir a população (100% não participou das decisões). Isso invisibiliza os problemas reais e marginaliza as pessoas que já trabalham informalmente com o lixo.</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-alert/20 border-2 border-pastel-alert flex items-center justify-center text-3xl font-bold font-serif text-pastel-alert">3</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2">Desperdício e Ausência de Reaproveitamento</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">A gestão de resíduos funciona de forma estritamente linear (coletar e afastar/enterrar). Metade do resíduo domiciliar é orgânico e uma grande parcela é reciclável (seco). Ao tratar tudo como "lixo" misturado, o município perde uma oportunidade imensa de gerar renda local e produzir adubo para os quintais.</p>
                                 </div>
                             </div>
                             
-                            {/* Coluna Imagens (Essa sim estica graças ao h-full) */}
-                            <div className="w-[45%] flex flex-col gap-4 h-full">
-                                <div className="flex-1 relative border-2 border-pastel-ink shadow-woodcut bg-pastel-sand overflow-hidden">
-                                    <img src="https://i.postimg.cc/JhWqTh7r/IMG-20250819-WA0013.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                </div>
-                                <div className="flex-1 flex gap-4 min-h-0">
-                                    <div className="w-1/2 relative border-2 border-pastel-ink shadow-woodcut bg-pastel-sand overflow-hidden">
-                                        <img src="https://i.postimg.cc/fbhKHbz1/IMG-20260113-WA0008.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                    </div>
-                                    <div className="w-1/2 relative border-2 border-pastel-ink shadow-woodcut bg-pastel-sand overflow-hidden">
-                                        <img src="https://i.postimg.cc/yY5xHdLj/imagem.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                    </div>
-                                </div>
+                            {/* Pergunta norteadora / Gancho para as diretrizes */}
+                            <div className="bg-pastel-ink p-5 custom-border shadow-woodcut text-center mt-2">
+                                <p className="text-lg font-serif font-bold text-pastel-sand italic">
+                                    "Como transformar o lixo — atualmente um problema crônico de saúde pública e exclusão — em um recurso de geração de renda, inclusão social e sustentabilidade para Novorizonte?"
+                                </p>
                             </div>
                         </div>
                     </section>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 3: O CONTEXTO (Geografia) */}
+                    {/* SLIDE 11: CAPÍTULO 4 - DIRETRIZES */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture">
                         <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
                             <div>
-                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 1</span>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
                                 <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                    <IconLeaf className="w-8 h-8 text-pastel-green"/> O Contexto: Geografia e Clima
+                                    <IconRecycle className="w-8 h-8 text-pastel-green"/> Diretrizes
                                 </h2>
                             </div>
                         </header>
 
-                        <div className="flex-1 flex gap-5 min-h-0 items-center">
-                            {/* Coluna Dados (Wrapper centraliza e abraça apenas a altura necessária) */}
-                            <div className="w-[55%] flex flex-col justify-center">
-                                <div className="bg-white p-6 custom-border shadow-woodcut">
-                                    <p className="text-base font-sans text-pastel-text leading-snug mb-5">
-                                        Novorizonte possui uma dinâmica geográfica rica e desafiadora, marcada pela sua localização estratégica e características climáticas marcantes do semiárido brasileiro.
-                                    </p>
-                                    
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="p-4 custom-border bg-pastel-green/40 flex items-start gap-3">
-                                            <div className="bg-pastel-green custom-border p-1.5 shrink-0"><IconMap className="w-5 h-5"/></div>
-                                            <div>
-                                                <h4 className="font-bold text-pastel-ink font-serif text-base mb-1">Bioma e Relevo</h4>
-                                                <p className="text-xs font-sans text-pastel-text leading-tight">Planalto em área de transição entre o Cerrado e a Mata Atlântica.</p>
-                                            </div>
-                                        </div>
-                                        <div className="p-4 custom-border bg-pastel-peach/40 flex items-start gap-3">
-                                            <div className="bg-pastel-peach custom-border p-1.5 shrink-0"><IconSun className="w-5 h-5"/></div>
-                                            <div>
-                                                <h4 className="font-bold text-pastel-ink font-serif text-base mb-1">Clima</h4>
-                                                <p className="text-xs font-sans text-pastel-text leading-tight">Semiárido brasileiro, impondo desafios com longos períodos de seca.</p>
-                                            </div>
-                                        </div>
-                                        <div className="p-4 custom-border bg-pastel-blue/40 flex items-start gap-3">
-                                            <div className="bg-pastel-blue custom-border p-1.5 shrink-0"><IconDroplets className="w-5 h-5"/></div>
-                                            <div>
-                                                <h4 className="font-bold text-pastel-ink font-serif text-base mb-1">Recursos Hídricos</h4>
-                                                <p className="text-xs font-sans text-pastel-text leading-tight">Forte dependência de poços e barragens para abastecimento.</p>
-                                            </div>
-                                        </div>
-                                        <div className="p-4 custom-border bg-pastel-sand flex items-start gap-3">
-                                            <div className="bg-white custom-border p-1.5 shrink-0"><IconTarget className="w-5 h-5"/></div>
-                                            <div>
-                                                <h4 className="font-bold text-pastel-ink font-serif text-base mb-1">Destaque Local</h4>
-                                                <p className="text-xs font-sans text-pastel-text leading-tight">Tradição na produção de cachaças artesanais de qualidade.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Coluna Imagens */}
-                            <div className="w-[45%] flex flex-col gap-4 h-full">
-                                <div className="flex-1 relative border-2 border-pastel-ink shadow-woodcut overflow-hidden">
-                                    <img src="https://i.postimg.cc/s2Rcn2fR/IMG-20180421-103542037.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                </div>
-                                <div className="flex-1 relative border-2 border-pastel-ink shadow-woodcut overflow-hidden">
-                                    <img src="https://i.postimg.cc/TPX9kP2x/IMG-20250809-151736639.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ========================================================= */}
-                    {/* SLIDE 4: DEMOGRAFIA */}
-                    {/* ========================================================= */}
-                    <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 shrink-0">
-                            <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                <IconUsers className="w-8 h-8 text-pastel-peach"/> Demografia (Censo 2022)
-                            </h2>
-                        </header>
-
-                        <div className="flex-1 flex gap-5 min-h-0 items-center">
-                            {/* Coluna Esquerda: Blocos de Texto (Sem esticar) */}
-                            <div className="w-1/2 flex flex-col gap-6 justify-center">
-                                <div className="flex gap-3 shrink-0">
-                                    <span className="px-3 py-1.5 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase shadow-woodcut-sm">Gentílico: Novorizontino</span>
-                                    <span className="px-3 py-1.5 bg-pastel-sand custom-border text-xs font-bold text-pastel-ink uppercase shadow-woodcut-sm">Aniversário: 21 de Dezembro</span>
-                                </div>
-                                
-                                <div className="grid grid-cols-2 gap-4">
-                                    <InfoBlock title="População Total" value="4.571" subtitle="Habitantes" bgClass="bg-white" />
-                                    <InfoBlock title="Densidade" value="16,83" subtitle="hab./km²" bgClass="bg-white" />
-                                    <InfoBlock title="Urbana vs Rural" value="83% / 17%" subtitle="Distribuição" bgClass="bg-white" />
-                                    <InfoBlock title="Idade Mediana" value="37" subtitle="Anos" bgClass="bg-white" />
-                                </div>
-                            </div>
+                        {/* Flex-1 centralizando os quadros, com largura máxima definida para não esticar muito nas laterais */}
+                        <div className="flex flex-col flex-1 justify-center min-h-0 w-full max-w-5xl mx-auto gap-4">
                             
-                            {/* Coluna Direita: Gráficos e Foto (Estica) */}
-                            <div className="w-1/2 flex flex-col gap-4 h-full">
-                                <div className="flex gap-4 shrink-0 h-44">
-                                    <div className="flex-1 p-3 custom-border bg-white shadow-woodcut-sm border-t-4 border-t-pastel-peach flex flex-col justify-center">
-                                        <h4 className="font-serif font-bold text-pastel-ink text-sm mb-2 text-center">Cor ou Raça</h4>
-                                        <RaceChart />
-                                    </div>
-                                    <div className="flex-1 p-3 custom-border bg-white shadow-woodcut-sm border-t-4 border-t-pastel-blue flex flex-col justify-center">
-                                        <h4 className="font-serif font-bold text-pastel-ink text-sm mb-2 text-center">Pirâmide Etária</h4>
-                                        <PyramidChart />
-                                    </div>
-                                </div>
-                                <div className="flex-1 relative border-2 border-pastel-ink shadow-woodcut overflow-hidden">
-                                    <img src="https://i.postimg.cc/8CVHyCpY/IMG-20260113-WA0006.jpg" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"/>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ========================================================= */}
-                    {/* SLIDE 5: ECONOMIA */}
-                    {/* ========================================================= */}
-                    <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 shrink-0">
-                            <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                <IconTrendingUp className="w-8 h-8 text-pastel-blue"/> Perfil Socioeconômico e Territorial
-                            </h2>
-                        </header>
-
-                        <div className="flex-1 flex flex-col justify-center gap-8 min-h-0">
-                            
-                            <div className="flex gap-4 shrink-0">
-                                {/* Localização */}
-                                <div className="w-1/3 flex flex-col gap-4">
-                                    <div className="p-3 custom-border bg-pastel-sand flex items-center gap-3 shadow-woodcut-sm">
-                                        <div className="w-10 h-10 shrink-0 bg-white custom-border flex items-center justify-center"><IconMapPin className="w-5 h-5"/></div>
-                                        <div>
-                                            <div className="text-[10px] font-bold uppercase text-pastel-ink/60">Localização</div>
-                                            <div className="text-base font-bold text-pastel-ink leading-tight">Norte de Minas</div>
-                                        </div>
-                                    </div>
-                                    <div className="p-3 custom-border bg-pastel-blue/40 flex items-center gap-3 shadow-woodcut-sm">
-                                        <div className="w-10 h-10 shrink-0 bg-white custom-border flex items-center justify-center"><IconDroplets className="w-5 h-5"/></div>
-                                        <div>
-                                            <div className="text-[10px] font-bold uppercase text-pastel-ink/60">Hidrografia</div>
-                                            <div className="text-base font-bold text-pastel-ink leading-tight">Rio Jequitinhonha</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Composição */}
-                                <div className="w-2/3 p-4 custom-border bg-white shadow-woodcut border-l-8 border-l-pastel-green flex flex-col justify-center">
-                                    <h4 className="font-serif font-bold text-pastel-ink text-xl mb-3">Composição do Território</h4>
-                                    <div className="grid grid-cols-2 gap-y-3 gap-x-6">
-                                        <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 2 Distritos (Sede e Campo Verde)</span>
-                                        <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 4 Povoados principais</span>
-                                        <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> 26 Fazendas na área rural</span>
-                                        <span className="flex items-center gap-2 text-sm font-bold text-pastel-text"><span className="w-2 h-2 rounded-full bg-pastel-ink block"></span> Povos Tradicionais Geraizeiros</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            {/* Cards de Estatísticas com altura fixada pelas suas classes e grids */}
-                            <div className="flex gap-4 shrink-0">
-                                <div className="grid grid-cols-3 gap-4 w-full">
-                                    <StatCard title="PIB per Capita" value="R$ 20.256" subtitle="Crescimento (2012-2023)" data={[5, 6, 7, 8, 10, 11, 13, 19, 20.2]} color="#2B2624" />
-                                    <StatCard title="Mortalidade Inf." value="0" subtitle="Óbitos/mil nv (08-23)" data={[10, 14, 14, 44, 28, 20, 32, 20, 14, 18, 21, 20, 0]} color="#2B2624" maxVal={50}/>
-                                    <StatCard title="IDEB (Anos Finais)" value="4,6" subtitle="Rede Pública (05-23)" data={[2, 3, 4, 4, 4, 4, 4, 4, 5, 4.6]} color="#2B2624" maxVal={6}/>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </section>
-
-                    {/* ========================================================= */}
-                    {/* SLIDE 6: A JUSTIFICATIVA */}
-                    {/* ========================================================= */}
-                    <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
-                            <div>
-                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 2</span>
-                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                    <IconTarget className="w-8 h-8 text-pastel-alert"/> A Justificativa: Qual é o problema?
-                                </h2>
-                            </div>
-                        </header>
-
-                        {/* Alterado para que as caixas fiquem centralizadas e apenas com o tamanho do texto */}
-                        <div className="flex flex-col flex-1 justify-center min-h-0">
-                            <div className="flex gap-4 items-stretch">
-                                
-                                <div className="flex-1 bg-white p-6 custom-border shadow-woodcut flex flex-col relative overflow-hidden group hover:bg-pastel-peach/10 transition-colors">
-                                    <div className="absolute -top-4 -right-4 text-8xl font-bold text-pastel-peach/20 font-serif z-0 transition-transform group-hover:scale-110">1</div>
-                                    <div className="z-10 flex flex-col">
-                                        <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-peach pb-2">Déficits nos Eixos</h3>
-                                        <p className="text-sm font-sans text-pastel-text leading-snug text-justify mb-4">A ausência ou ineficiência na prestação de serviços adequados nos quatro eixos estruturais: abastecimento de água, esgotamento sanitário, limpeza urbana/resíduos e drenagem. O cenário exige dimensionamento urgente de infraestrutura rural e urbana.</p>
-                                        <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2 mt-auto"><strong>Ref:</strong> Produto D - Prognóstico do Saneamento Básico.</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex-1 bg-white p-6 custom-border shadow-woodcut flex flex-col relative overflow-hidden group hover:bg-pastel-blue/10 transition-colors">
-                                    <div className="absolute -top-4 -right-4 text-8xl font-bold text-pastel-blue/20 font-serif z-0 transition-transform group-hover:scale-110">2</div>
-                                    <div className="z-10 flex flex-col">
-                                        <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-blue pb-2">Exclusão e Universalização</h3>
-                                        <p className="text-sm font-sans text-pastel-text leading-snug text-justify mb-4">A necessidade imperativa de garantir que o saneamento alcance a todos, priorizando populações e grupos historicamente excluídos do acesso ao básico, visando a universalização dos serviços e diminuição das desigualdades socioterritoriais.</p>
-                                        <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2 mt-auto"><strong>Ref:</strong> Resumo Executivo (Apresentação SanBas).</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex-1 bg-white p-6 custom-border shadow-woodcut flex flex-col relative overflow-hidden group hover:bg-pastel-green/10 transition-colors">
-                                    <div className="absolute -top-4 -right-4 text-8xl font-bold text-pastel-green/20 font-serif z-0 transition-transform group-hover:scale-110">3</div>
-                                    <div className="z-10 flex flex-col">
-                                        <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-green pb-2">Sustentabilidade e Riscos</h3>
-                                        <p className="text-sm font-sans text-pastel-text leading-snug text-justify mb-4">A formulação de projetos é dificultada pela vulnerabilidade ambiental (longos períodos de seca). O grande desafio é estruturar metas que englobem educação, convivência com o semiárido e recuperação de mananciais hídricos essenciais.</p>
-                                        <p className="text-[10px] text-pastel-ink/70 italic border-t border-pastel-ink/10 pt-2 mt-auto"><strong>Ref:</strong> Produto E - Programas, Projetos e Ações.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ========================================================= */}
-                    {/* SLIDE 7: A METODOLOGIA (Cartografia) */}
-                    {/* ========================================================= */}
-                    <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
-                            <div>
-                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 3</span>
-                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                    <IconBookOpen className="w-8 h-8 text-pastel-green"/> O Processo: Cartografia e Amostragem
-                                </h2>
-                            </div>
-                        </header>
-
-                        <div className="flex-1 flex gap-5 min-h-0">
-                            
-                            {/* MAPA */}
-                            <div className="relative w-[50%] h-full custom-border bg-pastel-sand shadow-woodcut overflow-hidden shrink-0">
-                                <img src="https://i.postimg.cc/yY5xHdLj/imagem.jpg" alt="Mapa" className="w-full h-full object-cover mix-blend-multiply opacity-90" />
-                                
-                                {/* Marcadores */}
-                                <div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-3 py-1.5 shadow-woodcut-sm flex flex-col items-center mb-1 scale-110">
-                                        <span className="text-[10px] font-bold font-serif text-pastel-ink uppercase flex items-center gap-1"><IconMapPin className="w-3 h-3"/> Novorizonte</span>
-                                        <span className="text-sm font-bold bg-pastel-green/50 px-2 mt-1 custom-border">94,29%</span>
-                                    </div>
-                                    <div className="w-0.5 h-6 bg-pastel-ink"></div>
-                                    <div className="w-2 h-2 rounded-full bg-pastel-ink"></div>
-                                </div>
-
-                                <div className="absolute top-[25%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-1">
-                                        <span className="text-[9px] font-bold font-serif text-pastel-ink uppercase">Cambaúba</span>
-                                        <span className="text-xs font-bold bg-pastel-peach/50 px-2 mt-1 custom-border">2,86%</span>
-                                    </div>
-                                    <div className="w-0.5 h-4 bg-pastel-ink"></div>
-                                    <div className="w-1.5 h-1.5 rounded-full bg-pastel-ink"></div>
-                                </div>
-
-                                <div className="absolute top-[70%] left-[70%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="bg-white custom-border px-2 py-1 shadow-woodcut-sm flex flex-col items-center mb-1">
-                                        <span className="text-[9px] font-bold font-serif text-pastel-ink uppercase">Campo Verde</span>
-                                        <span className="text-xs font-bold bg-pastel-blue/50 px-2 mt-1 custom-border">2,86%</span>
-                                    </div>
-                                    <div className="w-0.5 h-4 bg-pastel-ink"></div>
-                                    <div className="w-1.5 h-1.5 rounded-full bg-pastel-ink"></div>
-                                </div>
-                            </div>
-
-                            {/* LEITURA CRÍTICA (Caixas dimensionadas para o texto) */}
-                            <div className="w-[50%] flex flex-col justify-center gap-6 min-h-0">
-                                <div className="bg-white p-5 custom-border shadow-woodcut flex flex-col">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-xl mb-3 border-b-2 border-pastel-ink pb-2 flex items-center gap-2">
-                                        <IconAlertCircle className="w-5 h-5 text-pastel-alert"/> Leitura Crítica da Amostra
-                                    </h5>
-                                    <div className="space-y-3">
-                                        <div>
-                                            <strong className="text-pastel-ink font-sans text-sm block mb-0.5">1. Amostra concentrada</strong>
-                                            <p className="text-xs text-pastel-text font-sans">A pesquisa é praticamente um retrato exclusivo da sede. Outras comunidades são estatisticamente irrelevantes.</p>
-                                        </div>
-                                        <div>
-                                            <strong className="text-pastel-ink font-sans text-sm block mb-0.5">2. Baixa diversidade territorial</strong>
-                                            <p className="text-xs text-pastel-text font-sans">Essa limitação não permite comparação entre territórios e mascara possíveis desigualdades intraurbanas e rurais.</p>
-                                        </div>
-                                        <div>
-                                            <strong className="text-pastel-ink font-sans text-sm block mb-0.5">3. Problema na execução</strong>
-                                            <p className="text-xs text-pastel-text font-sans">Indica coleta por conveniência/proximidade e falha no planejamento de alcance da mobilização.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-pastel-peach/20 p-5 custom-border border-l-8 border-l-pastel-alert shadow-woodcut flex flex-col">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-base mb-2">📌 Síntese Diagnóstica</h5>
-                                    <p className="text-sm text-pastel-text font-sans leading-snug italic text-justify">
-                                        "Isso evidencia uma grave limitação espacial da pesquisa oficial, fazendo com que os resultados representem predominantemente a realidade de uma única comunidade, mascarando e subnotificando o déficit estrutural do restante do município, especialmente nas zonas rurais."
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-green/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-green custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">1</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-green pb-1 inline-block">Atender à realidade local do descarte e da coleta</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        Organizar a coleta de resíduos de forma compatível com o cotidiano de Novorizonte, reduzindo o descarte irregular que dificulta a limpeza urbana e prejudica o funcionamento da coleta.
                                     </p>
                                 </div>
                             </div>
+
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-peach/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-peach custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">2</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-peach pb-1 inline-block">Criar um espaço comunitário de gestão de resíduos</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        Planejar e construir a estação de tratamento junto aos moradores, transformando-a em um bem comum voltado ao convívio e à geração de renda local.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-blue/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-blue custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">3</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-blue pb-1 inline-block">Capacitar a população para gerir o próprio trabalho</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        Oferecer formação técnica e organizacional para que os moradores possam separar, administrar e gerir os resíduos de forma autônoma, fortalecendo cooperativas locais.
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 8: PESQUISAS (Parte 1) */}
+                    {/* SLIDE 12: DIAGRAMA DE METABOLISMO URBANO */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 shrink-0">
-                            <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                <IconPieChart className="w-8 h-8 text-pastel-blue"/> O Processo: Coleta de Dados
-                            </h2>
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-2 flex justify-between items-end shrink-0">
+                            <div>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconLeaf className="w-8 h-8 text-pastel-green"/> Economia Circular: O Metabolismo Urbano
+                                </h2>
+                            </div>
+                        </header>
+                        
+                        <div className="flex-1 flex justify-center items-center relative w-full mt-2">
+                            {/* Container do Diagrama */}
+                            <div className="relative w-[1000px] h-[500px]">
+                                
+                                {/* SETAS SVG DE CONEXÃO (Ciclo Contínuo) */}
+                                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 500">
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+                                            <polygon points="0 0, 6 3, 0 6" fill="#4A4440"/>
+                                        </marker>
+                                    </defs>
+                                    {/* Top -> Right */}
+                                    <path d="M 598 76 A 380 180 0 0 1 867 203" fill="none" stroke="#4A4440" strokeWidth="3" strokeDasharray="8 8" markerEnd="url(#arrowhead)"/>
+                                    {/* Right -> Bottom */}
+                                    <path d="M 867 296 A 380 180 0 0 1 598 423" fill="none" stroke="#4A4440" strokeWidth="3" strokeDasharray="8 8" markerEnd="url(#arrowhead)"/>
+                                    {/* Bottom -> Left */}
+                                    <path d="M 402 423 A 380 180 0 0 1 133 296" fill="none" stroke="#4A4440" strokeWidth="3" strokeDasharray="8 8" markerEnd="url(#arrowhead)"/>
+                                    {/* Left -> Top */}
+                                    <path d="M 133 203 A 380 180 0 0 1 402 76" fill="none" stroke="#4A4440" strokeWidth="3" strokeDasharray="8 8" markerEnd="url(#arrowhead)"/>
+                                </svg>
+
+                                {/* CENTRO: O Organismo */}
+                                <div className="absolute top-[250px] left-[500px] transform -translate-x-1/2 -translate-y-1/2 z-10 w-40 h-40 rounded-full bg-pastel-sand custom-border shadow-woodcut flex flex-col items-center justify-center text-center p-2">
+                                    <IconRecycle className="w-10 h-10 text-pastel-ink mb-2"/>
+                                    <span className="font-serif font-bold text-pastel-ink leading-tight text-base">Novorizonte<br/>Vivo</span>
+                                </div>
+
+                                {/* NÓ 1: Top (Geração) */}
+                                <div className="absolute top-[70px] left-[500px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-peach/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-peach custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconUsers className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-base mb-1 mt-2 border-b-2 border-pastel-peach pb-1 w-full">1. Casas (Geração)</h4>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-tight mt-1">O resíduo da casa deixa de ser "lixo" escondido e vira recurso da comunidade.</p>
+                                </div>
+
+                                {/* NÓ 2: Right (Coleta) */}
+                                <div className="absolute top-[250px] left-[880px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-blue/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-blue custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconMap className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-base mb-1 mt-2 border-b-2 border-pastel-blue pb-1 w-full">2. Coleta e Triagem</h4>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-tight mt-1">Trabalhadores locais separam orgânicos e secos com dignidade.</p>
+                                </div>
+
+                                {/* NÓ 3: Bottom (Tratamento) */}
+                                <div className="absolute top-[430px] left-[500px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-green/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-green custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconLeaf className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-base mb-1 mt-2 border-b-2 border-pastel-green pb-1 w-full">3. Estação de Tratamento</h4>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-tight mt-1">O Pátio de Compostagem processa a matéria, transformando o resto localmente.</p>
+                                </div>
+
+                                {/* NÓ 4: Left (Retorno/Alimento) */}
+                                <div className="absolute top-[250px] left-[120px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-sand/50 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-white custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconTrendingUp className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-base mb-1 mt-2 border-b-2 border-pastel-ink pb-1 w-full">4. Adubo e Renda</h4>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-tight mt-1">O ciclo fecha: o adubo vira alimento nos quintais, e a reciclagem gera renda direta.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ========================================================= */}
+                    {/* SLIDE 13: CAPÍTULO 4 - AÇÕES PRÁTICAS */}
+                    {/* ========================================================= */}
+                    <section className="ppt-slide map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
+                            <div>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconTarget className="w-8 h-8 text-pastel-alert"/> Ações: A intervenção prática no território
+                                </h2>
+                            </div>
                         </header>
 
-                        {/* Centraliza as caixas verticais e impede de esticar até o fim da página */}
-                        <div className="flex flex-col justify-center flex-1 min-h-0">
-                            <div className="grid grid-cols-2 gap-6 w-full items-stretch">
+                        <div className="flex-1 grid grid-cols-3 gap-5 items-stretch justify-center min-h-0 w-full max-w-6xl mx-auto">
+                            
+                            {/* Ação 1 */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex flex-col group hover:bg-pastel-green/10 transition-colors relative overflow-hidden h-full">
+                                <div className="absolute -top-4 -right-4 text-[120px] leading-none font-bold text-pastel-green/20 font-serif z-0 transition-transform group-hover:scale-110">1</div>
+                                <div className="z-10 relative flex flex-col h-full">
+                                    <div className="bg-pastel-green custom-border shadow-woodcut-sm w-10 h-10 flex items-center justify-center mb-4 shrink-0">
+                                        <IconMap className="w-5 h-5 text-pastel-ink" />
+                                    </div>
+                                    <div className="text-[10px] font-bold uppercase tracking-wider text-pastel-ink/60 mb-1">Descarte e Coleta</div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-green pb-2">Cartografia Sensível e Rotas Alternativas</h3>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-relaxed text-justify">
+                                        Caminhar pela comunidade o com os moradores para mapear as rugosidades do terreno (ruas de terra, ladeiras, becos onde o caminhão convencional não entra). A partir disso, desenhar com eles rotas para veículos alternativos (carrinhos, triciclos), garantindo que a coleta se adapte à vida real de Novorizonte e zere os pontos de descarte irregular.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Ação 2 */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex flex-col group hover:bg-pastel-peach/10 transition-colors relative overflow-hidden h-full">
+                                <div className="absolute -top-4 -right-4 text-[120px] leading-none font-bold text-pastel-peach/20 font-serif z-0 transition-transform group-hover:scale-110">2</div>
+                                <div className="z-10 relative flex flex-col h-full">
+                                    <div className="bg-pastel-peach custom-border shadow-woodcut-sm w-10 h-10 flex items-center justify-center mb-4 shrink-0">
+                                        <IconUsers className="w-5 h-5 text-pastel-ink" />
+                                    </div>
+                                    <div className="text-[10px] font-bold uppercase tracking-wider text-pastel-ink/60 mb-1">Espaço Comunitário</div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-peach pb-2">Oficinas de "Lugar Comum" e Autoconstrução</h3>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-relaxed text-justify">
+                                        Realizar encontros onde a comunidade desenha o projeto da estação de tratamento. Não será apenas um galpão fechado, mas um espaço vivo na trama urbana da cidade, que pode incluir uma praça anexa, uma horta comunitária ou um espaço de convivência, tornando-o atraente e seguro para quem mora no entorno.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Ação 3 */}
+                            <div className="bg-white p-6 custom-border shadow-woodcut flex flex-col group hover:bg-pastel-blue/10 transition-colors relative overflow-hidden h-full">
+                                <div className="absolute -top-4 -right-4 text-[120px] leading-none font-bold text-pastel-blue/20 font-serif z-0 transition-transform group-hover:scale-110">3</div>
+                                <div className="z-10 relative flex flex-col h-full">
+                                    <div className="bg-pastel-blue custom-border shadow-woodcut-sm w-10 h-10 flex items-center justify-center mb-4 shrink-0">
+                                        <IconBookOpen className="w-5 h-5 text-pastel-ink" />
+                                    </div>
+                                    <div className="text-[10px] font-bold uppercase tracking-wider text-pastel-ink/60 mb-1">Capacitação</div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-3 border-b-2 border-pastel-blue pb-2">O Canteiro-Escola</h3>
+                                    <p className="text-[13px] font-sans text-pastel-text leading-relaxed text-justify">
+                                        Transformar o próprio período de construção da estação em um espaço de ensino. Enquanto o espaço físico é erguido, os moradores de Novorizonte recebem aulas no próprio local sobre como organizar uma cooperativa, como fazer a triagem segura dos resíduos e como gerir o dinheiro gerado pela venda e tratamento do lixo.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    {/* ========================================================= */}
+                    {/* SLIDE 14: STORYBOARD / BANDA DESENHADA */}
+                    {/* ========================================================= */}
+                    <section className="ppt-slide map-texture">
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
+                            <div>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconUsers className="w-8 h-8 text-pastel-ink"/> Storyboard do Cotidiano: O Antes e Depois
+                                </h2>
+                            </div>
+                        </header>
+
+                        <div className="flex-1 flex flex-col justify-center min-h-0 w-full max-w-6xl mx-auto mt-2">
+                            {/* Grade de Quadrinhos (HQ) */}
+                            <div className="grid grid-cols-4 gap-4 bg-white p-4 custom-border shadow-woodcut relative overflow-hidden h-[400px]">
                                 
-                                {/* Perfil */}
-                                <div className="bg-white p-6 custom-border shadow-woodcut flex flex-col justify-between h-full">
-                                    <div>
-                                        <h5 className="font-serif font-bold text-pastel-ink text-xl mb-4 border-b-2 border-pastel-ink pb-2">📊 1. Perfil dos Respondentes</h5>
-                                        
-                                        <div className="mb-4">
-                                            <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-3 tracking-widest">Faixa Etária</div>
-                                            <MiniBar label="16 a 24 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-24" />
-                                            <MiniBar label="25 a 34 anos" percent={23.08} colorClass="bg-pastel-blue" width="w-24" />
-                                            <MiniBar label="35 a 44 anos" percent={7.69} colorClass="bg-pastel-blue" width="w-24" />
-                                            <MiniBar label="45 a 59 anos" percent={30.77} colorClass="bg-pastel-blue" width="w-24" />
-                                            <MiniBar label="60+ anos" percent={15.38} colorClass="bg-pastel-blue" width="w-24" />
-                                        </div>
+                                {/* Fundo sutil quadriculado estilo HQ */}
+                                <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '10px 10px'}}></div>
+
+                                {/* QUADRO 1: ANTES (Problema) */}
+                                <div className="col-span-1 border-4 border-pastel-ink bg-pastel-alert/10 relative flex flex-col p-3 z-10 group hover:-translate-y-1 transition-transform">
+                                    <div className="absolute -top-3 -left-3 bg-white border-2 border-pastel-ink px-2 py-0.5 text-xs font-bold shadow-woodcut-sm z-20">1. O Antes</div>
+                                    
+                                    {/* Ilustração Vetorial Simplificada */}
+                                    <div className="flex-1 flex items-end justify-center mb-3">
+                                        <svg viewBox="0 0 100 100" className="w-full h-32">
+                                            {/* Rua/Chão sujo */}
+                                            <path d="M10 90 L90 90" stroke="#4A4440" strokeWidth="2" />
+                                            {/* Pilha de lixo */}
+                                            <path d="M40 90 L30 60 L50 40 L70 60 L60 90 Z" fill="#D49A89" stroke="#2B2624" strokeWidth="2" />
+                                            <circle cx="35" cy="80" r="5" fill="#fff" stroke="#2B2624" />
+                                            <path d="M60 70 L75 80" stroke="#2B2624" strokeWidth="2" />
+                                            {/* Personagem triste/Preocupado */}
+                                            <circle cx="20" cy="50" r="10" fill="#E8C3B3" stroke="#2B2624" strokeWidth="2" />
+                                            <path d="M15 48 Q20 45 25 48" fill="none" stroke="#2B2624" />
+                                            <path d="M17 55 Q20 52 23 55" fill="none" stroke="#2B2624" />
+                                            <path d="M20 60 L20 90" stroke="#2B2624" strokeWidth="2" />
+                                        </svg>
                                     </div>
                                     
-                                    <div className="grid grid-cols-2 gap-4 border-t border-pastel-ink/20 pt-4 mt-4">
-                                        <div>
-                                            <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-3 tracking-widest">Gênero</div>
-                                            <MiniBar label="Mulher" percent={76.92} colorClass="bg-pastel-peach" width="w-12" />
-                                            <MiniBar label="Homem" percent={23.08} colorClass="bg-pastel-sand" width="w-12" />
-                                        </div>
-                                        <div>
-                                            <div className="text-[10px] font-bold text-pastel-ink/60 uppercase mb-3 tracking-widest">Renda Familiar</div>
-                                            <MiniBar label="Até 1 SM" percent={7.69} colorClass="bg-pastel-green" width="w-16" />
-                                            <MiniBar label="1 a 3 SM" percent={76.92} colorClass="bg-pastel-green" width="w-16" />
-                                            <MiniBar label="> 3 SM" percent={15.38} colorClass="bg-pastel-green" width="w-16" />
-                                        </div>
+                                    <div className="bg-white border-2 border-pastel-ink p-2 text-[11px] font-sans text-pastel-ink text-center leading-tight shadow-sm mt-auto">
+                                        Sem opção, o morador descarta resíduos na esquina. O caminhão não entra na rua de terra, gerando acúmulo e doenças.
                                     </div>
                                 </div>
 
-                                {/* Participação */}
-                                <div className="bg-white p-6 custom-border shadow-woodcut flex flex-col justify-between h-full">
-                                    <div>
-                                        <h5 className="font-serif font-bold text-pastel-ink text-xl mb-4 border-b-2 border-pastel-ink pb-2">📊 2. Conhecimento e Participação</h5>
-                                        
-                                        <div className="grid grid-cols-2 gap-4 mb-6">
-                                            <HighlightBox title="Conhece o Plano?" value="53%" subtitle="Dizem que Sim" color="bg-pastel-sand" />
-                                            <HighlightBox title="Escuta da Prefeit." value="84%" subtitle="Não sabe / Não viu" color="bg-pastel-sand" />
-                                        </div>
+                                {/* Seta de Transição */}
+                                <div className="absolute top-1/2 left-[25%] transform -translate-x-1/2 -translate-y-1/2 z-20">
+                                    <div className="bg-pastel-ink text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">➔</div>
+                                </div>
+
+                                {/* QUADRO 2: TRANSIÇÃO (Reunião) */}
+                                <div className="col-span-1 border-4 border-pastel-ink bg-pastel-sand/30 relative flex flex-col p-3 z-10 group hover:-translate-y-1 transition-transform">
+                                    <div className="absolute -top-3 -left-3 bg-white border-2 border-pastel-ink px-2 py-0.5 text-xs font-bold shadow-woodcut-sm z-20">2. A Escuta</div>
+                                    
+                                    {/* Ilustração Vetorial Simplificada */}
+                                    <div className="flex-1 flex items-end justify-center mb-3">
+                                        <svg viewBox="0 0 100 100" className="w-full h-32">
+                                            {/* Mesa Redonda e Pessoas */}
+                                            <ellipse cx="50" cy="80" rx="40" ry="15" fill="#F2E8D3" stroke="#2B2624" strokeWidth="2" />
+                                            <circle cx="25" cy="50" r="8" fill="#E8C3B3" stroke="#2B2624" strokeWidth="2" />
+                                            <circle cx="50" cy="40" r="8" fill="#B9D2D0" stroke="#2B2624" strokeWidth="2" />
+                                            <circle cx="75" cy="50" r="8" fill="#CDE0C0" stroke="#2B2624" strokeWidth="2" />
+                                            {/* Balão de fala */}
+                                            <path d="M40 30 C30 10 70 10 60 30 L50 35 Z" fill="#fff" stroke="#2B2624" strokeWidth="1.5" />
+                                            <path d="M45 20 L55 20" stroke="#2B2624" />
+                                            <path d="M48 25 L52 25" stroke="#2B2624" />
+                                        </svg>
                                     </div>
 
-                                    {/* Mantido com mt-auto para alinhar abaixo e preencher o card do mesmo tamanho do perfil */}
-                                    <div className="bg-pastel-alert p-6 custom-border text-center shadow-woodcut flex flex-col justify-center h-48 mt-auto">
-                                        <div className="text-sm font-bold text-white uppercase tracking-widest mb-3">Convidados para Reuniões?</div>
-                                        <div className="text-6xl font-serif font-bold text-white mb-3 drop-shadow-md">100% NÃO</div>
-                                        <div className="text-sm font-sans font-bold text-white bg-black/20 py-2 custom-border inline-block mx-auto px-4">Dado crítico: zero participação institucional</div>
+                                    <div className="bg-white border-2 border-pastel-ink p-2 text-[11px] font-sans text-pastel-ink text-center leading-tight shadow-sm mt-auto">
+                                        Oficina de "Lugar Comum". A comunidade é ouvida e ajuda a mapear rotas acessíveis para triciclos de coleta.
                                     </div>
                                 </div>
 
+                                {/* Seta de Transição */}
+                                <div className="absolute top-1/2 left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-20">
+                                    <div className="bg-pastel-ink text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">➔</div>
+                                </div>
+
+                                {/* QUADRO 3: AÇÃO (Canteiro-Escola) */}
+                                <div className="col-span-1 border-4 border-pastel-ink bg-pastel-blue/10 relative flex flex-col p-3 z-10 group hover:-translate-y-1 transition-transform">
+                                    <div className="absolute -top-3 -left-3 bg-white border-2 border-pastel-ink px-2 py-0.5 text-xs font-bold shadow-woodcut-sm z-20">3. Ação Prática</div>
+                                    
+                                    {/* Ilustração Vetorial Simplificada */}
+                                    <div className="flex-1 flex items-end justify-center mb-3">
+                                        <svg viewBox="0 0 100 100" className="w-full h-32">
+                                            {/* Tijolos subindo (Construção) */}
+                                            <rect x="20" y="70" width="20" height="10" fill="#D49A89" stroke="#2B2624" strokeWidth="1.5"/>
+                                            <rect x="40" y="70" width="20" height="10" fill="#D49A89" stroke="#2B2624" strokeWidth="1.5"/>
+                                            <rect x="30" y="60" width="20" height="10" fill="#D49A89" stroke="#2B2624" strokeWidth="1.5"/>
+                                            <rect x="20" y="80" width="60" height="10" fill="#D49A89" stroke="#2B2624" strokeWidth="1.5"/>
+                                            {/* Personagem trabalhando */}
+                                            <circle cx="70" cy="50" r="10" fill="#E8C3B3" stroke="#2B2624" strokeWidth="2" />
+                                            {/* Capacete */}
+                                            <path d="M60 50 A 10 10 0 0 1 80 50 Z" fill="#F2E8D3" stroke="#2B2624" strokeWidth="1.5"/>
+                                            <path d="M70 60 L70 80" stroke="#2B2624" strokeWidth="2" />
+                                            <path d="M60 65 L70 60 L80 65" fill="none" stroke="#2B2624" strokeWidth="2"/>
+                                        </svg>
+                                    </div>
+
+                                    <div className="bg-white border-2 border-pastel-ink p-2 text-[11px] font-sans text-pastel-ink text-center leading-tight shadow-sm mt-auto">
+                                        Durante a obra da estação, o <strong>Canteiro-Escola</strong> entra em ação. Moradores aprendem a construir e a fazer triagem segura.
+                                    </div>
+                                </div>
+
+                                {/* Seta de Transição */}
+                                <div className="absolute top-1/2 left-[75%] transform -translate-x-1/2 -translate-y-1/2 z-20">
+                                    <div className="bg-pastel-ink text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">➔</div>
+                                </div>
+
+                                {/* QUADRO 4: DEPOIS (Renda e Gestão) */}
+                                <div className="col-span-1 border-4 border-pastel-ink bg-pastel-green/20 relative flex flex-col p-3 z-10 group hover:-translate-y-1 transition-transform">
+                                    <div className="absolute -top-3 -left-3 bg-white border-2 border-pastel-ink px-2 py-0.5 text-xs font-bold shadow-woodcut-sm z-20">4. O Depois</div>
+                                    
+                                    {/* Ilustração Vetorial Simplificada */}
+                                    <div className="flex-1 flex items-end justify-center mb-3">
+                                        <svg viewBox="0 0 100 100" className="w-full h-32">
+                                            {/* Estação funcionando */}
+                                            <polygon points="10,60 50,30 90,60" fill="#F2E8D3" stroke="#2B2624" strokeWidth="2"/>
+                                            <rect x="20" y="60" width="60" height="30" fill="#fff" stroke="#2B2624" strokeWidth="2"/>
+                                            <rect x="40" y="70" width="20" height="20" fill="#2B2624" />
+                                            {/* Símbolo de Reciclagem / Dinheiro */}
+                                            <circle cx="50" cy="15" r="12" fill="#CDE0C0" stroke="#2B2624" strokeWidth="1.5" />
+                                            <path d="M45 15 L55 15" stroke="#2B2624" strokeWidth="1.5"/>
+                                            <path d="M50 10 L50 20" stroke="#2B2624" strokeWidth="1.5"/>
+                                            {/* Personagem feliz */}
+                                            <circle cx="20" cy="70" r="8" fill="#E8C3B3" stroke="#2B2624" strokeWidth="1.5" />
+                                            <path d="M17 72 Q20 75 23 72" fill="none" stroke="#2B2624" />
+                                        </svg>
+                                    </div>
+
+                                    <div className="bg-white border-2 border-pastel-ink p-2 text-[11px] font-sans text-pastel-ink text-center leading-tight shadow-sm mt-auto">
+                                        O morador agora é cooperado. O "lixo" virou renda formalizada, garantindo saúde para a cidade e dignidade financeira.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 9: PERCEPÇÃO E COTIDIANO */}
+                    {/* SLIDE 15: CAPÍTULO 4 - INSTRUMENTOS */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 shrink-0">
-                            <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                <IconPieChart className="w-8 h-8 text-pastel-blue"/> Percepção vs Realidade Cotidiana
-                            </h2>
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 flex justify-between items-end shrink-0">
+                            <div>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconBookOpen className="w-8 h-8 text-pastel-blue"/> Instrumentos Urbanísticos: A garantia legal e política
+                                </h2>
+                            </div>
                         </header>
 
-                        {/* Flex-1 com items-center não deixa as caixas esticarem verticalmente */}
-                        <div className="flex-1 flex gap-5 min-h-0 items-center">
+                        <div className="flex flex-col flex-1 justify-center min-h-0 w-full max-w-5xl mx-auto gap-4">
                             
-                            {/* Melhorias e Promessas */}
-                            <div className="w-[45%] flex flex-col gap-6">
-                                <div className="bg-white p-5 custom-border shadow-woodcut flex flex-col justify-center">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4">📊 3. Percepção de Melhoria</h5>
-                                    <div className="mb-4">
-                                        <MiniBar label="Água" percent={80} valStr="> 80%" colorClass="bg-pastel-blue" width="w-20" />
-                                        <MiniBar label="Esgoto" percent={10} valStr="Baixo" colorClass="bg-pastel-sand" width="w-20" />
-                                        <MiniBar label="Drenagem" percent={2} valStr="Nulo" colorClass="bg-pastel-sand" width="w-20" />
-                                    </div>
-                                    <p className="text-xs font-sans text-pastel-text italic bg-pastel-bg p-2.5 custom-border">👉 A água chegou, mas o saneamento não está completo.</p>
-                                </div>
-                                
-                                <div className="bg-white p-5 custom-border shadow-woodcut border-l-8 border-l-pastel-alert flex flex-col justify-center">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4">📊 4. Prometido e NÃO Feito</h5>
-                                    <div className="mb-4">
-                                        <MiniBar label="Esgoto" percent={50} valStr="~ 50%" colorClass="bg-pastel-alert" width="w-24" />
-                                        <MiniBar label="Tratamento" percent={30} valStr="Frequente" colorClass="bg-pastel-peach" width="w-24" />
-                                        <MiniBar label="Aterro/Lixo" percent={10} valStr="Pouco" colorClass="bg-pastel-sand" width="w-24" />
-                                    </div>
-                                    <p className="text-xs font-sans font-bold text-pastel-ink italic bg-pastel-alert/20 p-2.5 custom-border">👉 Síntese: O grande déficit cobrado é o ESGOTO.</p>
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-blue/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-blue custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">1</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-blue pb-1 inline-block">Revisão do Plano Municipal de Saneamento Básico (PMSB)</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        Utilizar a lei para obrigar a prefeitura de Novorizonte a revisar o PMSB (já que 100% da população relatou que não foi ouvida antes). Essa revisão deve aprovar e institucionalizar as "rotas alternativas de coleta" criadas pelos moradores, transformando-as em serviço público oficial.
+                                    </p>
                                 </div>
                             </div>
 
-                            {/* Problemas Cotidianos */}
-                            <div className="w-[55%] bg-white p-6 custom-border shadow-woodcut flex flex-col justify-center">
-                                <h5 className="font-serif font-bold text-pastel-ink text-xl mb-6 border-b-2 border-pastel-ink pb-2">📊 O Cotidiano Precário</h5>
-                                
-                                <div className="space-y-6">
-                                    <div>
-                                        <div className="text-sm font-bold font-sans text-pastel-ink mb-2 flex justify-between">
-                                            <span>Solução para Esgoto (S/ Rede)</span> 
-                                            <span className="text-pastel-alert">Fossa (61,5%)</span>
-                                        </div>
-                                        <div className="w-full h-5 bg-pastel-sand custom-border overflow-hidden mb-1.5"><div className="h-full bg-pastel-alert w-[61.54%]"></div></div>
-                                        <p className="text-xs text-pastel-text">Forte presença de soluções individuais precárias por falta de rede estrutural.</p>
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-bold font-sans text-pastel-ink mb-2 flex justify-between">
-                                            <span>Lixo Atrasado</span> 
-                                            <span className="text-pastel-peach">Rua / Guarda (61,5%)</span>
-                                        </div>
-                                        <div className="w-full h-5 bg-pastel-sand custom-border overflow-hidden mb-1.5"><div className="h-full bg-pastel-peach w-[61.5%]"></div></div>
-                                        <p className="text-xs text-pastel-text">Comportamento heterogêneo; 30% descarta de forma irregular e inadequada.</p>
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-bold font-sans text-pastel-ink mb-2 flex justify-between">
-                                            <span>Alagamentos / Lama</span> 
-                                            <span className="text-pastel-blue">Nenhuma (61,5%)</span>
-                                        </div>
-                                        <div className="w-full h-5 bg-pastel-sand custom-border overflow-hidden mb-1.5"><div className="h-full bg-pastel-blue w-[61.54%]"></div></div>
-                                        <p className="text-xs text-pastel-text">Ausência total de resposta do poder público onde o problema de drenagem ocorre.</p>
-                                    </div>
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-peach/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-peach custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">2</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-peach pb-1 inline-block">Concessão de Direito Real de Uso (CDRU) em ZEIS</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        A prefeitura cede formalmente um terreno público subutilizado de Novorizonte para a associação de moradores através da CDRU. Isso dá segurança jurídica para que o espaço comunitário pertença à população e não possa ser tomado de volta por gestões futuras.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-5 custom-border shadow-woodcut flex gap-5 items-center group hover:bg-pastel-green/5 transition-colors">
+                                <div className="w-14 h-14 shrink-0 bg-pastel-green custom-border shadow-woodcut-sm flex items-center justify-center text-2xl font-bold font-serif text-pastel-ink">3</div>
+                                <div>
+                                    <h3 className="text-xl font-bold font-serif text-pastel-ink mb-2 border-b-2 border-pastel-green pb-1 inline-block">Pagamento por Serviços Ambientais (PSA) e Termo de Fomento</h3>
+                                    <p className="text-sm font-sans text-pastel-text leading-relaxed text-justify">
+                                        Estabelecer um contrato onde a prefeitura de Novorizonte destina verba pública especificamente para pagar os cursos de capacitação e, posteriormente, remunera a cooperativa local de acordo com o volume de lixo que eles conseguem separar e tratar, reconhecendo-os como agentes ambientais.
+                                    </p>
                                 </div>
                             </div>
 
@@ -763,55 +707,88 @@
                     </section>
 
                     {/* ========================================================= */}
-                    {/* SLIDE 10: CONCLUSÃO E ESTRATÉGIA */}
+                    {/* SLIDE 16: RODA DA GESTÃO DEMOCRÁTICA (MANDALA) */}
                     {/* ========================================================= */}
                     <section className="ppt-slide map-texture">
-                        <header className="border-b-4 border-pastel-ink pb-3 mb-4 shrink-0">
-                            <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
-                                <IconTarget className="w-8 h-8 text-pastel-alert"/> Conclusão e Leitura Estratégica
-                            </h2>
+                        <header className="border-b-4 border-pastel-ink pb-3 mb-2 flex justify-between items-end shrink-0">
+                            <div>
+                                <span className="text-sm font-bold uppercase tracking-widest text-pastel-ink/60 block mb-1">Capítulo 4</span>
+                                <h2 className="text-3xl font-bold font-serif text-pastel-ink flex items-center gap-3">
+                                    <IconTarget className="w-8 h-8 text-pastel-alert"/> Roda da Gestão Democrática
+                                </h2>
+                            </div>
                         </header>
 
-                        <div className="flex-1 flex flex-col justify-center gap-6 min-h-0">
+                        <div className="flex-1 flex flex-col justify-center items-center relative w-full mt-2">
                             
-                            <div className="flex gap-5 shrink-0 items-stretch">
-                                {/* Prioridades */}
-                                <div className="w-[45%] bg-pastel-bg p-5 custom-border shadow-woodcut flex flex-col justify-center">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-4 flex items-center gap-2"><IconTarget className="w-5 h-5"/> Prioridade Absoluta</h5>
-                                    <MiniBar label="Esgoto / Saneam." percent={50} valStr="~50%" colorClass="bg-pastel-alert" width="w-28" />
-                                    <MiniBar label="Drenagem Pluvial" percent={20} valStr="~20%" colorClass="bg-pastel-blue" width="w-28" />
-                                    <MiniBar label="Pavimentação" percent={15} valStr="~15%" colorClass="bg-pastel-sand" width="w-28" />
-                                    <p className="text-xs font-sans text-pastel-ink font-bold mt-4 bg-white p-2.5 custom-border text-center">👉 Consenso: A demanda prioritária é a rede de ESGOTO.</p>
-                                </div>
+                            {/* Texto explicativo topo */}
+                            <div className="bg-white p-3 custom-border shadow-woodcut-sm max-w-4xl mb-6 z-20 text-center relative">
+                                <p className="text-sm font-sans text-pastel-text leading-relaxed">
+                                    Um modelo institucional revisto para o PMSB: a decisão <strong>parte de dentro (a comunidade) para fora (o poder público)</strong>. As secretarias orbitam e servem à vontade popular da assembleia local, extinguindo o antigo modelo impositivo "top-down".
+                                </p>
+                            </div>
+
+                            {/* Container do Diagrama */}
+                            <div className="relative w-[1000px] h-[450px]">
                                 
-                                {/* Leitura Estratégica */}
-                                <div className="w-[55%] bg-white p-5 custom-border shadow-woodcut border-l-8 border-l-pastel-ink flex flex-col justify-center">
-                                    <h5 className="font-serif font-bold text-pastel-ink text-lg mb-3">🧠 Síntese do Cenário</h5>
-                                    <ul className="space-y-3 font-sans text-xs text-pastel-text">
-                                        <li><strong className="text-pastel-ink">1. Universalização parcial:</strong> Água está relativamente resolvida, mas o esgoto representa falha estrutural.</li>
-                                        <li><strong className="text-pastel-ink">2. Ausência do Estado:</strong> Planejamento não participativo e baixa atuação prática corretiva em infraestrutura.</li>
-                                        <li><strong className="text-pastel-ink">3. Infraestrutura incompleta:</strong> Obras pontuais não sistêmicas; falta severa de drenagem pluvial.</li>
-                                        <li><strong className="text-pastel-ink">4. Solução improvisada:</strong> O uso de fossas domina e a população assume o risco pela falta de rede.</li>
-                                    </ul>
+                                {/* SETAS SVG DE CONEXÃO (De dentro para fora) */}
+                                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 450">
+                                    <defs>
+                                        <marker id="arrowhead-out" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+                                            <polygon points="0 0, 6 3, 0 6" fill="#4A4440"/>
+                                        </marker>
+                                    </defs>
+                                    
+                                    {/* Círculo base da Mandala */}
+                                    <circle cx="500" cy="225" r="170" fill="none" stroke="#4A4440" strokeWidth="2" strokeDasharray="8 8" opacity="0.15" />
+                                    
+                                    {/* Linhas irradiando do centro (500, 225) */}
+                                    {/* Top-Left */}
+                                    <line x1="450" y1="195" x2="330" y2="120" stroke="#4A4440" strokeWidth="3" strokeDasharray="6 6" markerEnd="url(#arrowhead-out)" />
+                                    {/* Top-Right */}
+                                    <line x1="550" y1="195" x2="670" y2="120" stroke="#4A4440" strokeWidth="3" strokeDasharray="6 6" markerEnd="url(#arrowhead-out)" />
+                                    {/* Bottom-Left */}
+                                    <line x1="450" y1="255" x2="330" y2="330" stroke="#4A4440" strokeWidth="3" strokeDasharray="6 6" markerEnd="url(#arrowhead-out)" />
+                                    {/* Bottom-Right */}
+                                    <line x1="550" y1="255" x2="670" y2="330" stroke="#4A4440" strokeWidth="3" strokeDasharray="6 6" markerEnd="url(#arrowhead-out)" />
+                                </svg>
+
+                                {/* CENTRO: Assembleia de Moradores */}
+                                <div className="absolute top-[225px] left-[500px] transform -translate-x-1/2 -translate-y-1/2 z-30 w-52 h-52 rounded-full bg-pastel-sand custom-border shadow-woodcut flex flex-col items-center justify-center text-center p-4 hover:scale-105 transition-transform">
+                                    <IconUsers className="w-10 h-10 text-pastel-ink mb-2"/>
+                                    <span className="font-serif font-bold text-pastel-ink leading-tight text-xl mb-1">Assembleia de<br/>Moradores</span>
+                                    <span className="text-[10px] font-sans text-pastel-ink/80 font-bold uppercase tracking-widest border-t border-pastel-ink/20 pt-2 mt-1 w-3/4">Núcleo Decisório</span>
                                 </div>
-                            </div>
 
-                            {/* Diretrizes de Participação */}
-                            <div className="bg-white p-5 custom-border shadow-woodcut border-t-8 border-t-pastel-blue shrink-0">
-                                <h4 className="text-xl font-bold font-serif text-pastel-ink flex items-center gap-2 mb-3">
-                                    <IconUsers className="w-6 h-6 text-pastel-blue"/> Diretrizes de Participação Social (Omissões do PMSB)
-                                </h4>
-                                <p className="text-sm text-pastel-text font-sans mb-4">Apesar do Plano Municipal prever a leitura comunitária como pilar central, os dados provam uma discrepância drástica entre a teoria e a prática governamental.</p>
-                                <ul className="space-y-3 font-sans text-pastel-text text-sm">
-                                    <li className="border-l-4 border-pastel-alert/50 pl-3 py-1.5 bg-pastel-alert/10">
-                                        <strong className="text-pastel-ink block mb-0.5">Audiências Públicas Inexistentes:</strong> Contradizendo as diretrizes de mobilização social, 100% da população amostrada relata exclusão total de reuniões e processos decisórios sobre sua própria cidade.
-                                    </li>
-                                    <li className="border-l-4 border-pastel-alert/50 pl-3 py-1.5 bg-pastel-alert/10">
-                                        <strong className="text-pastel-ink block mb-0.5">Falta de Setorização Justa:</strong> As demandas das áreas rurais (fazendas e povoados menores) são ignoradas e engolidas pelas prioridades da Sede, como demonstrado pela falha gritante de amostragem da pesquisa oficial.
-                                    </li>
-                                </ul>
-                            </div>
+                                {/* NÓ 1: Top-Left (Obras) */}
+                                <div className="absolute top-[80px] left-[220px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-60 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-blue/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-blue custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconMap className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-sm mb-1 mt-2 border-b-2 border-pastel-blue pb-1 w-full">Secretaria de Obras</h4>
+                                    <p className="text-[11px] font-sans text-pastel-text leading-tight mt-1">Executa rotas adaptadas de coleta e aprova o espaço da Estação.</p>
+                                </div>
 
+                                {/* NÓ 2: Top-Right (Meio Ambiente) */}
+                                <div className="absolute top-[80px] left-[780px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-60 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-green/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-green custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconLeaf className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-sm mb-1 mt-2 border-b-2 border-pastel-green pb-1 w-full">Sec. Meio Ambiente</h4>
+                                    <p className="text-[11px] font-sans text-pastel-text leading-tight mt-1">Garante e fiscaliza o Pagamento por Serviços Ambientais (PSA).</p>
+                                </div>
+
+                                {/* NÓ 3: Bottom-Left (Educação/Saúde) */}
+                                <div className="absolute top-[370px] left-[220px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-60 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-peach/10 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-pastel-peach custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconBookOpen className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-sm mb-1 mt-2 border-b-2 border-pastel-peach pb-1 w-full">Sec. Saúde & Educação</h4>
+                                    <p className="text-[11px] font-sans text-pastel-text leading-tight mt-1">Financia e certifica o "Canteiro-Escola" como ação em saúde.</p>
+                                </div>
+
+                                {/* NÓ 4: Bottom-Right (Câmara) */}
+                                <div className="absolute top-[370px] left-[780px] transform -translate-x-1/2 -translate-y-1/2 z-20 w-60 bg-white p-4 custom-border shadow-woodcut-sm flex flex-col items-center text-center hover:bg-pastel-sand/80 transition-colors">
+                                    <div className="absolute -top-5 w-10 h-10 bg-white custom-border rounded-full flex items-center justify-center shadow-woodcut-sm"><IconHistory className="w-5 h-5 text-pastel-ink"/></div>
+                                    <h4 className="font-bold font-serif text-pastel-ink text-sm mb-1 mt-2 border-b-2 border-pastel-ink pb-1 w-full">Câmara Municipal</h4>
+                                    <p className="text-[11px] font-sans text-pastel-text leading-tight mt-1">Aprova a CDRU do terreno e oficializa o PMSB revisado.</p>
+                                </div>
+
+                            </div>
                         </div>
                     </section>
 
