@@ -141,7 +141,7 @@
         <nav class="header-nav" id="navMenu">
             <a onclick="navigate('apresentacao')" class="nav-link" data-target="apresentacao">APRESENTAÇÃO</a>
             <a onclick="navigate('contexto')" class="nav-link active" data-target="contexto">CONTEXTO</a>
-            <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">CARTOGRAFIA</a>
+            <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">CARTOGRAFIA E AMOSTRAGEM</a>
             <a onclick="navigate('plano-acao')" class="nav-link" data-target="plano-acao">PLANO DE AÇÃO</a>
             <a onclick="navigate('ferramenta')" class="nav-link" data-target="ferramenta">FERRAMENTA</a>
         </nav>
@@ -427,12 +427,186 @@
             </section>
         </div>
 
-        <!-- 3. CARTOGRAFIA (Mantida original, sem expansão aqui) -->
+        <!-- 3. CARTOGRAFIA -->
         <div id="cartografia" class="view">
-            <section class="section" style="padding-top: 60px; text-align: center;">
-                <h2>CARTOGRAFIA</h2>
-                <p>Navegue pelas outras abas utilizando o menu superior.</p>
-                <div id="leaflet-map-macro" style="height: 400px; width: 100%; margin-top: 2rem;"></div>
+            <section class="section container" style="padding-top: 60px;">
+                <h2 class="section-title">Mapas Síntese e Temáticos</h2>
+                
+                <div class="grid-3" style="margin-top: 3rem;">
+                    <!-- Placeholder Mapa 1 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 1]</span>
+                    </div>
+                    
+                    <!-- Placeholder Mapa 2 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 2]</span>
+                    </div>
+
+                    <!-- Placeholder Mapa 3 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 3]</span>
+                    </div>
+
+                    <!-- Placeholder Mapa 4 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 4]</span>
+                    </div>
+
+                    <!-- Placeholder Mapa 5 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 5]</span>
+                    </div>
+
+                    <!-- Placeholder Mapa 6 -->
+                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 6]</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- SEÇÃO DE AMOSTRAGEM E DIAGNÓSTICO -->
+                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 1rem;">Amostragem e Manejo de Resíduos Sólidos</h3>
+                <p class="subtitle" style="max-width: 900px; margin: 0 auto 3rem;">A limpeza urbana e o manejo de resíduos sólidos são constituídos pela disponibilização e manutenção de atividades, infraestruturas e instalações operacionais de coleta, varrição manual e mecanizada, limpeza e conservação urbana, transporte, transbordo, tratamento, destinação e disposição final ambientalmente adequada dos resíduos sólidos domiciliares e dos resíduos de limpeza urbana (Lei Federal nº 11.445/2007).</p>
+
+                <div class="grid-half" style="margin-bottom: 2rem;">
+                    <!-- Concentração Espacial da Amostra -->
+                    <div class="list-card">
+                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-map-location-dot"></i> Distribuição da Amostra</h4>
+                        
+                        <div style="display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--accent);">
+                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--accent); line-height: 1;">94,29%</div>
+                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Sede</div>
+                            </div>
+                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--gold);">
+                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--gold); line-height: 1;">2,86%</div>
+                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Cambaúba</div>
+                            </div>
+                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--gold);">
+                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--gold); line-height: 1;">2,86%</div>
+                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Campo Verde</div>
+                            </div>
+                        </div>
+
+                        <p><strong>Síntese Diagnóstica:</strong> A amostra apresenta extrema concentração territorial na sede, mascarando as desigualdades rurais. Além disso, as Demandas Prioritárias da população focam majoritariamente em <strong>Esgoto/Saneamento (~50%)</strong>, Pavimentação (~20%) e Drenagem (~15%).</p>
+                    </div>
+
+                    <!-- Dados SNIS 2020: O Serviço de Manejo -->
+                    <div class="list-card" style="background-color: var(--text-main); color: var(--bg-panel); border: none;">
+                        <h4 style="font-size: 1.5rem; color: var(--bg-panel); border-bottom: 2px solid rgba(209, 191, 165, 0.2); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-truck-fast"></i> O Serviço de Manejo (SNIS 2020)</h4>
+                        <p style="color: rgba(242, 232, 208, 0.8); font-size: 0.95rem;">A tabela do SNIS apresenta como o prestador cobra pelos serviços de coleta regular, transporte e destinação final, além da despesa/receita per capita e quantidades coletadas de RSU, RCC (Construção) e RSS (Saúde).</p>
+                        
+                        <ul class="feature-list" style="margin-top: 1rem; border-top: none; color: var(--bg-panel);">
+                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
+                                <i class="fa-solid fa-building" style="color: var(--border-color);"></i> 
+                                <div><strong>Responsável:</strong> Prefeitura Municipal de Novorizonte - PMN</div>
+                            </li>
+                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
+                                <i class="fa-solid fa-file-circle-xmark" style="color: var(--border-color);"></i> 
+                                <div><strong>Possui PMGIRS (Lei 12.305/10)?</strong> Não</div>
+                            </li>
+                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
+                                <i class="fa-solid fa-handshake" style="color: var(--border-color);"></i> 
+                                <div><strong>Consórcio Intermunicipal:</strong> Sim (Consórcio Público Intermunicipal Multifinalitário do Alto Rio Pardo)</div>
+                            </li>
+                            <li style="border-bottom: none; padding: 0.5rem 0;">
+                                <i class="fa-solid fa-money-bill-slash" style="color: var(--border-color);"></i> 
+                                <div><strong>Cobrança pelos serviços de coleta e destinação?</strong> Não há cobrança instituída.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Segunda Parte do Grid: Coleta Seletiva e Leitura Estratégica -->
+                <div class="grid-half">
+                    <!-- Coleta Seletiva -->
+                    <div class="list-card">
+                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-recycle"></i> Coleta Seletiva e Catadores</h4>
+                        <p style="font-size: 0.95rem;">Dados relativos à cobertura da coleta seletiva porta a porta, população atendida e taxa de terceirização do Serviço de Limpeza Urbana (SLU).</p>
+                        
+                        <ul class="feature-list" style="margin-top: 1rem; border-top: none;">
+                            <li>
+                                <i class="fa-solid fa-ban" style="font-size: 1.2rem; color: var(--accent);"></i> 
+                                <div>
+                                    <strong style="color: var(--accent); font-size: 1.1rem;">Ausência de Coleta Seletiva</strong><br>
+                                    Não existe coleta seletiva no município, resultando em <strong>0%</strong> da população urbana atendida pelo modelo porta a porta.
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-person-walking-luggage" style="font-size: 1.2rem;"></i> 
+                                <div>
+                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Trabalho Informal</strong><br>
+                                    Existem catadores de materiais recicláveis, mas trabalham de forma autônoma e <strong>dispersos na cidade</strong>.
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-users-slash" style="font-size: 1.2rem;"></i> 
+                                <div>
+                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Desorganização Estrutural</strong><br>
+                                    Não há catadores organizados. A quantidade de entidades associativas ou cooperativas é <strong>zero (0)</strong>, assim como o número de associados.
+                                </div>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 1.5rem; text-align: right; font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Fonte: SNIS / Ministério das Cidades (2020)</div>
+                    </div>
+
+                    <!-- Novo Card: Gestão de RCC e Operação (Produto C) -->
+                    <div class="list-card">
+                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-helmet-safety"></i> Operação e Entulhos (RCC)</h4>
+                        <p style="font-size: 0.95rem;">O Diagnóstico Técnico-Participativo (Produto C) detalha a dinâmica operacional das coletas alternativas e a destinação final.</p>
+                        
+                        <ul class="feature-list" style="margin-top: 1rem; border-top: none;">
+                            <li>
+                                <i class="fa-solid fa-dumpster" style="font-size: 1.2rem; color: var(--gold);"></i> 
+                                <div>
+                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Aterro Controlado</strong><br>
+                                    A destinação final dos resíduos (incluindo entulhos) é realizada no <strong>aterro controlado</strong> do município, gerido pela Secretaria de Obras.
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-truck-pickup" style="font-size: 1.2rem;"></i> 
+                                <div>
+                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Mutirões de Limpeza</strong><br>
+                                    Sem empresas de caçambas, a Prefeitura recolhe Resíduos de Construção Civil (RCC) via <strong>mutirões sob demanda</strong> (sem taxas), cobrindo a Sede e 5 povoados.
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-users-gear" style="font-size: 1.2rem; color: var(--accent);"></i> 
+                                <div>
+                                    <strong style="color: var(--accent); font-size: 1.1rem;">Sobrecarga de Efetivo</strong><br>
+                                    Esses mutirões contam com a atuação do <strong>mesmo quadro de funcionários</strong> que já realiza a coleta convencional de lixo.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Leitura Estratégica Adaptada (Agora ocupando largura total) -->
+                <div style="background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 4px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(58, 40, 24, 0.1); margin-top: 4rem;">
+                    <h4 style="font-size: 1.8rem; text-align: center; margin-bottom: 2rem;"><i class="fa-solid fa-chess-knight" style="color: var(--accent); margin-right: 10px;"></i> Leitura Estratégica do Déficit</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--text-main);">
+                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">1. Universalização Crítica</h5>
+                            <p style="font-size: 0.9rem; margin: 0;">O esgoto (principal queixa), somado à total ausência de coleta seletiva e do PMGIRS, representa uma falha estrutural sistêmica na saúde pública.</p>
+                        </div>
+                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--accent);">
+                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--accent); margin-bottom: 0.5rem;">2. Ausência do Estado</h5>
+                            <p style="font-size: 0.9rem; margin: 0;">100% da amostra relatou exclusão de processos decisórios. A gestão de recicláveis depende da informalidade de catadores desamparados.</p>
+                        </div>
+                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--gold);">
+                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">3. Sustentabilidade Comprometida</h5>
+                            <p style="font-size: 0.9rem; margin: 0;">A prefeitura arca com o serviço de RSU sem cobranças específicas, onerando os cofres públicos. Sem cooperativas, não há destinação adequada ou renda.</p>
+                        </div>
+                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--text-muted);">
+                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">4. Sobrecarga Operacional</h5>
+                            <p style="font-size: 0.9rem; margin: 0;">O uso de <strong>Aterro Controlado</strong> e equipes de coleta divididas entre lixo comum e entulhos evidenciam forte subdimensionamento da máquina pública.</p>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </div>
         
@@ -467,11 +641,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (targetId === 'cartografia') {
-                if (!mapMacroIniciado) {
+                const mapEl = document.getElementById('leaflet-map-macro');
+                if (mapEl && !mapMacroIniciado) {
                     mapMacro = L.map('leaflet-map-macro').setView([-16.017, -42.408], 12);
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapMacro);
                     mapMacroIniciado = true;
-                } else {
+                } else if (mapEl) {
                     setTimeout(() => mapMacro.invalidateSize(), 100);
                 }
             }
