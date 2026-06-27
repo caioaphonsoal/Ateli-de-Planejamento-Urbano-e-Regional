@@ -114,6 +114,22 @@
         .divider { text-align: center; font-size: 1.5rem; color: var(--border-color); margin: 4rem 0; }
         .divider::before { content: '♦ ♦ ♦'; }
 
+        /* HERO SLIDESHOW (APRESENTAÇÃO) */
+        #apresentacao { position: relative; overflow: hidden; }
+        .hero-bg-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-bg-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1.5s ease-in-out;
+            transform: scale(1.05); /* Pequeno zoom inicial */
+        }
+        .hero-bg-slide.active { opacity: 1; transform: scale(1); transition: opacity 1.5s ease-in-out, transform 6s linear; }
+        .hero-bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(228, 213, 183, 0.85); /* Fundo translúcido para leitura */
+            z-index: 1;
+        }
+
         /* RESPONSIVIDADE */
         @media (max-width: 968px) {
             .menu-toggle { display: block; }
@@ -190,13 +206,23 @@
     <!-- CONTAINER SPA -->
     <div id="app">
 
-        <!-- 1. APRESENTAÇÃO (Abreviada para focar no Contexto) -->
+        <!-- 1. APRESENTAÇÃO -->
         <div id="apresentacao" class="view">
-            <section class="hero container">
-                <p style="font-family: var(--font-title); color: var(--gold); letter-spacing: 0.1em;">Universidade Federal da Bahia • ARQC10</p>
-                <h1 class="hero-title">Retratos de Novorizonte - MG</h1>
-                <h2 style="color: var(--accent); font-style: italic;">Novorizonte - Minas Gerais</h2>
-                <button onclick="navigate('contexto')" class="btn-primary" style="margin-top: 3rem;">Ir para o Contexto Histórico <i class="fa-solid fa-arrow-right"></i></button>
+            <!-- Slideshow de Fundo -->
+            <div class="hero-bg-container">
+                <div class="hero-bg-slide active" style="background-image: url('https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg');"></div>
+                <div class="hero-bg-slide" style="background-image: url('https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg');"></div>
+                <div class="hero-bg-slide" style="background-image: url('https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg');"></div>
+                <div class="hero-bg-slide" style="background-image: url('https://i.postimg.cc/Hk75wnbQ/3.jpg');"></div>
+                <div class="hero-bg-slide" style="background-image: url('https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg');"></div>
+                <div class="hero-bg-overlay"></div>
+            </div>
+
+            <section class="hero container" style="position: relative; z-index: 2;">
+                <p style="font-family: var(--font-title); color: var(--gold); letter-spacing: 0.1em; font-weight: 800; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">Universidade Federal da Bahia • ARQC10</p>
+                <h1 class="hero-title" style="text-shadow: 2px 2px 4px rgba(255,255,255,0.6);">Retratos de Novorizonte - MG</h1>
+                <h2 style="color: var(--accent); font-style: italic; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">Novorizonte - Minas Gerais</h2>
+                <button onclick="navigate('contexto')" class="btn-primary" style="margin-top: 3rem; box-shadow: 0 4px 15px rgba(58, 40, 24, 0.2);">Ir para o Contexto Histórico <i class="fa-solid fa-arrow-right"></i></button>
             </section>
         </div>
 
@@ -1016,6 +1042,20 @@
             if (dots[slideIndex-1]) {
                 dots[slideIndex-1].className += " active";
             }
+        }
+
+        // ==========================================
+        // LÓGICA DO SLIDESHOW DE FUNDO (APRESENTAÇÃO)
+        // ==========================================
+        const heroBGs = document.querySelectorAll('.hero-bg-slide');
+        let currentHeroBG = 0;
+        
+        if(heroBGs.length > 0) {
+            setInterval(() => {
+                heroBGs[currentHeroBG].classList.remove('active');
+                currentHeroBG = (currentHeroBG + 1) % heroBGs.length;
+                heroBGs[currentHeroBG].classList.add('active');
+            }, 5000); // 5000ms = 5 segundos
         }
     </script>
 </body>
