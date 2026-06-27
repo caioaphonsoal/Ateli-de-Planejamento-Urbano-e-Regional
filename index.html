@@ -128,6 +128,46 @@
         .map-wrapper { width: 100%; position: relative; background-color: var(--border-color); border-top: 2px solid var(--text-main); border-bottom: 2px solid var(--text-main); }
         .leaflet-map-container { width: 100%; height: 100%; z-index: 1; }
         .site-footer { background-color: var(--bg-panel); padding: 40px 4vw; border-top: 2px solid var(--border-color); text-align: center; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 0.05em; }
+        
+        /* MODAIS E BOTÕES DA FERRAMENTA */
+        .btn-law {
+            background: var(--bg-panel); border: 2px solid var(--border-color);
+            color: var(--text-main); font-family: var(--font-main); font-size: 1.05rem; font-weight: 600;
+            padding: 18px 20px; border-radius: 8px; display: flex; align-items: center;
+            justify-content: space-between; cursor: pointer; transition: all 0.3s ease;
+            text-align: left; margin-bottom: 1rem; width: 100%; box-shadow: 0 4px 6px rgba(58, 40, 24, 0.05);
+        }
+        .btn-law:hover { border-color: var(--gold); transform: translateX(5px); background: #fff; box-shadow: 0 6px 12px rgba(168, 124, 42, 0.15); }
+        .btn-law i { color: var(--accent); font-size: 1.3rem; }
+        .btn-law span { flex: 1; margin-left: 15px; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(58, 40, 24, 0.85); backdrop-filter: blur(4px);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: var(--bg-panel); width: 95%; max-width: 650px;
+            border-radius: 8px; padding: 2.5rem; position: relative;
+            transform: translateY(20px); transition: transform 0.3s ease;
+            max-height: 90vh; overflow-y: auto; border: 2px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; font-size: 1.8rem;
+            color: var(--text-muted); cursor: pointer; background: none; border: none; transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--accent); }
+
+        /* SLIDESHOW (GALERIA) */
+        .mySlides { display: none; }
+        .prev:hover, .next:hover { background-color: var(--accent) !important; color: var(--bg-panel) !important; }
+        .dot.active, .dot:hover { background-color: var(--accent) !important; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
     </style>
 </head>
 <body>
@@ -389,35 +429,40 @@
                 <div class="divider"></div>
 
                 <!-- PARTE 5: GALERIA DE FOTOS (ESPAÇO FUTURO) -->
-                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 1rem;"><i class="fa-solid fa-camera-retro"></i> Registros Visuais</h3>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Uma galeria reservada para preservar as memórias, as paisagens e a essência do povo novorizontino. (Em breve com fotografias locais).</p>
+                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 1rem;"><i class="fa-solid fa-camera-retro"></i> Galeria de Imagens</h3>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Uma galeria reservada para preservar as memórias, as paisagens e a essência do povo novorizontino.</p>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+                <div class="slideshow-container" style="max-width: 800px; position: relative; margin: 0 auto 4rem; border-radius: 8px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 10px 30px rgba(58, 40, 24, 0.2);">
                     
-                    <!-- Imagem 1 -->
-                    <div style="border-radius: 4px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 4px 15px rgba(58, 40, 24, 0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://placehold.co/600x400/D1BFA5/3A2818?text=A+Matriz" alt="Placeholder Igreja Matriz" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                        <div style="background-color: var(--bg-panel); padding: 12px; text-align: center; font-family: var(--font-title); font-size: 0.9rem; font-weight: 700; color: var(--text-main); border-top: 1px solid var(--border-color);">A Praça e a Matriz</div>
-                    </div>
-                    
-                    <!-- Imagem 2 -->
-                    <div style="border-radius: 4px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 4px 15px rgba(58, 40, 24, 0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://placehold.co/600x400/D1BFA5/3A2818?text=Festas+Juninas" alt="Placeholder Arraiás" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                        <div style="background-color: var(--bg-panel); padding: 12px; text-align: center; font-family: var(--font-title); font-size: 0.9rem; font-weight: 700; color: var(--text-main); border-top: 1px solid var(--border-color);">Tradição dos Arraiás</div>
+                    <div class="mySlides fade">
+                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+1" alt="Foto 1" style="width: 100%; display: block; object-fit: cover; height: 450px;">
+                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
                     </div>
 
-                    <!-- Imagem 3 -->
-                    <div style="border-radius: 4px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 4px 15px rgba(58, 40, 24, 0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://placehold.co/600x400/D1BFA5/3A2818?text=Producao+Local" alt="Placeholder Produção" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                        <div style="background-color: var(--bg-panel); padding: 12px; text-align: center; font-family: var(--font-title); font-size: 0.9rem; font-weight: 700; color: var(--text-main); border-top: 1px solid var(--border-color);">Produção e Cultura</div>
+                    <div class="mySlides fade">
+                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+2" alt="Foto 2" style="width: 100%; display: block; object-fit: cover; height: 450px;">
+                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
                     </div>
 
-                    <!-- Imagem 4 -->
-                    <div style="border-radius: 4px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 4px 15px rgba(58, 40, 24, 0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://placehold.co/600x400/D1BFA5/3A2818?text=Belezas+Naturais" alt="Placeholder Natureza" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                        <div style="background-color: var(--bg-panel); padding: 12px; text-align: center; font-family: var(--font-title); font-size: 0.9rem; font-weight: 700; color: var(--text-main); border-top: 1px solid var(--border-color);">Paisagens e Cerrado</div>
+                    <div class="mySlides fade">
+                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+3" alt="Foto 3" style="width: 100%; display: block; object-fit: cover; height: 450px;">
+                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
                     </div>
 
+                    <div class="mySlides fade">
+                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+4" alt="Foto 4" style="width: 100%; display: block; object-fit: cover; height: 450px;">
+                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)" style="cursor: pointer; position: absolute; top: 50%; left: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 0 4px 4px 0; user-select: none; background-color: rgba(58,40,24,0.6);"><i class="fa-solid fa-chevron-left"></i></a>
+                    <a class="next" onclick="plusSlides(1)" style="cursor: pointer; position: absolute; top: 50%; right: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 4px 0 0 4px; user-select: none; background-color: rgba(58,40,24,0.6);"><i class="fa-solid fa-chevron-right"></i></a>
+
+                    <div style="position: absolute; bottom: 65px; width: 100%; text-align: center;">
+                        <span class="dot" onclick="currentSlide(1)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
+                        <span class="dot" onclick="currentSlide(2)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
+                        <span class="dot" onclick="currentSlide(3)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
+                        <span class="dot" onclick="currentSlide(4)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
+                    </div>
                 </div>
 
                 <div style="text-align: center; margin-top: 4rem;">
@@ -464,147 +509,8 @@
                     </div>
                 </div>
 
-                <div class="divider"></div>
-
-                <!-- SEÇÃO DE AMOSTRAGEM E DIAGNÓSTICO -->
-                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 1rem;">Amostragem e Manejo de Resíduos Sólidos</h3>
-                <p class="subtitle" style="max-width: 900px; margin: 0 auto 3rem;">A limpeza urbana e o manejo de resíduos sólidos são constituídos pela disponibilização e manutenção de atividades, infraestruturas e instalações operacionais de coleta, varrição manual e mecanizada, limpeza e conservação urbana, transporte, transbordo, tratamento, destinação e disposição final ambientalmente adequada dos resíduos sólidos domiciliares e dos resíduos de limpeza urbana (Lei Federal nº 11.445/2007).</p>
-
-                <div class="grid-half" style="margin-bottom: 2rem;">
-                    <!-- Concentração Espacial da Amostra -->
-                    <div class="list-card">
-                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-map-location-dot"></i> Distribuição da Amostra</h4>
-                        
-                        <div style="display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--accent);">
-                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--accent); line-height: 1;">94,29%</div>
-                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Sede</div>
-                            </div>
-                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--gold);">
-                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--gold); line-height: 1;">2,86%</div>
-                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Cambaúba</div>
-                            </div>
-                            <div style="flex: 1; min-width: 100px; background: var(--bg-color); padding: 1rem; text-align: center; border-radius: 4px; border-bottom: 3px solid var(--gold);">
-                                <div style="font-size: 2rem; font-family: var(--font-title); font-weight: 700; color: var(--gold); line-height: 1;">2,86%</div>
-                                <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; text-transform: uppercase;">Campo Verde</div>
-                            </div>
-                        </div>
-
-                        <p><strong>Síntese Diagnóstica:</strong> A amostra apresenta extrema concentração territorial na sede, mascarando as desigualdades rurais. Além disso, as Demandas Prioritárias da população focam majoritariamente em <strong>Esgoto/Saneamento (~50%)</strong>, Pavimentação (~20%) e Drenagem (~15%).</p>
-                    </div>
-
-                    <!-- Dados SNIS 2020: O Serviço de Manejo -->
-                    <div class="list-card" style="background-color: var(--text-main); color: var(--bg-panel); border: none;">
-                        <h4 style="font-size: 1.5rem; color: var(--bg-panel); border-bottom: 2px solid rgba(209, 191, 165, 0.2); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-truck-fast"></i> O Serviço de Manejo (SNIS 2020)</h4>
-                        <p style="color: rgba(242, 232, 208, 0.8); font-size: 0.95rem;">A tabela do SNIS apresenta como o prestador cobra pelos serviços de coleta regular, transporte e destinação final, além da despesa/receita per capita e quantidades coletadas de RSU, RCC (Construção) e RSS (Saúde).</p>
-                        
-                        <ul class="feature-list" style="margin-top: 1rem; border-top: none; color: var(--bg-panel);">
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
-                                <i class="fa-solid fa-building" style="color: var(--border-color);"></i> 
-                                <div><strong>Responsável:</strong> Prefeitura Municipal de Novorizonte - PMN</div>
-                            </li>
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
-                                <i class="fa-solid fa-file-circle-xmark" style="color: var(--border-color);"></i> 
-                                <div><strong>Possui PMGIRS (Lei 12.305/10)?</strong> Não</div>
-                            </li>
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2); padding: 0.5rem 0;">
-                                <i class="fa-solid fa-handshake" style="color: var(--border-color);"></i> 
-                                <div><strong>Consórcio Intermunicipal:</strong> Sim (Consórcio Público Intermunicipal Multifinalitário do Alto Rio Pardo)</div>
-                            </li>
-                            <li style="border-bottom: none; padding: 0.5rem 0;">
-                                <i class="fa-solid fa-money-bill-slash" style="color: var(--border-color);"></i> 
-                                <div><strong>Cobrança pelos serviços de coleta e destinação?</strong> Não há cobrança instituída.</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Segunda Parte do Grid: Coleta Seletiva e Leitura Estratégica -->
-                <div class="grid-half">
-                    <!-- Coleta Seletiva -->
-                    <div class="list-card">
-                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-recycle"></i> Coleta Seletiva e Catadores</h4>
-                        <p style="font-size: 0.95rem;">Dados relativos à cobertura da coleta seletiva porta a porta, população atendida e taxa de terceirização do Serviço de Limpeza Urbana (SLU).</p>
-                        
-                        <ul class="feature-list" style="margin-top: 1rem; border-top: none;">
-                            <li>
-                                <i class="fa-solid fa-ban" style="font-size: 1.2rem; color: var(--accent);"></i> 
-                                <div>
-                                    <strong style="color: var(--accent); font-size: 1.1rem;">Ausência de Coleta Seletiva</strong><br>
-                                    Não existe coleta seletiva no município, resultando em <strong>0%</strong> da população urbana atendida pelo modelo porta a porta.
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-person-walking-luggage" style="font-size: 1.2rem;"></i> 
-                                <div>
-                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Trabalho Informal</strong><br>
-                                    Existem catadores de materiais recicláveis, mas trabalham de forma autônoma e <strong>dispersos na cidade</strong>.
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-users-slash" style="font-size: 1.2rem;"></i> 
-                                <div>
-                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Desorganização Estrutural</strong><br>
-                                    Não há catadores organizados. A quantidade de entidades associativas ou cooperativas é <strong>zero (0)</strong>, assim como o número de associados.
-                                </div>
-                            </li>
-                        </ul>
-                        <div style="margin-top: 1.5rem; text-align: right; font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Fonte: SNIS / Ministério das Cidades (2020)</div>
-                    </div>
-
-                    <!-- Novo Card: Gestão de RCC e Operação (Produto C) -->
-                    <div class="list-card">
-                        <h4 style="font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-helmet-safety"></i> Operação e Entulhos (RCC)</h4>
-                        <p style="font-size: 0.95rem;">O Diagnóstico Técnico-Participativo (Produto C) detalha a dinâmica operacional das coletas alternativas e a destinação final.</p>
-                        
-                        <ul class="feature-list" style="margin-top: 1rem; border-top: none;">
-                            <li>
-                                <i class="fa-solid fa-dumpster" style="font-size: 1.2rem; color: var(--gold);"></i> 
-                                <div>
-                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Aterro Controlado</strong><br>
-                                    A destinação final dos resíduos (incluindo entulhos) é realizada no <strong>aterro controlado</strong> do município, gerido pela Secretaria de Obras.
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-truck-pickup" style="font-size: 1.2rem;"></i> 
-                                <div>
-                                    <strong style="color: var(--text-main); font-size: 1.1rem;">Mutirões de Limpeza</strong><br>
-                                    Sem empresas de caçambas, a Prefeitura recolhe Resíduos de Construção Civil (RCC) via <strong>mutirões sob demanda</strong> (sem taxas), cobrindo a Sede e 5 povoados.
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-users-gear" style="font-size: 1.2rem; color: var(--accent);"></i> 
-                                <div>
-                                    <strong style="color: var(--accent); font-size: 1.1rem;">Sobrecarga de Efetivo</strong><br>
-                                    Esses mutirões contam com a atuação do <strong>mesmo quadro de funcionários</strong> que já realiza a coleta convencional de lixo.
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Leitura Estratégica Adaptada (Agora ocupando largura total) -->
-                <div style="background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 4px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(58, 40, 24, 0.1); margin-top: 4rem;">
-                    <h4 style="font-size: 1.8rem; text-align: center; margin-bottom: 2rem;"><i class="fa-solid fa-chess-knight" style="color: var(--accent); margin-right: 10px;"></i> Leitura Estratégica do Déficit</h4>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--text-main);">
-                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">1. Universalização Crítica</h5>
-                            <p style="font-size: 0.9rem; margin: 0;">O esgoto (principal queixa), somado à total ausência de coleta seletiva e do PMGIRS, representa uma falha estrutural sistêmica na saúde pública.</p>
-                        </div>
-                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--accent);">
-                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--accent); margin-bottom: 0.5rem;">2. Ausência do Estado</h5>
-                            <p style="font-size: 0.9rem; margin: 0;">100% da amostra relatou exclusão de processos decisórios. A gestão de recicláveis depende da informalidade de catadores desamparados.</p>
-                        </div>
-                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--gold);">
-                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">3. Sustentabilidade Comprometida</h5>
-                            <p style="font-size: 0.9rem; margin: 0;">A prefeitura arca com o serviço de RSU sem cobranças específicas, onerando os cofres públicos. Sem cooperativas, não há destinação adequada ou renda.</p>
-                        </div>
-                        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--text-muted);">
-                            <h5 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem;">4. Sobrecarga Operacional</h5>
-                            <p style="font-size: 0.9rem; margin: 0;">O uso de <strong>Aterro Controlado</strong> e equipes de coleta divididas entre lixo comum e entulhos evidenciam forte subdimensionamento da máquina pública.</p>
-                        </div>
-                    </div>
+                <div style="text-align: center; margin-top: 4rem;">
+                    <button onclick="navigate('plano-acao')" class="btn-primary">Avançar para Plano de Ação <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
                 </div>
 
             </section>
@@ -618,75 +524,154 @@
                 <div class="container">
                     <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Plano de Ação</h2>
                     <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
-                        Diretrizes, metas e projetos estratégicos.
+                        Diretrizes, metas e a democratização do acesso à informação pública.
                     </p>
                 </div>
             </section>
 
             <section class="section container">
+                <div class="info-box" style="margin-bottom: 3rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+                    <i class="fa-solid fa-lightbulb" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px; display: block;"></i>
+                    <strong>O Diagnóstico Central:</strong> Durante as análises, o maior obstáculo identificado não foi apenas a falta de infraestrutura, mas a <strong>barreira da linguagem</strong>. A população de Novorizonte tem extrema dificuldade em encontrar, ler e compreender as leis, programas e projetos do município. Sem entender seus direitos e deveres, a participação popular torna-se nula.
+                </div>
+
                 <h3 style="font-size: 2.2rem; color: var(--text-main); text-align: center; margin-bottom: 3rem;">Eixos de Intervenção Estratégica</h3>
 
                 <div class="grid-half">
-                    <!-- Eixo 1: Resíduos -->
+                    <!-- Eixo 1: Tradução -->
                     <div class="list-card" style="border-top: 4px solid var(--gold);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-recycle" style="color: var(--gold); margin-right: 10px;"></i>1. Resíduos Sólidos e RCC</h4>
-                        <p style="font-size: 0.95rem;">Foco na erradicação do aterro controlado e na estruturação da coleta seletiva, desonerando o quadro atual de funcionários.</p>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-language" style="color: var(--gold); margin-right: 10px;"></i>1. Tradução do "Juridiquês"</h4>
+                        <p style="font-size: 0.95rem;">Erradicar a complexidade desnecessária nos comunicados públicos, garantindo que o cidadão comum compreenda as regras que regem sua cidade.</p>
                         <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Elaboração e aprovação do <strong>Plano Municipal de Gestão Integrada de Resíduos Sólidos (PMGIRS)</strong>.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div><strong>Encerramento do Aterro Controlado</strong> e transição da destinação final via Consórcio Intermunicipal do Alto Rio Pardo.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Fomento institucional à criação de <strong>associações/cooperativas de catadores</strong>, integrando os trabalhadores dispersos.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Regulamentação do serviço de <strong>caçambas de RCC</strong> para retirar o peso operacional das costas da Prefeitura.</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Criação de resumos visuais e didáticos para as principais leis (como o Código de Posturas e o Marco do Saneamento).</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Adoção de diretrizes de <strong>Linguagem Simples</strong> em todos os novos editais e cartilhas da Prefeitura.</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Substituição de termos excessivamente técnicos por analogias do dia a dia nas Audiências Públicas.</div></li>
                         </ul>
                     </div>
 
-                    <!-- Eixo 2: Esgoto -->
+                    <!-- Eixo 2: Acesso Descomplicado -->
                     <div class="list-card" style="border-top: 4px solid var(--accent);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-droplet-slash" style="color: var(--accent); margin-right: 10px;"></i>2. Esgotamento Sanitário</h4>
-                        <p style="font-size: 0.95rem;">Atendimento à demanda prioritária máxima da população: erradicação progressiva do uso de fossas precárias na malha urbana.</p>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-magnifying-glass" style="color: var(--accent); margin-right: 10px;"></i>2. Acesso e Transparência Ativa</h4>
+                        <p style="font-size: 0.95rem;">Resolver o problema de "onde encontrar". O cidadão não deve ser um detetive para descobrir os projetos que impactam seu bairro.</p>
                         <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Contratação de projeto executivo para implantação de <strong>rede coletora universalizada na Sede</strong>.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Construção de uma <strong>Estação de Tratamento de Esgoto (ETE)</strong> compacta e adequada à projeção populacional.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Adoção de soluções alternativas (fossas ecológicas/biodigestores) com subsídio do Estado para as zonas rurais e povoados isolados.</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Centralização de informações sobre saneamento e obras em portais de fácil navegação (sem jargões contábeis).</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Distribuição de murais informativos físicos nos povoados (Cambaúba, Campo Verde) onde a internet é escassa.</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Uso de rádios locais e carros de som para divulgar resumos de projetos aprovados na câmara.</div></li>
                         </ul>
                     </div>
 
-                    <!-- Eixo 3: Drenagem -->
+                    <!-- Eixo 3: Empoderamento -->
                     <div class="list-card" style="border-top: 4px solid var(--text-main);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-cloud-showers-water" style="color: var(--text-main); margin-right: 10px;"></i>3. Drenagem Pluvial</h4>
-                        <p style="font-size: 0.95rem;">Mitigação de alagamentos constantes e preservação do pavimento no tecido urbano e nas vias rurais essenciais.</p>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-users-rays" style="color: var(--text-main); margin-right: 10px;"></i>3. Alfabetização Cidadã</h4>
+                        <p style="font-size: 0.95rem;">Capacitar líderes comunitários e a população geral para que saibam como cobrar ações do poder público com base nas leis vigentes.</p>
                         <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Mapeamento técnico formal dos <strong>pontos críticos de alagamento</strong> identificados empiricamente (61,5% de queixas).</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Integração obrigatória de obras de <strong>microdrenagem</strong> nos novos editais de pavimentação.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Cronograma anual de <strong>manutenção preventiva de bueiros</strong> antes do período chuvoso (novembro a março).</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Realização de oficinas nas escolas focadas em direitos e deveres urbanos e ambientais.</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Criação de um manual prático: "Como solicitar serviços de infraestrutura e limpeza urbana".</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Fomento à participação popular em conselhos, garantindo que o cidadão entenda o que está sendo votado.</div></li>
                         </ul>
                     </div>
 
-                    <!-- Eixo 4: Governança -->
-                    <div class="list-card" style="background-color: var(--text-main); color: var(--bg-panel); border: none; border-top: 4px solid var(--border-color);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--bg-panel);"><i class="fa-solid fa-users-gear" style="color: var(--bg-color); margin-right: 10px;"></i>4. Gestão e Participação</h4>
-                        <p style="font-size: 0.95rem; color: rgba(242, 232, 208, 0.8);">Garantia de que o planejamento não existirá apenas no papel, rompendo o histórico de exclusão decisória.</p>
+                    <!-- Eixo 4: Inovação e Ferramenta (Destaque) -->
+                    <div class="list-card" style="background-color: var(--text-main); color: var(--bg-panel); border: none; border-top: 4px solid var(--border-color); box-shadow: 0 15px 35px rgba(154, 42, 26, 0.3);">
+                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--bg-panel);"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold); margin-right: 10px;"></i>4. Inovação Tecnológica Social</h4>
+                        <p style="font-size: 0.95rem; color: rgba(242, 232, 208, 0.9);">O resultado final deste Plano de Ação materializa-se na criação de uma solução digital interativa para quebrar definitivamente a barreira da linguagem.</p>
                         <ul class="feature-list" style="border-top: none;">
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-bullhorn" style="color: var(--bg-panel);"></i> <div>Instituição formal de <strong>Audiências Públicas descentralizadas</strong> (Sede, Cambaúba, Campo Verde, Bitu).</div></li>
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-handshake-angle" style="color: var(--bg-panel);"></i> <div>Criação e empoderamento do <strong>Conselho Municipal de Saneamento</strong> com cadeiras para a sociedade civil.</div></li>
-                            <li style="border-bottom: none;"><i class="fa-solid fa-scale-balanced" style="color: var(--bg-panel);"></i> <div>Estudo de viabilidade para criação de taxa/fundo municipal para garantir a <strong>sustentabilidade financeira</strong> do serviço.</div></li>
+                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-microchip" style="color: var(--gold);"></i> <div>Desenvolvimento de uma <strong>Plataforma de Tradução Cidadã</strong> alimentada por Inteligência Artificial.</div></li>
+                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-book-open-reader" style="color: var(--gold);"></i> <div>Disponibilização de um <strong>Acervo Explicado</strong> com o "resumo mastigado" das leis mais procuradas.</div></li>
+                            <li style="border-bottom: none;"><i class="fa-solid fa-arrow-pointer" style="color: var(--gold);"></i> <div><strong>Acesso gratuito, rápido e responsivo</strong>, pensado para funcionar na tela do celular do morador.</div></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div style="text-align: center; margin-top: 4rem;">
-                    <button onclick="navigate('ferramenta')" class="btn-primary">Avançar para Ferramenta Inovadora <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                    <button onclick="navigate('ferramenta')" class="btn-primary" style="font-size: 1.1rem; padding: 15px 30px; background-color: var(--accent); border-color: var(--accent);">Conheça a Ferramenta Criada <i class="fa-solid fa-wand-magic-sparkles" style="margin-left: 8px;"></i></button>
                 </div>
             </section>
         </div>
 
-        <!-- 5. FERRAMENTA -->
-        <div id="ferramenta" class="view"><section class="section"><h2>Ferramenta</h2></section></div>
+        <!-- 5. FERRAMENTA: SIMPLIFICA NOVORIZONTE -->
+        <div id="ferramenta" class="view">
+            
+            <section class="section" style="background-color: rgba(242, 232, 208, 0.4); border-bottom: 1px dashed var(--border-color);">
+                <div class="container">
+                    <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Simplifica Novorizonte</h2>
+                    <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
+                        Compreenda os seus direitos e deveres de forma clara. Consulte as leis mais procuradas mastigadas graficamente, ou use o "Tradutor Cidadão" para novos documentos.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section container">
+                <div class="grid-half">
+                    
+                    <!-- COLUNA 1: ACERVO DE LEIS (BOTÕES LINK) -->
+                    <div>
+                        <h3 style="font-size: 1.8rem; color: var(--accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-book-open-reader"></i> Acervo Explicado</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 2rem; color: var(--text-muted);">Clique nos botões abaixo para entender, de forma visual e didática, as principais leis que regem o saneamento e a convivência em Novorizonte.</p>
+                        
+                        <button class="btn-law" onclick="openModal('lei11445')">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <span><strong>Lei Federal nº 11.445/2007</strong><br><small style="color: var(--text-muted); font-weight: normal;">Marco Legal do Saneamento Básico</small></span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--border-color); font-size: 1rem;"></i>
+                        </button>
+
+                        <button class="btn-law" onclick="openModal('lei16')">
+                            <i class="fa-solid fa-file-contract"></i>
+                            <span><strong>Lei Municipal nº 16/1997</strong><br><small style="color: var(--text-muted); font-weight: normal;">Código de Posturas de Novorizonte</small></span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--border-color); font-size: 1rem;"></i>
+                        </button>
+
+                        <button class="btn-law" onclick="openModal('lei12305')">
+                            <i class="fa-solid fa-recycle" style="color: var(--gold);"></i>
+                            <span><strong>Lei Federal nº 12.305/2010</strong><br><small style="color: var(--text-muted); font-weight: normal;">Política Nac. de Resíduos Sólidos</small></span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--border-color); font-size: 1rem;"></i>
+                        </button>
+                    </div>
+
+                    <!-- COLUNA 2: TRADUTOR IA -->
+                    <div style="background-color: var(--bg-panel); padding: 2.5rem; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(58, 40, 24, 0.1);">
+                        <h3 style="font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.5rem;"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold);"></i> Tradutor Livre (IA)</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Tem outro documento em mãos? Cole o "juridiquês" abaixo e nossa Inteligência Artificial simplifica para você.</p>
+                        
+                        <textarea id="docInput" rows="6" placeholder="Ex: 'Fica instituída a taxa sob a alíquota de 2% do valor venal do imóvel...' " style="width: 100%; padding: 1.5rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: var(--font-main); font-size: 1rem; background-color: var(--bg-color); color: var(--text-main); resize: vertical; outline: none; transition: border-color 0.3s;"></textarea>
+                        
+                        <div id="msgErro" style="color: var(--accent); font-size: 0.9rem; font-weight: bold; margin-top: 10px; display: none;"><i class="fa-solid fa-circle-exclamation"></i> Por favor, cole algum texto antes de traduzir.</div>
+
+                        <button id="btnTraduzir" class="btn-primary" style="width: 100%; margin-top: 1.5rem; font-size: 1rem; padding: 12px;"><i class="fa-solid fa-bolt" style="margin-right: 8px;"></i> Descomplicar Texto</button>
+
+                        <!-- Estado de Carregamento -->
+                        <div id="loadingStatus" style="display: none; text-align: center; margin-top: 2rem;">
+                            <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--gold);"></i>
+                            <p style="margin-top: 0.5rem; font-family: var(--font-title); font-weight: 700; color: var(--text-muted);">Traduzindo...</p>
+                        </div>
+
+                        <!-- Resultado da IA -->
+                        <div id="resultadoArea" style="display: none; margin-top: 2rem; border-top: 2px dashed var(--border-color); padding-top: 2rem;">
+                            <h4 style="font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-bullhorn"></i> O que isso significa?</h4>
+                            <div id="textoSimplificado" style="background-color: rgba(255, 255, 255, 0.4); padding: 1.5rem; border-radius: 4px; border-left: 5px solid var(--accent); font-size: 1rem; line-height: 1.6; color: var(--text-main);">
+                                <!-- Texto gerado entra aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
     </div>
 
     <footer class="site-footer">
         <strong>Retratos de Novorizonte - MG</strong> &copy; 2026. Cartografia e Saneamento Vivo.
     </footer>
+
+    <!-- POP-UP (MODAL) DAS LEIS EXPLICADAS -->
+    <div class="modal-overlay" id="lawModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modalBody">
+                <!-- Conteúdo injetado via JS -->
+            </div>
+        </div>
+    </div>
 
     <script>
         // Menu Mobile
@@ -719,6 +704,241 @@
                 }
             }
         };
+
+        // ==========================================
+        // LÓGICA DO ACERVO DE LEIS (BOTÕES POP-UP)
+        // ==========================================
+        const lawData = {
+            'lei11445': {
+                title: 'Marco do Saneamento Básico',
+                subtitle: 'Lei Federal nº 11.445/2007',
+                icon: 'fa-faucet-drip',
+                color: 'var(--accent)',
+                content: `
+                    <p style="font-size: 1.05rem;">Esta lei é a regra máxima do Brasil que diz: <strong>todo cidadão tem direito ao saneamento.</strong></p>
+                    <p>Muitos acham que Saneamento é só água na torneira, mas essa lei explica que ele possui <strong>4 pilares obrigatórios</strong>:</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 2rem 0;">
+                        <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; text-align: center; border-bottom: 3px solid #3498db;">
+                            <i class="fa-solid fa-glass-water" style="color:#3498db; font-size:2.5rem; margin-bottom: 10px;"></i><br>
+                            <strong>Água Potável</strong><br><small>Tratada e na torneira</small>
+                        </div>
+                        <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--accent);">
+                            <i class="fa-solid fa-toilet" style="color:var(--accent); font-size:2.5rem; margin-bottom: 10px;"></i><br>
+                            <strong>Esgoto</strong><br><small>Coletado e Tratado (Sem fossas na rua)</small>
+                        </div>
+                        <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--gold);">
+                            <i class="fa-solid fa-dumpster" style="color:var(--gold); font-size:2.5rem; margin-bottom: 10px;"></i><br>
+                            <strong>Lixo / Resíduos</strong><br><small>Coleta, varrição e descarte correto</small>
+                        </div>
+                        <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--text-main);">
+                            <i class="fa-solid fa-cloud-showers-water" style="color:var(--text-main); font-size:2.5rem; margin-bottom: 10px;"></i><br>
+                            <strong>Drenagem</strong><br><small>Escoar água da chuva (Sem alagamentos)</small>
+                        </div>
+                    </div>
+                    <div class="info-box" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-circle-exclamation" style="color: var(--accent); margin-right: 10px;"></i>
+                        <strong>A Regra de Ouro:</strong> A lei obriga que a prefeitura crie um "Plano Municipal" (PMSB) ouvindo a população em reuniões (Audiências Públicas), para garantir que esses 4 serviços cheguem a todos.
+                    </div>
+                `
+            },
+            'lei16': {
+                title: 'Código de Posturas',
+                subtitle: 'Lei Municipal nº 16/1997',
+                icon: 'fa-book-open-reader',
+                color: 'var(--text-main)',
+                content: `
+                    <p style="font-size: 1.05rem;">O Código de Posturas é o <strong>"Manual de Boa Convivência"</strong> criado pelos vereadores de Novorizonte para organizar a vida na cidade.</p>
+                    <ul class="feature-list" style="border-top: none; margin-top: 1.5rem;">
+                        <li>
+                            <i class="fa-solid fa-broom" style="font-size: 1.5rem; color: var(--gold);"></i>
+                            <div><strong>Calçadas Limpas:</strong> É dever de cada morador manter limpa a calçada e a frente da sua casa, não sendo permitido jogar lixo, água servida ou entulhos na rua.</div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-helmet-safety" style="font-size: 1.5rem; color: var(--gold);"></i>
+                            <div><strong>Obras e Entulhos (RCC):</strong> Quem faz reforma não pode amontoar restos de tijolo e areia no meio da rua atrapalhando o trânsito. É preciso organização e destinação correta (caçambas).</div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-shop" style="font-size: 1.5rem; color: var(--gold);"></i>
+                            <div><strong>Comércio e Sossego:</strong> Regula horários de funcionamento, regras para letreiros e limite de barulho para garantir a paz dos vizinhos.</div>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 1rem; background-color: var(--bg-color); padding: 1rem; border-radius: 4px;"><strong>E se não cumprir?</strong> A prefeitura tem o poder de aplicar multas ou embargar obras de quem descumpre essas regras, visando sempre o bem-estar coletivo.</p>
+                `
+            },
+            'lei12305': {
+                title: 'Política de Resíduos Sólidos',
+                subtitle: 'Lei Federal nº 12.305/2010',
+                icon: 'fa-recycle',
+                color: 'var(--gold)',
+                content: `
+                    <p style="font-size: 1.05rem;">Conhecida como PNRS, esta é a lei que declarou <strong>guerra ao lixo acumulado de forma errada</strong>.</p>
+                    <div style="background-color: rgba(168, 124, 42, 0.1); border-left: 4px solid var(--gold); padding: 1.5rem; margin: 1.5rem 0;">
+                        <h4 style="margin-bottom: 10px; color: var(--text-main);"><i class="fa-solid fa-ban" style="color: var(--accent);"></i> Fim dos Aterros Controlados e Lixões</h4>
+                        <p style="margin: 0;">A lei proíbe os municípios de jogarem lixo em buracos (lixões) ou em locais sem proteção no solo (aterros controlados). Todo município deve ter ou participar de um <strong>Aterro Sanitário</strong> (local impermeabilizado que trata o chorume).</p>
+                    </div>
+                    <ul class="feature-list" style="border-top: none;">
+                        <li>
+                            <i class="fa-solid fa-people-carry-box" style="color: var(--text-main);"></i>
+                            <div><strong>O Catador é Profissional:</strong> A lei exige que as prefeituras apoiem a criação de Associações e Cooperativas, valorizando os catadores que antes trabalhavam invisíveis nas ruas.</div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-boxes-packing" style="color: var(--text-main);"></i>
+                            <div><strong>Logística Reversa:</strong> A responsabilidade não é só da prefeitura. Quem fabrica pneu, eletrônicos ou embalagens de veneno tem obrigação de criar um sistema para recolher isso de volta.</div>
+                        </li>
+                    </ul>
+                `
+            }
+        };
+
+        const modalOverlay = document.getElementById('lawModal');
+        
+        window.openModal = function(lawId) {
+            const data = lawData[lawId];
+            const body = document.getElementById('modalBody');
+            
+            body.innerHTML = `
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <i class="fa-solid ${data.icon}" style="font-size: 3.5rem; color: ${data.color};"></i>
+                </div>
+                <h2 style="text-align: center; font-size: 2rem; color: var(--text-main); margin-bottom: 0;">${data.title}</h2>
+                <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">${data.subtitle}</div>
+                ${data.content}
+            `;
+            modalOverlay.classList.add('active');
+        };
+
+        window.closeModal = function() {
+            modalOverlay.classList.remove('active');
+        };
+
+        // Fecha modal ao clicar no fundo escuro
+        modalOverlay.addEventListener('click', function(e) {
+            if(e.target === this) closeModal();
+        });
+
+        // ==========================================
+        // LÓGICA DO TRADUTOR LIVRE (Integração IA)
+        // ==========================================
+        const btnTraduzir = document.getElementById('btnTraduzir');
+        const docInput = document.getElementById('docInput');
+        const msgErro = document.getElementById('msgErro');
+        const loadingStatus = document.getElementById('loadingStatus');
+        const resultadoArea = document.getElementById('resultadoArea');
+        const textoSimplificado = document.getElementById('textoSimplificado');
+
+        btnTraduzir.addEventListener('click', async () => {
+            const textoComplexo = docInput.value.trim();
+            
+            // Validação simples
+            if (!textoComplexo) {
+                msgErro.style.display = 'block';
+                docInput.style.borderColor = 'var(--accent)';
+                return;
+            }
+            msgErro.style.display = 'none';
+            docInput.style.borderColor = 'var(--border-color)';
+
+            // Atualiza UI para Carregamento
+            btnTraduzir.disabled = true;
+            btnTraduzir.innerHTML = '<i class="fa-solid fa-hourglass-half fa-spin" style="margin-right: 8px;"></i> Processando...';
+            resultadoArea.style.display = 'none';
+            loadingStatus.style.display = 'block';
+
+            // Configuração da API do Gemini
+            const apiKey = ""; // Injetado em tempo de execução
+            const systemPrompt = "Você é um assistente jurídico cidadão focado em ajudar a população leiga da cidade de Novorizonte (MG). Sua tarefa é pegar trechos de leis, editais, ofícios ou documentos governamentais complexos e traduzi-los para uma linguagem extremamente simples, direta e acessível para o cidadão comum. Evite jargões, explique termos técnicos e resuma os pontos principais de forma amigável. Formate a resposta usando tópicos claros e negrito para destacar informações chave.";
+            
+            const payload = {
+                contents: [{ parts: [{ text: textoComplexo }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            // Função auxiliar de espera
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            // Estratégia de Exponential Backoff (1s, 2s, 4s, 8s, 16s)
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            let apiSucesso = false;
+            let resultData = null;
+
+            for (let i = 0; i <= delays.length; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+                    
+                    resultData = await response.json();
+                    apiSucesso = true;
+                    break; // Sai do loop se deu certo
+                } catch (error) {
+                    if (i < delays.length) {
+                        await sleep(delays[i]); // Tenta novamente após delay
+                    }
+                }
+            }
+
+            // Restaura botões
+            loadingStatus.style.display = 'none';
+            btnTraduzir.disabled = false;
+            btnTraduzir.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 8px;"></i> Simplificar Documento';
+
+            // Processa o resultado
+            resultadoArea.style.display = 'block';
+            
+            if (apiSucesso && resultData?.candidates?.[0]?.content?.parts?.[0]?.text) {
+                let textoFinal = resultData.candidates[0].content.parts[0].text;
+                // Formatação simples (converte **negrito** para tag <strong> e quebras de linha para <br>)
+                textoFinal = textoFinal.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                textoFinal = textoFinal.replace(/\n/g, '<br>');
+                
+                textoSimplificado.innerHTML = textoFinal;
+                textoSimplificado.style.borderLeftColor = 'var(--accent)';
+            } else {
+                textoSimplificado.innerHTML = "<strong><i class='fa-solid fa-triangle-exclamation'></i> Ocorreu um problema de conexão.</strong><br>Não conseguimos contatar nosso servidor de tradução no momento. Por favor, tente novamente mais tarde.";
+                textoSimplificado.style.borderLeftColor = 'var(--gold)';
+            }
+        });
+
+        // ==========================================
+        // LÓGICA DO SLIDESHOW DA GALERIA
+        // ==========================================
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (slides.length === 0) return; // Segurança
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex-1].style.display = "block";
+            if (dots[slideIndex-1]) {
+                dots[slideIndex-1].className += " active";
+            }
+        }
     </script>
 </body>
 </html>
