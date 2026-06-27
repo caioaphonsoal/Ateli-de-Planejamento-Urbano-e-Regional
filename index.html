@@ -210,7 +210,7 @@
                 <div class="container">
                     <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">O Território e seu Povo</h2>
                     <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
-                        Uma incursão pelas dinâmicas sociopolíticas que moldaram  Novorizonte, Minas Gerais.
+                        Uma viagem pelas hitórias e personagens que moldaram  Novorizonte, Minas Gerais.
                     </p>
                 </div>
             </section>
@@ -284,7 +284,7 @@
                 <div class="grid-half">
                     <div class="list-card">
                         <i class="fa-solid fa-layer-group list-card-icon"></i>
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">O Chão que Pisamos</h4>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">A topografia</h4>
                         <p>Geologicamente, a área pertence ao <strong>Orógeno Araçuaí</strong>. A paisagem divide-se entre as altas Chapadas (formadas pelo Grupo Macaúbas, ricas em quartzitos e coberturas detríticas) e a Depressão do Jequitinhonha (Formação Salinas, áreas dissecadas e colinosas).</p>
                         <p>Os solos predominantes nas áreas planas e agricultáveis das chapadas são os <em>Latossolos Vermelho-Amarelos</em>, enquanto <em>Cambissolos</em> e <em>Nitossolos</em> (antiga Terra Roxa) ocorrem nas encostas e porções mais baixas.</p>
                         <p><strong>Espeleologia:</strong> O município possui alto potencial para cavernas. A <em>Caverninha dos Dois Capão</em> é o único registro oficial, hoje sob ameaça devido ao plantio de eucaliptos nas bordas de sua entrada.</p>
@@ -411,7 +411,7 @@
                 <div class="grid-3">
                     <div style="text-align: center;">
                         <i class="fa-solid fa-futbol" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
-                        <h4 style="font-size: 1.2rem; margin-bottom: 1rem;">O Sagrado Futebol</h4>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 1rem;">O Futebol</h4>
                         <p style="font-size: 0.95rem;">Com 13 campos pelo município e o Estádio Oswaldo Romualdo, o Campeonato Municipal é o maior aglutinador social da cidade. Times históricos (Pequi, Entroncamento) e atuais promovem rivalidade ferrenha e união identitária incomparável.</p>
                     </div>
                     <div style="text-align: center;">
@@ -434,34 +434,14 @@
 
                 <div class="slideshow-container" style="max-width: 800px; position: relative; margin: 0 auto 4rem; border-radius: 8px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 10px 30px rgba(58, 40, 24, 0.2);">
                     
-                    <div class="mySlides fade">
-                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+1" alt="Foto 1" style="width: 100%; display: block; object-fit: cover; height: 450px;">
-                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
-                    </div>
+                    <!-- As imagens e os dots serão injetados dinamicamente via JavaScript aqui -->
+                    <div id="slidesWrapper"></div>
 
-                    <div class="mySlides fade">
-                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+2" alt="Foto 2" style="width: 100%; display: block; object-fit: cover; height: 450px;">
-                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
-                    </div>
+                    <a class="prev" onclick="plusSlides(-1)" style="cursor: pointer; position: absolute; top: 50%; left: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 0 4px 4px 0; user-select: none; background-color: rgba(58,40,24,0.6); z-index: 10;"><i class="fa-solid fa-chevron-left"></i></a>
+                    <a class="next" onclick="plusSlides(1)" style="cursor: pointer; position: absolute; top: 50%; right: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 4px 0 0 4px; user-select: none; background-color: rgba(58,40,24,0.6); z-index: 10;"><i class="fa-solid fa-chevron-right"></i></a>
 
-                    <div class="mySlides fade">
-                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+3" alt="Foto 3" style="width: 100%; display: block; object-fit: cover; height: 450px;">
-                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img src="https://placehold.co/800x500/D1BFA5/3A2818?text=Foto+4" alt="Foto 4" style="width: 100%; display: block; object-fit: cover; height: 450px;">
-                        <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color);">Fonte: fotos tiradas pelo autor</div>
-                    </div>
-
-                    <a class="prev" onclick="plusSlides(-1)" style="cursor: pointer; position: absolute; top: 50%; left: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 0 4px 4px 0; user-select: none; background-color: rgba(58,40,24,0.6);"><i class="fa-solid fa-chevron-left"></i></a>
-                    <a class="next" onclick="plusSlides(1)" style="cursor: pointer; position: absolute; top: 50%; right: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 4px 0 0 4px; user-select: none; background-color: rgba(58,40,24,0.6);"><i class="fa-solid fa-chevron-right"></i></a>
-
-                    <div style="position: absolute; bottom: 65px; width: 100%; text-align: center;">
-                        <span class="dot" onclick="currentSlide(1)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
-                        <span class="dot" onclick="currentSlide(2)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
-                        <span class="dot" onclick="currentSlide(3)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
-                        <span class="dot" onclick="currentSlide(4)" style="cursor: pointer; height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.6); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.5);"></span>
+                    <div id="dotsWrapper" style="position: absolute; bottom: 45px; width: 100%; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; padding: 0 20px; z-index: 10;">
+                        <!-- Pontinhos (dots) criados pelo JS entrarão aqui -->
                     </div>
                 </div>
 
@@ -532,7 +512,7 @@
             <section class="section container">
                 <div class="info-box" style="margin-bottom: 3rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
                     <i class="fa-solid fa-lightbulb" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px; display: block;"></i>
-                    <strong>O Diagnóstico Central:</strong> Durante as análises, o maior obstáculo identificado não foi apenas a falta de infraestrutura, mas a <strong>barreira da linguagem</strong>. A população de Novorizonte tem extrema dificuldade em encontrar, ler e compreender as leis, programas e projetos do município. Sem entender seus direitos e deveres, a participação popular torna-se nula.
+                    <strong>O Diagnóstico Central:</strong> Durante as análises, o maior obstáculo identificado não foi apenas a falta de infraestrutura, mas a <strong>barreira da linguagem</strong>. A população de Novorizonte tem dificuldade em encontrar, ler e compreender as leis, programas e projetos do município. Sem entender seus direitos e deveres, a participação popular torna-se nula.
                 </div>
 
                 <h3 style="font-size: 2.2rem; color: var(--text-main); text-align: center; margin-bottom: 3rem;">Eixos de Intervenção Estratégica</h3>
@@ -541,7 +521,7 @@
                     <!-- Eixo 1: Tradução -->
                     <div class="list-card" style="border-top: 4px solid var(--gold);">
                         <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-language" style="color: var(--gold); margin-right: 10px;"></i>1. Tradução do "Juridiquês"</h4>
-                        <p style="font-size: 0.95rem;">Erradicar a complexidade desnecessária nos comunicados públicos, garantindo que o cidadão comum compreenda as regras que regem sua cidade.</p>
+                        <p style="font-size: 0.95rem;">Eliminar a complexidade desnecessária nos comunicados públicos, garantindo que o cidadão comum compreenda as regras que regem sua cidade.</p>
                         <ul class="feature-list" style="border-top: none;">
                             <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Criação de resumos visuais e didáticos para as principais leis (como o Código de Posturas e o Marco do Saneamento).</div></li>
                             <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Adoção de diretrizes de <strong>Linguagem Simples</strong> em todos os novos editais e cartilhas da Prefeitura.</div></li>
@@ -554,7 +534,7 @@
                         <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-magnifying-glass" style="color: var(--accent); margin-right: 10px;"></i>2. Acesso e Transparência Ativa</h4>
                         <p style="font-size: 0.95rem;">Resolver o problema de "onde encontrar". O cidadão não deve ser um detetive para descobrir os projetos que impactam seu bairro.</p>
                         <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Centralização de informações sobre saneamento e obras em portais de fácil navegação (sem jargões contábeis).</div></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Centralização de informações sobre leis, projetos e obras em portais de fácil navegação (sem jargões contábeis).</div></li>
                             <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Distribuição de murais informativos físicos nos povoados (Cambaúba, Campo Verde) onde a internet é escassa.</div></li>
                             <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Uso de rádios locais e carros de som para divulgar resumos de projetos aprovados na câmara.</div></li>
                         </ul>
@@ -660,7 +640,7 @@
     </div>
 
     <footer class="site-footer">
-        <strong>Retratos de Novorizonte - MG</strong> &copy; 2026. Cartografia e Saneamento Vivo.
+        <strong>Retratos de Novorizonte - MG</strong> &copy; 2026. Caio A. Almeida.
     </footer>
 
     <!-- POP-UP (MODAL) DAS LEIS EXPLICADAS -->
@@ -907,6 +887,88 @@
         // ==========================================
         // LÓGICA DO SLIDESHOW DA GALERIA
         // ==========================================
+        const galleryImages = [
+            "https://i.postimg.cc/gnp7H5tL/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg",
+            "https://i.postimg.cc/HVmN9Kvs/18-Vista-da-Praca-da-Matriz.jpg",
+            "https://i.postimg.cc/hfnY1wZh/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg",
+            "https://i.postimg.cc/WhVywKYf/20240128-062940.jpg",
+            "https://i.postimg.cc/WFr9M6Mm/20241123-153457.jpg",
+            "https://i.postimg.cc/RJBgG6dv/20250418-110009.jpg",
+            "https://i.postimg.cc/Wqv5SF8t/20250419-063634.jpg",
+            "https://i.postimg.cc/t73SJkR0/20250728-072350.jpg",
+            "https://i.postimg.cc/WtgKrj8q/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg",
+            "https://i.postimg.cc/TpxsJSNK/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg",
+            "https://i.postimg.cc/kBCHvZYb/29-Avenida-Salinas.jpg",
+            "https://i.postimg.cc/w7zrQP4c/30-Avenida-Salinas.jpg",
+            "https://i.postimg.cc/HVmN9Kvb/33-Gameleira.jpg",
+            "https://i.postimg.cc/hzxC9b9s/35-Aerea-Tronca-2.png",
+            "https://i.postimg.cc/pyvNsppH/arq-4387.jpg",
+            "https://i.postimg.cc/3WhMtdd3/arq-4388.jpg",
+            "https://i.postimg.cc/s1zFTvvx/arq-4389.jpg",
+            "https://i.postimg.cc/WtVR5hh4/arq-4397.jpg",
+            "https://i.postimg.cc/14Sxvffw/DSC00001.jpg",
+            "https://i.postimg.cc/nMGygpDK/DSC01177.jpg",
+            "https://i.postimg.cc/jC4pmt7Z/DSC01199.jpg",
+            "https://i.postimg.cc/D8f9KHQ3/DSC01337.jpg",
+            "https://i.postimg.cc/jL8Gqcv5/DSC01339.jpg",
+            "https://i.postimg.cc/2VHPjGTh/DSC01344.jpg",
+            "https://i.postimg.cc/Ln4cMwkn/DSC06004.jpg",
+            "https://i.postimg.cc/tsY8s6mB/DSC06152.jpg",
+            "https://i.postimg.cc/dhLghCxs/DSC06153.jpg",
+            "https://i.postimg.cc/GHMZ3KzY/Foto-Praca-2005.jpg",
+            "https://i.postimg.cc/v1njzsyj/IMG-20171228-163145329-(1)-(1).jpg",
+            "https://i.postimg.cc/zb1Q2cDp/IMG-20180421-103542037.jpg",
+            "https://i.postimg.cc/VrchZVL1/IMG-20190615-WA0006.jpg",
+            "https://i.postimg.cc/9RjkgnFc/IMG-20200104-WA0050.jpg",
+            "https://i.postimg.cc/2bft9K8S/IMG-20210712-WA0010.jpg",
+            "https://i.postimg.cc/r0LHZPFp/IMG-20210712-WA0012.jpg",
+            "https://i.postimg.cc/VrBVxWdm/IMG-20231103-WA0027.jpg",
+            "https://i.postimg.cc/hzqYZ54s/IMG-20240807-124609-394.jpg",
+            "https://i.postimg.cc/zb1Q2cDx/IMG-20240807-125038-138.webp",
+            "https://i.postimg.cc/34Hqfcr6/IMG-20240807-125038-238.webp",
+            "https://i.postimg.cc/p5W6R5jN/IMG-20250809-151625406.jpg",
+            "https://i.postimg.cc/6TtSdgm5/IMG-20250809-151736639.jpg",
+            "https://i.postimg.cc/WF6HBwhh/IMG-20250819-WA0013.jpg",
+            "https://i.postimg.cc/vgLNJtc1/IMG-20260113-WA0006.jpg",
+            "https://i.postimg.cc/JDc2f5Gc/IMG-20260113-WA0008.jpg",
+            "https://i.postimg.cc/gXqTCHnV/IMG-20260606-WA0006.jpg",
+            "https://i.postimg.cc/Q9ky2JHb/IMG-20260606-WA0008.jpg",
+            "https://i.postimg.cc/H8Yhd8y8/IMG-20260606-WA0010.jpg",
+            "https://i.postimg.cc/d7CXBYFL/IMG-5057.jpg",
+            "https://i.postimg.cc/R3t8RBm2/IMG-5091.jpg",
+            "https://i.postimg.cc/XBjz4BCL/Primeiras-Construcoes-de-Novorizonte.jpg",
+            "https://i.postimg.cc/RJSD4JHs/Residencia-do-Senhor-Saul-de-Almeida.jpg",
+            "https://i.postimg.cc/zy8V5Jtf/1.jpg",
+            "https://i.postimg.cc/yDskBVQ8/2.jpg",
+            "https://i.postimg.cc/tspYyXST/3.jpg"
+        ];
+
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const dotsWrapper = document.getElementById('dotsWrapper');
+
+        if(slidesWrapper && dotsWrapper) {
+            galleryImages.forEach((url, index) => {
+                // Cria o Slide HTML
+                const slide = document.createElement('div');
+                slide.className = 'mySlides fade';
+                slide.innerHTML = `
+                    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-family: var(--font-main); z-index: 5;">
+                        <i class="fa-solid fa-camera"></i> ${index + 1} / ${galleryImages.length}
+                    </div>
+                    <img src="${url}" onerror="this.src='https://placehold.co/800x500/D1BFA5/3A2818?text=Imagem+Indisponível'" alt="Acervo Fotográfico ${index + 1}" style="width: 100%; display: block; object-fit: cover; height: 450px;">
+                    <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color); z-index: 5;">Acervo: Retratos de Novorizonte</div>
+                `;
+                slidesWrapper.appendChild(slide);
+
+                // Cria o Pontinho (Dot) HTML
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.cssText = 'cursor: pointer; height: 8px; width: 8px; margin: 3px; background-color: rgba(255,255,255,0.7); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.5);';
+                dot.onclick = () => currentSlide(index + 1);
+                dotsWrapper.appendChild(dot);
+            });
+        }
+
         let slideIndex = 1;
         showSlides(slideIndex);
 
