@@ -654,6 +654,9 @@
     </div>
 
     <script>
+        // A chave da API deve ficar no escopo global para o ambiente injetar corretamente
+        const apiKey = "";
+
         // Menu Mobile
         const menuBtn = document.getElementById('menuBtn');
         const navMenu = document.getElementById('navMenu');
@@ -825,8 +828,6 @@
             resultadoArea.style.display = 'none';
             loadingStatus.style.display = 'block';
 
-            // Configuração da API do Gemini
-            const apiKey = ""; // Injetado em tempo de execução
             const systemPrompt = "Você é um assistente jurídico cidadão focado em ajudar a população leiga da cidade de Novorizonte (MG). Sua tarefa é pegar trechos de leis, editais, ofícios ou documentos governamentais complexos e traduzi-los para uma linguagem extremamente simples, direta e acessível para o cidadão comum. Evite jargões, explique termos técnicos e resuma os pontos principais de forma amigável. Formate a resposta usando tópicos claros e negrito para destacar informações chave.";
             
             const payload = {
@@ -853,6 +854,12 @@
                     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
                     
                     resultData = await response.json();
+                    
+                    // Trata casos em que a IA responde mas bloqueia por segurança interna
+                    if (resultData.candidates && resultData.candidates[0].finishReason !== 'STOP' && resultData.candidates[0].finishReason !== undefined) {
+                        throw new Error(`Bloqueio de segurança: ${resultData.candidates[0].finishReason}`);
+                    }
+
                     apiSucesso = true;
                     break; // Sai do loop se deu certo
                 } catch (error) {
@@ -865,7 +872,7 @@
             // Restaura botões
             loadingStatus.style.display = 'none';
             btnTraduzir.disabled = false;
-            btnTraduzir.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 8px;"></i> Simplificar Documento';
+            btnTraduzir.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 8px;"></i> Descomplicar Texto';
 
             // Processa o resultado
             resultadoArea.style.display = 'block';
@@ -879,7 +886,7 @@
                 textoSimplificado.innerHTML = textoFinal;
                 textoSimplificado.style.borderLeftColor = 'var(--accent)';
             } else {
-                textoSimplificado.innerHTML = "<strong><i class='fa-solid fa-triangle-exclamation'></i> Ocorreu um problema de conexão.</strong><br>Não conseguimos contatar nosso servidor de tradução no momento. Por favor, tente novamente mais tarde.";
+                textoSimplificado.innerHTML = "<strong><i class='fa-solid fa-triangle-exclamation'></i> Ocorreu um problema na tradução.</strong><br>Não conseguimos contatar a Inteligência Artificial no momento. Verifique se o conteúdo é apropriado ou tente novamente mais tarde.";
                 textoSimplificado.style.borderLeftColor = 'var(--gold)';
             }
         });
