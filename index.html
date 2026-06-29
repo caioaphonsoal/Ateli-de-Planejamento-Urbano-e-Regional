@@ -197,7 +197,7 @@
         <nav class="header-nav" id="navMenu">
             <a onclick="navigate('apresentacao')" class="nav-link" data-target="apresentacao">APRESENTAÇÃO</a>
             <a onclick="navigate('contexto')" class="nav-link active" data-target="contexto">CONTEXTO</a>
-            <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">CARTOGRAFIA E AMOSTRAGEM</a>
+            <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">TRABALHOS NOVORIZONTINOS</a>
             <a onclick="navigate('plano-acao')" class="nav-link" data-target="plano-acao">PLANO DE AÇÃO</a>
             <a onclick="navigate('ferramenta')" class="nav-link" data-target="ferramenta">FERRAMENTA</a>
         </nav>
@@ -481,47 +481,101 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 4rem;">
-                    <button onclick="navigate('cartografia')" class="btn-primary">Avançar para Cartografia e Amostragem <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                    <button onclick="navigate('cartografia')" class="btn-primary">Avançar para Trabalhos Novorizontinos <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
                 </div>
 
             </section>
         </div>
 
-        <!-- 3. CARTOGRAFIA -->
+        <!-- 3. TRABALHOS NOVORIZONTINOS -->
         <div id="cartografia" class="view">
-            <section class="section container" style="padding-top: 60px;">
-                <h2 class="section-title">Mapas Síntese e Temáticos</h2>
+            
+            <section class="section" style="background-color: rgba(242, 232, 208, 0.4); border-bottom: 1px dashed var(--border-color);">
+                <div class="container">
+                    <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Trabalhos Novorizontinos</h2>
+                    <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
+                        Acervo de cartografia, pesquisas, livros e estudos acadêmicos dedicados a compreender, registrar e preservar a memória e a ciência de Novorizonte.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section container">
                 
-                <div class="grid-3" style="margin-top: 3rem;">
-                    <!-- Placeholder Mapa 1 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 1]</span>
+                <!-- BLOCOS DE CARTOGRAFIA -->
+                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 2rem;"><i class="fa-solid fa-map-location-dot"></i> Mapas e Diagnóstico Territorial</h3>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: var(--text-muted);">Explore a delimitação territorial do município, seus distritos, povoados e as divisas com as cidades vizinhas (Salinas, Rio Pardo de Minas, etc).</p>
+                
+                <div class="map-wrapper" style="height: 500px; margin-bottom: 3rem; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(58, 40, 24, 0.15);">
+                    <div id="leaflet-map-macro" style="width: 100%; height: 100%;"></div>
+                </div>
+
+                <div class="grid-half" style="margin-bottom: 3rem;">
+                    <div style="background-color: rgba(209, 191, 165, 0.3); height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted);"><i class="fa-solid fa-image"></i> Mapa Hídrico / Bacias</span>
                     </div>
+                    <div style="background-color: rgba(209, 191, 165, 0.3); height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
+                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted);"><i class="fa-solid fa-image"></i> Mapa de Cobertura Vegetal</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- ACERVO BIBLIOGRÁFICO / TRABALHOS -->
+                <h3 style="font-size: 2.2rem; color: var(--gold); text-align: center; margin-bottom: 3rem;"><i class="fa-solid fa-book-bookmark"></i> Acervo Científico e Literário</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto;">
                     
-                    <!-- Placeholder Mapa 2 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 2]</span>
+                    <!-- Trabalho 1: Livro Henrique Neyffer -->
+                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--gold);">
+                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
+                            <span style="background-color: rgba(168, 124, 42, 0.1); color: var(--gold); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-book"></i> Livro (Edição do Autor)</span>
+                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">A cada dia, um novo horizonte</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Henrique Neyffer de Souza (2024)</p>
+                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
+                                <strong>Resumo da Obra:</strong> Um minucioso levantamento documental e literário sobre o município (ISBN 978-65-01-21568-6). A pesquisa estrutura-se em grandes eixos: História (desde a ocupação regional e passagens bandeirantes até a emancipação), Geografia, Demografia, Política, Economia, Cultura e Infraestrutura. Traz rico embasamento em órgãos oficiais (IBGE, CPRM, Fundação João Pinheiro) e resgata memórias fundadoras, tornando-se uma verdadeira enciclopédia da identidade novorizontina.
+                            </div>
+                            
+                            <a href="https://www.amazon.sg/cada-dia-novo-horizonte-Portuguese/dp/B0DLJ3HWD3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.mEUTH2TxTfeoyzVOc8IeBg.CZZnSOrlcuwBmkJIvUB5KkzuJEmGoNc4VeIRDl9mCms&dib_tag=se&qid=1782775007&refinements=p_27%3AHenrique+Neyffer+de+Souza&s=books&sr=1-1" target="_blank" class="btn-primary" style="background-color: var(--gold); border-color: var(--gold);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Obra na Amazon</a>
+                        </div>
+                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
+                            <i class="fa-solid fa-book-journal-whills" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
+                        </div>
                     </div>
 
-                    <!-- Placeholder Mapa 3 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 3]</span>
+                    <!-- Trabalho 2: TCC Química -->
+                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--accent);">
+                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
+                            <span style="background-color: rgba(154, 42, 26, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-graduation-cap"></i> TCC - Licenciatura em Química</span>
+                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">A Química Presente na Agricultura Familiar: Um Estudo de Caso em Novorizonte/MG</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Eliesio Lucas Souza Santos (IFNMG - Campus Salinas, 2025)</p>
+                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
+                                <strong>Resumo da Obra:</strong> O trabalho investiga como o conhecimento empírico do agricultor familiar cruza com o embasamento científico da Química. A pesquisa traz entrevistas locais e avalia práticas agroecológicas no controle de pragas — como o uso da calda bordalesa para fungos, calda de neem contra lagartas, calda de sabão e plantas repelentes. Destaca ainda como o conhecimento químico justifica técnicas de preparo do solo, a exemplo do uso do cálcio para neutralizar a acidez da terra, unindo saber popular e ciência.
+                            </div>
+                            
+                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" class="btn-primary" style="background-color: var(--accent); border-color: var(--accent);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Pesquisa no Drive</a>
+                        </div>
+                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
+                            <i class="fa-solid fa-flask-vial" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
+                        </div>
                     </div>
 
-                    <!-- Placeholder Mapa 4 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 4]</span>
+                    <!-- Trabalho 3: TCC Engenharia Florestal -->
+                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--text-main);">
+                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
+                            <span style="background-color: rgba(58, 40, 24, 0.1); color: var(--text-main); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-tree"></i> TCC - Engenharia Florestal</span>
+                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">Diagnóstico da Arborização do Município de Novorizonte - MG</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Pablo Santos Pereira (IFNMG - Campus Salinas, 2023)</p>
+                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
+                                <strong>Resumo da Obra:</strong> Um estudo técnico com foco na avaliação qualitativa e viária da arborização urbana de Novorizonte. A pesquisa mapeia a condição vital, adequação e acessibilidade das árvores plantadas nas ruas, praças e parques da cidade. Através desse diagnóstico, o trabalho fornece diretrizes essenciais para o poder público realizar um planejamento paisagístico e urbano eficiente, reduzindo conflitos com fiações elétricas e calçamentos, enquanto promove qualidade ambiental.
+                            </div>
+                            
+                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" class="btn-primary" style="background-color: var(--text-main); border-color: var(--text-main);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Pesquisa no Drive</a>
+                        </div>
+                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
+                            <i class="fa-solid fa-leaf" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
+                        </div>
                     </div>
 
-                    <!-- Placeholder Mapa 5 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 5]</span>
-                    </div>
-
-                    <!-- Placeholder Mapa 6 -->
-                    <div style="height: 400px; background-color: rgba(209, 191, 165, 0.3); display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 2px dashed var(--border-color);">
-                        <span style="font-family: var(--font-title); font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">[Espaço para Mapa 6]</span>
-                    </div>
                 </div>
 
                 <div style="text-align: center; margin-top: 4rem;">
