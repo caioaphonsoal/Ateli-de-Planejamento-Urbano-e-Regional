@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retratos Novorizonte, MG | Cartografia</title>
+    <title>Retratos de Novorizonte — MG | Sertão, memória e território</title>
     
     <!-- Fontes (Identidade Cartográfica) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -184,6 +184,1215 @@
         .dot.active, .dot:hover { background-color: var(--accent) !important; }
         .fade { animation-name: fade; animation-duration: 1.5s; }
         @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
+
+
+        /* =========================================================
+           REPAGINAÇÃO EDITORIAL — RETRATOS DE NOVORIZONTE
+           ========================================================= */
+        :root {
+            --bg-color: #e9ddc5;
+            --bg-panel: #f7f0e2;
+            --text-main: #2f2118;
+            --text-muted: rgba(47, 33, 24, 0.68);
+            --border-color: rgba(87, 61, 39, 0.18);
+            --accent: #9f2f20;
+            --gold: #9d762e;
+            --header-height: 74px;
+            --shadow-soft: 0 20px 60px rgba(47, 33, 24, 0.10);
+            --shadow-card: 0 16px 45px rgba(47, 33, 24, 0.08);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background:
+                radial-gradient(circle at 8% 2%, rgba(159, 47, 32, 0.08), transparent 30rem),
+                radial-gradient(circle at 92% 18%, rgba(157, 118, 46, 0.10), transparent 34rem),
+                var(--bg-color);
+            background-image: none;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: .28;
+            background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+        }
+
+        .site-header {
+            top: 14px;
+            left: 50%;
+            width: min(1500px, calc(100% - 28px));
+            height: var(--header-height);
+            padding: 0 18px 0 24px;
+            transform: translateX(-50%);
+            border: 1px solid rgba(255,255,255,.55);
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 22px;
+            background: rgba(247, 240, 226, 0.86);
+            box-shadow: 0 12px 40px rgba(47, 33, 24, 0.12);
+        }
+        .header-logo { font-size: .96rem; gap: 10px; white-space: nowrap; }
+        .header-logo i {
+            width: 36px; height: 36px; display: grid; place-items: center;
+            color: var(--bg-panel); background: var(--text-main); border-radius: 50%;
+        }
+        .header-nav { gap: 5px; }
+        .nav-link {
+            padding: 11px 14px;
+            border-radius: 999px;
+            font-size: .72rem;
+            letter-spacing: .08em;
+        }
+        .nav-link::after { display: none; }
+        .nav-link:hover { background: rgba(159, 47, 32, .08); }
+        .nav-link.active { color: var(--bg-panel); background: var(--text-main); }
+
+        .view { padding-top: 102px; }
+        #apresentacao { padding-top: 0; min-height: 100svh; }
+        .container { max-width: 1320px; }
+        .section { padding: 100px 5vw; }
+
+        /* Capa */
+        #apresentacao .hero-bg-slide { filter: saturate(.78) contrast(1.05); }
+        #apresentacao .hero-bg-overlay {
+            background:
+                linear-gradient(90deg, rgba(29, 21, 16, .92) 0%, rgba(29, 21, 16, .69) 47%, rgba(29, 21, 16, .20) 100%),
+                linear-gradient(0deg, rgba(29, 21, 16, .55), transparent 48%);
+        }
+        .hero {
+            min-height: 100svh;
+            padding: 150px 5vw 70px;
+            align-items: stretch;
+            justify-content: space-between;
+            border-bottom: none;
+            text-align: left;
+        }
+        .hero-editorial {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
+            gap: clamp(40px, 7vw, 110px);
+            align-items: end;
+            margin: auto 0;
+        }
+        .hero-copy { max-width: 870px; }
+        .hero-kicker {
+            display: inline-flex; align-items: center; gap: 10px;
+            color: #f2dca8; font-family: var(--font-title); font-size: .76rem;
+            font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+            margin-bottom: 26px;
+        }
+        .hero-title {
+            max-width: none;
+            margin: 0;
+            color: #fff8eb;
+            font-size: clamp(4rem, 8.5vw, 8rem);
+            line-height: .86;
+            letter-spacing: -.055em;
+            text-shadow: 0 15px 40px rgba(0,0,0,.24);
+        }
+        .hero-title em {
+            color: #d5ad5b;
+            font-weight: 400;
+        }
+        .hero-lead {
+            max-width: 700px;
+            margin: 34px 0 0;
+            color: rgba(255, 248, 235, .78);
+            font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+            line-height: 1.7;
+            text-align: left;
+        }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+        .btn-primary, .btn-secondary {
+            min-height: 50px;
+            padding: 14px 22px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            border-radius: 999px;
+            font-family: var(--font-title);
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+        .btn-primary { border: 1px solid var(--accent); background: var(--accent); color: #fff8eb; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(159,47,32,.25); }
+        .btn-secondary { border: 1px solid rgba(255,255,255,.34); background: rgba(255,255,255,.08); color: #fff8eb; backdrop-filter: blur(10px); }
+        .btn-secondary:hover { transform: translateY(-3px); background: rgba(255,255,255,.17); }
+
+        .hero-index {
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,.22);
+            border-radius: 24px;
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(18px);
+            color: #fff8eb;
+            box-shadow: 0 25px 60px rgba(0,0,0,.18);
+        }
+        .hero-index-head {
+            display: flex; justify-content: space-between;
+            padding: 4px 7px 15px;
+            color: rgba(255,255,255,.58);
+            font-family: var(--font-title);
+            font-size: .68rem;
+            letter-spacing: .12em;
+        }
+        .hero-index-item {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 18px 8px;
+            border-top: 1px solid rgba(255,255,255,.15);
+        }
+        .hero-index-item strong { color: #d5ad5b; font-family: var(--font-title); font-size: 1.35rem; }
+        .hero-index-item span { display: block; font-family: var(--font-title); font-weight: 700; font-size: .93rem; }
+        .hero-index-item small { display: block; color: rgba(255,255,255,.56); margin-top: 3px; font-size: .76rem; }
+        .hero-scroll {
+            width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            color: rgba(255,255,255,.55);
+            font-family: var(--font-title); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+        }
+        .hero-scroll i { animation: scrollHint 1.8s ease-in-out infinite; }
+        @keyframes scrollHint { 0%,100% { transform: translateY(-3px); } 50% { transform: translateY(5px); } }
+
+        /* Capítulos internos */
+        .view > .section:first-child {
+            position: relative;
+            min-height: 360px;
+            display: flex;
+            align-items: flex-end;
+            padding-top: 120px;
+            padding-bottom: 72px;
+            overflow: hidden;
+            background:
+                linear-gradient(130deg, rgba(47,33,24,.98), rgba(82,52,32,.92)) !important;
+            border-bottom: none !important;
+        }
+        .view > .section:first-child::before {
+            content: '';
+            position: absolute;
+            width: 520px; height: 520px;
+            right: -140px; top: -260px;
+            border: 1px solid rgba(213,173,91,.30);
+            border-radius: 50%;
+            box-shadow: 0 0 0 55px rgba(213,173,91,.05), 0 0 0 110px rgba(213,173,91,.035);
+        }
+        .view > .section:first-child::after {
+            content: 'NOVORIZONTE · MG';
+            position: absolute;
+            right: 5vw; bottom: 26px;
+            color: rgba(255,255,255,.22);
+            font-family: var(--font-title);
+            font-size: .65rem;
+            letter-spacing: .22em;
+        }
+        .view > .section:first-child .container { position: relative; z-index: 1; width: 100%; }
+        .view > .section:first-child .section-title {
+            max-width: 950px;
+            margin-left: 0 !important;
+            color: #fff8eb;
+            text-align: left;
+            line-height: 1.02;
+            letter-spacing: -.035em;
+        }
+        .view > .section:first-child .subtitle {
+            max-width: 760px !important;
+            margin-left: 0 !important;
+            margin-bottom: 0;
+            color: rgba(255,248,235,.63);
+            text-align: left;
+            font-style: normal;
+        }
+
+        h3[style*="text-align: center"] {
+            position: relative;
+            max-width: 900px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            line-height: 1.18;
+            letter-spacing: -.025em;
+        }
+        h3[style*="text-align: center"]::after {
+            content: '';
+            display: block;
+            width: 56px; height: 3px;
+            margin: 18px auto 0;
+            border-radius: 999px;
+            background: currentColor;
+            opacity: .36;
+        }
+
+        .grid-half { gap: clamp(28px, 4vw, 64px); }
+        .grid-3 { gap: 24px; }
+        .list-card {
+            border: 1px solid rgba(87,61,39,.14);
+            border-radius: var(--radius-md);
+            background: rgba(247,240,226,.88);
+            box-shadow: var(--shadow-card);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+        .list-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(159,47,32,.25);
+            box-shadow: 0 24px 60px rgba(47,33,24,.14);
+        }
+        .info-box {
+            border-left: none;
+            border-radius: 16px;
+            background: rgba(159,47,32,.075);
+            box-shadow: inset 0 0 0 1px rgba(159,47,32,.12);
+        }
+        .divider { margin: 6rem 0; opacity: .7; }
+        .divider::before { content: '✦  ·  ✦'; letter-spacing: .35em; }
+
+        .map-wrapper { border: none; border-radius: 22px !important; box-shadow: var(--shadow-soft) !important; }
+        .btn-law { border-radius: 14px; box-shadow: none; }
+        .btn-law:hover { transform: translateY(-3px); }
+        .modal-content { border: 1px solid rgba(213,173,91,.45); border-radius: 22px; }
+
+        .site-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            padding: 34px max(5vw, 24px);
+            background: var(--text-main);
+            color: rgba(255,248,235,.72);
+            border-top: none;
+            text-align: left;
+        }
+        .site-footer div { display: flex; flex-direction: column; gap: 4px; }
+        .site-footer strong { color: #fff8eb; font-size: .9rem; }
+        .site-footer span, .site-footer small { color: rgba(255,248,235,.46); font-size: .68rem; letter-spacing: .08em; }
+
+        /* Página dedicada — Galeria de Imagens */
+        .chapter-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-family: var(--font-title);
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+        .context-next-actions {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+            gap: clamp(30px, 6vw, 90px);
+            align-items: center;
+            margin-top: 6rem;
+            padding: clamp(28px, 5vw, 58px);
+            border: 1px solid rgba(87,61,39,.14);
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, rgba(247,240,226,.96), rgba(236,218,184,.78));
+            box-shadow: var(--shadow-soft);
+        }
+        .context-next-actions h3 {
+            margin: 0 0 14px;
+            font-size: clamp(1.7rem, 3vw, 2.7rem);
+            line-height: 1.12;
+        }
+        .context-next-actions p { max-width: 720px; margin: 0; text-align: left; color: var(--text-muted); }
+        .context-next-buttons { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+        .btn-inline {
+            min-height: 46px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-main);
+            font-family: var(--font-title);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+        .btn-inline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        .gallery-page-content { padding-top: 78px; }
+        .gallery-overview {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 40px;
+            align-items: end;
+            margin-bottom: 36px;
+        }
+        .gallery-overview h3 {
+            max-width: 800px;
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.7rem);
+            line-height: 1.05;
+            letter-spacing: -.04em;
+        }
+        .gallery-stat {
+            min-width: 150px;
+            padding-left: 28px;
+            border-left: 1px solid var(--border-color);
+        }
+        .gallery-stat strong {
+            display: block;
+            color: var(--accent);
+            font-family: var(--font-title);
+            font-size: clamp(2.8rem, 5vw, 4.4rem);
+            line-height: .9;
+        }
+        .gallery-stat span {
+            display: block;
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: .74rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .gallery-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            overflow: hidden;
+            border: 1px solid rgba(87,61,39,.16);
+            border-radius: var(--radius-lg);
+            background: var(--text-main);
+            box-shadow: 0 28px 70px rgba(47,33,24,.2);
+        }
+        .gallery-stage {
+            position: relative;
+            min-height: 610px;
+            overflow: hidden;
+            background: #1d1510;
+        }
+        .gallery-stage #slidesWrapper,
+        .gallery-stage .mySlides { height: 100%; min-height: 610px; }
+        .gallery-stage .mySlides { position: relative; }
+        .gallery-stage .mySlides img {
+            width: 100%;
+            height: 610px;
+            display: block;
+            object-fit: cover;
+        }
+        .gallery-image-link { display: block; height: 100%; cursor: zoom-in; }
+        .gallery-caption {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 42px 28px 24px;
+            color: rgba(255,248,235,.76);
+            background: linear-gradient(0deg, rgba(20,14,10,.92), transparent);
+            z-index: 4;
+        }
+        .gallery-caption strong { color: #fff8eb; font-family: var(--font-title); font-size: .9rem; }
+        .gallery-caption span { font-size: .76rem; }
+        .gallery-count {
+            position: absolute;
+            top: 22px; left: 22px;
+            z-index: 6;
+            padding: 9px 13px;
+            border: 1px solid rgba(255,255,255,.24);
+            border-radius: 999px;
+            background: rgba(20,14,10,.48);
+            color: #fff8eb;
+            backdrop-filter: blur(12px);
+            font-family: var(--font-title);
+            font-size: .68rem;
+            letter-spacing: .08em;
+        }
+        .gallery-control {
+            position: absolute;
+            top: 50%;
+            z-index: 8;
+            width: 52px; height: 52px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 50%;
+            background: rgba(20,14,10,.50);
+            color: #fff8eb;
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: .25s ease;
+        }
+        .gallery-control:hover { background: var(--accent) !important; transform: translateY(-50%) scale(1.06); }
+        .gallery-control.prev { left: 20px; }
+        .gallery-control.next { right: 20px; }
+        .gallery-dots {
+            position: absolute;
+            z-index: 8;
+            left: 50%; bottom: 21px;
+            max-width: calc(100% - 260px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            transform: translateX(-50%);
+        }
+        .gallery-note {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 38px 32px;
+            color: rgba(255,248,235,.66);
+            background: linear-gradient(160deg, #38261b, #2f2118);
+        }
+        .gallery-note .chapter-eyebrow { color: #d5ad5b; }
+        .gallery-note h4 { margin-bottom: 18px; color: #fff8eb; font-size: 1.65rem; line-height: 1.16; }
+        .gallery-note p { text-align: left; font-size: .94rem; }
+        .gallery-note-rule { width: 45px; height: 2px; margin: 12px 0 24px; background: #d5ad5b; opacity: .7; }
+        .gallery-note-small { color: rgba(255,248,235,.46); font-size: .78rem !important; }
+        .gallery-note-small i { margin-right: 7px; color: #d5ad5b; }
+        .gallery-thumbs-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin: 80px 0 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .gallery-thumbs-heading span {
+            color: var(--accent);
+            font-family: var(--font-title);
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+        .gallery-thumbs-heading h3 { margin: 6px 0 0; font-size: clamp(1.8rem, 3vw, 2.8rem); }
+        .gallery-thumbs-heading small { max-width: 300px; color: var(--text-muted); text-align: right; }
+        .gallery-thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .gallery-thumb {
+            position: relative;
+            aspect-ratio: 1 / .78;
+            overflow: hidden;
+            padding: 0;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+        }
+        .gallery-thumb:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(47,33,24,.16); }
+        .gallery-thumb.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(159,47,32,.12); }
+        .gallery-thumb img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease; }
+        .gallery-thumb:hover img { transform: scale(1.06); }
+        .gallery-thumb span {
+            position: absolute;
+            right: 7px; bottom: 7px;
+            min-width: 26px; height: 26px;
+            display: grid; place-items: center;
+            border-radius: 50%;
+            background: rgba(20,14,10,.68);
+            color: #fff;
+            font-family: var(--font-title);
+            font-size: .59rem;
+        }
+        .gallery-next { display: flex; justify-content: center; margin-top: 64px; }
+
+        @media (max-width: 1180px) {
+            .menu-toggle { display: block; }
+            .header-nav {
+                position: absolute;
+                top: calc(var(--header-height) + 8px);
+                left: 0;
+                width: 100%;
+                display: none;
+                flex-direction: column;
+                padding: 12px;
+                border: 1px solid rgba(255,255,255,.55);
+                border-radius: 18px;
+                background: rgba(247,240,226,.98);
+                box-shadow: 0 16px 40px rgba(47,33,24,.16);
+            }
+            .header-nav.open { display: flex; }
+            .nav-link { width: 100%; padding: 13px 16px; border-radius: 12px; text-align: center; }
+        }
+
+        @media (max-width: 968px) {
+            .site-header { top: 8px; width: calc(100% - 16px); border-radius: 18px; }
+            .header-nav {
+                top: calc(var(--header-height) + 8px);
+                left: 0;
+                border-radius: 18px;
+                padding: 12px;
+                gap: 2px;
+            }
+            .nav-link { padding: 13px 16px; border-radius: 12px; }
+            .hero { padding-top: 126px; }
+            .hero-editorial { grid-template-columns: 1fr; align-items: center; }
+            .hero-index { max-width: 620px; }
+            .hero-title { font-size: clamp(3.7rem, 16vw, 6.6rem); }
+            .view > .section:first-child { min-height: 310px; }
+            .context-next-actions { grid-template-columns: 1fr; }
+            .gallery-shell { grid-template-columns: 1fr; }
+            .gallery-note { display: none; }
+            .gallery-stage, .gallery-stage #slidesWrapper, .gallery-stage .mySlides { min-height: 520px; }
+            .gallery-stage .mySlides img { height: 520px; }
+            .gallery-thumb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .gallery-dots { max-width: calc(100% - 170px); }
+        }
+        @media (max-width: 620px) {
+            .header-logo { font-size: .76rem; }
+            .header-logo i { width: 32px; height: 32px; }
+            .section { padding: 72px 20px; }
+            .hero { padding: 118px 20px 36px; }
+            .hero-kicker { font-size: .62rem; line-height: 1.6; }
+            .hero-title { font-size: clamp(3.35rem, 17vw, 5.4rem); }
+            .hero-lead { font-size: 1rem; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .hero-actions button { width: 100%; }
+            .hero-index { display: none; }
+            .hero-scroll { margin-top: 40px; }
+            .view > .section:first-child { min-height: 270px; padding: 105px 20px 55px; }
+            .view > .section:first-child::after { display: none; }
+            .site-footer { flex-direction: column; align-items: flex-start; }
+            .gallery-page-content { padding-top: 56px; }
+            .gallery-overview { grid-template-columns: 1fr; align-items: start; }
+            .gallery-stat { padding: 18px 0 0; border-left: none; border-top: 1px solid var(--border-color); }
+            .gallery-stage, .gallery-stage #slidesWrapper, .gallery-stage .mySlides { min-height: 390px; }
+            .gallery-stage .mySlides img { height: 390px; }
+            .gallery-control { width: 43px; height: 43px; }
+            .gallery-control.prev { left: 12px; }
+            .gallery-control.next { right: 12px; }
+            .gallery-caption { padding: 50px 18px 18px; }
+            .gallery-caption span { display: none; }
+            .gallery-dots { display: none; }
+            .gallery-thumbs-heading { align-items: flex-start; flex-direction: column; margin-top: 58px; }
+            .gallery-thumbs-heading small { text-align: left; }
+            .gallery-thumb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+            .context-next-actions { margin-top: 4rem; padding: 26px 20px; }
+        }
+
+
+
+        /* =========================================================
+           IDENTIDADE SERTANEJA — PALETA TERROSA E XILOGRAVURA
+           ========================================================= */
+        :root {
+            --bg-color: #E7D2A3;
+            --bg-panel: #F4E5BF;
+            --text-main: #24170F;
+            --text-muted: rgba(36, 23, 15, 0.72);
+            --border-color: #9A6A3D;
+            --accent: #A23E22;
+            --gold: #C58A26;
+            --sertanejo-green: #4D5A38;
+            --clay: #B85C32;
+            --ink: #17110D;
+            --paper: #F2DFB3;
+            --sun: #D8A02F;
+            --xilo-shadow: 5px 5px 0 rgba(23, 17, 13, .18);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            background-image:
+                linear-gradient(rgba(106, 67, 31, .045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(106, 67, 31, .035) 1px, transparent 1px),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2324170f' stroke-opacity='.07' stroke-width='1'%3E%3Cpath d='M-20 22L22-20M-4 54L54-4M20 78L78 20M48 106L106 48M76 134L134 76M104 162L162 104'/%3E%3Cpath d='M18 160L160 18M-18 118L118-18'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 32px 32px, 32px 32px, 160px 160px;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: .18;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+        }
+
+        ::selection { background: var(--accent); color: var(--paper); }
+
+        .site-header {
+            background: rgba(29, 20, 14, .96) !important;
+            border-bottom: 4px double var(--sun) !important;
+            box-shadow: 0 8px 0 rgba(36, 23, 15, .12);
+        }
+        .site-header::after {
+            content: '';
+            position: absolute;
+            inset: auto 0 -1px;
+            height: 7px;
+            opacity: .45;
+            background: repeating-linear-gradient(135deg, var(--paper) 0 3px, transparent 3px 8px);
+        }
+        .header-logo, .nav-link, .menu-toggle { color: var(--paper) !important; }
+        .header-logo { text-shadow: 2px 2px 0 #000; }
+        .header-logo i { color: var(--sun); }
+        .nav-link:hover, .nav-link.active { color: #FFD477 !important; }
+        .nav-link::after { height: 3px; background: var(--clay); }
+        @media (max-width: 968px) {
+            .header-nav { background: rgba(29, 20, 14, .985) !important; border-bottom: 4px double var(--sun) !important; }
+        }
+
+        .view { position: relative; isolation: isolate; }
+        .view::after {
+            content: '';
+            position: fixed;
+            right: -52px;
+            bottom: -55px;
+            width: 210px;
+            height: 210px;
+            opacity: .045;
+            pointer-events: none;
+            z-index: -1;
+            background: var(--ink);
+            clip-path: polygon(46% 0,55% 25%,67% 12%,64% 39%,92% 31%,70% 51%,100% 62%,68% 64%,76% 94%,55% 72%,45% 100%,40% 69%,13% 90%,31% 61%,0 53%,32% 43%,13% 17%,40% 33%);
+        }
+
+        .view > .section:first-child,
+        .gallery-chapter {
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(110deg, rgba(23, 17, 13, .96), rgba(64, 34, 19, .93)) !important;
+            color: var(--paper);
+            border-bottom: 6px double var(--sun) !important;
+        }
+        .view > .section:first-child::before,
+        .gallery-chapter::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: .15;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cg fill='none' stroke='%23f4e5bf' stroke-width='2' stroke-opacity='.72'%3E%3Cpath d='M0 100c25-28 49-29 73 0s48 28 73 0 49-28 74 0'/%3E%3Ccircle cx='34' cy='28' r='12'/%3E%3Cpath d='M34 4v10M34 42v10M10 28h10M48 28h10M17 11l7 7M44 38l7 7M51 11l-7 7M24 38l-7 7'/%3E%3Cpath d='M172 108V55m0 20c-15 0-18-10-18-23m18 37c16 0 19-12 19-25m-19-9c0-13 7-20 7-31m-7 31c0-13-7-20-7-31'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 220px 120px;
+        }
+        .view > .section:first-child::after,
+        .gallery-chapter::after {
+            content: '☀  ✦  SERTÃO MINEIRO  ✦  ☀';
+            position: absolute;
+            right: 4vw;
+            bottom: 14px;
+            color: rgba(244, 229, 191, .22);
+            font-family: var(--font-title);
+            font-size: .72rem;
+            letter-spacing: .18em;
+        }
+        .view > .section:first-child .section-title,
+        .view > .section:first-child .subtitle,
+        .gallery-chapter .section-title,
+        .gallery-chapter .subtitle { color: var(--paper) !important; position: relative; }
+
+        .section-title {
+            letter-spacing: -.02em;
+            text-shadow: 2px 2px 0 rgba(0,0,0,.12);
+        }
+        .section-title::after {
+            content: '✦  ━━━━━  ☀  ━━━━━  ✦';
+            display: block;
+            margin: 14px auto 0;
+            color: var(--sun);
+            font-size: clamp(.6rem, 1.2vw, .85rem);
+            letter-spacing: .14em;
+        }
+        h3, h4 { text-wrap: balance; }
+        h3 i, h4 i, .chapter-eyebrow i { color: var(--clay) !important; }
+        .chapter-eyebrow {
+            color: var(--accent) !important;
+            font-weight: 800;
+            letter-spacing: .13em;
+        }
+
+        .list-card,
+        .info-box,
+        .gallery-overview,
+        .context-next-actions,
+        .modal-content,
+        .btn-law {
+            border-radius: 0 !important;
+            border: 2px solid var(--ink) !important;
+            box-shadow: var(--xilo-shadow) !important;
+            background-color: var(--bg-panel) !important;
+        }
+        .list-card { position: relative; }
+        .list-card::before {
+            content: '';
+            position: absolute;
+            inset: 7px;
+            border: 1px dashed rgba(36,23,15,.22);
+            pointer-events: none;
+        }
+        .info-box { border-left: 9px solid var(--accent) !important; }
+        .feature-list li { border-color: rgba(73, 44, 22, .28); }
+
+        .btn-primary,
+        .btn-inline,
+        .btn-law {
+            border-radius: 0 !important;
+            text-transform: uppercase;
+            letter-spacing: .075em;
+        }
+        .btn-primary {
+            background: var(--ink) !important;
+            color: var(--paper) !important;
+            border: 2px solid var(--ink) !important;
+            box-shadow: 4px 4px 0 var(--clay) !important;
+        }
+        .btn-primary:hover {
+            background: var(--accent) !important;
+            border-color: var(--ink) !important;
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 var(--ink) !important;
+        }
+        .btn-inline { color: var(--ink) !important; border-color: var(--ink) !important; }
+
+        .divider::before {
+            content: '✦  ╱╲╱╲  ☀  ╱╲╱╲  ✦' !important;
+            color: var(--accent);
+            letter-spacing: .12em;
+        }
+        .map-wrapper {
+            border: 4px double var(--ink) !important;
+            border-radius: 0 !important;
+            box-shadow: 7px 7px 0 rgba(36,23,15,.18) !important;
+        }
+        .leaflet-bar a { border-radius: 0 !important; }
+        .site-footer {
+            color: var(--paper);
+            background: var(--ink) !important;
+            border-top: 5px double var(--sun) !important;
+        }
+
+        #apresentacao .hero-bg-overlay {
+            background:
+                linear-gradient(90deg, rgba(26,16,10,.92), rgba(53,29,16,.68), rgba(167,89,38,.24)) !important;
+        }
+        #apresentacao .hero-title,
+        #apresentacao .hero h2,
+        #apresentacao .hero p { color: var(--paper) !important; text-shadow: 3px 3px 0 rgba(0,0,0,.7) !important; }
+        #apresentacao .hero-index { border: 2px solid rgba(244,229,191,.55) !important; background: rgba(23,17,13,.66) !important; backdrop-filter: blur(8px); }
+        #apresentacao .hero-index-item { border-color: rgba(244,229,191,.24) !important; }
+        #apresentacao .hero-index-item span, #apresentacao .hero-index-item small { color: var(--paper) !important; }
+
+        /* Xilogravura aplicada aos números e estatísticas */
+        .gallery-stat strong,
+        [style*="font-size: 3.5rem"] {
+            color: var(--accent) !important;
+            text-shadow: 2px 2px 0 var(--sun);
+        }
+
+        /* =========================================================
+           GALERIA ORGANIZADA POR LOCALIDADE
+           ========================================================= */
+        .gallery-overview {
+            background:
+                linear-gradient(135deg, rgba(244,229,191,.96), rgba(225,195,137,.96)) !important;
+        }
+        .gallery-filter-intro {
+            margin: 32px 0 14px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .gallery-filter-intro h4 { font-size: 1.25rem; margin: 5px 0 0; }
+        .gallery-filter-intro p { margin: 0; max-width: 580px; text-align: right; font-size: .88rem; color: var(--text-muted); }
+        .gallery-filterbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 28px;
+            padding: 13px;
+            background: rgba(36,23,15,.08);
+            border: 2px dashed rgba(36,23,15,.34);
+        }
+        .gallery-filter-btn {
+            appearance: none;
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            background: var(--paper);
+            color: var(--ink);
+            padding: 10px 13px;
+            font-family: var(--font-title);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .045em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+        }
+        .gallery-filter-btn:hover { transform: translateY(-2px); box-shadow: 3px 3px 0 var(--clay); }
+        .gallery-filter-btn.active { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--accent); }
+        .gallery-filter-btn .filter-count { color: var(--accent); margin-left: 5px; }
+        .gallery-filter-btn.active .filter-count { color: #FFD477; }
+
+        .gallery-shell { border-radius: 0 !important; border: 3px solid var(--ink); box-shadow: 7px 7px 0 rgba(36,23,15,.22); }
+        .gallery-stage { background: #120d09; }
+        .gallery-caption {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 4px 18px;
+            align-items: end;
+            padding: 72px 24px 22px !important;
+            background: linear-gradient(transparent, rgba(12,8,5,.95)) !important;
+        }
+        .gallery-caption strong { font-size: 1.02rem !important; letter-spacing: .02em; }
+        .gallery-caption .gallery-place { grid-column: 1; color: #f0cf88; font-size: .78rem; }
+        .gallery-caption .gallery-certainty {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            align-self: center;
+            color: #fff4d4;
+            border: 1px solid rgba(255,244,212,.5);
+            padding: 5px 8px;
+            font-size: .64rem;
+            font-style: normal;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .gallery-count { border-radius: 0 !important; background: var(--ink) !important; border: 1px solid var(--sun); }
+        .gallery-control { border-radius: 0 !important; border: 2px solid var(--paper) !important; box-shadow: 3px 3px 0 var(--accent); }
+        .gallery-note { background: var(--ink) !important; }
+        .gallery-note-current {
+            margin: 18px 0;
+            padding: 14px;
+            border: 1px dashed rgba(244,229,191,.42);
+            color: #f3d58f;
+            font-family: var(--font-title);
+            font-size: .84rem;
+            line-height: 1.45;
+        }
+        .gallery-note-current small { display: block; color: rgba(255,248,235,.55); font-family: var(--font-main); margin-top: 5px; }
+
+        .gallery-locality-groups { display: grid; gap: 46px; }
+        .gallery-locality-group { scroll-margin-top: calc(var(--header-height) + 25px); }
+        .gallery-locality-header {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+            gap: 18px;
+            margin-bottom: 16px;
+            padding: 18px 20px;
+            color: var(--paper);
+            background: var(--ink);
+            border-left: 10px solid var(--accent);
+            box-shadow: 5px 5px 0 var(--sun);
+        }
+        .gallery-locality-header::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border: 1px dashed rgba(244,229,191,.24);
+            pointer-events: none;
+        }
+        .gallery-locality-header h4 { color: var(--paper); font-size: clamp(1.05rem, 2vw, 1.35rem); margin: 0; }
+        .gallery-locality-header p { color: rgba(244,229,191,.67); text-align: left; margin: 5px 0 0; font-size: .84rem; }
+        .gallery-locality-count {
+            position: relative;
+            z-index: 1;
+            min-width: 76px;
+            text-align: center;
+            padding: 8px 10px;
+            border: 1px solid rgba(244,229,191,.55);
+            font-family: var(--font-title);
+            font-size: .72rem;
+            text-transform: uppercase;
+        }
+        .gallery-locality-count strong { display: block; color: #FFD477; font-size: 1.2rem; }
+        .gallery-group-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 13px;
+        }
+        .gallery-thumb {
+            height: auto !important;
+            aspect-ratio: auto !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            text-align: left;
+            background: var(--paper) !important;
+            border: 2px solid var(--ink) !important;
+            border-radius: 0 !important;
+            box-shadow: 4px 4px 0 rgba(36,23,15,.15);
+        }
+        .gallery-thumb-image { height: 155px; position: relative; overflow: hidden; background: #c9ad78; }
+        .gallery-thumb-image img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-thumb > span { display: none !important; }
+        .gallery-thumb-number {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            z-index: 2;
+            padding: 4px 7px;
+            background: var(--ink);
+            color: var(--paper);
+            border: 1px solid var(--sun);
+            font-family: var(--font-title);
+            font-size: .66rem;
+        }
+        .gallery-thumb-meta { min-height: 102px; padding: 12px 12px 13px; border-top: 2px solid var(--ink); }
+        .gallery-thumb-meta strong { display: block; color: var(--ink); font-family: var(--font-title); font-size: .78rem; line-height: 1.25; }
+        .gallery-thumb-meta small { display: block; margin-top: 7px; color: var(--text-muted); font-size: .71rem; line-height: 1.25; }
+        .gallery-thumb-confidence {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 3px 6px;
+            border: 1px solid rgba(36,23,15,.35);
+            color: var(--accent);
+            font-size: .58rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+        }
+        .gallery-thumb.active { transform: translate(-2px,-2px); border-color: var(--accent) !important; box-shadow: 7px 7px 0 var(--accent) !important; }
+        .gallery-thumb:hover { transform: translate(-2px,-2px) !important; box-shadow: 7px 7px 0 var(--sun) !important; }
+
+        @media (max-width: 1100px) {
+            .gallery-group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (max-width: 760px) {
+            .gallery-filter-intro { align-items: flex-start; flex-direction: column; }
+            .gallery-filter-intro p { text-align: left; }
+            .gallery-filterbar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 16px; }
+            .gallery-filter-btn { flex: 0 0 auto; }
+            .gallery-caption { grid-template-columns: 1fr; }
+            .gallery-caption .gallery-certainty { display: none; }
+            .gallery-locality-header { grid-template-columns: 1fr; }
+            .gallery-locality-count { width: max-content; }
+            .gallery-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+            .gallery-thumb-image { height: 125px; }
+            .gallery-thumb-meta { min-height: 112px; padding: 10px; }
+        }
+        @media (max-width: 430px) {
+            .gallery-group-grid { grid-template-columns: 1fr; }
+            .gallery-thumb-image { height: 210px; }
+            .gallery-thumb-meta { min-height: auto; }
+        }
+
+
+        .menu-toggle::before {
+            content: '☰';
+            font-family: Georgia, serif;
+            font-size: 1.55rem;
+            line-height: 1;
+            color: var(--paper);
+        }
+        .menu-toggle i { display: none !important; }
+        @media (max-width: 968px) {
+            .menu-toggle {
+                display: grid !important;
+                place-items: center;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                border: 1px solid rgba(244,229,191,.45);
+                box-shadow: 3px 3px 0 var(--accent);
+            }
+        }
+
+    
+
+        /* =========================================================
+           REVISÃO DOCUMENTAL 2026 — CONTEÚDO, ACERVO E LOCALIDADES
+           ========================================================= */
+        .document-note {
+            position: relative;
+            margin: 0 auto 3rem;
+            padding: 22px 24px 22px 82px;
+            max-width: 1120px;
+            background: rgba(244,229,191,.78);
+            border: 2px solid var(--ink);
+            box-shadow: 6px 6px 0 rgba(36,23,15,.18);
+        }
+        .document-note::before {
+            content: '✦';
+            position: absolute;
+            left: 22px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: var(--ink);
+            color: var(--sun);
+            font-size: 1.15rem;
+        }
+        .document-note strong { font-family: var(--font-title); }
+        .document-note p { margin: 5px 0 0; font-size: .92rem; }
+
+        .history-timeline {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0,1fr));
+            gap: 0;
+            margin: 1rem 0 4rem;
+            border: 3px solid var(--ink);
+            background: var(--paper);
+            box-shadow: 8px 8px 0 rgba(36,23,15,.18);
+        }
+        .history-milestone {
+            min-height: 190px;
+            padding: 22px 18px;
+            border-right: 1px dashed rgba(36,23,15,.4);
+            position: relative;
+        }
+        .history-milestone:last-child { border-right: none; }
+        .history-milestone time {
+            display: block;
+            font: 800 1.35rem/1 var(--font-title);
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .history-milestone strong { display:block; font-family:var(--font-title); font-size:.84rem; margin-bottom:8px; }
+        .history-milestone p { margin:0; font-size:.82rem; text-align:left; color:var(--text-muted); }
+
+        .locality-atlas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 22px;
+            margin-bottom: 4rem;
+        }
+        .locality-atlas-card {
+            position: relative;
+            padding: 26px 24px 24px;
+            background: var(--paper);
+            border: 2px solid var(--ink);
+            box-shadow: 5px 5px 0 rgba(36,23,15,.15);
+            overflow: hidden;
+        }
+        .locality-atlas-card::after {
+            content:'';
+            position:absolute;
+            right:-22px; bottom:-22px;
+            width:78px; height:78px;
+            border:10px double rgba(157,47,32,.22);
+            transform:rotate(45deg);
+        }
+        .locality-atlas-card h4 { font-size:1.13rem; margin:0 0 8px; padding-right:32px; }
+        .locality-atlas-card p { font-size:.88rem; margin:0 0 16px; text-align:left; }
+        .locality-facts { display:flex; flex-wrap:wrap; gap:7px; position:relative; z-index:1; }
+        .locality-facts span {
+            padding:5px 8px;
+            border:1px solid rgba(36,23,15,.35);
+            background:rgba(225,195,137,.34);
+            font-size:.68rem;
+            font-family:var(--font-title);
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:.03em;
+        }
+
+        .deep-dive-grid {
+            display:grid;
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            gap:22px;
+            margin:3rem 0 4rem;
+        }
+        .deep-dive-card {
+            padding:28px 24px;
+            background:rgba(244,229,191,.72);
+            border:2px solid var(--ink);
+            border-top:8px solid var(--accent);
+        }
+        .deep-dive-card:nth-child(2) { border-top-color:var(--gold); }
+        .deep-dive-card:nth-child(3) { border-top-color:var(--green); }
+        .deep-dive-card i { font-size:1.7rem; margin-bottom:14px; color:var(--accent); }
+        .deep-dive-card h4 { font-size:1.05rem; margin-bottom:10px; }
+        .deep-dive-card p { font-size:.86rem; text-align:left; margin-bottom:10px; }
+        .deep-dive-card p:last-child { margin-bottom:0; }
+
+        .sources-strip {
+            margin: 4rem 0 1rem;
+            padding: 26px;
+            background: var(--ink);
+            color: var(--paper);
+            border: 3px double var(--sun);
+        }
+        .sources-strip h4 { color:var(--sun); margin-bottom:12px; }
+        .sources-strip p { color:rgba(255,248,235,.78); font-size:.83rem; margin:.45rem 0; text-align:left; }
+
+        .gallery-audit {
+            display:grid;
+            grid-template-columns:auto 1fr;
+            gap:18px;
+            align-items:start;
+            margin:0 0 28px;
+            padding:20px 22px;
+            border:2px dashed var(--ink);
+            background:rgba(225,195,137,.30);
+        }
+        .gallery-audit i { font-size:1.6rem; color:var(--accent); margin-top:3px; }
+        .gallery-audit strong { font-family:var(--font-title); }
+        .gallery-audit p { margin:4px 0 0; font-size:.84rem; text-align:left; }
+
+        .archive-intro { max-width:880px; margin:-1.5rem auto 2.5rem; text-align:center; color:var(--text-muted); }
+        .archive-matrix {
+            display:grid;
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            gap:22px;
+            align-items:stretch;
+        }
+        .work-card {
+            min-height:390px;
+            display:flex;
+            flex-direction:column;
+            background:var(--paper);
+            border:2px solid var(--ink);
+            box-shadow:6px 6px 0 rgba(36,23,15,.16);
+            overflow:hidden;
+        }
+        .work-card-top {
+            min-height:112px;
+            padding:22px;
+            background:
+                repeating-linear-gradient(135deg, transparent 0 7px, rgba(36,23,15,.07) 7px 8px),
+                var(--sand);
+            border-bottom:2px solid var(--ink);
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+            gap:15px;
+        }
+        .work-card-top i { font-size:2rem; color:var(--accent); }
+        .work-card-index { font:800 1.4rem/1 var(--font-title); color:rgba(36,23,15,.48); }
+        .work-card-body { padding:22px; display:flex; flex-direction:column; flex:1; }
+        .work-type { font:800 .64rem/1 var(--font-title); text-transform:uppercase; letter-spacing:.08em; color:var(--accent); }
+        .work-card h4 { font-size:1rem; margin:12px 0 8px; line-height:1.3; }
+        .work-author { font-size:.74rem; color:var(--text-muted); font-weight:700; margin-bottom:12px; text-align:left; }
+        .work-summary { font-size:.82rem; line-height:1.55; text-align:left; margin:0 0 18px; }
+        .work-card .work-link { margin-top:auto; align-self:flex-start; }
+        .work-card.placeholder { opacity:.72; border-style:dashed; }
+        .work-card.placeholder .work-card-top { filter:grayscale(.35); }
+        .work-card.placeholder .work-summary { font-style:italic; }
+
+        @media (max-width:1100px) {
+            .history-timeline { grid-template-columns:repeat(3,minmax(0,1fr)); }
+            .history-milestone:nth-child(3) { border-right:none; }
+            .history-milestone:nth-child(-n+3) { border-bottom:1px dashed rgba(36,23,15,.4); }
+            .locality-atlas-grid, .deep-dive-grid, .archive-matrix { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        }
+        @media (max-width:680px) {
+            .document-note { padding:72px 18px 18px; }
+            .document-note::before { left:18px; top:17px; }
+            .history-timeline, .locality-atlas-grid, .deep-dive-grid, .archive-matrix { grid-template-columns:1fr; }
+            .history-milestone { border-right:none; border-bottom:1px dashed rgba(36,23,15,.4); min-height:auto; }
+            .history-milestone:last-child { border-bottom:none; }
+            .gallery-audit { grid-template-columns:1fr; }
+        }
+
     </style>
 </head>
 <body>
@@ -195,10 +1404,10 @@
         </a>
         <button class="menu-toggle" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
         <nav class="header-nav" id="navMenu">
-            <a onclick="navigate('apresentacao')" class="nav-link" data-target="apresentacao">APRESENTAÇÃO</a>
-            <a onclick="navigate('contexto')" class="nav-link active" data-target="contexto">CONTEXTO</a>
+            <a onclick="navigate('apresentacao')" class="nav-link active" data-target="apresentacao">APRESENTAÇÃO</a>
+            <a onclick="navigate('contexto')" class="nav-link" data-target="contexto">CONTEXTO</a>
+            <a onclick="navigate('galeria')" class="nav-link" data-target="galeria">GALERIA DE IMAGENS</a>
             <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">TRABALHOS NOVORIZONTINOS</a>
-            <a onclick="navigate('plano-acao')" class="nav-link" data-target="plano-acao">PLANO DE AÇÃO</a>
             <a onclick="navigate('ferramenta')" class="nav-link" data-target="ferramenta">FERRAMENTA</a>
         </nav>
     </header>
@@ -207,7 +1416,7 @@
     <div id="app">
 
         <!-- 1. APRESENTAÇÃO -->
-        <div id="apresentacao" class="view">
+        <div id="apresentacao" class="view active">
             <!-- Slideshow de Fundo -->
             <div class="hero-bg-container">
                 <div class="hero-bg-slide active" style="background-image: url('https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg');"></div>
@@ -217,26 +1426,56 @@
                 <div class="hero-bg-slide" style="background-image: url('https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg');"></div>
                 <div class="hero-bg-overlay"></div>
             </div>
-
             <section class="hero container" style="position: relative; z-index: 2;">
-                <p style="font-family: var(--font-title); color: var(--gold); letter-spacing: 0.1em; font-weight: 800; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">Universidade Federal da Bahia • ARQC10</p>
-                <h1 class="hero-title" style="text-shadow: 2px 2px 4px rgba(255,255,255,0.6);">Retratos de Novorizonte - MG</h1>
-                <h2 style="color: var(--accent); font-style: italic; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">Novorizonte - Minas Gerais</h2>
-                <button onclick="navigate('contexto')" class="btn-primary" style="margin-top: 3rem; box-shadow: 0 4px 15px rgba(58, 40, 24, 0.2);">Ir para o Contexto Histórico <i class="fa-solid fa-arrow-right"></i></button>
+                <div class="hero-editorial">
+                    <div class="hero-copy">
+                        <span class="hero-kicker"><i class="fa-solid fa-location-dot"></i> Norte de Minas Gerais · Cartografia, memória e território</span>
+                        <h1 class="hero-title">Retratos de<br><em>Novorizonte</em></h1>
+                        <p class="hero-lead">Uma leitura visual da formação histórica, da paisagem, da cultura e dos saberes que constroem a identidade novorizontina.</p>
+                        <div class="hero-actions">
+                            <button onclick="navigate('contexto')" class="btn-primary">Explorar o território <i class="fa-solid fa-arrow-right"></i></button>
+                            <button onclick="navigate('cartografia')" class="btn-secondary"><i class="fa-solid fa-map"></i> Ver trabalhos</button>
+                        </div>
+                    </div>
+
+                    <aside class="hero-index" aria-label="Resumo do projeto">
+                        <div class="hero-index-head">
+                            <span>ARQC10 · UFBA</span>
+                            <span>2026</span>
+                        </div>
+                        <div class="hero-index-item">
+                            <strong>01</strong>
+                            <div><span>Contexto</span><small>História, território e identidade</small></div>
+                        </div>
+                        <div class="hero-index-item" role="button" tabindex="0" onclick="navigate('galeria')" onkeydown="if(event.key==='Enter') navigate('galeria')" style="cursor:pointer;">
+                            <strong>02</strong>
+                            <div><span>Galeria</span><small>Memórias, paisagens e cotidiano</small></div>
+                        </div>
+                        <div class="hero-index-item">
+                            <strong>03</strong>
+                            <div><span>Acervo</span><small>Mapas, pesquisas e registros</small></div>
+                        </div>
+                        <div class="hero-index-item">
+                            <strong>04</strong>
+                            <div><span>Ferramenta</span><small>Informação pública simplificada</small></div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="hero-scroll"><span>Role para descobrir</span><i class="fa-solid fa-arrow-down-long"></i></div>
             </section>
         </div>
 
         <!-- ========================================== -->
         <!-- 2. CONTEXTO (Maciçamente Atualizado via PDF) -->
         <!-- ========================================== -->
-        <div id="contexto" class="view active">
+        <div id="contexto" class="view">
             
             <!-- Abertura -->
             <section class="section" style="background-color: rgba(242, 232, 208, 0.4); border-bottom: 1px dashed var(--border-color);">
                 <div class="container">
                     <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">O Território e seu Povo</h2>
                     <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
-                        Uma viagem pelas hitórias e personagens que moldaram  Novorizonte, Minas Gerais.
+                        Uma viagem pelas histórias, paisagens e personagens que moldaram Novorizonte, Minas Gerais.
                     </p>
                 </div>
             </section>
@@ -269,37 +1508,57 @@
                     </div>
                 </div>
 
+                <div class="document-note">
+                    <strong>Revisão documental:</strong>
+                    <p>O conteúdo abaixo preserva as informações anteriores e as amplia com o livro <em>A cada dia, um novo horizonte</em> (2024) e com o perfil histórico-estatístico do IBGE. Datas e localidades foram mantidas apenas quando sustentadas pelas referências.</p>
+                </div>
+
+                <div class="history-timeline" aria-label="Linha do tempo da formação de Novorizonte">
+                    <div class="history-milestone"><time>15 ago. 1953</time><strong>Reunião fundadora</strong><p>Vinte e três participantes aprovaram a criação da igreja no então Novo Indaiá, em terreno doado pelas famílias Almeida e Ferreira.</p></div>
+                    <div class="history-milestone"><time>03 set. 1953</time><strong>Mutirão da praça</strong><p>Vinte e cinco homens iniciaram a medição e a limpeza do terreno com foices, machados, facões e enxadões.</p></div>
+                    <div class="history-milestone"><time>1954–1955</time><strong>Primeira escola</strong><p>Sebastiana Ribeiro iniciou as aulas em estrutura provisória; no ano seguinte foi erguido o primeiro grupo escolar.</p></div>
+                    <div class="history-milestone"><time>1981</time><strong>Energia elétrica</strong><p>A chegada da eletricidade marcou uma nova etapa de consolidação urbana da sede.</p></div>
+                    <div class="history-milestone"><time>1995–1997</time><strong>Emancipação</strong><p>A Lei Estadual nº 12.030 criou o município em 21/12/1995; a instalação ocorreu em 01/01/1997.</p></div>
+                    <div class="history-milestone"><time>2020</time><strong>Novo distrito</strong><p>Campo Verde de Minas foi elevado a distrito, formando com a sede os dois distritos municipais.</p></div>
+                </div>
+
                 <div class="divider"></div>
 
                 <!-- OS POVOADOS -->
                 <h3 style="font-size: 2.2rem; color: var(--gold); text-align: center; margin-bottom: 1rem;">O Distrito e os Povoados</h3>
                 <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">A vida rural novorizontina pulsa em suas comunidades, que muitas vezes antecedem a própria sede e surgiram em entroncamentos rodoviários ou várzeas férteis.</p>
 
-                <div class="grid-3">
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-pin"></i> Campo Verde de Minas (Distrito)</h4>
-                        <p style="font-size: 0.95rem;">Antigo "Entroncamento de Taiobeiras", surgiu no cruzamento das BR-342 e LMG-626. Pela posição estratégica, abrigou Postos Fiscais. Elevado a distrito em 2020, possui cerca de 936 habitantes.</p>
-                    </div>
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-pin"></i> Indaiá</h4>
-                        <p style="font-size: 0.95rem;">Surgiu nos anos 1930 ao redor da venda de Antônio das Almas. Deu a base material e humana para a fundação de Novorizonte. Hoje abriga cerca de 236 habitantes.</p>
-                    </div>
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-pin"></i> São João do Pequi</h4>
-                        <p style="font-size: 0.95rem;">Fundado em 1939 em uma área rica em pequizeiros. Recebeu capela de Antônio Lima em devoção a São João. Conta hoje com cerca de 266 habitantes num ambiente bucólico.</p>
-                    </div>
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;"><i class="fa-solid fa-route"></i> Cambaúba</h4>
-                        <p style="font-size: 0.95rem;">Fundada em 1953 por José Elias Barbosa ("Zeca Félix"). Nomeada devido à abundância de embaúbas. Sofreu esvaziamento após a mudança de rota da BR-251 nos anos 90.</p>
-                    </div>
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;"><i class="fa-solid fa-route"></i> Bitu</h4>
-                        <p style="font-size: 0.95rem;">As terras pertenceram a João Bitu (1856). Fica na divisa com Rio Pardo de Minas. O primeiro poço artesiano chegou em 1978, libertando a população do lombo de animais.</p>
-                    </div>
-                    <div class="list-card" style="padding: 1.5rem;">
-                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem;"><i class="fa-solid fa-mountain"></i> Alto São João</h4>
-                        <p style="font-size: 0.95rem;">Pequena aglomeração às margens da LMG-626. É o ponto mais elevado de todo o município (aprox. 13km da sede), com cerca de 27 residentes permanentes.</p>
-                    </div>
+                <div class="locality-atlas-grid">
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-road"></i> Campo Verde de Minas</h4>
+                        <p>O antigo Entroncamento de Taiobeiras cresceu no cruzamento da BR-342 com a LMG-626. O ponto acolheu pensão para viajantes, Posto Fiscal Federal (1962–1968) e posto do DER até 1988. A histórica gameleira do acervo fotográfico servia de abrigo aos caminhões.</p>
+                        <div class="locality-facts"><span>Distrito desde 2020</span><span>8 km da sede</span><span>≈ 936 habitantes</span><span>37,51 km²</span></div>
+                    </article>
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-seedling"></i> Indaiá</h4>
+                        <p>Formou-se por volta de 1930 em torno do “Comercinho” de Antônio das Almas. O rancho comunitário, a escola e as famílias locais forneceram mão de obra, recursos e parte dos materiais para a criação da sede de Novorizonte.</p>
+                        <div class="locality-facts"><span>Origem c. 1930</span><span>4 km da sede</span><span>≈ 236 habitantes</span><span>Igreja de 1940</span></div>
+                    </article>
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-church"></i> São João do Pequi</h4>
+                        <p>Surgiu por volta de 1939 na área conhecida como Baixa do Pequi. Em 1943, Antônio Lima doou terras e ergueu uma capela dedicada a São João. O conjunto preserva casas simples e uma forte relação com a paisagem de pequizeiros.</p>
+                        <div class="locality-facts"><span>Origem c. 1939</span><span>14 km da sede</span><span>≈ 266 habitantes</span><span>Energia em 1987</span></div>
+                    </article>
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-gears"></i> Cambaúba</h4>
+                        <p>Fundada em 1953 por José Elias Barbosa, o Zeca Félix, numa depressão entre chapadas. Recebeu escola em 1960 e, em 1978, o “rodão”, sistema de roda d’água que abasteceu a comunidade. A alteração da antiga BR-251 reduziu o fluxo local nos anos 1990.</p>
+                        <div class="locality-facts"><span>Fundação em 1953</span><span>17 km da sede</span><span>≈ 202 habitantes</span><span>Também “Baixa da Cambaúba”</span></div>
+                    </article>
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-droplet"></i> Bitu</h4>
+                        <p>O nome remonta ao fazendeiro João Bitu, proprietário das terras desde 1856. O povoado consolidou-se na conexão entre antigas rotas regionais. Em 1978, o primeiro poço artesiano a diesel reduziu as longas viagens para buscar água.</p>
+                        <div class="locality-facts"><span>Referência desde 1856</span><span>21 km da sede</span><span>≈ 267 habitantes</span><span>Escola desde 1985</span></div>
+                    </article>
+                    <article class="locality-atlas-card">
+                        <h4><i class="fa-solid fa-mountain-sun"></i> Alto São João</h4>
+                        <p>Pequena aglomeração às margens da LMG-626, associada à posição de chapada acima de São João do Pequi. É apresentada nas referências como o núcleo habitado situado no ponto mais elevado do município.</p>
+                        <div class="locality-facts"><span>13 km da sede</span><span>≈ 27 habitantes</span><span>Ponto mais alto</span><span>Às margens da LMG-626</span></div>
+                    </article>
                 </div>
 
                 <div class="divider"></div>
@@ -418,7 +1677,7 @@
                             <span style="background-color: var(--bg-color); padding: 8px 20px; border-radius: 2px; border: 1px solid var(--border-color); font-size: 0.95rem;"><strong>Indígena:</strong> 10</span>
                             <span style="background-color: var(--bg-color); padding: 8px 20px; border-radius: 2px; border: 1px solid var(--border-color); font-size: 0.95rem;"><strong>Amarela:</strong> 2</span>
                         </div>
-                        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); font-style: italic;">Dados complementares indicam 19 casamentos oficializados em 2024 e uma taxa de mortalidade infantil rondando os 20 óbitos por mil nascidos vivos (Datasus/2023).</p>
+                        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); font-style: italic;">Dados complementares indicam 19 casamentos oficializados em 2024. O livro registra taxa de mortalidade infantil de 20,83 por mil nascidos vivos em 2022; o painel do IBGE consultado não apresenta valor consolidado para 2023.</p>
                     </div>
                 </div>
 
@@ -461,33 +1720,133 @@
                     </div>
                 </div>
 
-                <div class="divider"></div>
-
-                <!-- PARTE 5: GALERIA DE FOTOS (ESPAÇO FUTURO) -->
-                <h3 style="font-size: 2.2rem; color: var(--accent); text-align: center; margin-bottom: 1rem;"><i class="fa-solid fa-camera-retro"></i> Galeria de Imagens</h3>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Uma galeria reservada para preservar as memórias, as paisagens e a essência do povo novorizontino.</p>
-
-                <div class="slideshow-container" style="max-width: 800px; position: relative; margin: 0 auto 4rem; border-radius: 8px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: 0 10px 30px rgba(58, 40, 24, 0.2);">
-                    
-                    <!-- As imagens e os dots serão injetados dinamicamente via JavaScript aqui -->
-                    <div id="slidesWrapper"></div>
-
-                    <a class="prev" onclick="plusSlides(-1)" style="cursor: pointer; position: absolute; top: 50%; left: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 0 4px 4px 0; user-select: none; background-color: rgba(58,40,24,0.6); z-index: 10;"><i class="fa-solid fa-chevron-left"></i></a>
-                    <a class="next" onclick="plusSlides(1)" style="cursor: pointer; position: absolute; top: 50%; right: 0; width: auto; padding: 16px; margin-top: -22px; color: var(--bg-panel); font-weight: bold; font-size: 24px; transition: 0.3s ease; border-radius: 4px 0 0 4px; user-select: none; background-color: rgba(58,40,24,0.6); z-index: 10;"><i class="fa-solid fa-chevron-right"></i></a>
-
-                    <div id="dotsWrapper" style="position: absolute; bottom: 45px; width: 100%; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; padding: 0 20px; z-index: 10;">
-                        <!-- Pontinhos (dots) criados pelo JS entrarão aqui -->
-                    </div>
+                <div class="deep-dive-grid">
+                    <article class="deep-dive-card">
+                        <i class="fa-solid fa-store"></i>
+                        <h4>Feira, mercado e abastecimento</h4>
+                        <p>A feira livre começou na Avenida João Bernardino de Souza e hoje ocorre às quintas-feiras no Mercado Municipal João de Almeida Souto, em frente à Praça da Matriz.</p>
+                        <p>O mercado articula grãos, temperos, bebidas, hortaliças e produtos da agricultura familiar, aproximando a produção rural do cotidiano da sede.</p>
+                    </article>
+                    <article class="deep-dive-card">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                        <h4>Água e saneamento</h4>
+                        <p>Em 2020, menos da metade da população total tinha água encanada, enquanto a cobertura urbana superava 95%, evidenciando a desigualdade territorial.</p>
+                        <p>Até 2024, não havia rede coletora e tratamento de esgoto em funcionamento na sede; o Projeto SanBas/UFMG orientou o Plano Municipal de Saneamento.</p>
+                    </article>
+                    <article class="deep-dive-card">
+                        <i class="fa-solid fa-route"></i>
+                        <h4>Conectividade e cultura itinerante</h4>
+                        <p>A LMG-626 estrutura as relações entre sede, distrito, povoados e municípios vizinhos. Até 2024 não havia transporte público urbano nem terminal rodoviário municipal.</p>
+                        <p>Além do futebol, o Rally Horizonte Bikes percorre localidades rurais e Campo Verde; Folia de Reis, cavalgadas, festas juninas, música e artesanato completam o calendário cultural.</p>
+                    </article>
                 </div>
 
-                <div style="text-align: center; margin-top: 4rem;">
-                    <button onclick="navigate('cartografia')" class="btn-primary">Avançar para Trabalhos Novorizontinos <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                <div class="sources-strip">
+                    <h4><i class="fa-solid fa-book-open"></i> Fontes incorporadas nesta revisão</h4>
+                    <p><strong>SOUZA, Henrique Neyffer de.</strong> <em>A cada dia, um novo horizonte</em>. Novorizonte: Edição do Autor, 2024. ISBN 978-65-01-21568-6.</p>
+                    <p><strong>IBGE.</strong> Perfil municipal, indicadores estatísticos, histórico e formação administrativa de Novorizonte/MG, edição consultada de 2024.</p>
+                    <p>Os números de população das localidades são aproximações reproduzidas do Projeto SanBas/UFMG (2022), conforme compilação do livro. A classificação fotográfica distingue registros confirmados, prováveis e ainda não confirmados.</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- CONTINUIDADE DO PERCURSO -->
+                <div class="context-next-actions">
+                    <div>
+                        <span class="chapter-eyebrow"><i class="fa-solid fa-camera-retro"></i> Próximo capítulo</span>
+                        <h3>O território também se conta por imagens.</h3>
+                        <p>Conheça o acervo visual de Novorizonte, reunindo paisagens, espaços públicos, registros históricos e cenas do cotidiano.</p>
+                    </div>
+                    <div class="context-next-buttons">
+                        <button onclick="navigate('galeria')" class="btn-primary">Abrir Galeria de Imagens <i class="fa-solid fa-arrow-right"></i></button>
+                        <button onclick="navigate('cartografia')" class="btn-inline">Ir para Trabalhos Novorizontinos</button>
+                    </div>
                 </div>
 
             </section>
         </div>
 
-        <!-- 3. TRABALHOS NOVORIZONTINOS -->
+        <!-- 3. GALERIA DE IMAGENS -->
+        <div id="galeria" class="view">
+            <section class="section gallery-chapter">
+                <div class="container">
+                    <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Galeria de Imagens</h2>
+                    <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
+                        Um arquivo visual das paisagens, transformações urbanas, celebrações e memórias que formam a identidade novorizontina.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section container gallery-page-content">
+                <div class="gallery-overview">
+                    <div>
+                        <span class="chapter-eyebrow"><i class="fa-solid fa-images"></i> Acervo territorial</span>
+                        <h3>Novorizonte através de suas localidades, paisagens e memórias.</h3>
+                        <p style="margin:12px 0 0; text-align:left; max-width:760px; color:var(--text-muted);">As fotografias foram organizadas a partir dos nomes originais dos arquivos, da leitura dos elementos urbanos e paisagísticos e da relação entre séries registradas na mesma data. Identificações não conclusivas permanecem explicitamente marcadas como prováveis ou a confirmar.</p>
+                    </div>
+                    <div class="gallery-stat">
+                        <strong id="galleryTotal">—</strong>
+                        <span>registros exibidos</span>
+                    </div>
+                </div>
+
+                <div class="gallery-filter-intro">
+                    <div>
+                        <span class="chapter-eyebrow"><i class="fa-solid fa-location-dot"></i> Navegação territorial</span>
+                        <h4>Escolha uma localidade ou percorra todo o acervo.</h4>
+                    </div>
+                    <p>Os filtros reorganizam simultaneamente o visor principal e o índice fotográfico por localidade.</p>
+                </div>
+                    <div class="gallery-audit">
+                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                        <div>
+                            <strong>Classificação revista imagem por imagem.</strong>
+                            <p>Foram cruzados nomes de arquivos, legendas históricas e elementos visuais. A gameleira, antes atribuída à sede, foi corrigida para Campo Verde de Minas. Fotografias sem marco inequívoco permanecem como “prováveis” ou “a confirmar”, sem forçar uma localização.</p>
+                        </div>
+                    </div>
+
+                <div id="galleryFilters" class="gallery-filterbar" aria-label="Filtrar galeria por localidade"></div>
+
+                <div class="gallery-shell">
+                    <div class="gallery-stage">
+                        <div id="slidesWrapper"></div>
+
+                        <button class="gallery-control prev" onclick="plusSlides(-1)" aria-label="Imagem anterior">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-control next" onclick="plusSlides(1)" aria-label="Próxima imagem">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div id="dotsWrapper" class="gallery-dots" aria-label="Navegação da galeria"></div>
+                    </div>
+
+                    <aside class="gallery-note">
+                        <span class="chapter-eyebrow"><i class="fa-solid fa-box-archive"></i> Retratos de Novorizonte</span>
+                        <h4>Memória organizada pelo território</h4>
+                        <p>O acervo reúne o núcleo histórico, a malha urbana, Campo Verde de Minas, a zona rural, as águas, a produção e a vida comunitária.</p>
+                        <div id="galleryCurrentLocality" class="gallery-note-current">Todas as localidades<small>Acervo completo em exibição.</small></div>
+                        <div class="gallery-note-rule"></div>
+                        <p class="gallery-note-small"><i class="fa-solid fa-hand-pointer"></i> Selecione uma miniatura abaixo ou use as setas para navegar pelo acervo filtrado.</p>
+                    </aside>
+                </div>
+
+                <div class="gallery-thumbs-heading">
+                    <div>
+                        <span>Índice fotográfico territorial</span>
+                        <h3>Registros agrupados por localidade</h3>
+                    </div>
+                    <small>As indicações “provável” e “a confirmar” evitam atribuições geográficas sem comprovação suficiente.</small>
+                </div>
+                <div id="galleryGroups" class="gallery-locality-groups"></div>
+
+                <div class="gallery-next">
+                    <button onclick="navigate('cartografia')" class="btn-primary">Avançar para Trabalhos Novorizontinos <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. TRABALHOS NOVORIZONTINOS -->
         <div id="cartografia" class="view">
             
             <section class="section" style="background-color: rgba(242, 232, 208, 0.4); border-bottom: 1px dashed var(--border-color);">
@@ -537,139 +1896,79 @@
 
                 <!-- ACERVO BIBLIOGRÁFICO / TRABALHOS -->
                 <h3 style="font-size: 2.2rem; color: var(--gold); text-align: center; margin-bottom: 3rem;"><i class="fa-solid fa-book-bookmark"></i> Acervo Científico e Literário</h3>
-                
-                <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto;">
-                    
-                    <!-- Trabalho 1: Livro Henrique Neyffer -->
-                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--gold);">
-                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
-                            <span style="background-color: rgba(168, 124, 42, 0.1); color: var(--gold); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-book"></i> Livro (Edição do Autor)</span>
-                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">A cada dia, um novo horizonte</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Henrique Neyffer de Souza (2024)</p>
-                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
-                                <strong>Resumo da Obra:</strong> Um minucioso levantamento documental e literário sobre o município (ISBN 978-65-01-21568-6). A pesquisa estrutura-se em grandes eixos: História (desde a ocupação regional e passagens bandeirantes até a emancipação), Geografia, Demografia, Política, Economia, Cultura e Infraestrutura. Traz rico embasamento em órgãos oficiais (IBGE, CPRM, Fundação João Pinheiro) e resgata memórias fundadoras, tornando-se uma verdadeira enciclopédia da identidade novorizontina.
-                            </div>
-                            
-                            <a href="https://www.amazon.sg/cada-dia-novo-horizonte-Portuguese/dp/B0DLJ3HWD3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.mEUTH2TxTfeoyzVOc8IeBg.CZZnSOrlcuwBmkJIvUB5KkzuJEmGoNc4VeIRDl9mCms&dib_tag=se&qid=1782775007&refinements=p_27%3AHenrique+Neyffer+de+Souza&s=books&sr=1-1" target="_blank" class="btn-primary" style="background-color: var(--gold); border-color: var(--gold);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Obra na Amazon</a>
-                        </div>
-                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
-                            <i class="fa-solid fa-book-journal-whills" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
-                        </div>
-                    </div>
+                <p class="archive-intro">O acervo foi reorganizado em uma matriz 3×3. Quatro registros já estão documentados; os cinco espaços seguintes permanecem sinalizados para a incorporação de novos trabalhos sem inventar títulos ou autorias.</p>
 
-                    <!-- Trabalho 2: TCC Química -->
-                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--accent);">
-                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
-                            <span style="background-color: rgba(154, 42, 26, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-graduation-cap"></i> TCC - Licenciatura em Química</span>
-                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">A Química Presente na Agricultura Familiar: Um Estudo de Caso em Novorizonte/MG</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Eliesio Lucas Souza Santos (IFNMG - Campus Salinas, 2025)</p>
-                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
-                                <strong>Resumo da Obra:</strong> O trabalho investiga como o conhecimento empírico do agricultor familiar cruza com o embasamento científico da Química. A pesquisa traz entrevistas locais e avalia práticas agroecológicas no controle de pragas — como o uso da calda bordalesa para fungos, calda de neem contra lagartas, calda de sabão e plantas repelentes. Destaca ainda como o conhecimento químico justifica técnicas de preparo do solo, a exemplo do uso do cálcio para neutralizar a acidez da terra, unindo saber popular e ciência.
-                            </div>
-                            
-                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" class="btn-primary" style="background-color: var(--accent); border-color: var(--accent);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Pesquisa no Drive</a>
+                <div class="archive-matrix">
+                    <article class="work-card">
+                        <div class="work-card-top"><i class="fa-solid fa-book-open"></i><span class="work-card-index">01</span></div>
+                        <div class="work-card-body">
+                            <span class="work-type">Livro · história local</span>
+                            <h4>A cada dia, um novo horizonte</h4>
+                            <p class="work-author">Henrique Neyffer de Souza · 2024</p>
+                            <p class="work-summary">Pesquisa ampla sobre história, geografia, ambiente, demografia, política, economia, infraestrutura, esporte e cultura do município. ISBN 978-65-01-21568-6.</p>
+                            <a href="https://www.amazon.sg/cada-dia-novo-horizonte-Portuguese/dp/B0DLJ3HWD3" target="_blank" rel="noopener" class="btn-primary work-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar obra</a>
                         </div>
-                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
-                            <i class="fa-solid fa-flask-vial" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
-                        </div>
-                    </div>
+                    </article>
 
-                    <!-- Trabalho 3: TCC Engenharia Florestal -->
-                    <div class="list-card" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch; padding: 0; overflow: hidden; border-left: 6px solid var(--text-main);">
-                        <div style="flex: 1; min-width: 300px; padding: 2.5rem;">
-                            <span style="background-color: rgba(58, 40, 24, 0.1); color: var(--text-main); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-tree"></i> TCC - Engenharia Florestal</span>
-                            <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; color: var(--text-main);">Diagnóstico da Arborização do Município de Novorizonte - MG</h3>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold; margin-bottom: 1.5rem;"><i class="fa-solid fa-pen-nib"></i> Pablo Santos Pereira (IFNMG - Campus Salinas, 2023)</p>
-                            <div style="font-size: 1rem; text-align: justify; margin-bottom: 2rem;">
-                                <strong>Resumo da Obra:</strong> Um estudo técnico com foco na avaliação qualitativa e viária da arborização urbana de Novorizonte. A pesquisa mapeia a condição vital, adequação e acessibilidade das árvores plantadas nas ruas, praças e parques da cidade. Através desse diagnóstico, o trabalho fornece diretrizes essenciais para o poder público realizar um planejamento paisagístico e urbano eficiente, reduzindo conflitos com fiações elétricas e calçamentos, enquanto promove qualidade ambiental.
-                            </div>
-                            
-                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" class="btn-primary" style="background-color: var(--text-main); border-color: var(--text-main);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Pesquisa no Drive</a>
+                    <article class="work-card">
+                        <div class="work-card-top"><i class="fa-solid fa-flask-vial"></i><span class="work-card-index">02</span></div>
+                        <div class="work-card-body">
+                            <span class="work-type">TCC · Licenciatura em Química</span>
+                            <h4>A Química Presente na Agricultura Familiar</h4>
+                            <p class="work-author">Eliesio Lucas Souza Santos · IFNMG, 2025</p>
+                            <p class="work-summary">Estudo de caso sobre o encontro entre conhecimento empírico e ciência nas práticas agrícolas, incluindo caldas, repelentes vegetais, controle de pragas e correção da acidez do solo.</p>
+                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" rel="noopener" class="btn-primary work-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar pesquisa</a>
                         </div>
-                        <div style="flex: 0 0 250px; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--border-color);">
-                            <i class="fa-solid fa-leaf" style="font-size: 6rem; color: var(--border-color); opacity: 0.5;"></i>
-                        </div>
-                    </div>
+                    </article>
 
+                    <article class="work-card">
+                        <div class="work-card-top"><i class="fa-solid fa-tree-city"></i><span class="work-card-index">03</span></div>
+                        <div class="work-card-body">
+                            <span class="work-type">TCC · Engenharia Florestal</span>
+                            <h4>Diagnóstico da Arborização de Novorizonte</h4>
+                            <p class="work-author">Pablo Santos Pereira · IFNMG, 2023</p>
+                            <p class="work-summary">Avaliação da arborização urbana, da condição das árvores e dos conflitos com redes elétricas e calçamentos, oferecendo subsídios ao planejamento paisagístico municipal.</p>
+                            <a href="https://drive.google.com/drive/folders/1H7ZLCiqS4MgyZ3_otKDkOOn5se4LBEbR?usp=sharing" target="_blank" rel="noopener" class="btn-primary work-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar pesquisa</a>
+                        </div>
+                    </article>
+
+                    <article class="work-card">
+                        <div class="work-card-top"><i class="fa-solid fa-chart-column"></i><span class="work-card-index">04</span></div>
+                        <div class="work-card-body">
+                            <span class="work-type">Perfil oficial · IBGE</span>
+                            <h4>Novorizonte/MG: indicadores, histórico e formação administrativa</h4>
+                            <p class="work-author">Instituto Brasileiro de Geografia e Estatística · 2024</p>
+                            <p class="work-summary">Compilação oficial com população, densidade, área, idade mediana, composição por cor ou raça, PIB per capita, IDEB, frota e narrativa de formação administrativa.</p>
+                            <a href="https://cidades.ibge.gov.br/brasil/mg/novorizonte/panorama" target="_blank" rel="noopener" class="btn-primary work-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Consultar IBGE</a>
+                        </div>
+                    </article>
+
+                    <article class="work-card placeholder">
+                        <div class="work-card-top"><i class="fa-solid fa-file-circle-plus"></i><span class="work-card-index">05</span></div>
+                        <div class="work-card-body"><span class="work-type">Em catalogação</span><h4>Próximo trabalho novorizontino</h4><p class="work-author">Espaço reservado</p><p class="work-summary">Card preparado para receber título, autoria, ano, resumo e link de uma nova pesquisa sem alterar a matriz do acervo.</p></div>
+                    </article>
+                    <article class="work-card placeholder">
+                        <div class="work-card-top"><i class="fa-solid fa-file-circle-plus"></i><span class="work-card-index">06</span></div>
+                        <div class="work-card-body"><span class="work-type">Em catalogação</span><h4>Próximo trabalho novorizontino</h4><p class="work-author">Espaço reservado</p><p class="work-summary">Card preparado para novos estudos de história, ambiente, planejamento territorial, cultura ou memória local.</p></div>
+                    </article>
+                    <article class="work-card placeholder">
+                        <div class="work-card-top"><i class="fa-solid fa-file-circle-plus"></i><span class="work-card-index">07</span></div>
+                        <div class="work-card-body"><span class="work-type">Em catalogação</span><h4>Próximo trabalho novorizontino</h4><p class="work-author">Espaço reservado</p><p class="work-summary">A estrutura 3×3 permite expandir o acervo mantendo leitura clara e comparação direta entre os registros.</p></div>
+                    </article>
+                    <article class="work-card placeholder">
+                        <div class="work-card-top"><i class="fa-solid fa-file-circle-plus"></i><span class="work-card-index">08</span></div>
+                        <div class="work-card-body"><span class="work-type">Em catalogação</span><h4>Próximo trabalho novorizontino</h4><p class="work-author">Espaço reservado</p><p class="work-summary">Nenhum título foi inventado: este espaço aguarda documento, autoria e referência verificável.</p></div>
+                    </article>
+                    <article class="work-card placeholder">
+                        <div class="work-card-top"><i class="fa-solid fa-file-circle-plus"></i><span class="work-card-index">09</span></div>
+                        <div class="work-card-body"><span class="work-type">Em catalogação</span><h4>Próximo trabalho novorizontino</h4><p class="work-author">Espaço reservado</p><p class="work-summary">Última posição da matriz inicial, pronta para receber o próximo item do acervo científico ou literário.</p></div>
+                    </article>
                 </div>
 
                 <div style="text-align: center; margin-top: 4rem;">
-                    <button onclick="navigate('plano-acao')" class="btn-primary">Avançar para Plano de Ação <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                    <button onclick="navigate('ferramenta')" class="btn-primary">Conhecer o Simplifica Novorizonte <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
                 </div>
 
-            </section>
-        </div>
-        
-        <!-- 4. PLANO DE AÇÃO -->
-        <div id="plano-acao" class="view">
-            
-            <!-- Abertura -->
-            <section class="section" style="background-color: rgba(242, 232, 208, 0.4); border-bottom: 1px dashed var(--border-color);">
-                <div class="container">
-                    <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Plano de Ação</h2>
-                    <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
-                        Diretrizes, metas e a democratização do acesso à informação pública.
-                    </p>
-                </div>
-            </section>
-
-            <section class="section container">
-                <div class="info-box" style="margin-bottom: 3rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
-                    <i class="fa-solid fa-lightbulb" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px; display: block;"></i>
-                    <strong>O Diagnóstico Central:</strong> Durante as análises, o maior obstáculo identificado não foi apenas a falta de infraestrutura, mas a <strong>barreira da linguagem</strong>. A população de Novorizonte tem dificuldade em encontrar, ler e compreender as leis, programas e projetos do município. Sem entender seus direitos e deveres, a participação popular torna-se nula.
-                </div>
-
-                <h3 style="font-size: 2.2rem; color: var(--text-main); text-align: center; margin-bottom: 3rem;">Eixos de Intervenção Estratégica</h3>
-
-                <div class="grid-half">
-                    <!-- Eixo 1: Tradução -->
-                    <div class="list-card" style="border-top: 4px solid var(--gold);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-language" style="color: var(--gold); margin-right: 10px;"></i>1. Tradução do "Juridiquês"</h4>
-                        <p style="font-size: 0.95rem;">Eliminar a complexidade desnecessária nos comunicados públicos, garantindo que o cidadão comum compreenda as regras que regem sua cidade.</p>
-                        <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Criação de resumos visuais e didáticos para as principais leis (como o Código de Posturas e o Marco do Saneamento).</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Adoção de diretrizes de <strong>Linguagem Simples</strong> em todos os novos editais e cartilhas da Prefeitura.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--gold);"></i> <div>Substituição de termos excessivamente técnicos por analogias do dia a dia nas Audiências Públicas.</div></li>
-                        </ul>
-                    </div>
-
-                    <!-- Eixo 2: Acesso Descomplicado -->
-                    <div class="list-card" style="border-top: 4px solid var(--accent);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-magnifying-glass" style="color: var(--accent); margin-right: 10px;"></i>2. Acesso e Transparência Ativa</h4>
-                        <p style="font-size: 0.95rem;">Resolver o problema de "onde encontrar". O cidadão não deve ser um detetive para descobrir os projetos que impactam seu bairro.</p>
-                        <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Centralização de informações sobre leis, projetos e obras em portais de fácil navegação (sem jargões contábeis).</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Distribuição de murais informativos físicos nos povoados (Cambaúba, Campo Verde) onde a internet é escassa.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--accent);"></i> <div>Uso de rádios locais e carros de som para divulgar resumos de projetos aprovados na câmara.</div></li>
-                        </ul>
-                    </div>
-
-                    <!-- Eixo 3: Empoderamento -->
-                    <div class="list-card" style="border-top: 4px solid var(--text-main);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-users-rays" style="color: var(--text-main); margin-right: 10px;"></i>3. Alfabetização Cidadã</h4>
-                        <p style="font-size: 0.95rem;">Capacitar líderes comunitários e a população geral para que saibam como cobrar ações do poder público com base nas leis vigentes.</p>
-                        <ul class="feature-list" style="border-top: none;">
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Realização de oficinas nas escolas focadas em direitos e deveres urbanos e ambientais.</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Criação de um manual prático: "Como solicitar serviços de infraestrutura e limpeza urbana".</div></li>
-                            <li><i class="fa-solid fa-check" style="color: var(--text-main);"></i> <div>Fomento à participação popular em conselhos, garantindo que o cidadão entenda o que está sendo votado.</div></li>
-                        </ul>
-                    </div>
-
-                    <!-- Eixo 4: Inovação e Ferramenta (Destaque) -->
-                    <div class="list-card" style="background-color: var(--text-main); color: var(--bg-panel); border: none; border-top: 4px solid var(--border-color); box-shadow: 0 15px 35px rgba(154, 42, 26, 0.3);">
-                        <h4 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--bg-panel);"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold); margin-right: 10px;"></i>4. Inovação Tecnológica Social</h4>
-                        <p style="font-size: 0.95rem; color: rgba(242, 232, 208, 0.9);">O resultado final deste Plano de Ação materializa-se na criação de uma solução digital interativa para quebrar definitivamente a barreira da linguagem.</p>
-                        <ul class="feature-list" style="border-top: none;">
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-microchip" style="color: var(--gold);"></i> <div>Desenvolvimento de uma <strong>Plataforma de Tradução Cidadã</strong> alimentada por Inteligência Artificial.</div></li>
-                            <li style="border-bottom: 1px solid rgba(209, 191, 165, 0.2);"><i class="fa-solid fa-book-open-reader" style="color: var(--gold);"></i> <div>Disponibilização de um <strong>Acervo Explicado</strong> com o "resumo mastigado" das leis mais procuradas.</div></li>
-                            <li style="border-bottom: none;"><i class="fa-solid fa-arrow-pointer" style="color: var(--gold);"></i> <div><strong>Acesso gratuito, rápido e responsivo</strong>, pensado para funcionar na tela do celular do morador.</div></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 4rem;">
-                    <button onclick="navigate('ferramenta')" class="btn-primary" style="font-size: 1.1rem; padding: 15px 30px; background-color: var(--accent); border-color: var(--accent);">Conheça a Ferramenta Criada <i class="fa-solid fa-wand-magic-sparkles" style="margin-left: 8px;"></i></button>
-                </div>
             </section>
         </div>
 
@@ -744,7 +2043,7 @@
     </div>
 
     <footer class="site-footer">
-        <strong>Retratos de Novorizonte - MG</strong> &copy; 2026. Caio A. Almeida.
+        <div><strong>Retratos de Novorizonte — MG</strong><span>Cartografia, memória e território</span></div><small>&copy; 2026 · Caio A. Almeida</small>
     </footer>
 
     <!-- POP-UP (MODAL) DAS LEIS EXPLICADAS -->
@@ -773,7 +2072,9 @@
         window.navigate = function(targetId) {
             document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active');
+            const targetView = document.getElementById(targetId);
+            if (!targetView) return;
+            targetView.classList.add('active');
             
             const activeLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
             if(activeLink) activeLink.classList.add('active');
@@ -995,93 +2296,640 @@
             }
         });
 
+
         // ==========================================
-        // LÓGICA DO SLIDESHOW DA GALERIA
+        // GALERIA TERRITORIAL — LOCALIDADES E FILTROS
         // ==========================================
-        const galleryImages = [
-            "https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg",
-            "https://i.postimg.cc/5NQMbWwv/18-Vista-da-Praca-da-Matriz.jpg",
-            "https://i.postimg.cc/15VZs1p0/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg",
-            "https://i.postimg.cc/Nf2wBv6Y/20240128-062940.jpg",
-            "https://i.postimg.cc/63bDxMqP/20241123-153457.jpg",
-            "https://i.postimg.cc/5yHD48FQ/20250418-110009.jpg",
-            "https://i.postimg.cc/j2WBxyJ6/20250419-063634.jpg",
-            "https://i.postimg.cc/c1jVDkVJ/20250728-072350.jpg",
-            "https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg",
-            "https://i.postimg.cc/5NQMbWwS/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg",
-            "https://i.postimg.cc/yY3zsCFv/29-Avenida-Salinas.jpg",
-            "https://i.postimg.cc/Hs8Cd1QK/30-Avenida-Salinas.jpg",
-            "https://i.postimg.cc/QxKrhZpY/33-Gameleira.jpg",
-            "https://i.postimg.cc/LXQrFx5c/35-Aerea-Tronca-2.png",
-            "https://i.postimg.cc/VsrYLtwd/arq-4387.jpg",
-            "https://i.postimg.cc/bYDzNnPS/arq-4388.jpg",
-            "https://i.postimg.cc/zDbJXhNC/arq-4389.jpg",
-            "https://i.postimg.cc/PfptrDH1/arq-4397.jpg",
-            "https://i.postimg.cc/ry08F4Tn/DSC00001.jpg",
-            "https://i.postimg.cc/G3WbBp3f/DSC01177.jpg",
-            "https://i.postimg.cc/HWqTJLsD/DSC01199.jpg",
-            "https://i.postimg.cc/CLbSbVz5/DSC01337.jpg",
-            "https://i.postimg.cc/13PPHYqp/DSC01339.jpg",
-            "https://i.postimg.cc/0yxxfHwW/DSC01344.jpg",
-            "https://i.postimg.cc/BQ242GXc/DSC06004.jpg",
-            "https://i.postimg.cc/T39xHqjv/DSC06152.jpg",
-            "https://i.postimg.cc/K8Nbsr7M/DSC06153.jpg",
-            "https://i.postimg.cc/L8RRT01y/Foto-Praca-2005.jpg",
-            "https://i.postimg.cc/LsQpm9bH/IMG-20171228-163145329-(1)-(1).jpg",
-            "https://i.postimg.cc/HxJCxqqG/IMG-20180421-103542037.jpg",
-            "https://i.postimg.cc/W3DP3BBD/IMG-20190615-WA0006.jpg",
-            "https://i.postimg.cc/qRtdRPP6/IMG-20200104-WA0050.jpg",
-            "https://i.postimg.cc/KzKyz66B/IMG-20210712-WA0010.jpg",
-            "https://i.postimg.cc/rmdLmBB5/IMG-20210712-WA0012.jpg",
-            "https://i.postimg.cc/Hxf17Smc/IMG-20231103-WA0027.jpg",
-            "https://i.postimg.cc/pT9tTwgw/IMG-20240807-124609-394.jpg",
-            "https://i.postimg.cc/HxJCxqq1/IMG-20240807-125038-138.webp",
-            "https://i.postimg.cc/zBL1BssJ/IMG-20240807-125038-238.webp",
-            "https://i.postimg.cc/przbQDXd/IMG-20250809-151625406.jpg",
-            "https://i.postimg.cc/PfwjkkbZ/IMG-20250809-151736639.jpg",
-            "https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg",
-            "https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg",
-            "https://i.postimg.cc/Jn9CBT8g/IMG-20260113-WA0008.jpg",
-            "https://i.postimg.cc/k4kPtjCp/IMG-20260606-WA0006.jpg",
-            "https://i.postimg.cc/Hxf17Smf/IMG-20260606-WA0008.jpg",
-            "https://i.postimg.cc/tJWQdhRk/IMG-20260606-WA0010.jpg",
-            "https://i.postimg.cc/Bv70JSwc/IMG-5057.jpg",
-            "https://i.postimg.cc/JhYLRr27/IMG-5091.jpg",
-            "https://i.postimg.cc/C5kTCjM3/Primeiras-Construcoes-de-Novorizonte.jpg",
-            "https://i.postimg.cc/MHV20yKS/Residencia-do-Senhor-Saul-de-Almeida.jpg",
-            "https://i.postimg.cc/K8gLPjtt/1.jpg",
-            "https://i.postimg.cc/sgZSYx57/2.jpg",
-            "https://i.postimg.cc/Hk75wnbQ/3.jpg"
-        ];
+        const galleryGroupsMeta = {
+            "sede-centro": {
+                        "label": "Sede · Praça da Matriz, Avenida e núcleo fundador",
+                        "short": "Sede · centro histórico",
+                        "description": "Registros confirmados do núcleo fundador: Igreja Nossa Senhora da Conceição, Praça da Matriz, Avenida João Bernardino, Mercado Municipal e primeiras construções."
+            },
+            "sede-urbana": {
+                        "label": "Sede · ruas, escolas e expansão urbana",
+                        "short": "Sede · malha urbana",
+                        "description": "Ruas, escolas, moradias e etapas de urbanização da sede. Alguns pontos são prováveis porque não há legenda original com endereço."
+            },
+            "campo-verde": {
+                        "label": "Campo Verde de Minas · antiga Tronca",
+                        "short": "Campo Verde de Minas",
+                        "description": "A antiga Tronca ou Entroncamento. A gameleira e a vista aérea são confirmadas pelas legendas do livro; outros registros do conjunto são prováveis."
+            },
+            "rural-nao-identificada": {
+                        "label": "Zona rural · comunidade específica não identificada",
+                        "short": "Zona rural",
+                        "description": "Cozinha tradicional, propriedades familiares, cultivos e represas. O caráter rural é reconhecível, mas a comunidade exata não está documentada."
+            },
+            "cultura-municipal": {
+                        "label": "Eventos municipais · esporte e festas",
+                        "short": "Cultura e esporte",
+                        "description": "Equipe de futebol e Arraiá da Setembrina. O evento é municipal; a rua ou local exato permanece como provável quando não aparece em legenda."
+            },
+            "natureza-a-confirmar": {
+                        "label": "Paisagens naturais · ponto exato a confirmar",
+                        "short": "Natureza · a confirmar",
+                        "description": "Cursos d’água, cachoeira, estrada rural e espelho d’água. Não há evidência suficiente para atribuir esses registros a um povoado específico — ou, em alguns casos, ao próprio município."
+            },
+            "memoria-a-confirmar": {
+                        "label": "Memória comunitária · localidade a confirmar",
+                        "short": "Memória · a confirmar",
+                        "description": "Retratos familiares, transporte e ofícios tradicionais sem indicação espacial conclusiva no arquivo recebido."
+            },
+            "multiplas-localidades": {
+                        "label": "Montagens temáticas · múltiplas localidades",
+                        "short": "Montagens temáticas",
+                        "description": "Composições que reúnem cenas de diferentes espaços e, por isso, não devem ser atribuídas a uma única localidade."
+            },
+            "localidade-a-confirmar": {
+                        "label": "Núcleo habitado · localidade ainda não confirmada",
+                        "short": "Localidade a confirmar",
+                        "description": "Imagens urbanas ou religiosas cuja arquitetura não permite distinguir com segurança entre sede, distrito e povoados."
+            }
+};
+
+        const galleryItems = [
+            {
+                        "id": 1,
+                        "url": "https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg",
+                        "group": "sede-centro",
+                        "title": "Igreja Nossa Senhora da Conceição e Praça da Matriz",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 2,
+                        "url": "https://i.postimg.cc/5NQMbWwv/18-Vista-da-Praca-da-Matriz.jpg",
+                        "group": "sede-centro",
+                        "title": "Praça da Matriz no tempo dos carros de boi",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 3,
+                        "url": "https://i.postimg.cc/15VZs1p0/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg",
+                        "group": "sede-centro",
+                        "title": "Praça da Matriz e antiga Escola Municipal",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 4,
+                        "url": "https://i.postimg.cc/Nf2wBv6Y/20240128-062940.jpg",
+                        "group": "sede-urbana",
+                        "title": "Rua calçada após a chuva",
+                        "locality": "Sede de Novorizonte · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 5,
+                        "url": "https://i.postimg.cc/63bDxMqP/20241123-153457.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Cozinha de fogão a lenha em moradia rural",
+                        "locality": "Zona rural · comunidade a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 6,
+                        "url": "https://i.postimg.cc/5yHD48FQ/20250418-110009.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Represa em propriedade produtiva",
+                        "locality": "Zona rural · comunidade a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 7,
+                        "url": "https://i.postimg.cc/j2WBxyJ6/20250419-063634.jpg",
+                        "group": "sede-urbana",
+                        "title": "Rua arborizada junto à quadra esportiva",
+                        "locality": "Sede de Novorizonte · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 8,
+                        "url": "https://i.postimg.cc/c1jVDkVJ/20250728-072350.jpg",
+                        "group": "localidade-a-confirmar",
+                        "title": "Via não pavimentada em núcleo habitado",
+                        "locality": "Sede, distrito ou povoado · a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 9,
+                        "url": "https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg",
+                        "group": "sede-centro",
+                        "title": "Vista aérea histórica da sede",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 10,
+                        "url": "https://i.postimg.cc/5NQMbWwS/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg",
+                        "group": "sede-centro",
+                        "title": "Antiga Avenida Salinas — atual João Bernardino",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 11,
+                        "url": "https://i.postimg.cc/yY3zsCFv/29-Avenida-Salinas.jpg",
+                        "group": "sede-centro",
+                        "title": "Avenida Salinas em dia de movimento",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 12,
+                        "url": "https://i.postimg.cc/Hs8Cd1QK/30-Avenida-Salinas.jpg",
+                        "group": "sede-centro",
+                        "title": "Avenida Salinas e a infância nas ruas",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 13,
+                        "url": "https://i.postimg.cc/QxKrhZpY/33-Gameleira.jpg",
+                        "group": "campo-verde",
+                        "title": "Gameleira que servia de abrigo aos caminhões",
+                        "locality": "Campo Verde de Minas · antiga Tronca",
+                        "confidence": "Confirmada pelo livro"
+            },
+            {
+                        "id": 14,
+                        "url": "https://i.postimg.cc/LXQrFx5c/35-Aerea-Tronca-2.png",
+                        "group": "campo-verde",
+                        "title": "Vista aérea da antiga Tronca",
+                        "locality": "Campo Verde de Minas · antiga Tronca",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 15,
+                        "url": "https://i.postimg.cc/VsrYLtwd/arq-4387.jpg",
+                        "group": "sede-urbana",
+                        "title": "Avenida João Bernardino e escola estadual",
+                        "locality": "Sede de Novorizonte · E.E. João Bernardino de Souza",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 16,
+                        "url": "https://i.postimg.cc/bYDzNnPS/arq-4388.jpg",
+                        "group": "sede-urbana",
+                        "title": "E.E. João Bernardino de Souza",
+                        "locality": "Sede de Novorizonte",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 17,
+                        "url": "https://i.postimg.cc/zDbJXhNC/arq-4389.jpg",
+                        "group": "sede-urbana",
+                        "title": "Rua arborizada do centro urbano",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 18,
+                        "url": "https://i.postimg.cc/PfptrDH1/arq-4397.jpg",
+                        "group": "sede-urbana",
+                        "title": "Conjunto escolar e arquitetura tradicional",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 19,
+                        "url": "https://i.postimg.cc/ry08F4Tn/DSC00001.jpg",
+                        "group": "sede-centro",
+                        "title": "Igreja e Praça da Matriz",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 20,
+                        "url": "https://i.postimg.cc/G3WbBp3f/DSC01177.jpg",
+                        "group": "sede-urbana",
+                        "title": "Rua residencial ao entardecer",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 21,
+                        "url": "https://i.postimg.cc/HWqTJLsD/DSC01199.jpg",
+                        "group": "sede-urbana",
+                        "title": "Casa tradicional de esquina",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 22,
+                        "url": "https://i.postimg.cc/CLbSbVz5/DSC01337.jpg",
+                        "group": "sede-urbana",
+                        "title": "Expansão urbana junto à torre de telecomunicações",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 23,
+                        "url": "https://i.postimg.cc/13PPHYqp/DSC01339.jpg",
+                        "group": "sede-urbana",
+                        "title": "Eixo viário em processo de urbanização",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 24,
+                        "url": "https://i.postimg.cc/0yxxfHwW/DSC01344.jpg",
+                        "group": "sede-urbana",
+                        "title": "Rua e praça arborizada",
+                        "locality": "Sede · malha urbana",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 25,
+                        "url": "https://i.postimg.cc/BQ242GXc/DSC06004.jpg",
+                        "group": "campo-verde",
+                        "title": "Núcleo urbano em rua de terra",
+                        "locality": "Campo Verde de Minas · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 26,
+                        "url": "https://i.postimg.cc/T39xHqjv/DSC06152.jpg",
+                        "group": "campo-verde",
+                        "title": "Eixo pavimentado e estrutura de abastecimento",
+                        "locality": "Campo Verde de Minas · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 27,
+                        "url": "https://i.postimg.cc/K8Nbsr7M/DSC06153.jpg",
+                        "group": "campo-verde",
+                        "title": "Entrada urbana e estrutura de abastecimento",
+                        "locality": "Campo Verde de Minas · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 28,
+                        "url": "https://i.postimg.cc/L8RRT01y/Foto-Praca-2005.jpg",
+                        "group": "sede-centro",
+                        "title": "Praça da Matriz em 2005",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 29,
+                        "url": "https://i.postimg.cc/LsQpm9bH/IMG-20171228-163145329-(1)-(1).jpg",
+                        "group": "memoria-a-confirmar",
+                        "title": "Registro comunitário histórico",
+                        "locality": "Acervo comunitário · localidade a confirmar",
+                        "confidence": "A confirmar"
+            },
+            {
+                        "id": 30,
+                        "url": "https://i.postimg.cc/HxJCxqqG/IMG-20180421-103542037.jpg",
+                        "group": "natureza-a-confirmar",
+                        "title": "Curso d’água em mata de galeria",
+                        "locality": "Território municipal/regional · ponto a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 31,
+                        "url": "https://i.postimg.cc/W3DP3BBD/IMG-20190615-WA0006.jpg",
+                        "group": "cultura-municipal",
+                        "title": "Equipe Juventus de Esportes",
+                        "locality": "Evento municipal · campo/localidade a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 32,
+                        "url": "https://i.postimg.cc/qRtdRPP6/IMG-20200104-WA0050.jpg",
+                        "group": "natureza-a-confirmar",
+                        "title": "Cachoeira de grande porte",
+                        "locality": "Município ou região · origem a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 33,
+                        "url": "https://i.postimg.cc/KzKyz66B/IMG-20210712-WA0010.jpg",
+                        "group": "natureza-a-confirmar",
+                        "title": "Córrego em mata fechada",
+                        "locality": "Território municipal/regional · ponto a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 34,
+                        "url": "https://i.postimg.cc/rmdLmBB5/IMG-20210712-WA0012.jpg",
+                        "group": "natureza-a-confirmar",
+                        "title": "Estrada rural entre vegetação de cerrado",
+                        "locality": "Zona rural · trecho a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 35,
+                        "url": "https://i.postimg.cc/Hxf17Smc/IMG-20231103-WA0027.jpg",
+                        "group": "natureza-a-confirmar",
+                        "title": "Espelho d’água e passarela ao pôr do sol",
+                        "locality": "Município ou região · ponto a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 36,
+                        "url": "https://i.postimg.cc/pT9tTwgw/IMG-20240807-124609-394.jpg",
+                        "group": "cultura-municipal",
+                        "title": "Fogueira do Arraiá da Setembrina",
+                        "locality": "Evento municipal · sede provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 37,
+                        "url": "https://i.postimg.cc/HxJCxqq1/IMG-20240807-125038-138.webp",
+                        "group": "cultura-municipal",
+                        "title": "Ornamentação do Arraiá da Setembrina",
+                        "locality": "Evento municipal · sede provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 38,
+                        "url": "https://i.postimg.cc/zBL1BssJ/IMG-20240807-125038-238.webp",
+                        "group": "cultura-municipal",
+                        "title": "Noite do Arraiá da Setembrina",
+                        "locality": "Evento municipal · sede provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 39,
+                        "url": "https://i.postimg.cc/przbQDXd/IMG-20250809-151625406.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Cultivo em solo do sertão",
+                        "locality": "Zona rural · comunidade a confirmar",
+                        "confidence": "A confirmar"
+            },
+            {
+                        "id": 40,
+                        "url": "https://i.postimg.cc/PfwjkkbZ/IMG-20250809-151736639.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Represa e paisagem agrícola",
+                        "locality": "Zona rural · comunidade a confirmar",
+                        "confidence": "A confirmar"
+            },
+            {
+                        "id": 41,
+                        "url": "https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg",
+                        "group": "sede-urbana",
+                        "title": "Casa tradicional nº 183 e seus moradores",
+                        "locality": "Sede de Novorizonte · provável",
+                        "confidence": "Provável"
+            },
+            {
+                        "id": 42,
+                        "url": "https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Roda de conversa em moradia rural",
+                        "locality": "Zona rural · propriedade a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 43,
+                        "url": "https://i.postimg.cc/Jn9CBT8g/IMG-20260113-WA0008.jpg",
+                        "group": "rural-nao-identificada",
+                        "title": "Unidade produtiva familiar",
+                        "locality": "Zona rural · propriedade a confirmar",
+                        "confidence": "Localidade a confirmar"
+            },
+            {
+                        "id": 44,
+                        "url": "https://i.postimg.cc/k4kPtjCp/IMG-20260606-WA0006.jpg",
+                        "group": "memoria-a-confirmar",
+                        "title": "Caminhão e memória do transporte local",
+                        "locality": "Acervo comunitário · localidade a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 45,
+                        "url": "https://i.postimg.cc/Hxf17Smf/IMG-20260606-WA0008.jpg",
+                        "group": "memoria-a-confirmar",
+                        "title": "Crianças sobre caminhão em registro familiar",
+                        "locality": "Acervo comunitário · localidade a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 46,
+                        "url": "https://i.postimg.cc/tJWQdhRk/IMG-20260606-WA0010.jpg",
+                        "group": "memoria-a-confirmar",
+                        "title": "Ofício tradicional diante de parede de adobe",
+                        "locality": "Acervo comunitário · localidade a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 47,
+                        "url": "https://i.postimg.cc/Bv70JSwc/IMG-5057.jpg",
+                        "group": "sede-centro",
+                        "title": "Avenida com vista para a Igreja Matriz",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 48,
+                        "url": "https://i.postimg.cc/JhYLRr27/IMG-5091.jpg",
+                        "group": "localidade-a-confirmar",
+                        "title": "Congregação Cristã e rua residencial",
+                        "locality": "Sede ou povoado · a confirmar",
+                        "confidence": "Não confirmada"
+            },
+            {
+                        "id": 49,
+                        "url": "https://i.postimg.cc/C5kTCjM3/Primeiras-Construcoes-de-Novorizonte.jpg",
+                        "group": "sede-centro",
+                        "title": "Primeiras construções do núcleo urbano",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 50,
+                        "url": "https://i.postimg.cc/MHV20yKS/Residencia-do-Senhor-Saul-de-Almeida.jpg",
+                        "group": "sede-centro",
+                        "title": "Residência do Senhor Saul de Almeida",
+                        "locality": "Sede · núcleo fundador e centro histórico",
+                        "confidence": "Confirmada"
+            },
+            {
+                        "id": 51,
+                        "url": "https://i.postimg.cc/K8gLPjtt/1.jpg",
+                        "group": "sede-centro",
+                        "title": "Produtos da feira no Mercado Municipal",
+                        "locality": "Sede · feira/mercado municipal (provável)",
+                        "confidence": "Provável por contexto documental"
+            },
+            {
+                        "id": 52,
+                        "url": "https://i.postimg.cc/sgZSYx57/2.jpg",
+                        "group": "multiplas-localidades",
+                        "title": "Cultura, paisagem rural e calçamento — montagem",
+                        "locality": "Múltiplas localidades",
+                        "confidence": "Composição múltipla"
+            },
+            {
+                        "id": 53,
+                        "url": "https://i.postimg.cc/Hk75wnbQ/3.jpg",
+                        "group": "multiplas-localidades",
+                        "title": "Irrigação, praça e produção agrícola — montagem",
+                        "locality": "Múltiplas localidades",
+                        "confidence": "Composição múltipla"
+            }
+];
 
         const slidesWrapper = document.getElementById('slidesWrapper');
         const dotsWrapper = document.getElementById('dotsWrapper');
+        const galleryGroups = document.getElementById('galleryGroups');
+        const galleryFilters = document.getElementById('galleryFilters');
+        const galleryTotal = document.getElementById('galleryTotal');
+        const galleryCurrentLocality = document.getElementById('galleryCurrentLocality');
 
-        if(slidesWrapper && dotsWrapper) {
-            galleryImages.forEach((url, index) => {
-                // Cria o Slide HTML
+        let activeGalleryFilter = 'all';
+        let activeGalleryItems = [...galleryItems];
+        let slideIndex = 1;
+
+        function escapeGalleryText(value) {
+            return String(value).replace(/[&<>'"]/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            })[char]);
+        }
+
+        function renderGalleryFilters() {
+            if (!galleryFilters) return;
+            galleryFilters.innerHTML = '';
+            const filterOptions = [
+                { key: 'all', short: 'Todas as localidades', count: galleryItems.length },
+                ...Object.entries(galleryGroupsMeta).map(([key, value]) => ({
+                    key,
+                    short: value.short,
+                    count: galleryItems.filter(item => item.group === key).length
+                }))
+            ];
+
+            filterOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `gallery-filter-btn${option.key === activeGalleryFilter ? ' active' : ''}`;
+                button.setAttribute('aria-pressed', option.key === activeGalleryFilter ? 'true' : 'false');
+                button.innerHTML = `${escapeGalleryText(option.short)} <span class="filter-count">${option.count}</span>`;
+                button.addEventListener('click', () => setGalleryFilter(option.key));
+                galleryFilters.appendChild(button);
+            });
+        }
+
+        function setGalleryFilter(groupKey) {
+            activeGalleryFilter = groupKey;
+            activeGalleryItems = groupKey === 'all'
+                ? [...galleryItems]
+                : galleryItems.filter(item => item.group === groupKey);
+            slideIndex = 1;
+            renderGalleryFilters();
+            renderGallerySlides();
+            renderGalleryLocalityGroups();
+            updateGalleryContext();
+            showSlides(slideIndex);
+        }
+
+        function updateGalleryContext() {
+            if (galleryTotal) galleryTotal.textContent = activeGalleryItems.length;
+            if (!galleryCurrentLocality) return;
+            if (activeGalleryFilter === 'all') {
+                galleryCurrentLocality.innerHTML = `Todas as localidades<small>${galleryItems.length} registros organizados em ${Object.keys(galleryGroupsMeta).length} conjuntos territoriais.</small>`;
+            } else {
+                const meta = galleryGroupsMeta[activeGalleryFilter];
+                galleryCurrentLocality.innerHTML = `${escapeGalleryText(meta.label)}<small>${escapeGalleryText(meta.description)}</small>`;
+            }
+        }
+
+        function renderGallerySlides() {
+            if (!slidesWrapper || !dotsWrapper) return;
+            slidesWrapper.innerHTML = '';
+            dotsWrapper.innerHTML = '';
+
+            activeGalleryItems.forEach((item, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'mySlides fade';
+                slide.dataset.galleryId = item.id;
                 slide.innerHTML = `
-                    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-family: var(--font-main); z-index: 5;">
-                        <i class="fa-solid fa-camera"></i> ${index + 1} / ${galleryImages.length}
+                    <div class="gallery-count"><i class="fa-solid fa-camera"></i> ${String(index + 1).padStart(2, '0')} / ${String(activeGalleryItems.length).padStart(2, '0')}</div>
+                    <a class="gallery-image-link" href="${item.url}" target="_blank" rel="noopener" title="Abrir imagem em tamanho original">
+                        <img src="${item.url}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" onerror="this.src='https://placehold.co/1200x800/C9AD78/24170F?text=Imagem+Indisponível'" alt="${escapeGalleryText(item.title)} — ${escapeGalleryText(item.locality)}">
+                    </a>
+                    <div class="gallery-caption">
+                        <strong>${escapeGalleryText(item.title)}</strong>
+                        <span class="gallery-place"><i class="fa-solid fa-location-dot"></i> ${escapeGalleryText(item.locality)}</span>
+                        <em class="gallery-certainty">${escapeGalleryText(item.confidence)}</em>
                     </div>
-                    <img src="${url}" onerror="this.src='https://placehold.co/800x500/D1BFA5/3A2818?text=Imagem+Indisponível'" alt="Acervo Fotográfico ${index + 1}" style="width: 100%; display: block; object-fit: cover; height: 450px;">
-                    <div style="position: absolute; bottom: 0; width: 100%; background: rgba(242, 232, 208, 0.95); padding: 8px; text-align: center; font-family: var(--font-main); font-size: 0.8rem; font-style: italic; color: var(--text-muted); border-top: 1px solid var(--border-color); z-index: 5;">Acervo: Retratos de Novorizonte</div>
                 `;
                 slidesWrapper.appendChild(slide);
 
-                // Cria o Pontinho (Dot) HTML
                 const dot = document.createElement('span');
                 dot.className = 'dot';
-                dot.style.cssText = 'cursor: pointer; height: 8px; width: 8px; margin: 3px; background-color: rgba(255,255,255,0.7); border-radius: 50%; display: inline-block; transition: background-color 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.5);';
+                dot.style.cssText = 'cursor:pointer;height:8px;width:8px;margin:3px;background-color:rgba(255,255,255,.7);border-radius:50%;display:inline-block;transition:background-color .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.5);';
+                dot.setAttribute('aria-label', `Abrir ${item.title}`);
                 dot.onclick = () => currentSlide(index + 1);
                 dotsWrapper.appendChild(dot);
             });
         }
 
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        function renderGalleryLocalityGroups() {
+            if (!galleryGroups) return;
+            galleryGroups.innerHTML = '';
+            const groupKeys = activeGalleryFilter === 'all'
+                ? Object.keys(galleryGroupsMeta)
+                : [activeGalleryFilter];
+
+            groupKeys.forEach(groupKey => {
+                const meta = galleryGroupsMeta[groupKey];
+                const groupItems = galleryItems.filter(item => item.group === groupKey);
+                const section = document.createElement('section');
+                section.className = 'gallery-locality-group';
+                section.id = `galeria-${groupKey}`;
+
+                const header = document.createElement('div');
+                header.className = 'gallery-locality-header';
+                header.innerHTML = `
+                    <div>
+                        <h4><i class="fa-solid fa-location-dot"></i> ${escapeGalleryText(meta.label)}</h4>
+                        <p>${escapeGalleryText(meta.description)}</p>
+                    </div>
+                    <div class="gallery-locality-count"><strong>${groupItems.length}</strong> registros</div>
+                `;
+                section.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'gallery-group-grid';
+
+                groupItems.forEach(item => {
+                    const thumb = document.createElement('button');
+                    thumb.className = 'gallery-thumb';
+                    thumb.type = 'button';
+                    thumb.dataset.galleryId = item.id;
+                    thumb.setAttribute('aria-label', `Abrir: ${item.title}`);
+                    thumb.onclick = () => {
+                        if (activeGalleryFilter !== 'all' && activeGalleryFilter !== item.group) {
+                            setGalleryFilter(item.group);
+                        }
+                        const position = activeGalleryItems.findIndex(record => record.id === item.id);
+                        if (position >= 0) currentSlide(position + 1);
+                        document.querySelector('.gallery-stage')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    };
+                    thumb.innerHTML = `
+                        <div class="gallery-thumb-image">
+                            <span class="gallery-thumb-number">${String(item.id).padStart(2, '0')}</span>
+                            <img src="${item.url}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/420x300/C9AD78/24170F?text=Indisponível'" alt="${escapeGalleryText(item.title)}">
+                        </div>
+                        <div class="gallery-thumb-meta">
+                            <strong>${escapeGalleryText(item.title)}</strong>
+                            <small>${escapeGalleryText(item.locality)}</small>
+                            <span class="gallery-thumb-confidence">${escapeGalleryText(item.confidence)}</span>
+                        </div>
+                    `;
+                    grid.appendChild(thumb);
+                });
+
+                section.appendChild(grid);
+                galleryGroups.appendChild(section);
+            });
+        }
 
         function plusSlides(n) {
             showSlides(slideIndex += n);
@@ -1092,25 +2940,30 @@
         }
 
         function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            if (slides.length === 0) return; // Segurança
-            
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            
-            slides[slideIndex-1].style.display = "block";
-            if (dots[slideIndex-1]) {
-                dots[slideIndex-1].className += " active";
-            }
+            const slides = slidesWrapper ? slidesWrapper.querySelectorAll('.mySlides') : [];
+            const dots = dotsWrapper ? dotsWrapper.querySelectorAll('.dot') : [];
+            if (!slides.length) return;
+
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+
+            slides.forEach(slide => slide.style.display = 'none');
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[slideIndex - 1].style.display = 'block';
+            dots[slideIndex - 1]?.classList.add('active');
+
+            const activeItem = activeGalleryItems[slideIndex - 1];
+            document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+                thumb.classList.toggle('active', Number(thumb.dataset.galleryId) === activeItem?.id);
+            });
+        }
+
+        if (slidesWrapper && dotsWrapper && galleryGroups && galleryFilters) {
+            renderGalleryFilters();
+            renderGallerySlides();
+            renderGalleryLocalityGroups();
+            updateGalleryContext();
+            showSlides(slideIndex);
         }
 
         // ==========================================
