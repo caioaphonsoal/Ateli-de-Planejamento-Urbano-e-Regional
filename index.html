@@ -185,6 +185,82 @@
         .fade { animation-name: fade; animation-duration: 1.5s; }
         @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
 
+        /* FONTES E REFERÊNCIAS */
+        .source-note {
+            margin-top: 2.5rem;
+            padding: 1.5rem 1.6rem;
+            border-radius: 18px;
+            border: 1px solid rgba(87,61,39,.16);
+            background: linear-gradient(135deg, rgba(247,240,226,.95), rgba(233,221,197,.9));
+            box-shadow: var(--shadow-card);
+        }
+        .source-note h4 {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            margin-bottom: .8rem;
+            color: var(--text-main);
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+        .source-note p, .source-note li {
+            text-align:left;
+            font-size:.92rem;
+            color: var(--text-main);
+        }
+        .source-note ul { padding-left: 1.2rem; display:grid; gap:.45rem; }
+        .source-note .source-cta { margin-top: 1rem; display:flex; flex-wrap:wrap; gap:12px; }
+        .source-note .mini-tag {
+            display:inline-flex; align-items:center; gap:8px;
+            font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+            font-weight:700; color:var(--accent);
+            padding:.45rem .7rem; border-radius:999px;
+            background: rgba(159,47,32,.08); border:1px solid rgba(159,47,32,.12);
+            margin-bottom:.8rem;
+        }
+        .references-page { padding-top: 102px; }
+        .references-hero {
+            padding: 4rem 0 2rem;
+            text-align:center;
+        }
+        .references-hero p { text-align:center; max-width:900px; margin: 1rem auto 0; }
+        .references-grid {
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.4rem;
+            margin-top: 2rem;
+        }
+        .reference-card {
+            background: rgba(247,240,226,.95);
+            border: 1px solid rgba(87,61,39,.14);
+            border-radius: 22px;
+            box-shadow: var(--shadow-card);
+            padding: 1.6rem;
+        }
+        .reference-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: .85rem;
+            display:flex; align-items:center; gap:10px;
+        }
+        .reference-card p { text-align:left; font-size:.94rem; color:var(--text-muted); }
+        .reference-list { list-style:none; display:grid; gap:.9rem; margin-top:1rem; }
+        .reference-list li {
+            padding:.95rem 1rem;
+            background: rgba(233,221,197,.65);
+            border: 1px dashed rgba(87,61,39,.18);
+            border-radius: 14px;
+        }
+        .reference-list strong { display:block; color:var(--text-main); margin-bottom:.25rem; }
+        .reference-list small { display:block; color:var(--text-muted); font-size:.8rem; margin-top:.35rem; }
+        .reference-kicker {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:.45rem .72rem; border-radius:999px; border:1px solid rgba(87,61,39,.14);
+            font-family: var(--font-title); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+            background: rgba(255,255,255,.45); color: var(--accent);
+        }
+        .references-actions { margin-top: 2rem; display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+
+
 
         /* =========================================================
            REPAGINAÇÃO EDITORIAL — RETRATOS DE NOVORIZONTE
@@ -1393,6 +1469,47 @@
             .gallery-audit { grid-template-columns:1fr; }
         }
 
+    
+
+        /* GALERIA DE IMAGENS — EXIBIÇÃO LIMPA, SEM LEGENDAS */
+        .clean-gallery-page {
+            padding-top: 72px;
+            padding-bottom: 110px;
+        }
+        .clean-gallery-page .section-title {
+            margin-bottom: 2.5rem;
+        }
+        .clean-gallery-grid {
+            columns: 4 280px;
+            column-gap: 18px;
+        }
+        .clean-gallery-item {
+            display: block;
+            width: 100%;
+            margin: 0 0 18px;
+            break-inside: avoid;
+            overflow: hidden;
+            border-radius: 16px;
+            background: rgba(47,33,24,.08);
+            box-shadow: 0 12px 30px rgba(47,33,24,.12);
+            border: 1px solid rgba(87,61,39,.14);
+        }
+        .clean-gallery-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform .45s ease, filter .45s ease;
+        }
+        .clean-gallery-item:hover img {
+            transform: scale(1.025);
+            filter: contrast(1.03) saturate(1.03);
+        }
+        @media (max-width: 760px) {
+            .clean-gallery-page { padding-top: 52px; }
+            .clean-gallery-grid { columns: 2 150px; column-gap: 12px; }
+            .clean-gallery-item { margin-bottom: 12px; border-radius: 12px; }
+        }
+
     </style>
 </head>
 <body>
@@ -1409,6 +1526,7 @@
             <a onclick="navigate('galeria')" class="nav-link" data-target="galeria">GALERIA DE IMAGENS</a>
             <a onclick="navigate('cartografia')" class="nav-link" data-target="cartografia">TRABALHOS NOVORIZONTINOS</a>
             <a onclick="navigate('ferramenta')" class="nav-link" data-target="ferramenta">FERRAMENTA</a>
+            <a onclick="navigate('fontes')" class="nav-link" data-target="fontes">FONTES</a>
         </nav>
     </header>
 
@@ -1746,6 +1864,9 @@
                     <p><strong>SOUZA, Henrique Neyffer de.</strong> <em>A cada dia, um novo horizonte</em>. Novorizonte: Edição do Autor, 2024. ISBN 978-65-01-21568-6.</p>
                     <p><strong>IBGE.</strong> Perfil municipal, indicadores estatísticos, histórico e formação administrativa de Novorizonte/MG, edição consultada de 2024.</p>
                     <p>Os números de população das localidades são aproximações reproduzidas do Projeto SanBas/UFMG (2022), conforme compilação do livro. A classificação fotográfica distingue registros confirmados, prováveis e ainda não confirmados.</p>
+                    <div class="source-cta">
+                        <button onclick="navigate('fontes')" class="btn-inline">Ver referências completas</button>
+                    </div>
                 </div>
 
                 <div class="divider"></div>
@@ -1768,80 +1889,158 @@
 
         <!-- 3. GALERIA DE IMAGENS -->
         <div id="galeria" class="view">
-            <section class="section gallery-chapter">
+            <section class="section clean-gallery-page">
                 <div class="container">
-                    <h2 class="section-title" style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 0;">Galeria de Imagens</h2>
-                    <p class="subtitle" style="margin-top: 1rem; max-width: 900px;">
-                        Um arquivo visual das paisagens, transformações urbanas, celebrações e memórias que formam a identidade novorizontina.
-                    </p>
-                </div>
-            </section>
-
-            <section class="section container gallery-page-content">
-                <div class="gallery-overview">
-                    <div>
-                        <span class="chapter-eyebrow"><i class="fa-solid fa-images"></i> Acervo territorial</span>
-                        <h3>Novorizonte através de suas localidades, paisagens e memórias.</h3>
-                        <p style="margin:12px 0 0; text-align:left; max-width:760px; color:var(--text-muted);">As fotografias foram organizadas a partir dos nomes originais dos arquivos, da leitura dos elementos urbanos e paisagísticos e da relação entre séries registradas na mesma data. Identificações não conclusivas permanecem explicitamente marcadas como prováveis ou a confirmar.</p>
+                    <h2 class="section-title">Galeria de Imagens</h2>
+                    <div class="clean-gallery-grid" aria-label="Galeria de imagens de Novorizonte">
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/5NQMbWwv/18-Vista-da-Praca-da-Matriz.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/5NQMbWwv/18-Vista-da-Praca-da-Matriz.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/15VZs1p0/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/15VZs1p0/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Nf2wBv6Y/20240128-062940.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Nf2wBv6Y/20240128-062940.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/63bDxMqP/20241123-153457.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/63bDxMqP/20241123-153457.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/5yHD48FQ/20250418-110009.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/5yHD48FQ/20250418-110009.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/j2WBxyJ6/20250419-063634.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/j2WBxyJ6/20250419-063634.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/c1jVDkVJ/20250728-072350.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/c1jVDkVJ/20250728-072350.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/5NQMbWwS/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/5NQMbWwS/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/yY3zsCFv/29-Avenida-Salinas.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/yY3zsCFv/29-Avenida-Salinas.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Hs8Cd1QK/30-Avenida-Salinas.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Hs8Cd1QK/30-Avenida-Salinas.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/QxKrhZpY/33-Gameleira.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/QxKrhZpY/33-Gameleira.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/LXQrFx5c/35-Aerea-Tronca-2.png" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/LXQrFx5c/35-Aerea-Tronca-2.png" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/VsrYLtwd/arq-4387.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/VsrYLtwd/arq-4387.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/bYDzNnPS/arq-4388.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/bYDzNnPS/arq-4388.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/zDbJXhNC/arq-4389.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/zDbJXhNC/arq-4389.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/PfptrDH1/arq-4397.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/PfptrDH1/arq-4397.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/ry08F4Tn/DSC00001.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/ry08F4Tn/DSC00001.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/G3WbBp3f/DSC01177.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/G3WbBp3f/DSC01177.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/HWqTJLsD/DSC01199.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/HWqTJLsD/DSC01199.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/CLbSbVz5/DSC01337.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/CLbSbVz5/DSC01337.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/13PPHYqp/DSC01339.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/13PPHYqp/DSC01339.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/0yxxfHwW/DSC01344.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/0yxxfHwW/DSC01344.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/BQ242GXc/DSC06004.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/BQ242GXc/DSC06004.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/T39xHqjv/DSC06152.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/T39xHqjv/DSC06152.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/K8Nbsr7M/DSC06153.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/K8Nbsr7M/DSC06153.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/L8RRT01y/Foto-Praca-2005.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/L8RRT01y/Foto-Praca-2005.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/W3DP3BBD/IMG-20190615-WA0006.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/W3DP3BBD/IMG-20190615-WA0006.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/KzKyz66B/IMG-20210712-WA0010.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/KzKyz66B/IMG-20210712-WA0010.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/rmdLmBB5/IMG-20210712-WA0012.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/rmdLmBB5/IMG-20210712-WA0012.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Hxf17Smc/IMG-20231103-WA0027.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Hxf17Smc/IMG-20231103-WA0027.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/pT9tTwgw/IMG-20240807-124609-394.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/pT9tTwgw/IMG-20240807-124609-394.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/HxJCxqq1/IMG-20240807-125038-138.webp" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/HxJCxqq1/IMG-20240807-125038-138.webp" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/zBL1BssJ/IMG-20240807-125038-238.webp" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/zBL1BssJ/IMG-20240807-125038-238.webp" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/przbQDXd/IMG-20250809-151625406.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/przbQDXd/IMG-20250809-151625406.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/PfwjkkbZ/IMG-20250809-151736639.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/PfwjkkbZ/IMG-20250809-151736639.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Jn9CBT8g/IMG-20260113-WA0008.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Jn9CBT8g/IMG-20260113-WA0008.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/k4kPtjCp/IMG-20260606-WA0006.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/k4kPtjCp/IMG-20260606-WA0006.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Hxf17Smf/IMG-20260606-WA0008.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Hxf17Smf/IMG-20260606-WA0008.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/tJWQdhRk/IMG-20260606-WA0010.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/tJWQdhRk/IMG-20260606-WA0010.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Bv70JSwc/IMG-5057.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Bv70JSwc/IMG-5057.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/JhYLRr27/IMG-5091.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/JhYLRr27/IMG-5091.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/C5kTCjM3/Primeiras-Construcoes-de-Novorizonte.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/C5kTCjM3/Primeiras-Construcoes-de-Novorizonte.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/MHV20yKS/Residencia-do-Senhor-Saul-de-Almeida.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/MHV20yKS/Residencia-do-Senhor-Saul-de-Almeida.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/sgZSYx57/2.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/sgZSYx57/2.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
+                    <a class="clean-gallery-item" href="https://i.postimg.cc/Hk75wnbQ/3.jpg" target="_blank" rel="noopener" aria-label="Abrir imagem da galeria">
+                        <img src="https://i.postimg.cc/Hk75wnbQ/3.jpg" loading="lazy" decoding="async" alt="Registro visual de Novorizonte" onerror="this.closest('.clean-gallery-item').remove()">
+                    </a>
                     </div>
-                    <div class="gallery-stat">
-                        <strong id="galleryTotal">—</strong>
-                        <span>registros exibidos</span>
-                    </div>
-                </div>
-
-                <div class="gallery-filter-intro">
-                    <div>
-                        <span class="chapter-eyebrow"><i class="fa-solid fa-location-dot"></i> Navegação territorial</span>
-                        <h4>Escolha uma localidade ou percorra todo o acervo.</h4>
-                    </div>
-                    <p>Os filtros reorganizam simultaneamente o visor principal e o índice fotográfico por localidade.</p>
-                </div>
-                    <div class="gallery-audit">
-                        <i class="fa-solid fa-magnifying-glass-location"></i>
-                        <div>
-                            <strong>Classificação revista imagem por imagem.</strong>
-                            <p>Foram cruzados nomes de arquivos, legendas históricas e elementos visuais. A gameleira, antes atribuída à sede, foi corrigida para Campo Verde de Minas. Fotografias sem marco inequívoco permanecem como “prováveis” ou “a confirmar”, sem forçar uma localização.</p>
-                        </div>
-                    </div>
-
-                <div id="galleryFilters" class="gallery-filterbar" aria-label="Filtrar galeria por localidade"></div>
-
-                <div class="gallery-shell">
-                    <div class="gallery-stage">
-                        <div id="slidesWrapper"></div>
-
-                        <button class="gallery-control prev" onclick="plusSlides(-1)" aria-label="Imagem anterior">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button class="gallery-control next" onclick="plusSlides(1)" aria-label="Próxima imagem">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-
-                        <div id="dotsWrapper" class="gallery-dots" aria-label="Navegação da galeria"></div>
-                    </div>
-
-                    <aside class="gallery-note">
-                        <span class="chapter-eyebrow"><i class="fa-solid fa-box-archive"></i> Retratos de Novorizonte</span>
-                        <h4>Memória organizada pelo território</h4>
-                        <p>O acervo reúne o núcleo histórico, a malha urbana, Campo Verde de Minas, a zona rural, as águas, a produção e a vida comunitária.</p>
-                        <div id="galleryCurrentLocality" class="gallery-note-current">Todas as localidades<small>Acervo completo em exibição.</small></div>
-                        <div class="gallery-note-rule"></div>
-                        <p class="gallery-note-small"><i class="fa-solid fa-hand-pointer"></i> Selecione uma miniatura abaixo ou use as setas para navegar pelo acervo filtrado.</p>
-                    </aside>
-                </div>
-
-                <div class="gallery-thumbs-heading">
-                    <div>
-                        <span>Índice fotográfico territorial</span>
-                        <h3>Registros agrupados por localidade</h3>
-                    </div>
-                    <small>As indicações “provável” e “a confirmar” evitam atribuições geográficas sem comprovação suficiente.</small>
-                </div>
-                <div id="galleryGroups" class="gallery-locality-groups"></div>
-
-                <div class="gallery-next">
-                    <button onclick="navigate('cartografia')" class="btn-primary">Avançar para Trabalhos Novorizontinos <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </section>
         </div>
@@ -1965,6 +2164,19 @@
                     </article>
                 </div>
 
+                <div class="source-note">
+                    <span class="mini-tag"><i class="fa-solid fa-map"></i> Fontes desta página</span>
+                    <h4><i class="fa-solid fa-circle-info"></i> Base cartográfica e acervo de trabalhos</h4>
+                    <ul>
+                        <li>Os mapas síntese e temático integram o conjunto apresentado no trabalho <strong>Retratos de Novorizonte</strong>.</li>
+                        <li>O mapa interativo utiliza <strong>Leaflet</strong> e base cartográfica aberta do <strong>OpenStreetMap</strong>, com marcações territoriais adaptadas ao recorte municipal.</li>
+                        <li>Os resumos dos trabalhos em destaque foram redigidos a partir das próprias obras e dos documentos oficiais: <strong>SOUZA (2024)</strong>, <strong>IBGE (2024)</strong> e o perfil estatístico do portal <strong>Cidades e Estados do Brasil – IBGE</strong>.</li>
+                    </ul>
+                    <div class="source-cta">
+                        <button onclick="navigate('fontes')" class="btn-inline">Abrir página de fontes</button>
+                    </div>
+                </div>
+
                 <div style="text-align: center; margin-top: 4rem;">
                     <button onclick="navigate('ferramenta')" class="btn-primary">Conhecer o Simplifica Novorizonte <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
                 </div>
@@ -2037,13 +2249,130 @@
                         </div>
                     </div>
                 </div>
+                <div class="source-note">
+                    <span class="mini-tag"><i class="fa-solid fa-scale-balanced"></i> Fontes desta página</span>
+                    <h4><i class="fa-solid fa-circle-info"></i> Base legal e observações</h4>
+                    <ul>
+                        <li><strong>Lei Federal nº 11.445/2007</strong> — estabelece as diretrizes nacionais para o saneamento básico.</li>
+                        <li><strong>Lei Federal nº 12.305/2010</strong> — institui a Política Nacional de Resíduos Sólidos.</li>
+                        <li><strong>Lei Municipal nº 16/1997</strong> — Código de Posturas de Novorizonte.</li>
+                        <li>O recurso “Tradutor Livre” é apresentado como apoio didático para interpretação cidadã, sem substituir consulta técnica, jurídica ou administrativa oficial.</li>
+                    </ul>
+                    <div class="source-cta">
+                        <button onclick="navigate('fontes')" class="btn-inline">Ver referências completas</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 6. FONTES E REFERÊNCIAS -->
+        <div id="fontes" class="view references-page">
+            <section class="section container">
+                <div class="references-hero">
+                    <span class="reference-kicker"><i class="fa-solid fa-book-bookmark"></i> documentação do projeto</span>
+                    <h2 class="section-title" style="margin-top: 1rem;">Fontes e Referências</h2>
+                    <p>Esta página reúne as bases utilizadas na construção do conteúdo do site. As sínteses textuais, classificações da galeria, quadros territoriais, indicadores e observações históricas foram consolidados a partir das referências abaixo. Quando um dado secundário foi reproduzido por outra obra, isso foi indicado no próprio item.</p>
+                </div>
+
+                <div class="references-grid">
+                    <article class="reference-card">
+                        <h3><i class="fa-solid fa-book"></i> Bibliografia base</h3>
+                        <p>Obras centrais que sustentam a narrativa histórica, territorial e cultural do site.</p>
+                        <ul class="reference-list">
+                            <li>
+                                <strong>SOUZA, Henrique Neyffer de. <em>A cada dia, um novo horizonte</em>.</strong>
+                                Novorizonte, MG: Edição do Autor, 2024. ISBN 978-65-01-21568-6.
+                                <small>Fonte principal para história regional, formação da sede, distrito de Campo Verde, povoados, memória local, cultura, saneamento e acervo iconográfico descrito no livro.</small>
+                            </li>
+                            <li>
+                                <strong>IBGE. <em>Novorizonte - MG: História e Formação Administrativa</em>.</strong>
+                                Rio de Janeiro: Instituto Brasileiro de Geografia e Estatística, 2024.
+                                <small>Base principal para a narrativa institucional da formação administrativa do município e a validação cronológica da emancipação e organização territorial.</small>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="reference-card">
+                        <h3><i class="fa-solid fa-chart-column"></i> Dados estatísticos</h3>
+                        <p>Indicadores demográficos, sociais e econômicos utilizados nas seções de contexto e acervo.</p>
+                        <ul class="reference-list">
+                            <li>
+                                <strong>IBGE. <em>Cidades e Estados do Brasil – Novorizonte/MG</em>.</strong>
+                                Indicadores consultados: população (2022), densidade demográfica (2022), área territorial (2024), idade mediana (2022), cor ou raça (2022), PIB per capita (2023), casamentos (2024), IDEB (2023) e frota de veículos (2024).
+                                <small>Os dados foram usados nos cartões estatísticos e nos textos-síntese do perfil municipal.</small>
+                            </li>
+                            <li>
+                                <strong>Projeto SanBas / UFMG (2022), via SOUZA (2024).</strong>
+                                Dados de população aproximada e informações sobre abastecimento de água, saneamento e localidades rurais.
+                                <small>Os quantitativos de distrito e povoados foram mantidos como aproximações por derivarem da compilação do livro.</small>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="reference-card">
+                        <h3><i class="fa-solid fa-map-location-dot"></i> Cartografia e imagens</h3>
+                        <p>Bases visuais que sustentam a galeria, os mapas e a leitura do território.</p>
+                        <ul class="reference-list">
+                            <li>
+                                <strong>Acervo visual do projeto “Retratos de Novorizonte”.</strong>
+                                Conjunto de fotografias históricas e contemporâneas do município, incluindo Praça da Matriz, Avenida João Bernardino de Souza, Campo Verde de Minas, paisagens rurais e registros comunitários.
+                                <small>Usado na galeria territorial e na ambientação visual do site.</small>
+                            </li>
+                            <li>
+                                <strong>Mapas do trabalho: síntese territorial e mapa temático.</strong>
+                                Materiais gráficos incorporados ao acervo da página “Trabalhos Novorizontinos”.
+                                <small>O mapa interativo foi implementado com Leaflet e base OpenStreetMap.</small>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="reference-card">
+                        <h3><i class="fa-solid fa-scale-balanced"></i> Legislação e documentos normativos</h3>
+                        <p>Referências da seção “Simplifica Novorizonte”.</p>
+                        <ul class="reference-list">
+                            <li>
+                                <strong>BRASIL. Lei nº 11.445, de 5 de janeiro de 2007.</strong>
+                                Estabelece as diretrizes nacionais para o saneamento básico.
+                            </li>
+                            <li>
+                                <strong>BRASIL. Lei nº 12.305, de 2 de agosto de 2010.</strong>
+                                Institui a Política Nacional de Resíduos Sólidos.
+                            </li>
+                            <li>
+                                <strong>NOVORIZONTE (MG). Lei Municipal nº 16, de 1997.</strong>
+                                Código de Posturas do Município de Novorizonte.
+                            </li>
+                            <li>
+                                <strong>Minas Gerais. Lei Estadual nº 12.030, de 21 de dezembro de 1995.</strong>
+                                Dispõe sobre a criação do município de Novorizonte.
+                                <small>Referência jurídica importante para a narrativa de emancipação municipal.</small>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="source-note" style="margin-top:2rem;">
+                    <span class="mini-tag"><i class="fa-solid fa-pen-to-square"></i> nota metodológica</span>
+                    <h4><i class="fa-solid fa-circle-info"></i> Como as fontes foram aplicadas no site</h4>
+                    <ul>
+                        <li>Os textos do <strong>Contexto</strong> condensam informações históricas, ambientais, sociais e culturais principalmente a partir de <strong>SOUZA (2024)</strong>, complementadas pela validação institucional do <strong>IBGE (2024)</strong>.</li>
+                        <li>Os quadros estatísticos utilizam os indicadores oficiais mais recentes disponíveis no perfil municipal do <strong>IBGE</strong>.</li>
+                        <li>O acervo de <strong>Trabalhos Novorizontinos</strong> apresenta somente obras e registros que possuíam fonte ou autoria verificável no momento desta edição.</li>
+                        <li>A galeria reúne o acervo visual em uma apresentação direta, sem legendas ou classificação territorial.</li>
+                    </ul>
+                    <div class="references-actions">
+                        <button onclick="navigate('contexto')" class="btn-inline">Voltar ao Contexto</button>
+                        <button onclick="navigate('galeria')" class="btn-inline">Ir para a Galeria</button>
+                        <button onclick="navigate('cartografia')" class="btn-primary">Voltar ao Acervo</button>
+                    </div>
+                </div>
             </section>
         </div>
 
     </div>
 
     <footer class="site-footer">
-        <div><strong>Retratos de Novorizonte — MG</strong><span>Cartografia, memória e território</span></div><small>&copy; 2026 · Caio A. Almeida</small>
+        <div><strong>Retratos de Novorizonte — MG</strong><span>Cartografia, memória e território</span><small>Conteúdo referenciado em fontes documentais, estatísticas e legais disponíveis na página "Fontes".</small></div><small>&copy; 2026 · Caio A. Almeida</small>
     </footer>
 
     <!-- POP-UP (MODAL) DAS LEIS EXPLICADAS -->
@@ -2296,675 +2625,6 @@
             }
         });
 
-
-        // ==========================================
-        // GALERIA TERRITORIAL — LOCALIDADES E FILTROS
-        // ==========================================
-        const galleryGroupsMeta = {
-            "sede-centro": {
-                        "label": "Sede · Praça da Matriz, Avenida e núcleo fundador",
-                        "short": "Sede · centro histórico",
-                        "description": "Registros confirmados do núcleo fundador: Igreja Nossa Senhora da Conceição, Praça da Matriz, Avenida João Bernardino, Mercado Municipal e primeiras construções."
-            },
-            "sede-urbana": {
-                        "label": "Sede · ruas, escolas e expansão urbana",
-                        "short": "Sede · malha urbana",
-                        "description": "Ruas, escolas, moradias e etapas de urbanização da sede. Alguns pontos são prováveis porque não há legenda original com endereço."
-            },
-            "campo-verde": {
-                        "label": "Campo Verde de Minas · antiga Tronca",
-                        "short": "Campo Verde de Minas",
-                        "description": "A antiga Tronca ou Entroncamento. A gameleira e a vista aérea são confirmadas pelas legendas do livro; outros registros do conjunto são prováveis."
-            },
-            "rural-nao-identificada": {
-                        "label": "Zona rural · comunidade específica não identificada",
-                        "short": "Zona rural",
-                        "description": "Cozinha tradicional, propriedades familiares, cultivos e represas. O caráter rural é reconhecível, mas a comunidade exata não está documentada."
-            },
-            "cultura-municipal": {
-                        "label": "Eventos municipais · esporte e festas",
-                        "short": "Cultura e esporte",
-                        "description": "Equipe de futebol e Arraiá da Setembrina. O evento é municipal; a rua ou local exato permanece como provável quando não aparece em legenda."
-            },
-            "natureza-a-confirmar": {
-                        "label": "Paisagens naturais · ponto exato a confirmar",
-                        "short": "Natureza · a confirmar",
-                        "description": "Cursos d’água, cachoeira, estrada rural e espelho d’água. Não há evidência suficiente para atribuir esses registros a um povoado específico — ou, em alguns casos, ao próprio município."
-            },
-            "memoria-a-confirmar": {
-                        "label": "Memória comunitária · localidade a confirmar",
-                        "short": "Memória · a confirmar",
-                        "description": "Retratos familiares, transporte e ofícios tradicionais sem indicação espacial conclusiva no arquivo recebido."
-            },
-            "multiplas-localidades": {
-                        "label": "Montagens temáticas · múltiplas localidades",
-                        "short": "Montagens temáticas",
-                        "description": "Composições que reúnem cenas de diferentes espaços e, por isso, não devem ser atribuídas a uma única localidade."
-            },
-            "localidade-a-confirmar": {
-                        "label": "Núcleo habitado · localidade ainda não confirmada",
-                        "short": "Localidade a confirmar",
-                        "description": "Imagens urbanas ou religiosas cuja arquitetura não permite distinguir com segurança entre sede, distrito e povoados."
-            }
-};
-
-        const galleryItems = [
-            {
-                        "id": 1,
-                        "url": "https://i.postimg.cc/L6gM2FzD/16-Igreja-Nossa-Senhora-da-Conceicao-e-Praca.jpg",
-                        "group": "sede-centro",
-                        "title": "Igreja Nossa Senhora da Conceição e Praça da Matriz",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 2,
-                        "url": "https://i.postimg.cc/5NQMbWwv/18-Vista-da-Praca-da-Matriz.jpg",
-                        "group": "sede-centro",
-                        "title": "Praça da Matriz no tempo dos carros de boi",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 3,
-                        "url": "https://i.postimg.cc/15VZs1p0/20-Vista-da-Praca-da-Matriz-e-Escola-Municipal-de-Novorizonte.jpg",
-                        "group": "sede-centro",
-                        "title": "Praça da Matriz e antiga Escola Municipal",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 4,
-                        "url": "https://i.postimg.cc/Nf2wBv6Y/20240128-062940.jpg",
-                        "group": "sede-urbana",
-                        "title": "Rua calçada após a chuva",
-                        "locality": "Sede de Novorizonte · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 5,
-                        "url": "https://i.postimg.cc/63bDxMqP/20241123-153457.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Cozinha de fogão a lenha em moradia rural",
-                        "locality": "Zona rural · comunidade a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 6,
-                        "url": "https://i.postimg.cc/5yHD48FQ/20250418-110009.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Represa em propriedade produtiva",
-                        "locality": "Zona rural · comunidade a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 7,
-                        "url": "https://i.postimg.cc/j2WBxyJ6/20250419-063634.jpg",
-                        "group": "sede-urbana",
-                        "title": "Rua arborizada junto à quadra esportiva",
-                        "locality": "Sede de Novorizonte · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 8,
-                        "url": "https://i.postimg.cc/c1jVDkVJ/20250728-072350.jpg",
-                        "group": "localidade-a-confirmar",
-                        "title": "Via não pavimentada em núcleo habitado",
-                        "locality": "Sede, distrito ou povoado · a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 9,
-                        "url": "https://i.postimg.cc/8k0V2zr4/23-Vista-panoramica-da-Cidade-de-Novorizonte-alguns-anos-atras.jpg",
-                        "group": "sede-centro",
-                        "title": "Vista aérea histórica da sede",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 10,
-                        "url": "https://i.postimg.cc/5NQMbWwS/28-Avenida-Salinas-atual-Joao-Bernardino-de-Souza.jpg",
-                        "group": "sede-centro",
-                        "title": "Antiga Avenida Salinas — atual João Bernardino",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 11,
-                        "url": "https://i.postimg.cc/yY3zsCFv/29-Avenida-Salinas.jpg",
-                        "group": "sede-centro",
-                        "title": "Avenida Salinas em dia de movimento",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 12,
-                        "url": "https://i.postimg.cc/Hs8Cd1QK/30-Avenida-Salinas.jpg",
-                        "group": "sede-centro",
-                        "title": "Avenida Salinas e a infância nas ruas",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 13,
-                        "url": "https://i.postimg.cc/QxKrhZpY/33-Gameleira.jpg",
-                        "group": "campo-verde",
-                        "title": "Gameleira que servia de abrigo aos caminhões",
-                        "locality": "Campo Verde de Minas · antiga Tronca",
-                        "confidence": "Confirmada pelo livro"
-            },
-            {
-                        "id": 14,
-                        "url": "https://i.postimg.cc/LXQrFx5c/35-Aerea-Tronca-2.png",
-                        "group": "campo-verde",
-                        "title": "Vista aérea da antiga Tronca",
-                        "locality": "Campo Verde de Minas · antiga Tronca",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 15,
-                        "url": "https://i.postimg.cc/VsrYLtwd/arq-4387.jpg",
-                        "group": "sede-urbana",
-                        "title": "Avenida João Bernardino e escola estadual",
-                        "locality": "Sede de Novorizonte · E.E. João Bernardino de Souza",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 16,
-                        "url": "https://i.postimg.cc/bYDzNnPS/arq-4388.jpg",
-                        "group": "sede-urbana",
-                        "title": "E.E. João Bernardino de Souza",
-                        "locality": "Sede de Novorizonte",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 17,
-                        "url": "https://i.postimg.cc/zDbJXhNC/arq-4389.jpg",
-                        "group": "sede-urbana",
-                        "title": "Rua arborizada do centro urbano",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 18,
-                        "url": "https://i.postimg.cc/PfptrDH1/arq-4397.jpg",
-                        "group": "sede-urbana",
-                        "title": "Conjunto escolar e arquitetura tradicional",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 19,
-                        "url": "https://i.postimg.cc/ry08F4Tn/DSC00001.jpg",
-                        "group": "sede-centro",
-                        "title": "Igreja e Praça da Matriz",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 20,
-                        "url": "https://i.postimg.cc/G3WbBp3f/DSC01177.jpg",
-                        "group": "sede-urbana",
-                        "title": "Rua residencial ao entardecer",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 21,
-                        "url": "https://i.postimg.cc/HWqTJLsD/DSC01199.jpg",
-                        "group": "sede-urbana",
-                        "title": "Casa tradicional de esquina",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 22,
-                        "url": "https://i.postimg.cc/CLbSbVz5/DSC01337.jpg",
-                        "group": "sede-urbana",
-                        "title": "Expansão urbana junto à torre de telecomunicações",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 23,
-                        "url": "https://i.postimg.cc/13PPHYqp/DSC01339.jpg",
-                        "group": "sede-urbana",
-                        "title": "Eixo viário em processo de urbanização",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 24,
-                        "url": "https://i.postimg.cc/0yxxfHwW/DSC01344.jpg",
-                        "group": "sede-urbana",
-                        "title": "Rua e praça arborizada",
-                        "locality": "Sede · malha urbana",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 25,
-                        "url": "https://i.postimg.cc/BQ242GXc/DSC06004.jpg",
-                        "group": "campo-verde",
-                        "title": "Núcleo urbano em rua de terra",
-                        "locality": "Campo Verde de Minas · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 26,
-                        "url": "https://i.postimg.cc/T39xHqjv/DSC06152.jpg",
-                        "group": "campo-verde",
-                        "title": "Eixo pavimentado e estrutura de abastecimento",
-                        "locality": "Campo Verde de Minas · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 27,
-                        "url": "https://i.postimg.cc/K8Nbsr7M/DSC06153.jpg",
-                        "group": "campo-verde",
-                        "title": "Entrada urbana e estrutura de abastecimento",
-                        "locality": "Campo Verde de Minas · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 28,
-                        "url": "https://i.postimg.cc/L8RRT01y/Foto-Praca-2005.jpg",
-                        "group": "sede-centro",
-                        "title": "Praça da Matriz em 2005",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 29,
-                        "url": "https://i.postimg.cc/LsQpm9bH/IMG-20171228-163145329-(1)-(1).jpg",
-                        "group": "memoria-a-confirmar",
-                        "title": "Registro comunitário histórico",
-                        "locality": "Acervo comunitário · localidade a confirmar",
-                        "confidence": "A confirmar"
-            },
-            {
-                        "id": 30,
-                        "url": "https://i.postimg.cc/HxJCxqqG/IMG-20180421-103542037.jpg",
-                        "group": "natureza-a-confirmar",
-                        "title": "Curso d’água em mata de galeria",
-                        "locality": "Território municipal/regional · ponto a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 31,
-                        "url": "https://i.postimg.cc/W3DP3BBD/IMG-20190615-WA0006.jpg",
-                        "group": "cultura-municipal",
-                        "title": "Equipe Juventus de Esportes",
-                        "locality": "Evento municipal · campo/localidade a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 32,
-                        "url": "https://i.postimg.cc/qRtdRPP6/IMG-20200104-WA0050.jpg",
-                        "group": "natureza-a-confirmar",
-                        "title": "Cachoeira de grande porte",
-                        "locality": "Município ou região · origem a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 33,
-                        "url": "https://i.postimg.cc/KzKyz66B/IMG-20210712-WA0010.jpg",
-                        "group": "natureza-a-confirmar",
-                        "title": "Córrego em mata fechada",
-                        "locality": "Território municipal/regional · ponto a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 34,
-                        "url": "https://i.postimg.cc/rmdLmBB5/IMG-20210712-WA0012.jpg",
-                        "group": "natureza-a-confirmar",
-                        "title": "Estrada rural entre vegetação de cerrado",
-                        "locality": "Zona rural · trecho a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 35,
-                        "url": "https://i.postimg.cc/Hxf17Smc/IMG-20231103-WA0027.jpg",
-                        "group": "natureza-a-confirmar",
-                        "title": "Espelho d’água e passarela ao pôr do sol",
-                        "locality": "Município ou região · ponto a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 36,
-                        "url": "https://i.postimg.cc/pT9tTwgw/IMG-20240807-124609-394.jpg",
-                        "group": "cultura-municipal",
-                        "title": "Fogueira do Arraiá da Setembrina",
-                        "locality": "Evento municipal · sede provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 37,
-                        "url": "https://i.postimg.cc/HxJCxqq1/IMG-20240807-125038-138.webp",
-                        "group": "cultura-municipal",
-                        "title": "Ornamentação do Arraiá da Setembrina",
-                        "locality": "Evento municipal · sede provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 38,
-                        "url": "https://i.postimg.cc/zBL1BssJ/IMG-20240807-125038-238.webp",
-                        "group": "cultura-municipal",
-                        "title": "Noite do Arraiá da Setembrina",
-                        "locality": "Evento municipal · sede provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 39,
-                        "url": "https://i.postimg.cc/przbQDXd/IMG-20250809-151625406.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Cultivo em solo do sertão",
-                        "locality": "Zona rural · comunidade a confirmar",
-                        "confidence": "A confirmar"
-            },
-            {
-                        "id": 40,
-                        "url": "https://i.postimg.cc/PfwjkkbZ/IMG-20250809-151736639.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Represa e paisagem agrícola",
-                        "locality": "Zona rural · comunidade a confirmar",
-                        "confidence": "A confirmar"
-            },
-            {
-                        "id": 41,
-                        "url": "https://i.postimg.cc/j5GYJ8TQ/IMG-20250819-WA0013.jpg",
-                        "group": "sede-urbana",
-                        "title": "Casa tradicional nº 183 e seus moradores",
-                        "locality": "Sede de Novorizonte · provável",
-                        "confidence": "Provável"
-            },
-            {
-                        "id": 42,
-                        "url": "https://i.postimg.cc/C1Wpfv04/IMG-20260113-WA0006.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Roda de conversa em moradia rural",
-                        "locality": "Zona rural · propriedade a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 43,
-                        "url": "https://i.postimg.cc/Jn9CBT8g/IMG-20260113-WA0008.jpg",
-                        "group": "rural-nao-identificada",
-                        "title": "Unidade produtiva familiar",
-                        "locality": "Zona rural · propriedade a confirmar",
-                        "confidence": "Localidade a confirmar"
-            },
-            {
-                        "id": 44,
-                        "url": "https://i.postimg.cc/k4kPtjCp/IMG-20260606-WA0006.jpg",
-                        "group": "memoria-a-confirmar",
-                        "title": "Caminhão e memória do transporte local",
-                        "locality": "Acervo comunitário · localidade a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 45,
-                        "url": "https://i.postimg.cc/Hxf17Smf/IMG-20260606-WA0008.jpg",
-                        "group": "memoria-a-confirmar",
-                        "title": "Crianças sobre caminhão em registro familiar",
-                        "locality": "Acervo comunitário · localidade a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 46,
-                        "url": "https://i.postimg.cc/tJWQdhRk/IMG-20260606-WA0010.jpg",
-                        "group": "memoria-a-confirmar",
-                        "title": "Ofício tradicional diante de parede de adobe",
-                        "locality": "Acervo comunitário · localidade a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 47,
-                        "url": "https://i.postimg.cc/Bv70JSwc/IMG-5057.jpg",
-                        "group": "sede-centro",
-                        "title": "Avenida com vista para a Igreja Matriz",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 48,
-                        "url": "https://i.postimg.cc/JhYLRr27/IMG-5091.jpg",
-                        "group": "localidade-a-confirmar",
-                        "title": "Congregação Cristã e rua residencial",
-                        "locality": "Sede ou povoado · a confirmar",
-                        "confidence": "Não confirmada"
-            },
-            {
-                        "id": 49,
-                        "url": "https://i.postimg.cc/C5kTCjM3/Primeiras-Construcoes-de-Novorizonte.jpg",
-                        "group": "sede-centro",
-                        "title": "Primeiras construções do núcleo urbano",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 50,
-                        "url": "https://i.postimg.cc/MHV20yKS/Residencia-do-Senhor-Saul-de-Almeida.jpg",
-                        "group": "sede-centro",
-                        "title": "Residência do Senhor Saul de Almeida",
-                        "locality": "Sede · núcleo fundador e centro histórico",
-                        "confidence": "Confirmada"
-            },
-            {
-                        "id": 51,
-                        "url": "https://i.postimg.cc/K8gLPjtt/1.jpg",
-                        "group": "sede-centro",
-                        "title": "Produtos da feira no Mercado Municipal",
-                        "locality": "Sede · feira/mercado municipal (provável)",
-                        "confidence": "Provável por contexto documental"
-            },
-            {
-                        "id": 52,
-                        "url": "https://i.postimg.cc/sgZSYx57/2.jpg",
-                        "group": "multiplas-localidades",
-                        "title": "Cultura, paisagem rural e calçamento — montagem",
-                        "locality": "Múltiplas localidades",
-                        "confidence": "Composição múltipla"
-            },
-            {
-                        "id": 53,
-                        "url": "https://i.postimg.cc/Hk75wnbQ/3.jpg",
-                        "group": "multiplas-localidades",
-                        "title": "Irrigação, praça e produção agrícola — montagem",
-                        "locality": "Múltiplas localidades",
-                        "confidence": "Composição múltipla"
-            }
-];
-
-        const slidesWrapper = document.getElementById('slidesWrapper');
-        const dotsWrapper = document.getElementById('dotsWrapper');
-        const galleryGroups = document.getElementById('galleryGroups');
-        const galleryFilters = document.getElementById('galleryFilters');
-        const galleryTotal = document.getElementById('galleryTotal');
-        const galleryCurrentLocality = document.getElementById('galleryCurrentLocality');
-
-        let activeGalleryFilter = 'all';
-        let activeGalleryItems = [...galleryItems];
-        let slideIndex = 1;
-
-        function escapeGalleryText(value) {
-            return String(value).replace(/[&<>'"]/g, char => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-            })[char]);
-        }
-
-        function renderGalleryFilters() {
-            if (!galleryFilters) return;
-            galleryFilters.innerHTML = '';
-            const filterOptions = [
-                { key: 'all', short: 'Todas as localidades', count: galleryItems.length },
-                ...Object.entries(galleryGroupsMeta).map(([key, value]) => ({
-                    key,
-                    short: value.short,
-                    count: galleryItems.filter(item => item.group === key).length
-                }))
-            ];
-
-            filterOptions.forEach(option => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = `gallery-filter-btn${option.key === activeGalleryFilter ? ' active' : ''}`;
-                button.setAttribute('aria-pressed', option.key === activeGalleryFilter ? 'true' : 'false');
-                button.innerHTML = `${escapeGalleryText(option.short)} <span class="filter-count">${option.count}</span>`;
-                button.addEventListener('click', () => setGalleryFilter(option.key));
-                galleryFilters.appendChild(button);
-            });
-        }
-
-        function setGalleryFilter(groupKey) {
-            activeGalleryFilter = groupKey;
-            activeGalleryItems = groupKey === 'all'
-                ? [...galleryItems]
-                : galleryItems.filter(item => item.group === groupKey);
-            slideIndex = 1;
-            renderGalleryFilters();
-            renderGallerySlides();
-            renderGalleryLocalityGroups();
-            updateGalleryContext();
-            showSlides(slideIndex);
-        }
-
-        function updateGalleryContext() {
-            if (galleryTotal) galleryTotal.textContent = activeGalleryItems.length;
-            if (!galleryCurrentLocality) return;
-            if (activeGalleryFilter === 'all') {
-                galleryCurrentLocality.innerHTML = `Todas as localidades<small>${galleryItems.length} registros organizados em ${Object.keys(galleryGroupsMeta).length} conjuntos territoriais.</small>`;
-            } else {
-                const meta = galleryGroupsMeta[activeGalleryFilter];
-                galleryCurrentLocality.innerHTML = `${escapeGalleryText(meta.label)}<small>${escapeGalleryText(meta.description)}</small>`;
-            }
-        }
-
-        function renderGallerySlides() {
-            if (!slidesWrapper || !dotsWrapper) return;
-            slidesWrapper.innerHTML = '';
-            dotsWrapper.innerHTML = '';
-
-            activeGalleryItems.forEach((item, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'mySlides fade';
-                slide.dataset.galleryId = item.id;
-                slide.innerHTML = `
-                    <div class="gallery-count"><i class="fa-solid fa-camera"></i> ${String(index + 1).padStart(2, '0')} / ${String(activeGalleryItems.length).padStart(2, '0')}</div>
-                    <a class="gallery-image-link" href="${item.url}" target="_blank" rel="noopener" title="Abrir imagem em tamanho original">
-                        <img src="${item.url}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" onerror="this.src='https://placehold.co/1200x800/C9AD78/24170F?text=Imagem+Indisponível'" alt="${escapeGalleryText(item.title)} — ${escapeGalleryText(item.locality)}">
-                    </a>
-                    <div class="gallery-caption">
-                        <strong>${escapeGalleryText(item.title)}</strong>
-                        <span class="gallery-place"><i class="fa-solid fa-location-dot"></i> ${escapeGalleryText(item.locality)}</span>
-                        <em class="gallery-certainty">${escapeGalleryText(item.confidence)}</em>
-                    </div>
-                `;
-                slidesWrapper.appendChild(slide);
-
-                const dot = document.createElement('span');
-                dot.className = 'dot';
-                dot.style.cssText = 'cursor:pointer;height:8px;width:8px;margin:3px;background-color:rgba(255,255,255,.7);border-radius:50%;display:inline-block;transition:background-color .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.5);';
-                dot.setAttribute('aria-label', `Abrir ${item.title}`);
-                dot.onclick = () => currentSlide(index + 1);
-                dotsWrapper.appendChild(dot);
-            });
-        }
-
-        function renderGalleryLocalityGroups() {
-            if (!galleryGroups) return;
-            galleryGroups.innerHTML = '';
-            const groupKeys = activeGalleryFilter === 'all'
-                ? Object.keys(galleryGroupsMeta)
-                : [activeGalleryFilter];
-
-            groupKeys.forEach(groupKey => {
-                const meta = galleryGroupsMeta[groupKey];
-                const groupItems = galleryItems.filter(item => item.group === groupKey);
-                const section = document.createElement('section');
-                section.className = 'gallery-locality-group';
-                section.id = `galeria-${groupKey}`;
-
-                const header = document.createElement('div');
-                header.className = 'gallery-locality-header';
-                header.innerHTML = `
-                    <div>
-                        <h4><i class="fa-solid fa-location-dot"></i> ${escapeGalleryText(meta.label)}</h4>
-                        <p>${escapeGalleryText(meta.description)}</p>
-                    </div>
-                    <div class="gallery-locality-count"><strong>${groupItems.length}</strong> registros</div>
-                `;
-                section.appendChild(header);
-
-                const grid = document.createElement('div');
-                grid.className = 'gallery-group-grid';
-
-                groupItems.forEach(item => {
-                    const thumb = document.createElement('button');
-                    thumb.className = 'gallery-thumb';
-                    thumb.type = 'button';
-                    thumb.dataset.galleryId = item.id;
-                    thumb.setAttribute('aria-label', `Abrir: ${item.title}`);
-                    thumb.onclick = () => {
-                        if (activeGalleryFilter !== 'all' && activeGalleryFilter !== item.group) {
-                            setGalleryFilter(item.group);
-                        }
-                        const position = activeGalleryItems.findIndex(record => record.id === item.id);
-                        if (position >= 0) currentSlide(position + 1);
-                        document.querySelector('.gallery-stage')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    };
-                    thumb.innerHTML = `
-                        <div class="gallery-thumb-image">
-                            <span class="gallery-thumb-number">${String(item.id).padStart(2, '0')}</span>
-                            <img src="${item.url}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/420x300/C9AD78/24170F?text=Indisponível'" alt="${escapeGalleryText(item.title)}">
-                        </div>
-                        <div class="gallery-thumb-meta">
-                            <strong>${escapeGalleryText(item.title)}</strong>
-                            <small>${escapeGalleryText(item.locality)}</small>
-                            <span class="gallery-thumb-confidence">${escapeGalleryText(item.confidence)}</span>
-                        </div>
-                    `;
-                    grid.appendChild(thumb);
-                });
-
-                section.appendChild(grid);
-                galleryGroups.appendChild(section);
-            });
-        }
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            const slides = slidesWrapper ? slidesWrapper.querySelectorAll('.mySlides') : [];
-            const dots = dotsWrapper ? dotsWrapper.querySelectorAll('.dot') : [];
-            if (!slides.length) return;
-
-            if (n > slides.length) slideIndex = 1;
-            if (n < 1) slideIndex = slides.length;
-
-            slides.forEach(slide => slide.style.display = 'none');
-            dots.forEach(dot => dot.classList.remove('active'));
-            slides[slideIndex - 1].style.display = 'block';
-            dots[slideIndex - 1]?.classList.add('active');
-
-            const activeItem = activeGalleryItems[slideIndex - 1];
-            document.querySelectorAll('.gallery-thumb').forEach(thumb => {
-                thumb.classList.toggle('active', Number(thumb.dataset.galleryId) === activeItem?.id);
-            });
-        }
-
-        if (slidesWrapper && dotsWrapper && galleryGroups && galleryFilters) {
-            renderGalleryFilters();
-            renderGallerySlides();
-            renderGalleryLocalityGroups();
-            updateGalleryContext();
-            showSlides(slideIndex);
-        }
 
         // ==========================================
         // LÓGICA DO SLIDESHOW DE FUNDO (APRESENTAÇÃO)
